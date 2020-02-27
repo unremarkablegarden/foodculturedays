@@ -63,93 +63,16 @@ export default {
 </script>
 
 <style lang="scss">
-.abs {
-  position: absolute !important;
-}
-// .slide-left-enter-active,
-// .slide-left-leave-active
-// .slide-right-enter-active,
-// .slide-right-leave-active {
-//   transition-duration: 0.5s;
-//   transition-property: height, opacity, transform;
-//   transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-//   overflow: hidden;
-//   position: absolute;
-//   width: calc(100vw - 1.4rem);
-// }
-// .slide-left-enter {
-//   translate: transformX(100vw);
-// }
-// .slide-left-enter-active {
-//   translate: transformX(100vw);
-// }
-// .slide-left-leave-active {
-//   translate: transformX(100vw);
-// }
-
-// .slide-right-enter {
-//   translate: transformX(100vw);
-// }
-// .slide-right-leave-active {
-//   translate: transformX(100vw);
-// }
-
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition-duration: 0.5s;
-  transition-property: height, opacity, transform;
-  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-  overflow: hidden;
-  position: absolute;
-  width: calc(100vw - 1.4rem)
-}
-
-.slide-left-enter,
-.slide-right-leave-active {
-  opacity: 0;
-  transform: translate(100vw, 0);
-}
-
-.slide-left-leave-active,
-.slide-right-enter {
-  opacity: 0;
-  transform: translate(-100vw, 0);
-}
 
 $green: #11ff36;
+.green { color: $green; }
 
-.green {
-  color: $green;
-}
-
-@font-face {
-    font-family: 'CE';
-    src: url('./assets/ce-i.woff2') format('woff2'),
-         url('./assets/ce-i.woff') format('woff');
-    font-weight: 500;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'D';
-    src: url('./assets/d.woff2') format('woff2'),
-         url('./assets/d.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'CE';
-    src: url('./assets/ce.woff2') format('woff2'),
-         url('./assets/ce.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
+html, body, #app, .body {
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .layout {
-  // max-width: 760px;
   margin: 0 auto;
   padding-left: 0.7rem;
   padding-right: 0.7rem;
@@ -165,10 +88,6 @@ h1, h2, h3, h4 {
   line-height: 1em;
   font-size: 30px;
 }
-
-// .title {
-//   margin-top: 4rem;
-// }
 
 #buttons {
   width: 100%;
@@ -205,7 +124,7 @@ body {
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
 }
-i, em {
+i, em, label {
   font-family: 'CE', Times, serif;
 }
 
@@ -215,4 +134,59 @@ xmp {
   line-height: 1em;
   color: white;
 }
+
+
+.abs {
+  position: absolute !important;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition-duration: 0.5s;
+  transition-property: height, opacity, transform;
+  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  overflow: hidden;
+  position: absolute;
+  width: calc(100vw - 1.4rem)
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translate(100vw, 0);
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0;
+  transform: translate(-100vw, 0);
+}
+
+
+@font-face {
+    font-family: 'CE';
+    src: url('./assets/ce-i.woff2') format('woff2'),
+         url('./assets/ce-i.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'D';
+    src: url('./assets/d.woff2') format('woff2'),
+         url('./assets/d.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CE';
+    src: url('./assets/ce.woff2') format('woff2'),
+         url('./assets/ce.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
 </style>

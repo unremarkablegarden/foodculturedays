@@ -2,6 +2,7 @@
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 import Vuex from 'vuex'
 import { common } from 'prismic-vue/components'
+import { animatedScrollTo } from 'es6-scroll-to'
 // window.$ = require('jquery')
 // window.JQuery = require('jquery')
 
@@ -46,6 +47,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     const fromDepth = from.path.split('/').length
     const transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     appOptions.store.commit('setTransitionName', transitionName)
+    console.log('router beforeEach');
     next()
   })
 
@@ -56,12 +58,28 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   Vue.component('Layout', DefaultLayout)
 
+
+  Vue.prototype.$nav = (to) => {
+    if (process.isClient) {
+      let top = window.pageYOffset
+      animatedScrollTo({
+          duration: top,
+          to: 0
+      })
+      setTimeout(() => {
+        router.push(to)
+      }, top);
+    }
+  }
+
   // Add attributes to HTML tag
   // var userLang = navigator.language || navigator.userLanguage;
   // head.htmlAttrs = { lang: userLang.toLowerCase() }
 
   Vue.prototype.$prismic = {
-    linkResolver() { /* ... */}
+    linkResolver() {
+      console.log('linkResolver()')
+    }
   }
 
   Object.entries(common).forEach(([_, component]) => {
