@@ -1,34 +1,60 @@
 <template lang="pug">
   #logo
-    g-link(to="/")
-      //- img(alt='FOODCULTURE days', :src='$store.state.img.logo')#logo
-      img(:src='$store.state.img.logoParts[0]', :style="{ 'transform': 'translateX('+offset*-1+'px)' }").logoPart.part1
+    .part-wrapper
+      g-link(to="/")
+        //- img(alt='FOODCULTURE days', :src='$store.state.img.logo')#logo
+        img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
 
-    img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
+    .part-wrapper
+      img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
 
-    g-link(to="/")
-      img(:src='$store.state.img.logoParts[2]', :style="{ 'transform': 'translateX('+offset+'px)' }").logoPart.part3
+    .part-wrapper
+      g-link(to="/")
+        img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
 </template>
 
 <style lang="scss" scoped>
 $w: calc(90vw);
 $h: calc(90vw * 0.105);
+$h2: calc(90vw * 0.085);
+$left: calc(90vw * 0.066);
+
 #logo {
+  box-sizing: border-box;
   margin-top: 1rem;
-  width: $w;
+  // width: $w;
+  width: 100vw;
   height: $h;
   overflow: hidden;
-  margin-left: 0.7rem;
-  .logoPart {
-    position: absolute;
-    width: $w;
+  padding-left: 0.7rem;
+  position: relative;
+  z-index: 888;
+  // background: red;
+  // display: block;
+  .part-wrapper {
+    display: block;
     height: $h;
+    // box-shadow: 0 0 0 1px red;
+    position: fixed;
+  }
+  .logoPart {
+    display: block;
+  }
+  .part1, .part3 {
+    // position: absolute;
+    // width: $w;
+    height: $h;
+    // box-shadow: 0 0 1px 0px blue;
   }
   .part2 {
     z-index: 999;
     position: fixed;
-    // box-shadow: 0 0 10px 5px red;
-    // clip: rect(0px,60px,200px,0px);
+    height: $h2;
+    // border: 1px red solid;
+    // box-shadow: 0 0 1px 0px red;
+    margin-left: $left;
+    // clip: rect(0px,90px,30px,0px);
+    // top, right, bottom, left
   }
 }
 </style>
@@ -63,15 +89,14 @@ export default {
         const w = window.innerWidth
         const h = window.innerHeight
         let top = window.pageYOffset
-        this.offset = top
+        this.offset = top * 0.5
 
-        top = top * 0.5
         if (top > 100) {
           top = 100
         }
-        this.logoOffX = (top * 1.05)
-        this.logoOffY = (top * (h/w) * 1)
-        // 0-100 scale to 1-2 = x/100+1
+
+        this.logoOffX = (top/100) * (w/5.5)
+        this.logoOffY = (top/100) * (h/4)
         this.logoScale = (top / 200) + 1
       }
     }

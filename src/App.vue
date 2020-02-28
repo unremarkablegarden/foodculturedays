@@ -1,11 +1,11 @@
 <template lang="pug">
   #app
-    Loader(v-if='!$store.state.loaded')
-    .body(v-else)
+    Loader
+    .body
       Logo
       #buttons(v-bind:class="{ 'abs': animating }")
-        Social
-        Lang
+        Social#social(v-bind:class='{ moveoutleft: loading }').move
+        Lang#lang(v-bind:class='{ moveoutright: loading }').move
       transition(:name='transitionName')
         router-view(class='child-view')
 </template>
@@ -28,7 +28,8 @@ import Logo from '~/components/Logo.vue'
 export default {
   data () {
     return {
-      animating: false
+      animating: false,
+      loading: true
     }
   },
   watch: {
@@ -38,6 +39,24 @@ export default {
         this.animating = false
       }, 600)
     }
+  },
+  mounted () {
+    const t = this
+    const time = 6000
+
+    setTimeout(() => {
+      const menuItems = t.$el.querySelectorAll('.menu-item')
+      t.$anime({
+        targets: menuItems,
+        easing: 'easeOutSine',
+        left: 0,
+        delay: t.$anime.stagger(100)
+      });
+    }, time)
+
+    setTimeout(() => {
+      t.loading = false
+    }, time+700)
   },
   computed: {
     transitionName () {
@@ -67,10 +86,10 @@ export default {
 $green: #11ff36;
 .green { color: $green; }
 
-html, body, #app, .body {
-  width: 100vw;
-  overflow-x: hidden;
-}
+// html, body, #app, .body {
+//   width: 100vw;
+//   overflow-x: hidden;
+// }
 
 .layout {
   margin: 0 auto;
@@ -78,6 +97,16 @@ html, body, #app, .body {
   padding-right: 0.7rem;
 }
 
+.move {
+  transition: all 500ms ease-in;
+}
+
+.moveoutleft {
+  transform: translateX(-100px)
+}
+.moveoutright {
+  transform: translateX(200px)
+}
 
 h1, h2, h3, h4 {
   text-transform: uppercase;

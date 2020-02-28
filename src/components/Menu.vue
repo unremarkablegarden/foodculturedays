@@ -1,8 +1,9 @@
 <template lang="pug">
   #menu
     .menu-item(v-for="item in menu", :key="item.title[lang]")
-      .disabled(v-if='item.disabled') {{ item.title[lang] }}
-      g-link(v-else, :to="item.to[lang]") {{ item.title[lang] }}
+      //- .disabled(v-if='item.disabled') {{ item.title[lang] }}
+      //- g-link(v-else, :to="item.to[lang]") {{ item.title[lang] }}
+      g-link(v-if='!item.disabled', :to="item.to[lang]") {{ item.title[lang] }}
 </template>
 
 <script>
@@ -57,6 +58,8 @@ $green: #11ff36;
   font-size: 30px;
   line-height: 1.3em;
   font-weight: normal;
+  position: relative;
+  left: -500px;
   a {
     color: black;
     &:hover, &:active {

@@ -5,12 +5,11 @@
       prismic-rich-text(:field='page.title').title
       .content
         prismic-rich-text(:field='page.body')
-      .newsletter
-        //- g-link(:to='"/" + lang + "/newsletter"').button {{ newsletterText }}
 
-        a.link(@click='$nav("/" + lang + "/newsletter")').button {{ newsletterText }}
+      Newsletter
+      //- a.link(@click='$nav("/" + lang + "/newsletter")').button {{ newsletterText }}
 
-        //- a(:href='"/" + lang + "/newsletter"').button {{ newsletterText }}
+
 
 </template>
 
@@ -20,7 +19,7 @@ $green: #11ff36;
 
 .title {
   position: sticky;
-  top: 0rem;
+  top: 0;
   background: white;
   padding: 1rem 0 0rem;
   margin-bottom: 0.5rem;
@@ -43,10 +42,10 @@ $green: #11ff36;
     font-size: 0.9rem;
     border: 1px black solid;
     padding: 0.3rem 0.4rem 0.1rem;
-    // &:hover {
-    //   color: white;
-    //   background: black;
-    // }
+    &:hover {
+      color: white;
+      background: black;
+    }
   }
 }
 
@@ -55,7 +54,12 @@ $green: #11ff36;
 
 
 <script>
+import Newsletter from '~/components/Newsletter.vue'
+
 export default {
+  components: {
+    Newsletter
+  },
   metaInfo() {
     return {
       title: this.$context.plainTitle

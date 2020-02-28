@@ -3,6 +3,7 @@
 import Vuex from 'vuex'
 import { common } from 'prismic-vue/components'
 import { animatedScrollTo } from 'es6-scroll-to'
+import anime from 'animejs/lib/anime.min.js'
 // window.$ = require('jquery')
 // window.JQuery = require('jquery')
 
@@ -21,7 +22,11 @@ export default function (Vue, { router, head, isClient, appOptions }) {
         logo: 'https://images.prismic.io/foodculturedays2020/e5f2d0ad-8f07-45b0-8c5a-6e480cf54d14_logo.svg?auto=compress,format',
         logoParts: [
           'https://images.prismic.io/foodculturedays2020/064e355d-d4aa-47c6-9c9d-56c9c53a5fc9_logo1.svg?auto=compress,format',
-          'https://images.prismic.io/foodculturedays2020/b8247d2f-d27c-4f2c-b51c-860e7a81b739_logo2.svg?auto=compress,format',
+          // full logo
+          // 'https://images.prismic.io/foodculturedays2020/e5f2d0ad-8f07-45b0-8c5a-6e480cf54d14_logo.svg?auto=compress,format',
+          // old part with big width
+          // 'https://images.prismic.io/foodculturedays2020/b8247d2f-d27c-4f2c-b51c-860e7a81b739_logo2.svg?auto=compress,format',
+          'https://images.prismic.io/foodculturedays2020/4d8abd31-e023-4ded-a245-e728554fbe06_blob.svg?auto=compress,format',
           'https://images.prismic.io/foodculturedays2020/5ce3419c-a90f-4bda-b842-0a05ffcec96c_logo3.svg?auto=compress,format',
         ]
       }
@@ -56,8 +61,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     href: 'https://cdn.lineicons.com/1.0.1/LineIcons.min.css'
   })
 
-  Vue.component('Layout', DefaultLayout)
-
+  Vue.prototype.$anime = anime
 
   Vue.prototype.$nav = (to) => {
     if (process.isClient) {
@@ -81,6 +85,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       console.log('linkResolver()')
     }
   }
+
+  Vue.component('Layout', DefaultLayout)
 
   Object.entries(common).forEach(([_, component]) => {
     Vue.component(component.name, component)
