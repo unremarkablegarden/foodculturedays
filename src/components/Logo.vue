@@ -4,7 +4,7 @@
       //- img(alt='FOODCULTURE days', :src='$store.state.img.logo')#logo
       img(:src='$store.state.img.logoParts[0]', :style="{ 'transform': 'translateX('+offset*-1+'px)' }").logoPart.part1
 
-    img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
+    img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
 
     g-link(to="/")
       img(:src='$store.state.img.logoParts[2]', :style="{ 'transform': 'translateX('+offset+'px)' }").logoPart.part3
@@ -27,6 +27,8 @@ $h: calc(90vw * 0.105);
   .part2 {
     z-index: 999;
     position: fixed;
+    // box-shadow: 0 0 10px 5px red;
+    // clip: rect(0px,60px,200px,0px);
   }
 }
 </style>
@@ -39,7 +41,8 @@ export default {
     return {
       offset: 0,
       logoOffX: 0,
-      logoOffY: 0
+      logoOffY: 0,
+      logoScale: 1
     }
   },
   methods: {
@@ -66,8 +69,10 @@ export default {
         if (top > 100) {
           top = 100
         }
-        this.logoOffX = (top * 0.9)
-        this.logoOffY = (top * (h/w) * 1.5)
+        this.logoOffX = (top * 1.05)
+        this.logoOffY = (top * (h/w) * 1)
+        // 0-100 scale to 1-2 = x/100+1
+        this.logoScale = (top / 200) + 1
       }
     }
   },
