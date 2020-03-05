@@ -87,7 +87,7 @@ export default {
   },
   created () {
     let lang = this.$store.state.lang
-    if (lang.includes('/fr/')) { this.lang = 'fr' }
+    if (lang.includes('fr')) { this.lang = 'fr' }
   },
   watch: {
     $route (to){

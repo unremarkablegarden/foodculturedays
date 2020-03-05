@@ -1,7 +1,7 @@
 export default {
   "trailingSlash": true,
   "pathPrefix": "",
-  "titleTemplate": "%s - FOODCULTURE days",
+  "titleTemplate": "%s - Foodculture days",
   "siteUrl": "",
   "version": "0.7.13",
   "catchLinks": true

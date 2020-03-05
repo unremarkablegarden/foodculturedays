@@ -50,16 +50,21 @@ export default {
 
 <style lang="scss" scoped>
 $green: #11ff36;
+$headingSize: 2.2rem;
+
 #menu {
-  margin-top: 1rem;
+  margin-top: 1.4rem;
 }
 .menu-item {
   text-transform: uppercase;
-  font-size: 30px;
+  // font-size: 30px;
+  // line-height: 1em;
+  font-size: $headingSize;
   line-height: 1.3em;
+  // margin: 0 0 0.3rem 0;
   font-weight: normal;
   position: relative;
-  left: -500px;
+  // left: -500px;
   a {
     color: black;
     &:hover, &:active {

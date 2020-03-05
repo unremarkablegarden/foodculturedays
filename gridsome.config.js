@@ -5,8 +5,8 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'FOODCULTURE days',
-  siteDescription: 'Description',
+  siteName: 'Foodculture days',
+  siteDescription: "a space for critical reflexion and a platform for knowledge exchange / un espace de réflexion critique et une plateforme d'échange de connaissances",
 
   plugins: [
     {
@@ -29,6 +29,9 @@ module.exports = {
 				pug: { /* Options for `pug-plain-loader` */ },
 				pugLoader: { /* Options for `pug-loader` */ }
 			}
-		}
+    },
+    // {
+    //   use: 'gridsome-plugin-tailwindcss',
+    // }
   ]
 }

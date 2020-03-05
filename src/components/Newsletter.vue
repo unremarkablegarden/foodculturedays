@@ -1,6 +1,5 @@
 <template lang="pug">
   #newsletter
-    //- h1 {{ t[lang].title }}
     .subtitle {{ t[lang].subtitle }}
 
     #mc_embed_signup
@@ -8,39 +7,12 @@
         #mc_embed_signup_scroll
           div(style='position: absolute; left: -5000px;', aria-hidden='true')
             input(type='text', name='b_07a3eaaaad1fdf2ab12286e6a_a741f19be3', tabindex='-1')
-          table
-            tr
-              td
-                .mc-field-group#email
-                  label(for='mce-EMAIL') {{ t[lang].form[0] }}
-                  input.required.email#mce-EMAIL(type='email', name='EMAIL')
-              td
-                input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
-          //- .mc-field-group
-            label(for='mce-FNAME') {{ t[lang].form[1] }}
-            input#mce-FNAME(type='text', name='FNAME')
-          //- .mc-field-group
-            label(for='mce-LNAME') {{ t[lang].form[2] }}
-            input#mce-LNAME(type='text', name='LNAME')
-          //- .mc-field-group.size1of2
-            label(for='mce-BIRTHDAY-month') {{ t[lang].form[3] }}
-            .datefield
-              span.subfield.monthfield
-                input.birthday#mce-BIRTHDAY-month(type='text', pattern='[0-9]*', placeholder='MM', size='2', maxlength='2', name='BIRTHDAY[month]')
-              | /
-
-              span.subfield.dayfield
-                input.birthday#mce-BIRTHDAY-day(type='text', pattern='[0-9]*', placeholder='DD', size='2', maxlength='2', name='BIRTHDAY[day]')
-              span.small-meta.nowrap ( mm / dd )
-          //- #mce-responses.clear
-            .response#mce-error-response(style='display:none')
-            .response#mce-success-response(style='display:none')
-
-          //- input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
-
-    //- script(type='text/javascript', src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js')
-
-    //- script(type='text/javascript') (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='BIRTHDAY';ftypes[3]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);
+          label(for='mce-EMAIL') {{ t[lang].form[0] }}
+          .mc-field-group#email.email-fields
+            .email-left
+              input.required.email#mce-EMAIL(type='email', name='EMAIL')
+            .email-right
+              input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
 
 </template>
 
@@ -98,9 +70,9 @@ export default {
   }
   .subtitle {
     text-transform: uppercase;
-    font-size: 0.9rem;
-    margin-top: 4rem;
-    margin-bottom: 1rem;
+    // font-size: 0.9rem;
+    margin-top: 3rem;
+    margin-bottom: 0rem;
   }
   margin-top: 1rem;
   form {
@@ -110,9 +82,21 @@ export default {
     display: block;
     margin-top: 1rem;
     padding-left: 0.1rem;
+    font-size: 1.2rem;
+  }
+  .email-fields {
+    display: flex;
+    .email-right {
+      input {
+        // border-left: 0;
+        // border-top-right-radius: 6px;
+        // border-bottom-right-radius: 6px;
+        border-radius: 6px;
+      }
+    }
   }
   table, td, tr {
-    margin: 0;
+    // margin: 0;
     padding: 0;
     width: 100%;
   }
@@ -128,6 +112,7 @@ export default {
     padding: 0.2rem 0.3rem 0;
     box-sizing: border-box;
     height: 2rem;
+
   }
   .small-meta.nowrap {
     padding-left: 0.5rem;
@@ -146,13 +131,14 @@ export default {
   }
   .submit {
     text-transform: uppercase;
-    margin: 2.2rem 0 0 0;
+    // margin: 2.3rem 0 0 0;
+    margin-left: 0.3rem;
     padding: 0.2rem 0.5rem 0;
     display: inline-block;
     width: auto;
     font-size: 0.9rem;
     // float: right;
-
   }
+
 }
 </style>

@@ -12,11 +12,15 @@ import DefaultLayout from '~/layouts/Default.vue'
 export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.use(Vuex)
 
+  // console.log(JSON.stringify(appOptions));
+
+
   appOptions.store = new Vuex.Store({
     state: {
       lang: 'en-gb',
       loaded: false,
       transitionName: 'slide-left',
+      // urlMap: false,
       img: {
         blobMobile: 'https://images.prismic.io/foodculturedays2020/06c2d21b-3c2c-4630-981b-1fc92de9028d_blob-mobile.svg?auto=compress,format',
         logo: 'https://images.prismic.io/foodculturedays2020/e5f2d0ad-8f07-45b0-8c5a-6e480cf54d14_logo.svg?auto=compress,format',
@@ -52,7 +56,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     const fromDepth = from.path.split('/').length
     const transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     appOptions.store.commit('setTransitionName', transitionName)
-    console.log('router beforeEach');
+    // console.log('router beforeEach');
     next()
   })
 
@@ -61,7 +65,16 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     href: 'https://cdn.lineicons.com/1.0.1/LineIcons.min.css'
   })
 
+  // head.link.push({
+    // rel: 'stylesheet',
+    // href: 'https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css'
+  // })
+
+
+
   Vue.prototype.$anime = anime
+
+  // Vue.prototype.$appOptions = appOptions
 
   Vue.prototype.$nav = (to) => {
     if (process.isClient) {

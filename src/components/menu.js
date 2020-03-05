@@ -3,18 +3,22 @@ export default
     // -------------- No trailing slashes! ---------------
     // ABOUT
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
-      // PROJECTS
-      // { disabled: true, title: ['Projects', 'Projets'], to: ['/en/projects', '/fr/projets'] },
-      // PARTICIPANTS
-      // { disabled: true, title: ['Participants', 'Participants'], to: ['/en/participants', '/fr/participants'] },
-      // NEWSLETTER
-      // { disabled: true, title: ['Newsletter', 'Newsletter'], to: ['/en/newsletter', '/fr/newsletter'] },
-      // LOCATIONS
-      // { disabled: true, title: ['Locations', 'Lieux'], to: ['/en/locations', '/fr/lieux'] },
-      // PROGRAM
-      // { disabled: true, title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
+    // PROJECTS
+    // { title: ['Projects', 'Projets'], to: ['/en/projects', '/fr/projets'] },
+    // PARTICIPANTS
+    // { title: ['Participants', 'Participants'], to: ['/en/participants', '/fr/participants'] },
+    // NEWSLETTER
+    // { title: ['Newsletter', 'Newsletter'], to: ['/en/newsletter', '/fr/newsletter'] },
+    // LOCATIONS
+    // { title: ['Locations', 'Lieux'], to: ['/en/locations', '/fr/lieux'] },
+    // PROGRAM
+    // { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
+
+    // PARTNERS
+    { title: ['Partners', 'Partenaires'], to: ['/en/partners', '/fr/partenaires'] },
+
     // ARCHIVE
-    { title: ['Archive', 'Archiver'], to: ['/en/archive', '/fr/archiver'] },
+    { title: ['Archive', 'Archives'], to: ['/en/archive', '/fr/archives'] },
     // CONTACT
     { title: ['Contact', 'Contact'], to: ['/en/contact', '/fr/contact'] },
     // MEDIA

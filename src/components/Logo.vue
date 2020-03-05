@@ -2,7 +2,6 @@
   #logo
     .part-wrapper
       g-link(to="/")
-        //- img(alt='FOODCULTURE days', :src='$store.state.img.logo')#logo
         img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
 
     .part-wrapper
@@ -14,14 +13,15 @@
 </template>
 
 <style lang="scss" scoped>
-$w: calc(90vw);
-$h: calc(90vw * 0.105);
-$h2: calc(90vw * 0.085);
-$left: calc(90vw * 0.066);
+$w: calc(95vw);
+$h: calc(95vw * 0.105);
+$h2: calc(95vw * 0.085);
+$left: calc(95vw * 0.066);
 
 #logo {
   box-sizing: border-box;
-  margin-top: 1rem;
+  // margin-top: 1rem;
+  margin-top: 0.8rem;
   // width: $w;
   width: 100vw;
   height: $h;

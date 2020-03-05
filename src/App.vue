@@ -1,11 +1,13 @@
 <template lang="pug">
   #app
-    Loader
+    //- Loader
     .body
       Logo
       #buttons(v-bind:class="{ 'abs': animating }")
-        Social#social(v-bind:class='{ moveoutleft: loading }').move
-        Lang#lang(v-bind:class='{ moveoutright: loading }').move
+        Social#social
+        //- (v-bind:class='{ moveoutleft: loading }').move
+        Lang#lang
+        //- (v-bind:class='{ moveoutright: loading }').move
       transition(:name='transitionName')
         router-view(class='child-view')
 </template>
@@ -38,25 +40,35 @@ export default {
       setTimeout(() => {
         this.animating = false
       }, 600)
+
+      // console.log('watch router: ' + to.path);
+      if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
+        console.log('back home')
+      }
     }
   },
   mounted () {
     const t = this
-    const time = 6000
+    const time = 1000
+    // const time = 0
 
-    setTimeout(() => {
-      const menuItems = t.$el.querySelectorAll('.menu-item')
-      t.$anime({
-        targets: menuItems,
-        easing: 'easeOutSine',
-        left: 0,
-        delay: t.$anime.stagger(100)
-      });
-    }, time)
+    // setTimeout(() => {
+    // const menuItems = t.$el.querySelectorAll('.menu-item')
+    // t.$anime({
+    //   targets: menuItems,
+    //   easing: 'easeOutSine',
+    //   left: 0,
+    //   delay: t.$anime.stagger(100)
+    // });
+    // }, time)
 
     setTimeout(() => {
       t.loading = false
-    }, time+700)
+    }, time+800)
+    // t.loading = false
+  },
+  methods: {
+
   },
   computed: {
     transitionName () {
@@ -86,10 +98,18 @@ export default {
 $green: #11ff36;
 .green { color: $green; }
 
-// html, body, #app, .body {
-//   width: 100vw;
-//   overflow-x: hidden;
-// }
+$headingSize: 2.2rem;
+
+@media (max-width: 960px) {
+  .desktop {
+    display: none;
+  }
+}
+@media (min-width: 960px) {
+  .mobile {
+    display: none;
+  }
+}
 
 .layout {
   margin: 0 auto;
@@ -97,25 +117,20 @@ $green: #11ff36;
   padding-right: 0.7rem;
 }
 
-.move {
-  transition: all 500ms ease-in;
-}
-
-.moveoutleft {
-  transform: translateX(-100px)
-}
-.moveoutright {
-  transform: translateX(200px)
-}
-
-h1, h2, h3, h4 {
+h1 {
   text-transform: uppercase;
   color: $green;
   font-weight: normal;
-  margin: 0;
+  margin: 0 0 0.3rem 0;
   padding: 0;
   line-height: 1em;
-  font-size: 30px;
+  font-size: $headingSize;
+}
+
+input {
+  -webkit-appearance: none;
+  -webkit-border-radius:0;
+  border-radius:0;
 }
 
 #buttons {
@@ -129,11 +144,14 @@ h1, h2, h3, h4 {
   width: 100vw;
   left: 0;
   margin: 0;
-  padding: 0.5rem 0.8rem 0.1rem;
+  padding: 0.7rem 0.7rem 0.8rem 1.2rem;
+  // border: 1px red solid;
+  box-sizing: border-box;
+  // padding: 1rem;
   background: white;
   box-sizing: border-box;
   // box-shadow: 0 0 30px white;
-  box-shadow: 0 -10px 20px 5px white;
+  // box-shadow: 0 -10px 20px 5px white;
 }
 
 textarea, select, input, button { outline: none; }
@@ -147,15 +165,20 @@ body {
   font-family: 'D', -apple-system,system-ui,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
   margin: 0;
   padding: 0;
-  line-height: 1.5;
-  font-size: 17.5px;
+  // line-height: 1.5;
+  line-height: 1.275em;
+  font-size: 18px;
+  letter-spacing: -0.01rem;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
 }
+
 i, em, label {
   font-family: 'CE', Times, serif;
+  font-size: 1.285rem;
 }
+
 
 xmp {
   background: black;
@@ -163,6 +186,40 @@ xmp {
   line-height: 1em;
   color: white;
 }
+
+
+
+.title {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 1.7rem 0 0rem;
+}
+.subtitle {
+  margin-top: 1rem;
+  * {
+    font-weight: normal;
+    margin: 0 0 0.3rem 0;
+    padding: 0;
+  }
+}
+
+.content {
+  p {
+    margin-top: 0;
+    margin-block-start: 0;
+  }
+  a {
+    color: black;
+  }
+}
+.page-wrapper {
+  padding-bottom: 6rem;
+}
+
+
+
+
 
 
 .abs {

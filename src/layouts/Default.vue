@@ -24,7 +24,6 @@ export default {
         } else {
           to = '/en/'
         }
-        console.log(to)
         this.$router.push(to)
       }
     }
