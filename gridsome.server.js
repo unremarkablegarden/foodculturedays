@@ -163,18 +163,18 @@ module.exports = function (api, options) {
 
         console.log(path);
 
-        // createPage({
-        //   path: path,
-        //   component: './src/templates/Archive.vue',
-        //   context: {
-        //     node: node,
-        //     uid: node._meta.uid,
-        //     lang: node._meta.lang,
-        //     year: node.year,
-        //     plainTitle: node.artist[0].text,
-        //     altPath: altPath
-        //   }
-        // })
+        createPage({
+          path: path,
+          component: './src/templates/Archive.vue',
+          context: {
+            node: node,
+            uid: node._meta.uid,
+            lang: node._meta.lang,
+            year: node.year,
+            plainTitle: node.artist[0].text,
+            altPath: altPath
+          }
+        })
 
         node['context'] = {
           uid: node._meta.uid,

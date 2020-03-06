@@ -31,7 +31,7 @@ export default {
   computed: {
     title () {
       if (process.isClient) {
-        $context.data.node.title[0].text
+        return this.$context.data.node.title[0].text
       }
     },
     imgs () {
