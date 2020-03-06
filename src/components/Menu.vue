@@ -27,6 +27,7 @@ export default {
   },
   created () {
     this.menu = menu
+    if (!process.isClient) return
     if (process.isClient) {
       let lang = window.location.pathname
       if (lang.includes('fr')) {
@@ -49,7 +50,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$green: #11ff36;
+// $green: #11ff36;
+$green: rgb(17,230,54);
 $headingSize: 2.2rem;
 
 #menu {

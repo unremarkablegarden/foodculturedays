@@ -2,10 +2,10 @@
   layout#partners
     .page-wrapper
       .title
-        h1 {{ $context.title }}
+        h1 {{ title }}
       .img-wrapper
-        img(:src="imgs1").mobile
-        img(:src="imgs2", ).desktop
+        img(:src="img1").mobile
+        img(:src="img2", ).desktop
 
 </template>
 
@@ -29,6 +29,11 @@ export default {
     }
   },
   computed: {
+    title () {
+      if (process.isClient) {
+        $context.data.node.title[0].text
+      }
+    },
     imgs () {
       if (process.isClient) {
         return this.$context.data.node.body.filter(el => el.type == 'image')

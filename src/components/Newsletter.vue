@@ -48,6 +48,7 @@ export default {
     }
   },
   created () {
+    if (!process.isClient) return
     let lang = this.$store.state.lang
     if (lang.includes('/fr/')) { this.lang = 'fr' }
   },

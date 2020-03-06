@@ -20,6 +20,7 @@ export default {
   computed: {
     lang () {
       // return this.$store.state.lang
+      if (!process.isClient) return
       return this.$context.lang
     },
   }

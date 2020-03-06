@@ -3,14 +3,6 @@
     #newsletter
       h1 {{ t[lang].title }}
       .subtitle {{ t[lang].subtitle }}
-      //- form
-        label {{ t[lang].form[0] }}
-        input(type="text").text
-        label {{ t[lang].form[1] }}
-        input(type="text").text
-        label {{ t[lang].form[2] }}
-        input(type="text").text
-        input(type="submit", :value="t[lang].form[3]").submit
 
       #mc_embed_signup
         form#mc-embedded-subscribe-form.validate(action='https://foodculturedays.us16.list-manage.com/subscribe/post?u=07a3eaaaad1fdf2ab12286e6a&id=a741f19be3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate)

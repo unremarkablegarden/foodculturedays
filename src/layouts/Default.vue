@@ -15,6 +15,8 @@ query {
 <script>
 export default {
   created () {
+    if (!process.isClient) return
+
     if (process.isClient) {
       // if in the root path redirect to user's language index page
       if (window.location.pathname == '/') {

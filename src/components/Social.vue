@@ -10,10 +10,6 @@
       i.lni-facebook-filled.hover
 </template>
 
-<script>
-export default {
-}
-</script>
 
 <style lang="scss" scoped>
 #social {

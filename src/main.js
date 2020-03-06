@@ -4,10 +4,8 @@ import Vuex from 'vuex'
 import { common } from 'prismic-vue/components'
 import { animatedScrollTo } from 'es6-scroll-to'
 import anime from 'animejs/lib/anime.min.js'
-// window.$ = require('jquery')
-// window.JQuery = require('jquery')
-
 import DefaultLayout from '~/layouts/Default.vue'
+// import * as PIXI from 'pixi.js'
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.use(Vuex)
@@ -56,7 +54,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     const fromDepth = from.path.split('/').length
     const transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     appOptions.store.commit('setTransitionName', transitionName)
-    // console.log('router beforeEach');
     next()
   })
 
@@ -65,16 +62,11 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     href: 'https://cdn.lineicons.com/1.0.1/LineIcons.min.css'
   })
 
-  // head.link.push({
-    // rel: 'stylesheet',
-    // href: 'https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css'
-  // })
-
-
-
   Vue.prototype.$anime = anime
 
-  // Vue.prototype.$appOptions = appOptions
+  // if (process.isClient) {
+  //   Vue.prototype.$PIXI = PIXI
+  // }
 
   Vue.prototype.$nav = (to) => {
     if (process.isClient) {

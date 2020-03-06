@@ -1,73 +1,88 @@
 <template lang="pug">
   layout
+    .back(@click='goBack') {{ back[lang] }}
+    .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
     .page-wrapper
-      xmp {{ page }}
-      //- prismic-image(:field='page.image', v-if='page.image')
-      //- prismic-rich-text(:field='page.title').title
-      //- .content
-        prismic-rich-text(:field='page.body')
-
-      //- Newsletter
-      //- a.link(@click='$nav("/" + lang + "/newsletter")').button {{ newsletterText }}
-
-
-
+      prismic-rich-text(:field='page.project').project-title
+      prismic-rich-text(:field='page.artist').artist-title
+      prismic-rich-text(:field='page.project_body').project-body
+      prismic-rich-text(:field='page.artist_body').artist-body
 </template>
 
 
 <style lang="scss">
-$green: #11ff36;
+// $green: #11ff36;
+$green: rgb(17,230,54);
+$headingSize: 2.2rem;
 
-.title {
+
+.project-title, .artist-title {
+  * {
+    font-size: 1.7rem;
+    color: black;
+  }
+}
+.project-title {
+  font-family: 'CE', Times, serif;
+  font-style: italic;
+}
+
+.image {
+  width: 100vw;
+  height: 45vh;
+  background-position-x: 0;
+  background-position-y: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-left: -0.7rem;
+  margin-bottom: 0.8rem;
+}
+
+.back {
+  cursor: pointer;
+  text-transform: uppercase;
+  color: $green;
+  text-align: right;
+  font-size: $headingSize;
+  background: white;
+  padding: 2rem 0.7rem 0.5rem;
+  width: 100vw;
+  margin-left: -0.7rem;
+  box-sizing: border-box;
   position: sticky;
   top: 0;
-  background: white;
-  padding: 1rem 0 0rem;
-  margin-bottom: 0.5rem;
-  box-shadow: 0 10px 20px 3px white;
 }
-.content {
-  margin-top: 1rem;
-  p {
-    margin-top: 0;
-    margin-block-start: 0;
-  }
-  a {
-    color: black;
-  }
-}
-.page-wrapper {
-  padding-bottom: 6rem;
-}
-.newsletter {
-  margin-top: 4rem;
-  .button {
-    color: black;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    border: 1px black solid;
-    padding: 0.3rem 0.4rem 0.1rem;
-    &:hover {
-      color: white;
-      background: black;
-    }
-  }
-}
-
 </style>
 
 
 
 <script>
-import Newsletter from '~/components/Newsletter.vue'
+// import Newsletter from '~/components/Newsletter.vue'
 
 export default {
   components: {
-    Newsletter
+    // Newsletter
+  },
+  data () {
+    return {
+      back: {
+        en: 'Back',
+        fr: 'Retour'
+      }
+    }
   },
   metaInfo() {
     return {
       title: this.$context.plainTitle
+    }
+  },
+  methods: {
+    goBack () {
+      if (!process.isClient) return
+
+      let path = window.location.pathname.split('/')
+      path.pop(); path.pop();
+      this.$router.push(path.join('/'))
     }
   },
   computed: {
@@ -80,12 +95,12 @@ export default {
       else { lang = 'en' }
       return lang
     },
-    newsletterText () {
-      const en = 'Join our newsletter'
-      const fr = 'Abonnez-vous à notre newsletter'
-      if (this.lang == 'fr') { return fr }
-      else { return en }
-    }
+    // newsletterText () {
+    //   const en = 'Join our newsletter'
+    //   const fr = 'Abonnez-vous à notre newsletter'
+    //   if (this.lang == 'fr') { return fr }
+    //   else { return en }
+    // }
   }
 }
 </script>

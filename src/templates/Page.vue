@@ -14,6 +14,7 @@
 
 <style lang="scss">
 // $green: #11ff36;
+$green: rgb(17,230,54);
 </style>
 
 <script>

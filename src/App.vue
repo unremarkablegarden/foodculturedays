@@ -1,6 +1,6 @@
 <template lang="pug">
   #app
-    //- Loader
+    Loader
     .body
       Logo
       #buttons(v-bind:class="{ 'abs': animating }")
@@ -26,8 +26,12 @@ import Lang from '~/components/Lang.vue'
 import Social from '~/components/Social.vue'
 import Loader from '~/components/Loader.vue'
 import Logo from '~/components/Logo.vue'
+// import Pixi from '~/components/Pixi.vue'
 
 export default {
+  components: {
+    Lang, Social, Loader, Logo
+  },
   data () {
     return {
       animating: false,
@@ -36,6 +40,8 @@ export default {
   },
   watch: {
     $route (to, from) {
+      if (!process.isClient) return
+
       this.animating = true
       setTimeout(() => {
         this.animating = false
@@ -48,6 +54,8 @@ export default {
     }
   },
   mounted () {
+    if (!process.isClient) return
+
     const t = this
     const time = 1000
     // const time = 0
@@ -75,9 +83,6 @@ export default {
       return this.$store.state.transitionName
     }
   },
-  components: {
-    Lang, Social, Loader, Logo
-  },
   metaInfo() {
     return {
       title: this.$static.metadata.siteName,
@@ -95,7 +100,8 @@ export default {
 
 <style lang="scss">
 
-$green: #11ff36;
+// $green: #11ff36;
+$green: rgb(17,230,54);
 .green { color: $green; }
 
 $headingSize: 2.2rem;
@@ -122,6 +128,15 @@ h1 {
   color: $green;
   font-weight: normal;
   margin: 0 0 0.3rem 0;
+  padding: 0;
+  line-height: 1em;
+  font-size: $headingSize;
+}
+.titleLike {
+  text-transform: uppercase;
+  color: $green;
+  font-weight: normal;
+  // margin: 0 0 0.3rem 0;
   padding: 0;
   line-height: 1em;
   font-size: $headingSize;
@@ -165,13 +180,15 @@ body {
   font-family: 'D', -apple-system,system-ui,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
   margin: 0;
   padding: 0;
-  // line-height: 1.5;
   line-height: 1.275em;
   font-size: 18px;
   letter-spacing: -0.01rem;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
+}
+.serif {
+  font-family: 'CE', Times, serif;
 }
 
 i, em, label {
@@ -195,6 +212,17 @@ xmp {
   background: white;
   padding: 1.7rem 0 0rem;
 }
+.title.unstick {
+  position: relative;
+}
+.stick {
+  top: 0;
+  position: sticky;
+}
+.bg-white {
+  background: white;
+}
+
 .subtitle {
   margin-top: 1rem;
   * {

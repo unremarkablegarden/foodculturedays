@@ -25,6 +25,8 @@ export default {
     }
   },
   created () {
+    if (!process.isClient) return
+
     this.menu = menu
     // set the language to french if its in the user browser setting
     if (process.isClient) {
@@ -59,7 +61,8 @@ export default {
 </script>
 
 <style lang="scss">
-  $green: #11ff36;
+  // $green: #11ff36;
+  $green: rgb(17,230,54);
   #lang {
     button {
       font-size: 0.9rem;

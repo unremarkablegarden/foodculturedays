@@ -15,7 +15,9 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
+$green: rgb(17,230,54);
+
 #blog, .path {
   transform-origin: center center;
 }
@@ -46,137 +48,91 @@ export default {
     }
   },
   mounted () {
-    var thiss = this
-    const w = window.outerWidth
-    const h = window.outerHeight
-    const curtain = this.$el.querySelector('#curtain')
-    const blob = this.$el.querySelector('#blob')
-    const blobPath =  this.$el.querySelector('#blobPath')
+    if (!process.isClient) return
 
-    // console.log(w + " x " + h)
+    if (process.isClient) {
+      var thiss = this
+      const w = window.outerWidth
+      const h = window.outerHeight
+      const curtain = this.$el.querySelector('#curtain')
+      const blob = this.$el.querySelector('#blob')
+      const blobPath =  this.$el.querySelector('#blobPath')
+      const t = 1000
+      const a = this.$anime
+      var tl = a.timeline()
 
-    const t = 1000
-
-    const a = this.$anime
-
-    var tl = a.timeline({
-      // ...
-    });
-
-    tl
-      .add({
-        targets: blob,
-        scale: {
-          value: 0.5,
+      tl
+        .add({
+          targets: blob,
+          opacity: [0, 1],
           duration: t,
-          easing: 'easeOutSine',
-        },
-        rotate: {
-          value: -90,
+          easing: 'easeInSine'
+        })
+        .add({
+          targets: blob,
+          scale: {
+            value: 0.5,
+            duration: t,
+            easing: 'easeOutSine',
+          },
+          rotate: {
+            value: -90,
+            duration: t,
+            easing: 'easeInSine',
+          },
+        })
+        .add({
+          targets: blob,
+          scale: {
+            value: 0.29,
+            duration: 500,
+            easing: 'easeInOutSine',
+          },
+          'translateX': {
+            value: h*1.56,
+            duration: 500,
+            easing: 'easeInOutSine',
+            // delay: t+500
+          },
+        })
+        .add({
+          targets: blob,
+          'translateY': {
+            value: (w*1.05)*-1,
+            duration: 500,
+            easing: 'easeInOutSine',
+          },
+        })
+        .add({
+          targets: [curtain, blob],
+          opacity: {
+            value: 0,
+            duration: 700,
+            easing: 'easeOutSine',
+            // delay: t+1000
+          },
+          complete: function(anim) {
+            thiss.loading = false
+            // thiss.store.commit('setLoaded', true)
+            thiss.$store.commit('setLoaded', true)
+          }
+        })
+
+      this.$anime({ targets: blobPath,
+        strokeDashoffset: [this.$anime.setDashoffset, 1000],
+        easing: 'easeInOutSine',
+        duration: t*2,
+        // delay: t,
+        // close the snakes
+        strokeDasharray: {
+          value: '10500 0',
           duration: t,
-          easing: 'easeInSine',
-        },
-      })
-      .add({
-        targets: blob,
-        scale: {
-          value: 0.28,
-          duration: 500,
-          easing: 'easeInOutSine',
-        },
-        'translateX': {
-          value: h*1.6,
-          duration: 500,
-          easing: 'easeInOutSine',
-          // delay: t+500
-        },
-      })
-      .add({
-        targets: blob,
-        'translateY': {
-          value: (w*1.11)*-1,
-          duration: 500,
-          easing: 'easeInOutSine',
-        },
-      })
-      .add({
-        targets: curtain,
-        opacity: {
-          value: 0,
-          duration: 700,
-          easing: 'easeOutSine',
-          // delay: t+1000
-        },
-        complete: function(anim) {
-          thiss.loading = false
-          // thiss.store.commit('setLoaded', true)
-          thiss.$store.commit('setLoaded', true)
+          easing: 'easeOutQuart',
+          delay: t*1.8,
         }
       })
-
-
-      // .add({
-      //   targets: blob,
-
-      // })
-
-    this.$anime({ targets: blobPath,
-      strokeDashoffset: [this.$anime.setDashoffset, 1000],
-      easing: 'easeInOutSine',
-      duration: t,
-
-      // close the snakes
-      strokeDasharray: {
-        value: '10500 0',
-        duration: t*1,
-        easing: 'easeOutQuart',
-        delay: t/2,
-      }
-
-      // // color
-      // stroke: {
-      //   value: '#000',
-      //   duration: 500,
-      //   easing: 'linear',
-      //   delay: t+1000
-      // }
-    })
-
-    // this.$anime({ targets: blob,
-      // scale: {
-      //   value: 0.5,
-      //   duration: t,
-      //   easing: 'easeOutSine',
-      //   delay: 0,
-      // },
-      // rotate: {
-      //   value: -90,
-      //   duration: t,
-      //   easing: 'easeInSine',
-      // },
-      // 'translateX': {
-      //   value: h*0.9,
-      //   duration: 500,
-      //   easing: 'easeInOutSine',
-      //   delay: t+500
-      // },
-      // 'translateY': {
-      //   value: (w*0.6)*-1,
-      //   duration: 500,
-      //   easing: 'easeInOutSine',
-      //   delay: t+1000
-      // },
-      // 'opacity': {
-      //   value: 0,
-      //   duration: 300,
-      //   easing: 'easeOutSine',
-      //   delay: t+700
-      // }
-    // })
-
+    }
   },
-  methods: {
-  }
 }
 </script>
 

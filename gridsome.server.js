@@ -5,7 +5,18 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+// var path = require('path')
+
 module.exports = function (api, options) {
+
+  // api.configureWebpack({
+  //   resolve: {
+  //     alias: {
+  //       "pixi": path.resolve('node_modules', 'pixi.js/dist/pixi.min.js')
+  //     }
+  //   },
+  // })
+
 
   api.createPages(async ({ createPage, graphql }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
@@ -47,27 +58,6 @@ module.exports = function (api, options) {
     })
 
 
-    // ARCHIVE INDEX
-    createPage({
-      path: `/en/archive`,
-      component: './src/pages/Archive.vue',
-      context: {
-        lang: 'en-gb',
-        altPath: '/fr/archives',
-        title: 'Archive'
-      }
-    })
-    createPage({
-      path: `/fr/archives`,
-      component: './src/pages/Archive.vue',
-      context: {
-        lang: 'fr-ch',
-        altPath: '/en/archive',
-        title: 'Archives'
-      }
-    })
-
-
     const pagesQuery = await graphql(`{
       prismic {
         allPages {
@@ -91,18 +81,16 @@ module.exports = function (api, options) {
       }
     }`)
 
-    const archivesQuery = await graphql(`{
+    const mediasQuery = await graphql(`{
       prismic {
-        allArchives {
+        allMedias {
           edges {
             node {
               year
-              artist
-              country
-              artist_body
-              project
-              project_body
-              image
+              links {
+                title
+                link
+              }
               _meta {
                 uid
                 lang
@@ -116,6 +104,100 @@ module.exports = function (api, options) {
         }
       }
     }`)
+
+    let archives = []
+    let keepLoading = true
+    let after = ''
+
+    while (keepLoading) {
+      let archivesQuery = await graphql(`{
+        prismic {
+          allArchives(after: "${after}") {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            edges {
+              node {
+                year
+                artist
+                country
+                artist_body
+                project
+                project_body
+                image
+                _meta {
+                  uid
+                  lang
+                  alternateLanguages {
+                    uid
+                    lang
+                  }
+                }
+              }
+              cursor
+            }
+          }
+        }
+      }`)
+
+      let data = archivesQuery.data.prismic.allArchives
+
+      data.edges.forEach(({ node }) => {
+        let lang, archive, alt, altArchive
+        if (node._meta.lang == 'en-gb') {
+          lang = 'en'
+          archive = 'archive'
+          altArchive = 'archives'
+          alt = 'fr'
+        }
+        if (node._meta.lang == 'fr-ch') {
+          lang = 'fr';
+          archive = 'archives'
+          altArchive = 'archive'
+          alt = 'en';
+        }
+
+        const path = `/${lang}/${archive}/${node.year}/${node._meta.uid}`
+        const altPath = `/${alt}/${altArchive}/${node.year}/${node._meta.alternateLanguages[0].uid}`
+
+        console.log(path);
+
+        // createPage({
+        //   path: path,
+        //   component: './src/templates/Archive.vue',
+        //   context: {
+        //     node: node,
+        //     uid: node._meta.uid,
+        //     lang: node._meta.lang,
+        //     year: node.year,
+        //     plainTitle: node.artist[0].text,
+        //     altPath: altPath
+        //   }
+        // })
+
+        node['context'] = {
+          uid: node._meta.uid,
+          lang: node._meta.lang,
+          year: node.year,
+          plainTitle: node.artist[0].text,
+          path: path,
+          altPath: altPath
+        }
+      })
+
+      // set next page to load in the loop
+      after = data.pageInfo.endCursor
+
+      // add to master archives array
+      archives = archives.concat(data.edges)
+
+      // while loop breaker
+      if (! data.pageInfo.hasNextPage) {
+        keepLoading = false
+      }
+    }
+
 
 
 
@@ -145,29 +227,28 @@ module.exports = function (api, options) {
       })
     }
 
-    if (archivesQuery.hasOwnProperty('data')) {
-      archivesQuery.data.prismic.allArchives.edges.forEach(({ node }) => {
-        let lang, archive, alt
-        if (node._meta.lang == 'en-gb') { lang = 'en'; archive = 'archive'; alt = 'fr'; }
-        if (node._meta.lang == 'fr-ch') { lang = 'fr'; archive = 'archiver'; alt = 'en'; }
 
-        const path = `/${lang}/${node.year}/${archive}/${node._meta.uid}`
-        const altPath = `/${alt}/${node.year}/${archive}/${node._meta.alternateLanguages[0].uid}`
-
-        createPage({
-          path: path,
-          component: './src/templates/Archive.vue',
-          context: {
-            node: node,
-            uid: node._meta.uid,
-            lang: node._meta.lang,
-            year: node.year,
-            plainTitle: node.artist[0].text,
-            altPath: altPath
-          }
-        })
-      })
-    }
+    // ARCHIVE INDEX
+    createPage({
+      path: `/en/archive`,
+      component: './src/pages/Archive.vue',
+      context: {
+        lang: 'en-gb',
+        altPath: '/fr/archives',
+        title: 'Archive',
+        data: archives.filter(el => el.node._meta.lang == 'en-gb')
+      }
+    })
+    createPage({
+      path: `/fr/archives`,
+      component: './src/pages/Archive.vue',
+      context: {
+        lang: 'fr-ch',
+        altPath: '/en/archive',
+        title: 'Archives',
+        data: archives.filter(el => el.node._meta.lang == 'fr-ch')
+      }
+    })
 
 
     // PARTNERS
@@ -177,8 +258,6 @@ module.exports = function (api, options) {
       context: {
         lang: 'en-gb',
         altPath: '/fr/partenaires',
-        // title: 'Partners',
-        // uid: 'partners',
         data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partners')
       }
     })
@@ -189,8 +268,30 @@ module.exports = function (api, options) {
         lang: 'fr-ch',
         altPath: '/en/partners',
         title: 'Partenaires',
-        // uid: 'partenaires',
         data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partenaires')
+      }
+    })
+
+
+    // MEDIA
+    createPage({
+      path: `/en/media`,
+      component: './src/pages/Media.vue',
+      context: {
+        pageTitle: 'Media',
+        lang: 'en-gb',
+        altPath: '/fr/medias',
+        data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'en-gb')
+      }
+    })
+    createPage({
+      path: `/fr/medias`,
+      component: './src/pages/Media.vue',
+      context: {
+        pageTitle: 'Médias',
+        lang: 'fr-ch',
+        altPath: '/en/media',
+        data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'fr-ch')
       }
     })
 

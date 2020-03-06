@@ -4,9 +4,19 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+// var path = require('path')
+
 module.exports = {
   siteName: 'Foodculture days',
   siteDescription: "a space for critical reflexion and a platform for knowledge exchange / un espace de réflexion critique et une plateforme d'échange de connaissances",
+
+  // configureWebpack: {
+  //   resolve: {
+  //     alias: {
+  //       "pixi": path.resolve('node_modules', 'pixi.js/dist/pixi.min.js')
+  //     }
+  //   },
+  // },
 
   plugins: [
     {
