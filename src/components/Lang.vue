@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import {animatedScrollTo} from 'es6-scroll-to'
 import menu from '~/components/menu.js'
 
 export default {
@@ -40,13 +41,21 @@ export default {
   methods: {
     changeLang (l) {
       if (process.isClient) {
+
         let path = window.location.pathname
         let newPath = this.$context.altPath
         if (!newPath) {
           this.hasTranslation = false
         } else {
           if (path !== newPath) {
-            this.$router.push(newPath)
+            let top = window.pageYOffset
+            animatedScrollTo({
+                duration: top,
+                to: 0
+            })
+            setTimeout(() => {
+              this.$router.push(newPath)
+            }, top)
           }
           if (this.lang == 0) { this.lang = 1}
           else { this.lang = 0 }
@@ -55,7 +64,18 @@ export default {
     },
     activeLang (l) {
       if (l === this.lang) return 'is-active'
-    }
+    },
+    // logoHome () {
+    //   if (!process.isClient) return
+    //   let top = window.pageYOffset
+    //   animatedScrollTo({
+    //       duration: top,
+    //       to: 0
+    //   })
+    //   setTimeout(() => {
+    //     this.$router.push('/')
+    //   }, top)
+    // },
   }
 }
 </script>

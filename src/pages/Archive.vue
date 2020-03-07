@@ -1,18 +1,23 @@
 <template lang="pug">
   layout
     #archive
-      h1.title.unstick {{ title }}
+      h1.title {{ title }}
       .year(v-for='(year, index) in years', :key='index')
-        h1.title.bg-white {{ year.year }}
+        h2.serif {{ year.year }}
 
-        g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
-          .page
-            h2
-              em {{ tc(page.node.project[0].text) }}
-              div {{ tc(page.node.artist[0].text) }}
+        .pages-wrapper
+          g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
+            .page
+              h2
+                em {{ tc(page.node.project[0].text) }}
+                div {{ tc(page.node.artist[0].text) }}
 </template>
 
 <style lang="scss" scoped>
+h1 {
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+}
 h2 {
   font-size: 0.98rem;
   margin: 0;
@@ -23,7 +28,10 @@ h2 {
 em {
   font-size: 1.05rem;
 }
-
+.pages-wrapper {
+  border-top: 1px black solid;
+  // margin-top: 2rem;
+}
 .page {
   padding: 0.5rem 0 0.2rem;
   border-bottom: 1px black solid;

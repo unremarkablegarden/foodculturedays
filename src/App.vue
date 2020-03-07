@@ -1,13 +1,11 @@
 <template lang="pug">
   #app
-    Loader
+    //- Loader
     .body
       Logo
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
-        //- (v-bind:class='{ moveoutleft: loading }').move
         Lang#lang
-        //- (v-bind:class='{ moveoutright: loading }').move
       transition(:name='transitionName')
         router-view(class='child-view')
 </template>
@@ -26,7 +24,6 @@ import Lang from '~/components/Lang.vue'
 import Social from '~/components/Social.vue'
 import Loader from '~/components/Loader.vue'
 import Logo from '~/components/Logo.vue'
-// import Pixi from '~/components/Pixi.vue'
 
 export default {
   components: {
@@ -35,10 +32,30 @@ export default {
   data () {
     return {
       animating: false,
-      loading: true
+      menuShown: false,
+      // loading: true
+    }
+  },
+  computed: {
+    transitionName () {
+      return this.$store.state.transitionName
+    },
+    loaded () {
+      let loaded = this.$store.state.loaded
+      if (loaded) {
+        setTimeout(() => {
+          this.showMenu()
+        }, 1800)
+      }
+      return loaded
     }
   },
   watch: {
+    loaded (val) {
+      if (val) {
+        this.showMenu()
+      }
+    },
     $route (to, from) {
       if (!process.isClient) return
 
@@ -55,32 +72,27 @@ export default {
   },
   mounted () {
     if (!process.isClient) return
-
-    const t = this
-    const time = 1000
-    // const time = 0
-
-    // setTimeout(() => {
-    // const menuItems = t.$el.querySelectorAll('.menu-item')
-    // t.$anime({
-    //   targets: menuItems,
-    //   easing: 'easeOutSine',
-    //   left: 0,
-    //   delay: t.$anime.stagger(100)
-    // });
-    // }, time)
-
-    setTimeout(() => {
-      t.loading = false
-    }, time+800)
-    // t.loading = false
+    // set up the menu outside the screen while curtain is up
+    this.$anime({
+      targets: this.$el.querySelectorAll('.menu-item'),
+      duration: 0,
+      easing: 'easeOutSine',
+      left: '-80vw',
+      delay: 0
+    })
   },
   methods: {
-
-  },
-  computed: {
-    transitionName () {
-      return this.$store.state.transitionName
+    showMenu () {
+      if (this.menuShown == false) {
+        this.$anime({
+          targets: this.$el.querySelectorAll('.menu-item'),
+          easing: 'easeOutSine',
+          left: 0,
+          delay: [this.$anime.stagger(50)]
+        })
+        this.menuShown = true
+        console.log('animate')
+      }
     }
   },
   metaInfo() {
@@ -99,11 +111,9 @@ export default {
 </script>
 
 <style lang="scss">
-
-// $green: #11ff36;
 $green: rgb(17,230,54);
 .green { color: $green; }
-
+// $green: #11ff36;
 $headingSize: 2.2rem;
 
 @media (max-width: 960px) {
@@ -116,6 +126,12 @@ $headingSize: 2.2rem;
     display: none;
   }
 }
+
+// @screen sm {
+//   #app {
+//     border: 10px red solid;
+//   }
+// }
 
 .layout {
   margin: 0 auto;
@@ -204,13 +220,12 @@ xmp {
   color: white;
 }
 
-
-
 .title {
   position: sticky;
   top: 0;
   background: white;
   padding: 1.7rem 0 0rem;
+  z-index: 1010;
 }
 .title.unstick {
   position: relative;

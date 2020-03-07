@@ -134,10 +134,11 @@ export default {
     text-transform: uppercase;
     // margin: 2.3rem 0 0 0;
     margin-left: 0.3rem;
-    padding: 0.2rem 0.5rem 0;
+    padding: 0.2rem 0.5rem 0.1rem;
     display: inline-block;
     width: auto;
     font-size: 0.9rem;
+    transform: scale(1.01);
     // float: right;
   }
 

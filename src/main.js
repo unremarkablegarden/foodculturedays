@@ -5,20 +5,20 @@ import { common } from 'prismic-vue/components'
 import { animatedScrollTo } from 'es6-scroll-to'
 import anime from 'animejs/lib/anime.min.js'
 import DefaultLayout from '~/layouts/Default.vue'
+
 // import * as PIXI from 'pixi.js'
+// const path = require('path')
+// const bulma = path.resolve('node_modules', 'bulma-scss/base/_all.scss')
+// require(bulma);
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.use(Vuex)
-
-  // console.log(JSON.stringify(appOptions));
-
 
   appOptions.store = new Vuex.Store({
     state: {
       lang: 'en-gb',
       loaded: false,
       transitionName: 'slide-left',
-      // urlMap: false,
       img: {
         blobMobile: 'https://images.prismic.io/foodculturedays2020/06c2d21b-3c2c-4630-981b-1fc92de9028d_blob-mobile.svg?auto=compress,format',
         logo: 'https://images.prismic.io/foodculturedays2020/e5f2d0ad-8f07-45b0-8c5a-6e480cf54d14_logo.svg?auto=compress,format',
@@ -64,10 +64,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   Vue.prototype.$anime = anime
 
-  // if (process.isClient) {
-  //   Vue.prototype.$PIXI = PIXI
-  // }
-
   Vue.prototype.$nav = (to) => {
     if (process.isClient) {
       let top = window.pageYOffset
@@ -90,6 +86,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       console.log('linkResolver()')
     }
   }
+
+  require('~/main.css')
 
   Vue.component('Layout', DefaultLayout)
 

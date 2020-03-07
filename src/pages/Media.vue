@@ -41,9 +41,9 @@ h1.title {
     text-transform: uppercase;
     font-size: 0.97rem;
   }
-  a:hover, a:active {
-    color: $green;
-  }
+  // a:hover, a:active {
+  //   color: $green;
+  // }
   a:visited {
     opacity: 0.5;
   }

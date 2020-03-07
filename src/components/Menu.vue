@@ -54,19 +54,17 @@ export default {
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
 
-#menu {
-  margin-top: 1.4rem;
-}
 .menu-item {
+  &:first-child {
+    padding-top: 1.4rem;
+  }
   text-transform: uppercase;
-  // font-size: 30px;
-  // line-height: 1em;
   font-size: $headingSize;
   line-height: 1.3em;
-  // margin: 0 0 0.3rem 0;
   font-weight: normal;
   position: relative;
   // left: -500px;
+  // background-color: pink;
   a {
     color: black;
     &:hover, &:active {

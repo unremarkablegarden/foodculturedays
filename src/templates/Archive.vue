@@ -51,6 +51,7 @@ $headingSize: 2.2rem;
   box-sizing: border-box;
   position: sticky;
   top: 0;
+  z-index: 1010;
 }
 </style>
 
@@ -66,8 +67,8 @@ export default {
   data () {
     return {
       back: {
-        en: 'Back',
-        fr: 'Retour'
+        en: 'X',
+        fr: 'X'
       }
     }
   },
