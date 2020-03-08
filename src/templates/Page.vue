@@ -1,13 +1,20 @@
 <template lang="pug">
   layout
-    .page-wrapper
-      //- prismic-image(:field='page.image', v-if='page.image')
-      prismic-rich-text(:field='page.title').title
-      prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
-      .content
-        prismic-rich-text(:field='page.body')
+    .columns
+      .column.is-6.desktop.no-pad.gallery-column
+        .gallery
+          .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+          .item(v-else) Add a featured image to this page in Prismic
+          //- prismic-image(:field='page.image', v-if='page.image')
 
-      Newsletter
+      .column.is-6.left
+        .page-wrapper
+          prismic-rich-text(:field='page.title').title
+          prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
+          .content
+            prismic-rich-text(:field='page.body')
+
+          Newsletter
 
 </template>
 
@@ -28,6 +35,11 @@ export default {
   metaInfo() {
     return {
       title: this.$context.plainTitle
+    }
+  },
+  data () {
+    return {
+      gallery: false
     }
   },
   computed: {

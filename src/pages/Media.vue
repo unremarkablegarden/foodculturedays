@@ -1,12 +1,22 @@
 <template lang="pug">
   layout
     #media
-      h1.title {{ $context.pageTitle }}
-      .year-wrapper(v-for='(page, index) in pages', :key='index')
-        .year.serif {{ page.node.year }}
-        .link-list
-          .link(v-for='(link, index) in page.node.links' :key='index')
-            a(:href='link.link', target="_blank") {{ link.title }}
+      .columns
+        .column.is-6.desktop.no-pad.gallery-column
+          .gallery
+            .item(v-if='image', :style="'background-image: url('+image+')'")
+            //- .item(v-else) Add a featured image to this page in Prismic
+            //- .item hello
+            //- .item {{ image }}
+          //- prismic-image(:field='page.image', v-if='page.image')
+
+        .column.is-6.left
+          h1.title {{ $context.pageTitle }}
+          .year-wrapper(v-for='(page, index) in pages', :key='index')
+            .year.serif {{ page.node.year }}
+            .link-list
+              .link(v-for='(link, index) in page.node.links' :key='index')
+                a(:href='link.link', target="_blank") {{ link.title }}
 
 </template>
 
@@ -48,6 +58,12 @@ h1.title {
     opacity: 0.5;
   }
 }
+
+@media (min-width: 960px) {
+  .column.left {
+    padding-right: 2.7rem;
+  }
+}
 </style>
 
 <script>
@@ -74,6 +90,13 @@ export default {
         return 0
       })
       return p
+    },
+    image () {
+      if (!process.isClient) return
+      let img = this.pages[0].node.image
+      if ('url' in img) {
+        return img.url
+      }
     }
   }
 }

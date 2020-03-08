@@ -6,11 +6,11 @@
 
 // var path = require('path')
 
-const tailwind = require('tailwindcss')
+// const tailwind = require('tailwindcss')
 const purgecss = require('@fullhuman/postcss-purgecss')
 
 const postcssPlugins = [
-	tailwind(),
+	// tailwind(),
 ]
 
 if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require('./purgecss.config.js')))

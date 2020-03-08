@@ -16,10 +16,8 @@
       g-link(to="/")
         img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
 
-    .pixi2(v-bind:class="{ 'is-hidden': !showBlob }")
+    .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
       Pixi(@click='logoHome')
-    //- .debug
-      xmp winW: {{winW}} winH {{winH}} top {{top}}
 </template>
 
 
@@ -42,14 +40,18 @@ export default {
       step2: false,
       step3: false,
       transparent: false,
-      curtain: true
+      curtain: true,
+      showBlob: false,
+      enableBlob: false
     }
   },
-  computed: {
-    showBlob () {
-      if (this.top > 100 && !this.curtain) { return true }
-    }
-  },
+  // computed: {
+  //   showBlob () {
+  //     let showBlob = false
+  //     if (this.top > 100 && !this.curtain) { showBlob = true }
+  //     return showBlob
+  //   }
+  // },
   methods: {
     logoHome () {
       if (!process.isClient) return
@@ -75,10 +77,24 @@ export default {
     },
     handleScroll (event) {
       if (!process.isClient) return
-
       this.setSize()
       let top = window.pageYOffset
       this.top = top
+
+      // fuckery to get the hidden clicker to be disabled, plus fade
+      if (!this.enableBlob && this.top > 100 && !this.curtain && this.winW < 960) {
+        this.enableBlob = true
+        setTimeout(() => {
+          this.showBlob = true
+        }, 10)
+      }
+
+      if (this.enableBlob && this.top < 100 && !this.curtain && this.winW < 960) {
+        this.showBlob = false
+        setTimeout(() => {
+          this.enableBlob = false
+        }, 666)
+      }
     }
   },
   mounted () {
@@ -159,11 +175,20 @@ $left: calc(95vw * 0.06);
   transform-origin: 0 0;
   opacity: 1;
   transition: all 1000ms;
+  // transition: opacity 900ms height 2000ms;
+  // box-shadow: 0 0 1px 1px red;
+  width: 21vw;
+  height: 9vw;
+  overflow: hidden;
 }
 
+.is-moved {
+  margin-left: -100vw;
+}
 .is-hidden {
   opacity: 0;
   transition: all 666ms;
+  // height: 0;
 }
 
 .center {
@@ -223,9 +248,7 @@ $left: calc(95vw * 0.06);
 }
 
 #logo {
-
   box-sizing: border-box;
-  margin-top: 0.8rem;
   width: 100vw;
   height: $h;
   padding-left: 0.7rem;

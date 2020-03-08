@@ -77,7 +77,7 @@ export default {
       targets: this.$el.querySelectorAll('.menu-item'),
       duration: 0,
       easing: 'easeOutSine',
-      left: '-80vw',
+      left: '-100%',
       delay: 0
     })
   },
@@ -116,28 +116,109 @@ $green: rgb(17,230,54);
 // $green: #11ff36;
 $headingSize: 2.2rem;
 
+// MOBILE
 @media (max-width: 960px) {
   .desktop {
     display: none;
   }
+  #logo {
+    margin-top: 0.8rem;
+  }
+  .layout {
+    margin: 0 auto;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+  #buttons {
+    width: 100vw;
+    left: 0;
+  }
 }
+
+// DESKTOP
 @media (min-width: 960px) {
   .mobile {
     display: none;
   }
+  #logo {
+    padding-top: 0.8rem;
+    transform: scale(0.49);
+    transform-origin: 0 0;
+    margin-left: calc(49.5vw + 1rem);
+  }
+  #buttons {
+    right: 0;
+  }
+  .layout {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  .columns {
+    display: flex;
+    .column {
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .column.no-pad {
+      padding: 0;
+    }
+    .is-6 {
+      width: 50%;
+    }
+  }
+  .body {
+    min-height: 100vh;
+  }
+
+  #app {
+    min-height: 100vh;
+    cursor: auto;
+    cursor: url(assets/cursor-1x.png) 15 15, auto;
+  }
+
+  a, .link:hover, #pixi, #pixi1, #pixi2, button, .back {
+    cursor: pointer;
+    cursor: url(assets/cursorB-1x.png) 15 15, auto !important;
+  }
+
+  .gallery-column {
+    min-height: 100vh;
+    position: relative;
+    z-index: 10;
+  }
+
+  .column.left {
+    padding-top: 6vw;
+    padding-right: 4rem;
+  }
+
+  .gallery {
+    background-color: #f5f5f5;
+    color: #ccc;
+    height: 100%;
+    width: 50vw;
+    .item {
+      height: 100%;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      width: 50vw;
+      box-sizing: border-box;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 
-// @screen sm {
-//   #app {
-//     border: 10px red solid;
-//   }
-// }
-
-.layout {
-  margin: 0 auto;
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
-}
 
 h1 {
   text-transform: uppercase;
@@ -165,15 +246,14 @@ input {
 }
 
 #buttons {
-  width: 100%;
+  height: 3.75rem;
   display: flex;
   justify-content: space-between;
   position: fixed;
   // position: absolute;
   z-index: 888;
   bottom: 0;
-  width: 100vw;
-  left: 0;
+  // left: 0;
   margin: 0;
   padding: 0.7rem 0.7rem 0.8rem 1.2rem;
   // border: 1px red solid;
@@ -278,7 +358,9 @@ xmp {
   transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
   overflow: hidden;
   position: absolute;
-  width: calc(100vw - 1.4rem)
+  // width: calc(100vw - 1.4rem)
+  box-sizing: border-box;
+  width: 100vw;
 }
 
 .slide-left-enter,

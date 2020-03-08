@@ -1,9 +1,14 @@
 <template lang="pug">
-  #menu
-    .menu-item(v-for="item in menu", :key="item.title[lang]")
-      //- .disabled(v-if='item.disabled') {{ item.title[lang] }}
-      //- g-link(v-else, :to="item.to[lang]") {{ item.title[lang] }}
-      g-link(v-if='!item.disabled', :to="item.to[lang]") {{ item.title[lang] }}
+#menu
+  .columns
+    .column.is-6.desktop.no-pad.gallery-column
+      .gallery(v-if='gallery && gallery.length')
+        .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }")
+
+    .column.is-6.menu.left
+      .menu-item(v-for="(item, i) in menu", :key="item.title[lang]")
+        span.linkwrap(@mouseover='galleryItem = (i+1)', @mouseleave='galleryItem = 0')
+          g-link(:to="item.to[lang]") {{ item.title[lang] }}
 </template>
 
 <script>
@@ -22,12 +27,15 @@ export default {
       langpath: [
         'en',
         'fr'
-      ]
+      ],
+      gallery: false,
+      galleryItem: 0,
+      total: null,
     }
   },
   created () {
-    this.menu = menu
     if (!process.isClient) return
+    this.menu = menu
     if (process.isClient) {
       let lang = window.location.pathname
       if (lang.includes('fr')) {
@@ -35,6 +43,9 @@ export default {
       } else {
         this.lang = 0
       }
+    }
+    if (this.$route.path !== '/') {
+      this.getGallery()
     }
   },
   watch: {
@@ -44,6 +55,24 @@ export default {
       } else {
         this.lang = 0
       }
+      if (to.path == '/en/' || to.path == '/fr/') {
+        this.getGallery()
+      }
+    }
+  },
+  methods: {
+    hoverMenu (e) {
+      console.log(e);
+    },
+    getGallery () {
+      let c = this.$context.gallery
+      if (c) {
+        if ('node' in c) { c = c.node }
+        if ('gallery' in c) { c = c.gallery }
+      }
+      // c.reverse()
+      this.total = c.length
+      this.gallery = c
     }
   }
 }
@@ -54,7 +83,16 @@ export default {
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
 
+.menu {
+  // display: flex;
+  // flex-direction: column;
+}
+.linkwrap {
+  // background: pink;
+}
 .menu-item {
+  // display: inline-block;
+  // border: 1px blue solid;
   &:first-child {
     padding-top: 1.4rem;
   }
@@ -63,8 +101,6 @@ $headingSize: 2.2rem;
   line-height: 1.3em;
   font-weight: normal;
   position: relative;
-  // left: -500px;
-  // background-color: pink;
   a {
     color: black;
     &:hover, &:active {
@@ -76,5 +112,11 @@ $headingSize: 2.2rem;
   display: inline-block;
   opacity: 0.2;
   // transform: rotateY(180deg);
+}
+.gallery .item {
+  opacity: 0;
+}
+.gallery .item.active {
+  opacity: 1;
 }
 </style>

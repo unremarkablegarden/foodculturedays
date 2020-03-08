@@ -154,6 +154,9 @@ export default {
     },
     logoHome () {
       if (process.isClient) {
+        // let clicker = this.$parent.$el.querySelector('#pixi2')
+        //
+        // console.log(clicker);
         let top = window.pageYOffset
         animatedScrollTo({
             duration: top,

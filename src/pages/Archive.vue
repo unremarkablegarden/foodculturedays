@@ -1,16 +1,27 @@
 <template lang="pug">
   layout
     #archive
-      h1.title {{ title }}
-      .year(v-for='(year, index) in years', :key='index')
-        h2.serif {{ year.year }}
+      .columns
+        .column.is-6.desktop.no-pad.gallery-column
+          .gallery
+            //- .year(v-for='(year, index) in years', :key='index')
+            //-   //- h2.serif {{ year.year }}
+            //-   .item(v-for='(page, index) in year.pages', :key='index', v-if='page.node.image.url', :style="'background-image: url('+page.node.image.url+')'")
+            //- .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+            .item(style='padding: 10vw') The images are quite low-res in the archive so we can't use them big like this maybe... See sub-pages.
+            //- prismic-image(:field='page.image', v-if='page.image')
 
-        .pages-wrapper
-          g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
-            .page
-              h2
-                em {{ tc(page.node.project[0].text) }}
-                div {{ tc(page.node.artist[0].text) }}
+        .column.is-6.left
+          h1.title {{ title }}
+          .year(v-for='(year, index) in years', :key='index')
+            h2.serif {{ year.year }}
+
+            .pages-wrapper
+              g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
+                .page
+                  h2
+                    em {{ tc(page.node.project[0].text) }}
+                    div {{ tc(page.node.artist[0].text) }}
 </template>
 
 <style lang="scss" scoped>

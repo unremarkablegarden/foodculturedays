@@ -9,35 +9,8 @@
 
 module.exports = function (api, options) {
 
-  // api.configureWebpack({
-  //   resolve: {
-  //     alias: {
-  //       "pixi": path.resolve('node_modules', 'pixi.js/dist/pixi.min.js')
-  //     }
-  //   },
-  // })
-
-
   api.createPages(async ({ createPage, graphql }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
-
-    // INDEX
-    createPage({
-      path: `/en`,
-      component: './src/pages/Index.vue',
-      context: {
-        lang: 'en-gb',
-        altPath: '/fr/'
-      }
-    })
-    createPage({
-      path: `/fr`,
-      component: './src/pages/Index.vue',
-      context: {
-        lang: 'fr-ch',
-        altPath: '/en/'
-      }
-    })
 
     // NEWSLETTER
     createPage({
@@ -58,28 +31,7 @@ module.exports = function (api, options) {
     })
 
 
-    const pagesQuery = await graphql(`{
-      prismic {
-        allPages {
-          edges {
-            node {
-              title
-              subtitle
-              body
-              image
-              _meta {
-                uid
-                lang
-                alternateLanguages {
-                  uid
-                  lang
-                }
-              }
-            }
-          }
-        }
-      }
-    }`)
+
 
     const mediasQuery = await graphql(`{
       prismic {
@@ -87,6 +39,7 @@ module.exports = function (api, options) {
           edges {
             node {
               year
+              image
               links {
                 title
                 link
@@ -202,16 +155,45 @@ module.exports = function (api, options) {
 
 
     // CREATE THE PAGES
+    const pagesQuery = await graphql(`{
+      prismic {
+        allPages {
+          edges {
+            node {
+              title
+              subtitle
+              body
+              image
+              gallery {
+                item
+              }
+              _meta {
+                uid
+                lang
+                alternateLanguages {
+                  uid
+                  lang
+                }
+              }
+            }
+          }
+        }
+      }
+    }`)
     if (pagesQuery.hasOwnProperty('data')) {
       pagesQuery.data.prismic.allPages.edges.forEach(({ node }) => {
         let lang, alt
         if (node._meta.lang == 'en-gb') { lang = 'en'; alt = 'fr'; }
         if (node._meta.lang == 'fr-ch') { lang = 'fr'; alt = 'en'; }
         const path = `/${lang}/${node._meta.uid}`
-        const altPath = `/${alt}/${node._meta.alternateLanguages[0].uid}/`
-        const skip = ['partners', 'partenaires']
+        let altPath
+
+        const skip = ['partners', 'partenaires', 'homepage']
 
         if (! skip.includes(node._meta.uid)) {
+          if (node._meta.alternateLanguages.length) {
+            altPath = `/${alt}/${node._meta.alternateLanguages[0].uid}/`
+          }
           createPage({
             path: path,
             component: './src/templates/Page.vue',
@@ -220,12 +202,43 @@ module.exports = function (api, options) {
               uid: node._meta.uid,
               lang: node._meta.lang,
               plainTitle: node.title[0].text,
-              altPath: altPath
+              altPath: altPath,
+              gallery: node.gallery
             }
           })
         }
       })
     }
+
+
+    // INDEX
+    createPage({
+      path: `/`,
+      component: './src/pages/Index.vue',
+      context: {
+        lang: 'en-gb',
+        altPath: '/fr/',
+        gallery:  pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+      }
+    })
+    createPage({
+      path: `/en`,
+      component: './src/pages/Index.vue',
+      context: {
+        lang: 'en-gb',
+        altPath: '/fr/',
+        gallery:  pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+      }
+    })
+    createPage({
+      path: `/fr`,
+      component: './src/pages/Index.vue',
+      context: {
+        lang: 'fr-ch',
+        altPath: '/en/',
+        gallery: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+      }
+    })
 
 
     // ARCHIVE INDEX
@@ -295,5 +308,74 @@ module.exports = function (api, options) {
       }
     })
 
+
+    // const imagesQuery = await graphql(`{
+    //   prismic {
+    //     allImagess {
+    //       edges {
+    //         node {
+    //           images {
+    //             image
+    //           }
+    //           _meta {
+    //             uid
+    //             lang
+    //             alternateLanguages {
+    //               uid
+    //               lang
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }`)
+
+    // if (imagesQuery.hasOwnProperty('data')) {
+    //   // console.log(JSON.stringify(imagesQuery))
+
+    //   api.loadSource((actions) => {
+    //     console.log('\n\nTESTING\n\n');
+
+    //     const images = actions.addCollection('Images')
+    //     // const images = addCollection('Images')
+
+    //     imagesQuery.data.prismic.allImagess.edges.forEach(({ node }) => {
+    //       console.log(JSON.stringify(node));
+
+    //       let lang, alt
+    //       if (node._meta.lang == 'en-gb') { lang = 'en'; alt = 'fr'; }
+    //       if (node._meta.lang == 'fr-ch') { lang = 'fr'; alt = 'en'; }
+    //       const path = `/${lang}/img/${node._meta.uid}`
+    //       const altPath = `/${alt}/img/${node._meta.alternateLanguages[0].uid}/`
+
+    //       // console.log(path)
+
+
+
+    //       images.addNode({
+    //         uid: node._meta.uid,
+    //         images: node.images,
+    //         lang: lang,
+    //         path: path,
+    //         altPath: altPath,
+    //       })
+
+    //       // createPage({
+    //       //   path: path,
+    //       //   component: './src/templates/Page.vue',
+    //       //   context: {
+    //       //     node: node,
+    //       //     uid: node._meta.uid,
+    //       //     lang: node._meta.lang,
+    //       //     plainTitle: node.title[0].text,
+    //       //     altPath: altPath
+    //       //   }
+    //       // })
+    //     })
+    //   })
+    // }
+
   })
+
 }

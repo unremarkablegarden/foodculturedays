@@ -1,16 +1,26 @@
 <template lang="pug">
   layout
-    .back(@click='goBack') {{ back[lang] }}
-    .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
-    .page-wrapper
-      prismic-rich-text(:field='page.project').project-title
-      prismic-rich-text(:field='page.artist').artist-title
-      prismic-rich-text(:field='page.project_body').project-body
-      prismic-rich-text(:field='page.artist_body').artist-body
+    .columns
+      .column.is-6.desktop.no-pad.gallery-column
+        .gallery
+          .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+          //- .item(v-else) Add a featured image to this page in Prismic
+          //- prismic-image(:field='page.image', v-if='page.image')
+
+      .column.is-6.left
+        .back(@click='goBack')
+          img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
+
+        .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+        .page-wrapper
+          prismic-rich-text(:field='page.project').project-title
+          prismic-rich-text(:field='page.artist').artist-title
+          prismic-rich-text(:field='page.project_body').project-body
+          prismic-rich-text(:field='page.artist_body').artist-body
 </template>
 
 
-<style lang="scss">
+<style lang="scss" >
 // $green: #11ff36;
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
@@ -28,10 +38,10 @@ $headingSize: 2.2rem;
 }
 
 .image {
-  width: 100vw;
+  width: calc(100% + 1.4rem);
   height: 45vh;
-  background-position-x: 0;
-  background-position-y: center;
+  background-position-x: center;
+  background-position-y: 0;
   background-size: cover;
   background-repeat: no-repeat;
   margin-left: -0.7rem;
@@ -39,20 +49,42 @@ $headingSize: 2.2rem;
 }
 
 .back {
-  cursor: pointer;
+  width: calc(100% + 1.4rem);
+  // cursor: pointer;
   text-transform: uppercase;
   color: $green;
   text-align: right;
   font-size: $headingSize;
   background: white;
-  padding: 2rem 0.7rem 0.5rem;
-  width: 100vw;
+  // padding: 2rem 0.7rem 0.5rem;
+  padding: 0.6rem 0.7rem 0.5rem;
   margin-left: -0.7rem;
+
   box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 1010;
+  img {
+    height: 1.8rem;
+    width: auto;
+  }
 }
+@media (min-width: 960px) {
+  .image {
+    display: none;
+    // margin-left: -1rem;
+    // width: 50vw;
+  }
+  .back {
+    // display: none;
+    width: calc(50vw - 2.5rem);
+    position: absolute;
+    background: transparent;
+    margin-top: 5.5vw;
+    // text-align: left;
+  }
+}
+
 </style>
 
 
@@ -67,8 +99,8 @@ export default {
   data () {
     return {
       back: {
-        en: 'X',
-        fr: 'X'
+        en: '←',
+        fr: '←'
       }
     }
   },

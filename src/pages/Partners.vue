@@ -1,23 +1,28 @@
 <template lang="pug">
-  layout#partners
-    .page-wrapper
-      .title
-        h1 {{ title }}
-      .img-wrapper
-        img(:src="img1").mobile
-        img(:src="img2", ).desktop
-
+  layout
+    #partners
+      .page-wrapper
+        .title
+          h1 {{ title }}
+        .img-wrapper
+          img(:src="img1").mobile
+          img(:src="img2", ).desktop
 </template>
 
 <style lang="scss" scoped>
-  .img-wrapper {
+.img-wrapper {
+  width: 100%;
+  img {
     width: 100%;
-    img {
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-    }
+    height: auto;
+    max-width: 100%;
   }
+}
+@media (min-width: 960px) {
+  #partners {
+    padding: 6vw 2rem 5rem;
+  }
+}
 </style>
 
 <script>
