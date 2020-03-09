@@ -7,25 +7,29 @@
 // var path = require('path')
 
 // const tailwind = require('tailwindcss')
-const purgecss = require('@fullhuman/postcss-purgecss')
+// const purgecss = require('@fullhuman/postcss-purgecss')
 
-const postcssPlugins = [
+// const postcssPlugins = [
 	// tailwind(),
-]
+// ]
 
-if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require('./purgecss.config.js')))
+// if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require('./purgecss.config.js')))
 
 module.exports = {
   siteName: 'Foodculture days',
   siteDescription: "a space for critical reflexion and a platform for knowledge exchange / un espace de réflexion critique et une plateforme d'échange de connaissances",
 
-  css: {
-    loaderOptions: {
-        postcss: {
-            plugins: postcssPlugins,
-        },
-    },
-  },
+  // chainWebpack (config) {
+  //   config.mode('development')
+  // },
+
+  // css: {
+  //   loaderOptions: {
+  //       postcss: {
+  //           plugins: postcssPlugins,
+  //       },
+  //   },
+  // },
 
   // css: {
   //   loaderOptions: {
@@ -64,6 +68,9 @@ module.exports = {
 				pug: { /* Options for `pug-plain-loader` */ },
 				pugLoader: { /* Options for `pug-loader` */ }
 			}
+    },
+    {
+      use: "gridsome-plugin-htaccess",
     },
     // {
     //   use: 'gridsome-plugin-tailwindcss',

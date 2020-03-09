@@ -8,9 +8,10 @@
 
     .part-wrapper#pixi1(v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
       //- img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
-      img(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", :src='$store.state.img.logoParts[1]').logoPart.part2.ref
+      //- img(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", :src='$store.state.img.logoParts[1]').logoPart.part2.ref
 
-      Pixi(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
+      //- Pixi(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
+      Pixi(@click='logoHome').logoPart.part2
 
     .part-wrapper
       g-link(to="/")
@@ -42,16 +43,9 @@ export default {
       transparent: false,
       curtain: true,
       showBlob: false,
-      enableBlob: false
+      enableBlob: false,
     }
   },
-  // computed: {
-  //   showBlob () {
-  //     let showBlob = false
-  //     if (this.top > 100 && !this.curtain) { showBlob = true }
-  //     return showBlob
-  //   }
-  // },
   methods: {
     logoHome () {
       if (!process.isClient) return
@@ -65,10 +59,10 @@ export default {
       }, top)
     },
     setSize () {
+      if (!process.isClient) return
       let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
       let iw = (iOS) ? screen.width : window.innerWidth
       let ih = (iOS) ? screen.height : window.innerHeight
-
       this.winW = iw
       this.winH = ih
     },
@@ -98,33 +92,45 @@ export default {
     }
   },
   mounted () {
-    if (!process.isClient) return
+    // if (!process.isClient) return
     this.setSize()
 
     setTimeout(() => {
+      console.log('step1');
       this.step1 = true
     }, 200)
     setTimeout(() => {
+      console.log('step2');
       this.step2 = true
     }, 600)
     setTimeout(() => {
+      console.log('step3');
       this.step3 = true
     }, 1200)
     setTimeout(() => {
+      console.log('step4');
       this.transparent = true
     }, 1600)
     setTimeout(() => {
+      console.log('step5');
+      console.log('curtain: ' + this.curtain);
       this.curtain = false
+      console.log('curtain: ' + this.curtain);
       this.setLoaded()
     }, 2000)
 
   },
   created () {
-    if (!process.isClient) return
+
 
     // prevent animation if its not loaded on menu page
     const path = this.$route.path
-    if (path !== '/en/' || path == '/fr/') {
+
+    console.log('path that checks if we should skip intro');
+
+    console.log(path);
+
+    if (path !== '/en/' && path !== '/fr/') {
       this.step1 = true
       this.step2 = true
       this.step3 = true
@@ -132,6 +138,8 @@ export default {
       this.curtain = false
       this.setLoaded()
     }
+
+    if (!process.isClient) return
     window.addEventListener('scroll', this.handleScroll)
   },
   destroyed () {
@@ -159,6 +167,7 @@ $left: calc(95vw * 0.06);
   z-index: 1000;
   opacity: 1;
   transition: all 500ms;
+  z-index: 10;
 }
 .transparent {
   transition: all 500ms;

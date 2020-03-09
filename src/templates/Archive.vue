@@ -77,10 +77,14 @@ $headingSize: 2.2rem;
   }
   .back {
     // display: none;
-    width: calc(50vw - 2.5rem);
-    position: absolute;
+    // width: calc(50vw - 2.5rem);
+    position: fixed;
     background: transparent;
-    margin-top: 5.5vw;
+    // margin-top: 5.5vw;
+    left: 2rem;
+    top: 1rem;
+    width: 2rem;
+    z-index: 99;
     // text-align: left;
   }
 }

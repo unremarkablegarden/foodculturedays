@@ -41,6 +41,7 @@ export default {
       return this.$store.state.transitionName
     },
     loaded () {
+      // show menu after loaded is set in store by Logo.vue
       let loaded = this.$store.state.loaded
       if (loaded) {
         setTimeout(() => {
@@ -51,13 +52,13 @@ export default {
     }
   },
   watch: {
-    loaded (val) {
-      if (val) {
+    loaded (loadedTrue) {
+      if (loadedTrue) {
         this.showMenu()
       }
     },
     $route (to, from) {
-      if (!process.isClient) return
+      // if (!process.isClient) return
 
       this.animating = true
       setTimeout(() => {
@@ -78,16 +79,20 @@ export default {
       duration: 0,
       easing: 'easeOutSine',
       left: '-100%',
+      opacity: 0,
       delay: 0
     })
   },
   methods: {
     showMenu () {
+      console.log('showmenu');
+      if (!process.isClient) return
       if (this.menuShown == false) {
         this.$anime({
           targets: this.$el.querySelectorAll('.menu-item'),
           easing: 'easeOutSine',
           left: 0,
+          opacity: 1,
           delay: [this.$anime.stagger(50)]
         })
         this.menuShown = true
@@ -148,6 +153,8 @@ $headingSize: 2.2rem;
   }
   #buttons {
     right: 0;
+    transform-origin: bottom right;
+    transform: scale(0.9);
   }
   .layout {
     position: absolute;
@@ -172,6 +179,20 @@ $headingSize: 2.2rem;
       width: 50%;
     }
   }
+
+  .column.is-6.desktop {
+    width: 50vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .column.is-6.left {
+    width: 50vw;
+    position: absolute;
+    top: 0;
+    left: 50vw;
+  }
+
   .body {
     min-height: 100vh;
   }
@@ -188,7 +209,7 @@ $headingSize: 2.2rem;
   }
 
   .gallery-column {
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
     z-index: 10;
   }

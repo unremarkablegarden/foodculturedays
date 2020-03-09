@@ -1,8 +1,9 @@
 <template lang="pug">
 #menu
   .columns
+    //- transition(name='slide-left')
     .column.is-6.desktop.no-pad.gallery-column
-      .gallery(v-if='gallery && gallery.length')
+      .gallery(v-if='gallery && gallery.length')#gallery
         .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }")
 
     .column.is-6.menu.left
@@ -33,22 +34,39 @@ export default {
       total: null,
     }
   },
-  created () {
-    if (!process.isClient) return
-    this.menu = menu
-    if (process.isClient) {
-      let lang = window.location.pathname
-      if (lang.includes('fr')) {
-        this.lang = 1
-      } else {
-        this.lang = 0
-      }
+  computed: {
+    loaded () {
+      // show menu after loaded is set in store by Logo.vue
+      let loaded = this.$store.state.loaded
+      return loaded
     }
+  },
+  created () {
+    this.menu = menu
+    // if (process.isClient) {
+      // let lang = window.location.pathname
+    if (this.$route.path.includes('fr')) {
+      this.lang = 1
+    } else {
+      this.lang = 0
+    }
+    // }
     if (this.$route.path !== '/') {
       this.getGallery()
     }
   },
+  mounted () {
+    if (!this.loaded) {
+      this.hideImage()
+    }
+  },
   watch: {
+    loaded (loadedTrue) {
+      if (!process.isClient) return
+      if (loadedTrue) {
+        this.showImage()
+      }
+    },
     $route (to, from){
       if (to.path.includes('fr')) {
         this.lang = 1
@@ -61,6 +79,29 @@ export default {
     }
   },
   methods: {
+    hideImage () {
+      if (!process.isClient) return
+      this.$anime({
+        targets: this.$el.querySelector('#gallery'),
+        easing: 'easeOutSine',
+        opacity: 0,
+        // top: '100%',
+        // 'margin-top': '-200%',
+        duration: 0,
+      })
+    },
+    showImage () {
+      if (!process.isClient) return
+      this.$anime({
+        targets: this.$el.querySelector('#gallery'),
+        easing: 'easeOutSine',
+        opacity: 1,
+        // 'margin-top': 0,
+        duration: 1000,
+        delay: 1000
+        // left: 0
+      })
+    },
     hoverMenu (e) {
       console.log(e);
     },
