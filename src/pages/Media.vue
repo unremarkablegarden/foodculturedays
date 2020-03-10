@@ -3,11 +3,10 @@
     #media
       .columns
         .column.is-6.desktop.no-pad.gallery-column
+          //- xmp {{ $context.image }}
           .gallery
-            .item(v-if='image', :style="'background-image: url('+image+')'")
-            //- .item(v-else) Add a featured image to this page in Prismic
-            //- .item hello
-            //- .item {{ image }}
+            .item(v-if='$context.image', :style="'background-image: url('+$context.image.node.image.url+')'")
+            //- .item(v-if='image', :style="'background-image: url('+image.url+')'")
           //- prismic-image(:field='page.image', v-if='page.image')
 
         .column.is-6.left
@@ -70,11 +69,12 @@ h1.title {
 export default {
   metaInfo() {
     return {
-      title: this.$context.pageTitle
+      title: this.$context.pageTitle,
     }
   },
   data () {
     return {
+      image: false
     }
   },
   computed: {
@@ -91,18 +91,10 @@ export default {
       })
       return p
     },
-    image () {
-      if (!process.isClient) return
-      let img = this.pages[0].node.image
-
-      if (img) {
-        if ('url' in img) {
-          return img.url
-        }
-      }
-
-      return img
-    }
+    // image () {
+    //   if (!process.isClient) return
+    //   return this.pages[0].image
+    // }
   }
 }
 </script>

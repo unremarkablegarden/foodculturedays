@@ -19,9 +19,9 @@ module.exports = {
   siteName: 'Foodculture days',
   siteDescription: "a space for critical reflexion and a platform for knowledge exchange / un espace de réflexion critique et une plateforme d'échange de connaissances",
 
-  // chainWebpack (config) {
-  //   config.mode('development')
-  // },
+  chainWebpack (config) {
+    config.mode('development')
+  },
 
   // css: {
   //   loaderOptions: {

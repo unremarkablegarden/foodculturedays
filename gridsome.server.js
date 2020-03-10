@@ -286,6 +286,8 @@ module.exports = function (api, options) {
     })
 
 
+    let image = mediasQuery.data.prismic.allMedias.edges.find(el => el.node.image !== null)
+
     // MEDIA
     createPage({
       path: `/en/media`,
@@ -294,7 +296,8 @@ module.exports = function (api, options) {
         pageTitle: 'Media',
         lang: 'en-gb',
         altPath: '/fr/medias',
-        data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'en-gb')
+        data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'en-gb'),
+        image: image
       }
     })
     createPage({
@@ -304,7 +307,8 @@ module.exports = function (api, options) {
         pageTitle: 'Médias',
         lang: 'fr-ch',
         altPath: '/en/media',
-        data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'fr-ch')
+        data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'fr-ch'),
+        image: image
       }
     })
 

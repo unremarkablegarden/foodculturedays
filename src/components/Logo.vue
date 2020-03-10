@@ -196,8 +196,10 @@ $left: calc(95vw * 0.06);
   .pixi2 {
     left: 50vw;
     top: 50vh;
-    transform: translate(-15.5vw, -12vw) scale(1.4);
+    // transform: translate(-15.5vw, -13vw) scale(1.4);
+    transform: translate(-20vw,-20vw) scale(1.4);
     transform-origin: 0 0;
+    padding: 0.5rem;
   }
 }
 // desktop
