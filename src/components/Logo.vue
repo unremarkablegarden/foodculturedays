@@ -1,25 +1,20 @@
 <template lang="pug">
   .logo-wrapper
-    #logo(@click='logoHome')
+    #logo
       #curtain(v-if='curtain', v-bind:class="{ transparent: transparent }")
-      //- .center
+      .clicker(@click='logoHome')
       .part-wrapper
-        g-link(to="/")
-          img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
+        img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
 
       .part-wrapper#pixi1(v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
-        //- img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
-        //- img(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", :src='$store.state.img.logoParts[1]').logoPart.part2.ref
-
-        //- Pixi(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
-        Pixi().logoPart.part2
+        Pixi.logoPart.part2
 
       .part-wrapper
-        g-link(to="/")
-          img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
+        img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
 
     .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
-      Pixi(@click='logoHome')
+      Pixi
+      //- (@click='logoHome')
 </template>
 
 
@@ -50,17 +45,20 @@ export default {
   methods: {
     logoHome () {
       if (!process.isClient) return
-
       let top = window.pageYOffset
       animatedScrollTo({
           duration: top,
           to: 0
       })
+
       setTimeout(() => {
         let home = '/en/'
-        if (this.$route.path.includes('/fr/')) { home = '/fr/'}
-        this.$router.push(home)
-      }, top)
+        let path = this.$route.path
+        if (path.includes('/fr/')) { home = '/fr/'}
+        if (path !== '/en/' && path !== '/fr/' && path !== '/' ) {
+          this.$router.push(home)
+        }
+      }, top);
     },
     setSize () {
       if (!process.isClient) return
@@ -164,6 +162,14 @@ $w: calc(95vw);
 $h: calc(95vw * 0.105);
 $h2: calc(95vw * 0.085);
 $left: calc(95vw * 0.06);
+
+.clicker {
+  position: absolute;
+  width: 100%;
+  height: $h2;
+  // background: pink;
+  z-index: 10;
+}
 
 #curtain {
   position: fixed;
@@ -317,6 +323,7 @@ $left: calc(95vw * 0.06);
   }
   .part1, .part3 {
     height: $h;
+    // background-color: pink;
   }
 }
 </style>

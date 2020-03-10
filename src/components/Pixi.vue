@@ -6,30 +6,13 @@
 
 <style lang="scss">
 #pixi {
-  // transform-origin: 0 0;
-  // transform: scale(0.2) translate(-5vw, -2vw);
-  // box-shadow: 0 0 1px 1px blue;
-  canvas {
-    // transform-origin: 0 0;
-    // transform: scale(0.2) translate(-5vw, -2vw);
-    // box-shadow: 0 0 1px 1px red;
-  }
   .pixi {
-    // box-shadow: 0 0 1px 1px green;
-    // box-shadow: 0 0 1px 1px blue;
-    // background: rgba(0,255,0,0.2);
     position: relative;
     z-index: 0;
-    // height: 9vw;
-    // width: 21vw;
     transform-origin: 0 0;
-    // transform: scale(0.2);
-    // translate(-5vw, -2vw);
   }
   .clicker {
-    // box-shadow: 0 0 1px 1px purple;
-    // background: rgba(255,200,0,0.1);
-    // background: red;
+    // background: rgba(255,200,0,1);
     height: 9vw;
     width: 21vw;
     position: absolute;
@@ -40,8 +23,6 @@
 </style>
 
 <script>
-// var path = require('path')
-// import * as PIXI from 'pixi.js'
 import {animatedScrollTo} from 'es6-scroll-to'
 
 export default {
@@ -153,19 +134,21 @@ export default {
       this.setWinSize()
     },
     logoHome () {
-      // if (process.isClient) {
-      //   let top = window.pageYOffset
-      //   animatedScrollTo({
-      //       duration: top,
-      //       to: 0
-      //   })
+      if (!process.isClient) return
+      let top = window.pageYOffset
+      animatedScrollTo({
+          duration: top,
+          to: 0
+      })
 
-      //   setTimeout(() => {
-      //     let home = '/en/'
-      //     if (this.$route.path.includes('/fr/')) { home = '/fr/'}
-      //     this.$router.push(home)
-      //   }, top);
-      // }
+      setTimeout(() => {
+        let home = '/en/'
+        let path = this.$route.path
+        if (path.includes('/fr/')) { home = '/fr/'}
+        if (path !== '/en/' && path !== '/fr/' && path !== '/' ) {
+          this.$router.push(home)
+        }
+      }, top);
     },
   },
 }
