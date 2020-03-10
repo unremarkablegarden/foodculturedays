@@ -242,7 +242,7 @@ $left: calc(95vw * 0.06);
     transform-origin: center center;
     transform: scale(2);
     margin-left: -31vw;
-    margin-top: 50vw;
+    margin-top: 80vh;
     opacity: 0;
   }
 }
