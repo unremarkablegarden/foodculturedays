@@ -1,6 +1,7 @@
 <template lang="pug">
   layout
     #partners
+      //- xmp {{ $context }}
       .page-wrapper
         .title
           h1 {{ title }}

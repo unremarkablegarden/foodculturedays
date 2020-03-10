@@ -118,9 +118,7 @@ export default {
       }, 800) // t+1400
       setTimeout(() => {
         console.log('step5');
-        console.log('curtain: ' + this.curtain);
         this.curtain = false
-        console.log('curtain: ' + this.curtain);
         this.setLoaded()
       }, 1200) // t+1800
 
