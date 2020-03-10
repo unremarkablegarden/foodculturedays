@@ -207,7 +207,7 @@ $headingSize: 2.2rem;
 
   a, .link:hover, #pixi, #pixi1, #pixi2, button, .back {
     cursor: pointer;
-    cursor: url(assets/cursorB-1x.png) 13 13, auto !important;
+    cursor: url(assets/cursorB-1x.png) 12 12, auto !important;
   }
 
   .gallery-column {
