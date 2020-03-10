@@ -53,7 +53,14 @@ export default {
     }
   },
   mounted () {
-    if (!this.loaded) {
+    console.log('menu > mounted > loaded = ' + this.loaded);
+
+    // if (!this.loaded) {
+      // this.hideImage()
+    // }
+    console.log(this.$route.path);
+
+    if (this.$route.path == '/' || this.$route.path == '/en/' || this.$route.path == '/fr/') {
       this.hideImage()
     }
   },
@@ -61,7 +68,7 @@ export default {
     loaded (loadedTrue) {
       if (!process.isClient) return
       if (loadedTrue) {
-        this.showImage()
+        // this.showImage()
       }
     },
     $route (to, from){
@@ -79,11 +86,13 @@ export default {
     hideImage () {
       if (!process.isClient) return
       this.$anime({
-        targets: this.$el.querySelector('#gallery'),
-        easing: 'easeOutSine',
-        opacity: 0,
-        duration: 0,
-      })
+          targets: this.$el.querySelector('#gallery'),
+          duration: 0,
+          easing: 'easeOutSine',
+          'margin-left': '-33%',
+          opacity: 0,
+          delay: 0
+        })
     },
     showImage () {
       if (!process.isClient) return
@@ -157,4 +166,8 @@ $headingSize: 2.2rem;
 .gallery .item.active {
   opacity: 1;
 }
+// #gallery {
+//   opacity: 0;
+//   margin-left: '-33%';
+// }
 </style>

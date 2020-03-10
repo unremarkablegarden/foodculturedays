@@ -27,6 +27,7 @@ export default {
     if (lang.includes('fr')) { this.lang = 'fr' }
 
     if (window.location.pathname == '/') {
+      // console.log('leaving root');
       this.$router.push('/'+this.lang+'/')
     }
   },

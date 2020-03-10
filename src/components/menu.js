@@ -17,7 +17,7 @@ export default
     // MEDIA
     { title: ['Media', 'Médias'], to: ['/en/media', '/fr/medias'] },
     // VIDEO
-    { title: ['Video', 'Vidéo'], to: ['https://vimeo.com/user72160049', 'https://vimeo.com/user72160049'] },
+    // { title: ['Video', 'Vidéo'], to: ['https://vimeo.com/user72160049', 'https://vimeo.com/user72160049'] },
     // PARTNERS
     { title: ['Partners', 'Partenaires'], to: ['/en/partners', '/fr/partenaires'] },
     // ARCHIVE

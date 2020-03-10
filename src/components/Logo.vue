@@ -104,13 +104,13 @@ export default {
 
     let t = 500
     setTimeout(() => {
-      console.log('step1');
+      // console.log('step1');
       this.step1 = true
 
       setTimeout(() => {
-        console.log('step2');
+        // console.log('step2');
         this.step2 = true
-        console.log('step3');
+        // console.log('step3');
         this.step3 = true
       }, t+500)
       // setTimeout(() => {
@@ -118,14 +118,14 @@ export default {
         // this.step3 = true
       // }, t+500) // t+1000
       setTimeout(() => {
-        console.log('step4');
+        // console.log('step4');
         this.transparent = true
-      }, 800) // t+1400
+      }, t+800) // t+1400
       setTimeout(() => {
-        console.log('step5');
+        // console.log('step5');
         this.curtain = false
         this.setLoaded()
-      }, 1200) // t+1800
+      }, t+1100) // t+1800
 
     }, t)
   },
@@ -134,7 +134,7 @@ export default {
     const path = this.$route.path
     // console.log(path);
 
-    if (path !== '/en/' && path !== '/fr/') {
+    if (path !== '/en/' && path !== '/fr/' && path !== '/') {
       this.step1 = true
       this.step2 = true
       this.step3 = true
@@ -180,12 +180,13 @@ $left: calc(95vw * 0.06);
   background: white;
   z-index: 1000;
   opacity: 1;
-  transition: all 500ms;
+  // transition: all 500ms;
   // z-index: 10;
   z-index: 900;
+  transition: all 1000ms;
 }
 .transparent {
-  transition: all 500ms;
+  transition: all 1000ms;
   opacity: 0 !important;
 }
 

@@ -65,7 +65,10 @@ export default {
         this.animating = false
       }, 600)
 
-      // console.log('watch router: ' + to.path);
+      if (from.path == '/') {
+        this.hideMenu()
+      }
+
       if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
         // console.log('back home')
       }
@@ -74,20 +77,38 @@ export default {
   mounted () {
     if (!process.isClient) return
     // set up the menu outside the screen while curtain is up
-    this.$anime({
-      targets: this.$el.querySelectorAll('.menu-item'),
-      duration: 0,
-      easing: 'easeOutSine',
-      left: '-33%',
-      opacity: 0,
-      delay: 0
-    })
+    this.hideMenu()
   },
   methods: {
+    hideMenu () {
+      if (this.menuShown == false && this.$route.path !== '/') {
+        // console.log('hidemenu');
+        this.$anime({
+          targets: this.$el.querySelectorAll('.menu-item'),
+          duration: 0,
+          easing: 'easeOutSine',
+          left: '-33%',
+          opacity: 0,
+          delay: 0
+        })
+
+        // this.$anime({
+        //   targets: this.$el.querySelector('#gallery'),
+        //   duration: 0,
+        //   easing: 'easeOutSine',
+        //   'margin-left': '-33%',
+        //   opacity: 0,
+        //   delay: 0
+        // })
+      }
+    },
     showMenu () {
-      console.log('showmenu');
+
       if (!process.isClient) return
-      if (this.menuShown == false) {
+
+      if (this.menuShown == false && this.$route.path !== '/') {
+        // console.log('showmenu');
+        // console.log('animate')
         this.$anime({
           targets: this.$el.querySelectorAll('.menu-item'),
           easing: 'easeInOutSine',
@@ -97,7 +118,16 @@ export default {
           delay: [this.$anime.stagger(50)]
         })
         this.menuShown = true
-        console.log('animate')
+
+
+        // this.$anime({
+        //   targets: this.$el.querySelector('#gallery'),
+        //   easing: 'easeInOutSine',
+        //   'margin-left': 0,
+        //   opacity: 1,
+        //   duration: 700,
+        //   delay: 300,
+        // })
       }
     }
   },

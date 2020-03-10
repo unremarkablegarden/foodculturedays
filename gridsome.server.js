@@ -188,7 +188,7 @@ module.exports = function (api, options) {
         const path = `/${lang}/${node._meta.uid}`
         let altPath
 
-        const skip = ['partners', 'partenaires', 'homepage']
+        const skip = ['partners', 'partenaires', 'homepage', 'archive', 'archives', 'media', 'medias']
 
         if (! skip.includes(node._meta.uid)) {
           if (node._meta.alternateLanguages.length) {
@@ -311,74 +311,6 @@ module.exports = function (api, options) {
         image: image
       }
     })
-
-
-    // const imagesQuery = await graphql(`{
-    //   prismic {
-    //     allImagess {
-    //       edges {
-    //         node {
-    //           images {
-    //             image
-    //           }
-    //           _meta {
-    //             uid
-    //             lang
-    //             alternateLanguages {
-    //               uid
-    //               lang
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }`)
-
-    // if (imagesQuery.hasOwnProperty('data')) {
-    //   // console.log(JSON.stringify(imagesQuery))
-
-    //   api.loadSource((actions) => {
-    //     console.log('\n\nTESTING\n\n');
-
-    //     const images = actions.addCollection('Images')
-    //     // const images = addCollection('Images')
-
-    //     imagesQuery.data.prismic.allImagess.edges.forEach(({ node }) => {
-    //       console.log(JSON.stringify(node));
-
-    //       let lang, alt
-    //       if (node._meta.lang == 'en-gb') { lang = 'en'; alt = 'fr'; }
-    //       if (node._meta.lang == 'fr-ch') { lang = 'fr'; alt = 'en'; }
-    //       const path = `/${lang}/img/${node._meta.uid}`
-    //       const altPath = `/${alt}/img/${node._meta.alternateLanguages[0].uid}/`
-
-    //       // console.log(path)
-
-
-
-    //       images.addNode({
-    //         uid: node._meta.uid,
-    //         images: node.images,
-    //         lang: lang,
-    //         path: path,
-    //         altPath: altPath,
-    //       })
-
-    //       // createPage({
-    //       //   path: path,
-    //       //   component: './src/templates/Page.vue',
-    //       //   context: {
-    //       //     node: node,
-    //       //     uid: node._meta.uid,
-    //       //     lang: node._meta.lang,
-    //       //     plainTitle: node.title[0].text,
-    //       //     altPath: altPath
-    //       //   }
-    //       // })
-    //     })
-    //   })
-    // }
 
   })
 

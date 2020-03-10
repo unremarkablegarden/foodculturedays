@@ -17,6 +17,9 @@ export default {
     return {
     }
   },
+  mounted () {
+    // console.log('were in index');
+  },
   computed: {
     lang () {
       // return this.$store.state.lang
