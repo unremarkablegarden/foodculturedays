@@ -1,6 +1,6 @@
 <template lang="pug">
   layout
-    Menu
+    Menu(v-if='notSlashIndex')
 </template>
 
 <script>
@@ -26,6 +26,12 @@ export default {
       if (!process.isClient) return
       return this.$context.lang
     },
+    notSlashIndex () {
+      let path = this.$route.path
+      if (path !== '/') {
+        return true
+      }
+    }
   }
 }
 </script>

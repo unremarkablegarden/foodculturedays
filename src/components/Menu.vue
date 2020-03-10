@@ -55,14 +55,16 @@ export default {
   mounted () {
     console.log('menu > mounted > loaded = ' + this.loaded);
 
-    // if (!this.loaded) {
-      // this.hideImage()
-    // }
-    console.log(this.$route.path);
 
-    if (this.$route.path == '/' || this.$route.path == '/en/' || this.$route.path == '/fr/') {
-      this.hideImage()
+    if (this.$route.path == '/en/' || this.$route.path == '/fr/') {
+      if (!this.loaded) {
+        this.hideImage()
+      }
     }
+
+    // console.log(this.$route.path);
+
+
   },
   watch: {
     loaded (loadedTrue) {
@@ -85,24 +87,27 @@ export default {
   methods: {
     hideImage () {
       if (!process.isClient) return
+      console.log('hide image');
+
       this.$anime({
-          targets: this.$el.querySelector('#gallery'),
-          duration: 0,
-          easing: 'easeOutSine',
-          'margin-left': '-33%',
-          opacity: 0,
-          delay: 0
-        })
+        targets: this.$el.querySelector('#gallery'),
+        duration: 0,
+        easing: 'easeOutSine',
+        'margin-left': '-33%',
+        opacity: 0,
+        delay: 0
+      })
     },
     showImage () {
       if (!process.isClient) return
-      this.$anime({
-        targets: this.$el.querySelector('#gallery'),
-        easing: 'easeOutSine',
-        opacity: 1,
-        duration: 1000,
-        delay: 1000
-      })
+      // this.$anime({
+      //   targets: this.$el.querySelector('#gallery'),
+      //   easing: 'easeInOutSine',
+      //   'margin-left': 0,
+      //   opacity: 1,
+      //   duration: 700,
+      //   delay: 300,
+      // })
     },
     hoverMenu (e) {
       console.log(e);

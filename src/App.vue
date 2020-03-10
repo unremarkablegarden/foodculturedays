@@ -70,7 +70,7 @@ export default {
       }
 
       if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
-        // console.log('back home')
+        console.log('back home')
       }
     }
   },
@@ -119,15 +119,14 @@ export default {
         })
         this.menuShown = true
 
-
-        // this.$anime({
-        //   targets: this.$el.querySelector('#gallery'),
-        //   easing: 'easeInOutSine',
-        //   'margin-left': 0,
-        //   opacity: 1,
-        //   duration: 700,
-        //   delay: 300,
-        // })
+        this.$anime({
+          targets: this.$el.querySelector('#gallery'),
+          easing: 'easeInOutSine',
+          'margin-left': 0,
+          opacity: 1,
+          duration: 700,
+          delay: 300,
+        })
       }
     }
   },
