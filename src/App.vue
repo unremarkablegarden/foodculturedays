@@ -93,6 +93,7 @@ export default {
           easing: 'easeInOutSine',
           left: 0,
           opacity: 1,
+          duration: 250,
           delay: [this.$anime.stagger(50)]
         })
         this.menuShown = true

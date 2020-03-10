@@ -36,6 +36,11 @@ $headingSize: 2.2rem;
   font-family: 'CE', Times, serif;
   font-style: italic;
 }
+.project-body, .artist-body {
+  strong {
+    font-weight: normal !important;
+  }
+}
 
 .image {
   width: calc(100% + 1.4rem);
