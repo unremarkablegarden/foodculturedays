@@ -29,12 +29,23 @@ $green: rgb(17,230,54);
 h1.title {
   background: white;
   padding: 2rem 0.7rem 0rem;
-  width: 100vw;
   margin-left: -0.7rem;
   box-sizing: border-box;
   position: sticky;
   top: 0;
+  width: 100vw;
 }
+
+// desktop
+@media (min-width: 960px) {
+  h1.title {
+    width: 50vw;
+  }
+  .column.is-6.left {
+    padding-bottom: 5rem;
+  }
+}
+
 .year {
   padding: 0.7rem 0 0 0;
 }
