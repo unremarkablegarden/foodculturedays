@@ -1,7 +1,6 @@
 <template lang="pug">
   layout
     #media
-      //- xmp {{ pages }}
       .columns
         .column.is-6.desktop.no-pad.gallery-column
           .gallery
@@ -94,7 +93,7 @@ export default {
     },
     image () {
       if (!process.isClient) return
-      let img = this.pages[0].node.img
+      let img = this.pages[0].node.image
 
       if (img) {
         if ('url' in img) {
@@ -102,7 +101,7 @@ export default {
         }
       }
 
-      return false
+      return img
     }
   }
 }
