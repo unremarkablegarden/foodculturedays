@@ -240,9 +240,9 @@ $left: calc(95vw * 0.06);
 @media (min-width: 960px) {
   .start {
     transform-origin: center center;
-    transform: scale(2.4);
-    margin-left: -41vw;
-    margin-top: 55vw;
+    transform: scale(2);
+    margin-left: -31vw;
+    margin-top: 50vw;
     opacity: 0;
   }
 }
