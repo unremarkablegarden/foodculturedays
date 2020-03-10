@@ -123,11 +123,13 @@ $headingSize: 2.2rem;
 }
 .linkwrap {
   // background: pink;
+  // padding-top: 1rem;
+  padding-top: 0.63rem;
 }
 .menu-item {
   // display: inline-block;
   // border: 1px blue solid;
-  padding-top: 0.63rem;
+  // padding-top: 0.63rem;
   &:first-child {
     padding-top: 1.8rem;
   }
