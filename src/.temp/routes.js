@@ -244,11 +244,11 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {
-    path: "/en/contact/",
+    path: "/fr/a-propos/",
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {
-    path: "/fr/a-propos/",
+    path: "/en/contact/",
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {

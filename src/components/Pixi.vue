@@ -49,7 +49,7 @@ export default {
   data () {
     return {
       loaded: false,
-      img: '/blob400.png',
+      img: '/blob800.png',
       w: 400,
       // h: 150,
       ratio: (150/400),

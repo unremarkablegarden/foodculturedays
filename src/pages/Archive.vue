@@ -42,6 +42,7 @@ em {
 .pages-wrapper {
   border-top: 1px black solid;
   // margin-top: 2rem;
+  margin-bottom: 5rem;
 }
 .page {
   padding: 0.5rem 0 0.2rem;

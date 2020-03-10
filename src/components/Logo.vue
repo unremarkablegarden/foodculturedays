@@ -1,21 +1,22 @@
 <template lang="pug">
-  #logo(@click='logoHome')
-    #curtain(v-if='curtain', v-bind:class="{ transparent: transparent }")
-    //- .center
-    .part-wrapper
-      g-link(to="/")
-        img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
+  .logo-wrapper
+    #logo(@click='logoHome')
+      #curtain(v-if='curtain', v-bind:class="{ transparent: transparent }")
+      //- .center
+      .part-wrapper
+        g-link(to="/")
+          img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
 
-    .part-wrapper#pixi1(v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
-      //- img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
-      //- img(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", :src='$store.state.img.logoParts[1]').logoPart.part2.ref
+      .part-wrapper#pixi1(v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
+        //- img(:src='$store.state.img.logoParts[1]', :style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
+        //- img(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", :src='$store.state.img.logoParts[1]').logoPart.part2.ref
 
-      //- Pixi(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
-      Pixi().logoPart.part2
+        //- Pixi(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
+        Pixi().logoPart.part2
 
-    .part-wrapper
-      g-link(to="/")
-        img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
+      .part-wrapper
+        g-link(to="/")
+          img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
 
     .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
       Pixi(@click='logoHome')
@@ -93,7 +94,11 @@ export default {
           this.enableBlob = false
         }, 666)
       }
-    }
+    },
+    handleResize (event) {
+      // console.log('resize')
+      this.setSize()
+    },
   },
   mounted () {
     // if (!process.isClient) return
@@ -107,11 +112,13 @@ export default {
       setTimeout(() => {
         console.log('step2');
         this.step2 = true
-      }, t+300)
-      setTimeout(() => {
         console.log('step3');
         this.step3 = true
-      }, t+300) // t+1000
+      }, t+500)
+      // setTimeout(() => {
+        // console.log('step3');
+        // this.step3 = true
+      // }, t+500) // t+1000
       setTimeout(() => {
         console.log('step4');
         this.transparent = true
@@ -140,10 +147,12 @@ export default {
 
     if (!process.isClient) return
     window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.handleResize)
   },
   destroyed () {
     if (!process.isClient) return
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
   }
 }
 </script>
@@ -176,20 +185,33 @@ $left: calc(95vw * 0.06);
 
 .pixi2 {
   position: fixed;
-  left: 50vw;
-  top: 50vh;
-                   //  x, y
-                   // pixi is 21vw i think
-  transform: translate(-15.5vw, -12vw) scale(1.4);
-  transform-origin: 0 0;
   opacity: 1;
   transition: all 1000ms;
-  // transition: opacity 900ms height 2000ms;
-  // box-shadow: 0 0 1px 1px red;
   width: 21vw;
   height: 9vw;
   overflow: hidden;
 }
+// mobile
+@media (max-width: 960px) {
+  .pixi2 {
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-15.5vw, -12vw) scale(1.4);
+    transform-origin: 0 0;
+  }
+}
+// desktop
+@media (min-width: 960px) {
+  .pixi2 {
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-52%, -60%) scale(1);
+    z-index: 2001;
+    padding: 1rem;
+    transform-origin: center center;
+  }
+}
+
 
 .is-moved {
   margin-left: -100vw;
