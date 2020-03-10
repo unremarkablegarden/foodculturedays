@@ -153,19 +153,19 @@ export default {
       this.setWinSize()
     },
     logoHome () {
-      if (process.isClient) {
-        // let clicker = this.$parent.$el.querySelector('#pixi2')
-        //
-        // console.log(clicker);
-        let top = window.pageYOffset
-        animatedScrollTo({
-            duration: top,
-            to: 0
-        })
-        setTimeout(() => {
-          this.$router.push('/')
-        }, top);
-      }
+      // if (process.isClient) {
+      //   let top = window.pageYOffset
+      //   animatedScrollTo({
+      //       duration: top,
+      //       to: 0
+      //   })
+
+      //   setTimeout(() => {
+      //     let home = '/en/'
+      //     if (this.$route.path.includes('/fr/')) { home = '/fr/'}
+      //     this.$router.push(home)
+      //   }, top);
+      // }
     },
   },
 }

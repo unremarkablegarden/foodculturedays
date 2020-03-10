@@ -1,5 +1,5 @@
 <template lang="pug">
-  #logo
+  #logo(@click='logoHome')
     #curtain(v-if='curtain', v-bind:class="{ transparent: transparent }")
     //- .center
     .part-wrapper
@@ -11,7 +11,7 @@
       //- img(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", :src='$store.state.img.logoParts[1]').logoPart.part2.ref
 
       //- Pixi(:style="{ 'transform': 'scale('+logoScale+') translateX('+logoOffX+'px) translateY('+logoOffY+'px)' }", @click='logoHome').logoPart.part2
-      Pixi(@click='logoHome').logoPart.part2
+      Pixi().logoPart.part2
 
     .part-wrapper
       g-link(to="/")
@@ -49,13 +49,16 @@ export default {
   methods: {
     logoHome () {
       if (!process.isClient) return
+
       let top = window.pageYOffset
       animatedScrollTo({
           duration: top,
           to: 0
       })
       setTimeout(() => {
-        this.$router.push('/')
+        let home = '/en/'
+        if (this.$route.path.includes('/fr/')) { home = '/fr/'}
+        this.$router.push(home)
       }, top)
     },
     setSize () {
@@ -76,14 +79,15 @@ export default {
       this.top = top
 
       // fuckery to get the hidden clicker to be disabled, plus fade
-      if (!this.enableBlob && this.top > 100 && !this.curtain && this.winW < 960) {
+      if (!this.enableBlob && this.top > 50 && !this.curtain) {
+        // && this.winW < 960
         this.enableBlob = true
         setTimeout(() => {
           this.showBlob = true
         }, 10)
       }
 
-      if (this.enableBlob && this.top < 100 && !this.curtain && this.winW < 960) {
+      if (this.enableBlob && this.top < 50 && !this.curtain) {
         this.showBlob = false
         setTimeout(() => {
           this.enableBlob = false
@@ -95,40 +99,37 @@ export default {
     // if (!process.isClient) return
     this.setSize()
 
+    let t = 500
     setTimeout(() => {
       console.log('step1');
       this.step1 = true
-    }, 200)
-    setTimeout(() => {
-      console.log('step2');
-      this.step2 = true
-    }, 600)
-    setTimeout(() => {
-      console.log('step3');
-      this.step3 = true
-    }, 1200)
-    setTimeout(() => {
-      console.log('step4');
-      this.transparent = true
-    }, 1600)
-    setTimeout(() => {
-      console.log('step5');
-      console.log('curtain: ' + this.curtain);
-      this.curtain = false
-      console.log('curtain: ' + this.curtain);
-      this.setLoaded()
-    }, 2000)
 
+      setTimeout(() => {
+        console.log('step2');
+        this.step2 = true
+      }, t+300)
+      setTimeout(() => {
+        console.log('step3');
+        this.step3 = true
+      }, t+300) // t+1000
+      setTimeout(() => {
+        console.log('step4');
+        this.transparent = true
+      }, 800) // t+1400
+      setTimeout(() => {
+        console.log('step5');
+        console.log('curtain: ' + this.curtain);
+        this.curtain = false
+        console.log('curtain: ' + this.curtain);
+        this.setLoaded()
+      }, 1200) // t+1800
+
+    }, t)
   },
   created () {
-
-
     // prevent animation if its not loaded on menu page
     const path = this.$route.path
-
-    console.log('path that checks if we should skip intro');
-
-    console.log(path);
+    // console.log(path);
 
     if (path !== '/en/' && path !== '/fr/') {
       this.step1 = true
@@ -162,12 +163,13 @@ $left: calc(95vw * 0.06);
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 202vh;
   background: white;
   z-index: 1000;
   opacity: 1;
   transition: all 500ms;
-  z-index: 10;
+  // z-index: 10;
+  z-index: 900;
 }
 .transparent {
   transition: all 500ms;
@@ -196,7 +198,7 @@ $left: calc(95vw * 0.06);
 }
 .is-hidden {
   opacity: 0;
-  transition: all 666ms;
+  transition: all 400ms;
   // height: 0;
 }
 
@@ -204,7 +206,7 @@ $left: calc(95vw * 0.06);
   position: fixed;
   top: 0;
   left: 0;
-  background: red;
+  background: white;
   width: 50vw;
   height: 50vh;
 }
@@ -222,13 +224,27 @@ $left: calc(95vw * 0.06);
 #pixi1 {
   position: relative;
   z-index: 1001;
+  // transform: scaleX(1.01);
 }
-.start {
-  transform-origin: center center;
-  transform: scale(1.4);
-  margin-left: 23vw;
-  margin-top: 39vh;
-  opacity: 0;
+// mobile
+@media (max-width: 960px) {
+  .start {
+    transform-origin: center center;
+    transform: scale(1.4);
+    margin-left: 23vw;
+    margin-top: 39vh;
+    opacity: 0;
+  }
+}
+// desktop
+@media (min-width: 960px) {
+  .start {
+    transform-origin: center center;
+    transform: scale(2.4);
+    margin-left: -41vw;
+    margin-top: 55vw;
+    opacity: 0;
+  }
 }
 .step1 {
   transition: all 2000ms;
@@ -240,6 +256,11 @@ $left: calc(95vw * 0.06);
   transform: scale(1);
   margin-top: 0;
   margin-left: 29vw
+}
+@media (min-width: 960px) {
+  .step2 {
+    margin-left: -16vw;
+  }
 }
 .step3 {
   transition: all 600ms;
@@ -254,6 +275,7 @@ $left: calc(95vw * 0.06);
   // width: 23vw;
   // box-shadow: 0 0 1px 1px red;
   margin-left: $left;
+  transform: scaleX(1.01)
 }
 
 #logo {

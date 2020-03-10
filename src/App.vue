@@ -67,7 +67,7 @@ export default {
 
       // console.log('watch router: ' + to.path);
       if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
-        console.log('back home')
+        // console.log('back home')
       }
     }
   },
@@ -78,7 +78,7 @@ export default {
       targets: this.$el.querySelectorAll('.menu-item'),
       duration: 0,
       easing: 'easeOutSine',
-      left: '-100%',
+      left: '-33%',
       opacity: 0,
       delay: 0
     })
@@ -90,7 +90,7 @@ export default {
       if (this.menuShown == false) {
         this.$anime({
           targets: this.$el.querySelectorAll('.menu-item'),
-          easing: 'easeOutSine',
+          easing: 'easeInOutSine',
           left: 0,
           opacity: 1,
           delay: [this.$anime.stagger(50)]
@@ -154,7 +154,8 @@ $headingSize: 2.2rem;
   #buttons {
     right: 0;
     transform-origin: bottom right;
-    transform: scale(0.9);
+    // transform: scale(0.9);
+    width: 50vw;
   }
   .layout {
     position: absolute;
@@ -205,7 +206,7 @@ $headingSize: 2.2rem;
 
   a, .link:hover, #pixi, #pixi1, #pixi2, button, .back {
     cursor: pointer;
-    cursor: url(assets/cursorB-1x.png) 15 15, auto !important;
+    cursor: url(assets/cursorB-1x.png) 13 13, auto !important;
   }
 
   .gallery-column {

@@ -43,14 +43,11 @@ export default {
   },
   created () {
     this.menu = menu
-    // if (process.isClient) {
-      // let lang = window.location.pathname
     if (this.$route.path.includes('fr')) {
       this.lang = 1
     } else {
       this.lang = 0
     }
-    // }
     if (this.$route.path !== '/') {
       this.getGallery()
     }
@@ -85,8 +82,6 @@ export default {
         targets: this.$el.querySelector('#gallery'),
         easing: 'easeOutSine',
         opacity: 0,
-        // top: '100%',
-        // 'margin-top': '-200%',
         duration: 0,
       })
     },
@@ -96,10 +91,8 @@ export default {
         targets: this.$el.querySelector('#gallery'),
         easing: 'easeOutSine',
         opacity: 1,
-        // 'margin-top': 0,
         duration: 1000,
         delay: 1000
-        // left: 0
       })
     },
     hoverMenu (e) {
@@ -134,12 +127,14 @@ $headingSize: 2.2rem;
 .menu-item {
   // display: inline-block;
   // border: 1px blue solid;
+  padding-top: 0.63rem;
   &:first-child {
-    padding-top: 1.4rem;
+    padding-top: 1.8rem;
   }
   text-transform: uppercase;
   font-size: $headingSize;
-  line-height: 1.3em;
+  // line-height: 1.3em;
+  line-height: 1.0em;
   font-weight: normal;
   position: relative;
   a {

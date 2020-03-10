@@ -52,7 +52,9 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   router.beforeEach((to, from, next) => {
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length
-    const transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    let transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    if (from.path !== '/' && to.path == '/en/' || from.path !== '/' && to.path == '/fr/') { transitionName = 'slide-right' }
+
     appOptions.store.commit('setTransitionName', transitionName)
     next()
   })
