@@ -53,18 +53,12 @@ export default {
     }
   },
   mounted () {
-    console.log('menu > mounted > loaded = ' + this.loaded);
-
-
+    // console.log('menu > mounted > loaded = ' + this.loaded);
     if (this.$route.path == '/en/' || this.$route.path == '/fr/') {
       if (!this.loaded) {
         this.hideImage()
       }
     }
-
-    // console.log(this.$route.path);
-
-
   },
   watch: {
     loaded (loadedTrue) {
