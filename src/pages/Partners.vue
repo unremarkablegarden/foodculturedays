@@ -3,7 +3,7 @@
     #partners
       //- xmp {{ $context }}
       .page-wrapper
-        .title
+        //- .title
           h1 {{ title }}
         .img-wrapper
           img(:src="img1").mobile

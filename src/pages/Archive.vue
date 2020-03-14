@@ -46,7 +46,10 @@ em {
 .pages-wrapper {
   border-top: 1px black solid;
   // margin-top: 2rem;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+}
+.column.is-6.left {
+  padding-bottom: 5rem;
 }
 .page {
   padding: 0.5rem 0 0.2rem;
@@ -97,7 +100,7 @@ export default {
           years.push(year)
         }
       })
-      years.sort()
+      years.sort().reverse()
 
       let structure = []
 

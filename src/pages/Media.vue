@@ -14,7 +14,7 @@
           .year-wrapper(v-for='(page, index) in pages', :key='index')
             .year.serif {{ page.node.year }}
             .link-list
-              .link(v-for='(link, index) in page.node.links' :key='index')
+              .link(v-for='(link, index) in page.node.links' :key='index', v-if='link.title')
                 a(:href='link.link', target="_blank") {{ link.title }}
 
 </template>

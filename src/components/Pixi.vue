@@ -24,6 +24,7 @@
 
 <script>
 import {animatedScrollTo} from 'es6-scroll-to'
+// import Modernizr from 'modernizr'
 
 export default {
   name: 'Pixi',
@@ -63,6 +64,9 @@ export default {
     if (!process.isClient) return
 
     let PIXI = require("pixi.js")
+    // let PIXI = require('pixi.js-legacy')
+    // console.log(PIXI.autoDetectRenderer)
+
 
     const app = new PIXI.Application({
       width: 420,

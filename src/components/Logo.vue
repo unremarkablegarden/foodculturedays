@@ -7,20 +7,27 @@
         img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
 
       .part-wrapper#pixi1(v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
-        Pixi.logoPart.part2
+        Pixi(v-if='webgl').logoPart.part2.pix
+        img(v-else, :src='$store.state.img.logoParts[1]').logoPart.part2
+
+
 
       .part-wrapper
         img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
 
     .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
-      Pixi
-      //- (@click='logoHome')
+      Pixi(v-if='webgl')
+      img(v-else, :src='$store.state.img.logoParts[1]')
+
+
 </template>
 
 
 <script>
 import Pixi from '~/components/Pixi.vue'
 import {animatedScrollTo} from 'es6-scroll-to'
+// import feature from 'feature.js'
+// import PIXI from 'pixi.js'
 
 export default {
   components: { Pixi },
@@ -40,6 +47,13 @@ export default {
       curtain: true,
       showBlob: false,
       enableBlob: false,
+      // webgl: true
+    }
+  },
+  computed: {
+    webgl () {
+      let PIXI = require("pixi.js")
+      return PIXI.utils.isWebGLSupported()
     }
   },
   methods: {
@@ -97,6 +111,37 @@ export default {
       // console.log('resize')
       this.setSize()
     },
+    // isWebGLSupported() {
+	  //   if (typeof supported === 'undefined') {
+	  //       supported = (function supported() {
+	  //           var contextOptions = {
+	  //               stencil: true,
+	  //               failIfMajorPerformanceCaveat: settings.FAIL_IF_MAJOR_PERFORMANCE_CAVEAT,
+	  //           };
+	  //           try {
+	  //               if (!window.WebGLRenderingContext) {
+	  //                   return false;
+	  //               }
+	  //               var canvas = document.createElement('canvas');
+	  //               var gl = (canvas.getContext('webgl', contextOptions)
+	  //                   || canvas.getContext('experimental-webgl', contextOptions));
+	  //               var success = !!(gl && gl.getContextAttributes().stencil);
+	  //               if (gl) {
+	  //                   var loseContext = gl.getExtension('WEBGL_lose_context');
+	  //                   if (loseContext) {
+	  //                       loseContext.loseContext();
+	  //                   }
+	  //               }
+	  //               gl = null;
+	  //               return success;
+	  //           }
+	  //           catch (e) {
+	  //               return false;
+	  //           }
+	  //       })();
+	  //   }
+    //   return supported;
+    // }
   },
   mounted () {
     // if (!process.isClient) return
@@ -197,6 +242,9 @@ $left: calc(95vw * 0.06);
   width: 21vw;
   height: 9vw;
   overflow: hidden;
+  img {
+    position: absolute;
+  }
 }
 // mobile
 @media (max-width: 960px) {
@@ -304,8 +352,11 @@ $left: calc(95vw * 0.06);
   // width: 23vw;
   // box-shadow: 0 0 1px 1px red;
   margin-left: $left;
-  transform: scaleX(1.01)
 }
+.part2.pix {
+  transform: scaleX(1.01);
+}
+
 
 #logo {
   box-sizing: border-box;
