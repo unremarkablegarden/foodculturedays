@@ -88,10 +88,6 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
-    path: "/fr/archives/2018/lingji-hon/",
-    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
-  },
-  {
     path: "/en/archive/2018/karim-yassin-goessinger/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -105,10 +101,6 @@ export default [
   },
   {
     path: "/fr/archives/2018/jonas-van-holanda/",
-    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
-  },
-  {
-    path: "/en/archive/2018/lingji-hon/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
@@ -133,14 +125,6 @@ export default [
   },
   {
     path: "/en/archive/2018/being-of-immigrant-descent-has-driven-suzan-inan-to/",
-    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
-  },
-  {
-    path: "/fr/archives/2017/a-little-history-of-food-in-switzerland-10000-years/",
-    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
-  },
-  {
-    path: "/en/archive/2017/a-little-history-of-food-in-switzerland-10000-years/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
@@ -252,11 +236,11 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {
-    path: "/fr/a-propos/",
+    path: "/en/contact/",
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {
-    path: "/en/contact/",
+    path: "/fr/a-propos/",
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {

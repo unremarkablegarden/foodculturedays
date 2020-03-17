@@ -52,6 +52,7 @@ export default {
   },
   computed: {
     webgl () {
+      if (!process.isClient) return
       let PIXI = require("pixi.js")
       return PIXI.utils.isWebGLSupported()
     }
