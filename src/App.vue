@@ -137,7 +137,15 @@ export default {
         {
           key: 'description',
           name: 'description',
-          content: this.$static.metadata.siteDescription
+          content: function () {
+            let description = this.$static.metadata.siteDescription
+            if (process.isClient) {
+              if (location.pathname.includes('/fr/')) {
+                description = 'Une plateforme multidisciplinaire d‘échange de connaissances'
+              }
+            }
+            return description
+          }
         },
         {
           key: 'og:image',

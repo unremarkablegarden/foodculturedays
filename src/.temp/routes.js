@@ -1,5 +1,13 @@
 export default [
   {
+    path: "/fr/archives/2019/workshop-social-fermentation-her--stories-with/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2019/workshop-social-fermentation-her--stories-with/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/fr/archives/2018/yvonne-buchheim/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -228,6 +236,10 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
+    path: "/fr/archives/2019/caique-tizzi1/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/en/archive/2018/carpe-orem/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -249,6 +261,10 @@ export default [
   },
   {
     path: "/en/archive/2019/caique-tizzi/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2019/caique-tizzi1/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {

@@ -64,17 +64,11 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     href: 'https://cdn.lineicons.com/1.0.1/LineIcons.min.css'
   })
 
-  head.meta.push({
-    key: 'og:description',
-    name: 'og:description',
-    content: `A multidisciplinary platform for knowledge exchange`,
-  })
-
-  head.meta.push({
-    key: 'twitter:description',
-    name: 'twitter:description',
-    content: `A multidisciplinary platform for knowledge exchange`,
-  })
+  // head.meta.push({
+  //   key: 'og:description',
+  //   name: 'og:description',
+  //   content: `A multidisciplinary platform for knowledge exchange`,
+  // })
 
   Vue.prototype.$anime = anime
 
