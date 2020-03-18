@@ -7,6 +7,7 @@
         Social#social
         Lang#lang
       transition(:name='transitionName')
+        //- xmp {{ lang }}
         router-view(class='child-view')
 </template>
 
@@ -37,6 +38,20 @@ export default {
     }
   },
   computed: {
+    lang () {
+      // if (process.isClient) {
+      //   return location.pathname.substr(1,2)
+      // } else {
+      //   return 'en'
+      // }
+      // let i = 0
+      // if (location.pathname.substr(1,2) == 'fr') { i = 1 }
+      // return function() {
+      //   let i = 0
+      //   if (location.pathname.substr(1,2) == 'fr') i = 1
+      //   return this.$static.metadata.siteDescription[i]
+      // }
+    },
     transitionName () {
       return this.$store.state.transitionName
     },
@@ -103,7 +118,6 @@ export default {
       }
     },
     showMenu () {
-
       if (!process.isClient) return
 
       if (this.menuShown == false && this.$route.path !== '/') {
@@ -131,28 +145,54 @@ export default {
     }
   },
   metaInfo() {
-    return {
-      title: this.$static.metadata.siteName,
-      meta: [
-        {
-          key: 'description',
-          name: 'description',
-          content: function () {
-            let description = this.$static.metadata.siteDescription
-            if (process.isClient) {
-              if (location.pathname.includes('/fr/')) {
-                description = 'Une plateforme multidisciplinaire d‘échange de connaissances'
-              }
-            }
-            return description
-          }
-        },
+    function customMeta () {
+      let i = 0
+      if (process.isClient) {
+        if (location.pathname.substr(1,2) == 'fr') i = 1
+      }
+      let descs = [
+        'A multidisciplinary platform for knowledge exchange',
+        'Une plateforme multidisciplinaire d‘échange de connaissances'
+      ]
+      return [
         {
           key: 'og:image',
           name: 'og:image',
           content: 'https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format'
+        },
+        {
+          key: 'description',
+          name: 'description',
+          content: descs[i]
         }
       ]
+    }
+    return {
+      title: this.$static.metadata.siteName,
+      meta: customMeta()
+
+      // [
+      //   {
+      //     key: 'description',
+      //     name: 'description',
+      //     content: '',
+      //     // content: this.$static.metadata.siteDescription[] || this.$static.metadata.siteDescription
+      //     // function () {
+      //     //   let description = this.$static.metadata.siteDescription
+      //     //   if (process.isClient) {
+      //     //     if (location.pathname.includes('/fr/')) {
+      //     //       description = 'Une plateforme multidisciplinaire d‘échange de connaissances'
+      //     //     }
+      //     //   }
+      //     //   return description
+      //     // }
+      //   },
+      //   {
+      //     key: 'og:image',
+      //     name: 'og:image',
+      //     content: 'https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format'
+      //   }
+      // ]
     }
   }
 }

@@ -17,7 +17,8 @@
 
 module.exports = {
   siteName: 'Foodculture days',
-  siteDescription: "A multidisciplinary platform for knowledge exchange",
+  // siteDescription: "A multidisciplinary platform for knowledge exchange",
+  siteDescription: 'A multidisciplinary platform for knowledge exchange',
 
   chainWebpack (config) {
     config.mode('development')
