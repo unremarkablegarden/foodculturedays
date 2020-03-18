@@ -11,7 +11,15 @@ export default {
     Menu
   },
   metaInfo: {
-    title: 'Index'
+    title: function () {
+      let title = 'Home'
+      if (process.isClient) {
+        if (location.pathname == '/fr/') {
+          title = 'Accueil'
+        }
+      }
+      return title
+    }
   },
   data () {
     return {

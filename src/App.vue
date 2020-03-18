@@ -138,6 +138,11 @@ export default {
           key: 'description',
           name: 'description',
           content: this.$static.metadata.siteDescription
+        },
+        {
+          key: 'og:image',
+          name: 'og:image',
+          content: 'https://images.prismic.io/foodculturedays2020/ef88fb98-8648-4bff-90b5-971d79c14d8a_3644e5960676457228dbcfe5522e563c.jpg?auto=compress,format'
         }
       ]
     }
