@@ -7,11 +7,12 @@
         img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
 
       .part-wrapper#pixi1(v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
-        div(v-if='webgl')
-          Pixi.logoPart.part2.pix
-        div(v-else)
-          img(:src='$store.state.img.logoParts[1]').logoPart.part2
 
+      .part-wrapper#pixi1(v-if='webgl', v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
+        Pixi.logoPart.part2.pix
+
+      .part-wrapper#pixi1(v-if='!webgl', v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
+        img(:src='$store.state.img.logoParts[1]').logoPart.part2
 
       .part-wrapper
         img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
@@ -19,13 +20,13 @@
     //- .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
 
     //- the if overloads the mobile webgl browser ???
-    #pixi2.pixi2(v-bind:class="{ 'is-hidden': !showBlob, 'is-hidden2': !showBlob }")
+    #pixi2.pixi2(v-if='webgl', v-bind:class="{ 'is-hidden': !showBlob, 'is-hidden2': !showBlob }")
       .clicker2(@click='logoHomeIfBlob')
-        //- xmp {{ enableBlob }}
-      div(v-if='webgl')
-        Pixi
-      div(v-else)
-        img(:src='$store.state.img.logoParts[1]')
+      Pixi
+
+    #pixi2.pixi2(v-if='!webgl', v-bind:class="{ 'is-hidden': !showBlob, 'is-hidden2': !showBlob }")
+      .clicker2(@click='logoHomeIfBlob')
+      img(:src='$store.state.img.logoParts[1]')
 
 
 </template>
@@ -55,18 +56,18 @@ export default {
       curtain: true,
       showBlob: false,
       enableBlob: false,
-      // webgl: true
+      webgl: false
     }
   },
-  computed: {
-    webgl () {
-      if (!process.isClient) return
-      let PIXI = require("pixi.js")
-      let supported = PIXI.utils.isWebGLSupported()
-      console.log('webgl = ' + supported)
-      return supported
-    }
-  },
+  // computed: {
+  //   webgl () {
+  //     if (!process.isClient) return
+  //     let PIXI = require("pixi.js")
+  //     let supported = PIXI.utils.isWebGLSupported()
+  //     console.log('webgl = ' + supported)
+  //     return supported
+  //   }
+  // },
   methods: {
     logoHome () {
       if (!process.isClient) return
@@ -160,7 +161,14 @@ export default {
     // }
   },
   mounted () {
-    // if (!process.isClient) return
+    if (!process.isClient) return
+
+    let PIXI = require("pixi.js")
+    let supported = PIXI.utils.isWebGLSupported()
+    console.log('webgl = ' + supported)
+    this.webgl = supported
+
+
     this.setSize()
 
     let t = 500
