@@ -358,6 +358,7 @@ xmp {
   background: white;
   padding: 1.7rem 0 0rem;
   z-index: 1010;
+  box-sizing: border-box;
 }
 .title.unstick {
   position: relative;
@@ -399,6 +400,8 @@ xmp {
 
 .abs {
   position: absolute !important;
+  bottom: 0;
+
 }
 
 .slide-left-enter-active,

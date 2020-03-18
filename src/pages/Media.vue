@@ -39,7 +39,8 @@ h1.title {
 // desktop
 @media (min-width: 960px) {
   h1.title {
-    width: 50vw;
+    // width: 50vw;
+    width: auto;
   }
   .column.is-6.left {
     padding-bottom: 5rem;

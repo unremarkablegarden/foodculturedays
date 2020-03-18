@@ -13,11 +13,15 @@
           img(:src='$store.state.img.logoParts[1]').logoPart.part2
 
 
-
       .part-wrapper
         img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
 
-    .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
+    //- .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
+
+    //- the if overloads the mobile webgl browser ???
+    #pixi2.pixi2(v-bind:class="{ 'is-hidden': !showBlob, 'is-hidden2': !showBlob }")
+      .clicker2(@click='logoHomeIfBlob')
+        //- xmp {{ enableBlob }}
       div(v-if='webgl')
         Pixi
       div(v-else)
@@ -80,6 +84,11 @@ export default {
           this.$router.push(home)
         }
       }, top);
+    },
+    logoHomeIfBlob () {
+      if (this.enableBlob) {
+        this.logoHome()
+      }
     },
     setSize () {
       if (!process.isClient) return
@@ -217,10 +226,20 @@ $left: calc(95vw * 0.06);
 
 .clicker {
   position: absolute;
-  width: 100%;
+  width: $w;
   height: $h2;
   // background: pink;
+  // z-index: 10;
+  z-index: 2000;
+}
+.clicker2 {
+  // background: pink;
   z-index: 10;
+  width: 21vw;
+  height: 13vh;
+  position: absolute;
+  z-index: 1001;
+  margin-top: -2vh;
 }
 
 #curtain {
@@ -281,10 +300,18 @@ $left: calc(95vw * 0.06);
   margin-left: -100vw;
 }
 .is-hidden {
-  opacity: 0;
+  opacity: 0.2;
   transition: all 400ms;
+  // back
   // height: 0;
+  // cursor: auto !important;
+  // cursor: url(/assets/cursor-1x.png) 15 15, auto !important;
 }
+.is-hidden2 {
+  // transform: translateY(-100vh);
+  margin-top: 160vh;
+}
+
 
 .center {
   position: fixed;
