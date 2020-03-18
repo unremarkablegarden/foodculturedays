@@ -112,7 +112,13 @@ module.exports = function (api, options) {
         }
 
         const path = `/${lang}/${archive}/${node.year}/${node._meta.uid}`
-        const altPath = `/${alt}/${altArchive}/${node.year}/${node._meta.alternateLanguages[0].uid}`
+        let altPath
+        if (node._meta.alternateLanguages.length > 0) {
+          altPath = `/${alt}/${altArchive}/${node.year}/${node._meta.alternateLanguages[0].uid}`
+        } else {
+          altPath = ''
+        }
+
 
         console.log(path);
 
@@ -191,7 +197,7 @@ module.exports = function (api, options) {
         const skip = ['partners', 'partenaires', 'homepage', 'archive', 'archives', 'media', 'medias']
 
         if (! skip.includes(node._meta.uid)) {
-          if (node._meta.alternateLanguages.length) {
+          if (node._meta.alternateLanguages.length > 0) {
             altPath = `/${alt}/${node._meta.alternateLanguages[0].uid}/`
           }
           createPage({

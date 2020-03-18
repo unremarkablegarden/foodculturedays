@@ -13,10 +13,10 @@
 
         .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
         .page-wrapper
-          prismic-rich-text(:field='page.project').project-title
-          prismic-rich-text(:field='page.artist').artist-title
-          prismic-rich-text(:field='page.project_body').project-body
-          prismic-rich-text(:field='page.artist_body').artist-body
+          prismic-rich-text(:field='page.project', v-if='page.project').project-title
+          prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
+          prismic-rich-text(:field='page.project_body', v-if='page.project_body').project-body
+          prismic-rich-text(:field='page.artist_body', v-if='page.artist_body').artist-body
 </template>
 
 
