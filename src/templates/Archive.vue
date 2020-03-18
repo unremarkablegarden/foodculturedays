@@ -83,14 +83,21 @@ $headingSize: 2.2rem;
   .back {
     // display: none;
     // width: calc(50vw - 2.5rem);
-    position: fixed;
+    // position: fixed;
     background: transparent;
+    width: 3rem;
+    // background: pink;
+    float: right;
+    margin-right: -2rem;
     // margin-top: 5.5vw;
-    left: 2rem;
-    top: 1rem;
-    width: 2rem;
+    // left: 2rem;
+    // top: 1rem;
+    // width: 2rem;
     z-index: 99;
     // text-align: left;
+  }
+  .project-title, .artist-title {
+    width: 90%;
   }
 }
 

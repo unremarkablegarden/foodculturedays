@@ -7,8 +7,10 @@
         img(:src='$store.state.img.logoParts[0]', :style="{ 'margin-left': (offset/2)*-1+'px' }").logoPart.part1
 
       .part-wrapper#pixi1(v-bind:class="{ step1: step1, step2: step2, step3: step3 }").middle.start
-        Pixi(v-if='webgl').logoPart.part2.pix
-        img(v-else, :src='$store.state.img.logoParts[1]').logoPart.part2
+        div(v-if='webgl')
+          Pixi.logoPart.part2.pix
+        div(v-else)
+          img(:src='$store.state.img.logoParts[1]').logoPart.part2
 
 
 
@@ -16,8 +18,10 @@
         img(:src='$store.state.img.logoParts[2]', :style="{ 'margin-left': (offset*5)+'px' }").logoPart.part3
 
     .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
-      Pixi(v-if='webgl')
-      img(v-else, :src='$store.state.img.logoParts[1]')
+      div(v-if='webgl')
+        Pixi
+      div(v-else)
+        img(:src='$store.state.img.logoParts[1]')
 
 
 </template>
