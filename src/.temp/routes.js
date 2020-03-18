@@ -8,6 +8,14 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
+    path: "/fr/archives/2017/pepe-dayaw---danilo-timm---asli-hatipoglu/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2017/pepe-dayaw---danilo-timm---asli-hatipoglu/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/fr/archives/2018/seducao-da-carne-vo/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -64,6 +72,10 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
+    path: "/fr/archives/2017/nowhere-kitchen/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/fr/archives/2018/kunik-de-morsier-architects/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -77,6 +89,10 @@ export default [
   },
   {
     path: "/en/archive/2018/nina-gautier/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2017/nowhere-kitchen/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
@@ -124,11 +140,27 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
+    path: "/fr/archives/2019/caique-tizzi-julie-campiche-heloise-fracheboud-estelle-krattinger/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/en/archive/2018/being-of-immigrant-descent-has-driven-suzan-inan-to/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
+    path: "/en/archive/2019/caique-tizzi-julie-campiche-heloise-fracheboud-estelle-krattinger/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/fr/archives/2017/foreplay--paradies/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/fr/archives/2018/cacilia-verweyen--omer-polak/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2017/foreplay--paradies/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
@@ -148,6 +180,10 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
+    path: "/fr/archives/2017/benjamin-luzuy--diego-agullo/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/en/archive/2018/erika-marthins/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -157,6 +193,10 @@ export default [
   },
   {
     path: "/en/archive/2018/emily-groves/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2017/benjamin-luzuy--diego-agullo/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
@@ -180,6 +220,10 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
+    path: "/fr/archives/2019/caique-tizzi/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
     path: "/en/archive/2018/carpe-orem/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -197,6 +241,18 @@ export default [
   },
   {
     path: "/en/archive/2018/ceres-collective/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2019/caique-tizzi/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/fr/archives/2017/asli-hatipoglu/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2017/asli-hatipoglu/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {

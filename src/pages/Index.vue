@@ -11,7 +11,7 @@ export default {
     Menu
   },
   metaInfo: {
-    // title: 'Index'
+    title: 'Index'
   },
   data () {
     return {
