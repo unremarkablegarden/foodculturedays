@@ -164,10 +164,6 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
-    path: "/fr/archives/2018/ceres-collective/",
-    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
-  },
-  {
     path: "/fr/archives/2018/charlotte-vuissoz/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
@@ -180,11 +176,11 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
-    path: "/en/archive/2018/carpe-orem/",
+    path: "/fr/archives/2018/ceres-collective/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
-    path: "/en/archive/2018/ceres-collective/",
+    path: "/en/archive/2018/carpe-orem/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
@@ -197,6 +193,10 @@ export default [
   },
   {
     path: "/en/archive/2018/bonbock-residence-culinaire/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
+  },
+  {
+    path: "/en/archive/2018/ceres-collective/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
