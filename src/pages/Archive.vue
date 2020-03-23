@@ -110,8 +110,8 @@ export default {
         p.sort((a, b) => {
           const sortA = a.node.artist[0].text
           const sortB = b.node.artist[0].text
-          if(sortA < sortB) { return -1 }
-          if(sortA > sortB) { return 1 }
+          if(sortA > sortB) { return -1 }
+          if(sortA < sortB) { return 1 }
           return 0
         })
 
