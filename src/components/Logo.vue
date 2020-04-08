@@ -276,6 +276,7 @@ $left: calc(95vw * 0.06);
   width: 21vw;
   height: 9vw;
   overflow: hidden;
+  z-index: 2;
   img {
     position: absolute;
   }
@@ -308,16 +309,20 @@ $left: calc(95vw * 0.06);
   margin-left: -100vw;
 }
 .is-hidden {
-  opacity: 0.2;
+  opacity: 0;
   transition: all 400ms;
+  overflow: hidden;
+
   // back
-  // height: 0;
+  height: 0;
   // cursor: auto !important;
   // cursor: url(/assets/cursor-1x.png) 15 15, auto !important;
 }
 .is-hidden2 {
   // transform: translateY(-100vh);
+  height: 0;
   margin-top: 160vh;
+  overflow: hidden;
 }
 
 

@@ -14,12 +14,13 @@
 
 <script>
 import menu from '~/components/menu.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Menu',
   data () {
     return {
-      lang: 0,
+      // lang: 0,
       menu: null,
       langs: [
         'en-gb',
@@ -35,6 +36,13 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      langCode: 'getLang'
+    }),
+    lang () {
+      if (this.langCode == 'fr') return 1
+      else return 0
+    },
     loaded () {
       // show menu after loaded is set in store by Logo.vue
       let loaded = this.$store.state.loaded
@@ -43,11 +51,11 @@ export default {
   },
   created () {
     this.menu = menu
-    if (this.$route.path.includes('fr')) {
-      this.lang = 1
-    } else {
-      this.lang = 0
-    }
+    // if (this.$route.path.includes('fr')) {
+    //   this.lang = 1
+    // } else {
+    //   this.lang = 0
+    // }
     if (this.$route.path !== '/') {
       this.getGallery()
     }

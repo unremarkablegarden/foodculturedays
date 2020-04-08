@@ -46,7 +46,7 @@ $headingSize: 2.2rem;
   width: calc(100% + 1.4rem);
   height: 45vh;
   background-position-x: center;
-  background-position-y: 0;
+  background-position-y: center;
   background-size: cover;
   background-repeat: no-repeat;
   margin-left: -0.7rem;

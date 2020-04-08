@@ -1,14 +1,17 @@
 <template lang="pug">
   layout
+    //- Splash
     Menu(v-if='notSlashIndex')
 </template>
 
 <script>
 import Menu from '~/components/Menu.vue'
+// import Splash from '~/components/Splash.vue'
 
 export default {
   components: {
-    Menu
+    Menu, 
+    // Splash
   },
   metaInfo: {
     title: function () {

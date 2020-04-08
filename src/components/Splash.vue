@@ -1,0 +1,289 @@
+<template lang="pug">
+  #splash
+    .image
+    #matter.words
+      //- .word NATURE
+      //- .word CULTURE
+      //- .word SOCIETY
+      //- .word ART
+    .index.intro
+      .text(v-if="lang == 'en'")
+        //- | Foodculture days is a space for 
+        //- em critical reflexion 
+        //- | and a platform for 
+        //- em knowledge exchange 
+        //- | based in Vevey (Switzerland)
+        | Foodculture days is an interdisciplinary 
+        em platform 
+        | for 
+        em knowledge exchange 
+        | based in Vevey (Switzerland)
+
+      .text(v-else)
+        | Foodculture days est une 
+        em plateforme 
+        | interdisciplinaire 
+        em d’échange de connaissances 
+        | basée à Vevey (Suisse)
+
+</template>
+
+<script>
+import Matter from 'matter-js'
+import { mapGetters } from 'vuex'
+
+export default {
+  data () {
+    return {
+      matterLoaded: false,
+      render: null
+    }
+  },
+  computed: {
+    // lang () {
+    //   // return this.$store.state.lang
+    //   if (!process.isClient) return
+    //   return this.$context.lang
+    // },
+    ...mapGetters({
+      lang: 'getLang'
+    }),
+    loaded () {
+      // show menu after loaded is set in store by Logo.vue
+      let loaded = this.$store.state.loaded
+      if (loaded && !this.matterLoaded) {
+        // setTimeout(() => {
+        //   this.matterInit()
+        // }, 1800)
+      }
+      return loaded
+    }
+  },
+  watch: {
+    loaded (loadedTrue) {
+      if (loadedTrue && !this.matterLoaded) {
+        this.matterInit()
+      }
+    },
+    $route (to, from) {
+      if (to.path !== '/fr/' && to.path !== '/en/') {
+        this.matterControl('stop')
+      } else {
+        setTimeout(() => {
+          if (this.matterLoaded) {
+            this.matterControl('run')    
+          } else {
+            this.matterInit()
+          }          
+        }, 500)
+      }
+    }
+  },
+  mounted () {
+    console.log('Splash mounted')
+  },
+  methods: {
+    matterControl (cmd) {
+      if (!process.isClient) return
+      var Render = Matter.Render
+      if (cmd == 'run') {
+        console.log('run matter');
+        Render.run(this.render)  
+      }
+      if (cmd == 'stop') {
+        console.log('stop matter');
+        Render.stop(this.render) 
+      }
+    },
+    matterInit () {
+      if (!process.isClient) return
+      console.log('MATTER IT');
+      
+      var Engine = Matter.Engine,
+          Render = Matter.Render,
+          Runner = Matter.Runner,
+          Common = Matter.Common,
+          MouseConstraint = Matter.MouseConstraint,
+          Mouse = Matter.Mouse,
+          World = Matter.World,
+          // Vertices = Matter.Vertices,
+          // Svg = Matter.Svg,
+          Bodies = Matter.Bodies
+          
+      var engine = Engine.create({
+            enableSleeping: true
+          })
+          
+      var world = engine.world
+      world.gravity.y = 1.3;
+      
+      let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+      let winW = (iOS) ? screen.width : window.innerWidth
+      let winH = (iOS) ? screen.height : window.innerHeight
+          winH -= 160
+      
+      this.render = Render.create({
+        element: this.$el.querySelector('#matter'),
+        engine: engine,
+        options: {
+          width: winW,
+          height: winH,
+          // width: winW*2,
+          // height: winH,
+          pixelRatio: 2,
+          // wireframes: true,
+          wireframes: false,
+          // showAngleIndicator: true,
+          // showCollisions: true
+        }
+      })
+      
+      this.render.options.wireframeBackground = 'transparent'
+      this.render.options.background = 'transparent'
+
+      // padding
+      let p = 10,
+          p2 = p * 2
+      winW = winW - p2
+      winH = winH - p2
+      
+      var rest = 0.6,
+      space = winW / 4,
+      scale = 0.7,
+      scale2 = 1
+      
+      // society
+      // word1a= 214x40 = 
+      // societe
+      // word1b= 179x52 = 
+      // art
+      // word2 = 103x40 = 
+      // culture
+      // word3 = 224x40 = 
+      // nature
+      // word4 = 201x40 = 
+      
+      let 
+          // r1a = { sprite: { texture: '/word1a.svg', xScale: 0.71*scale2, yScale: 0.71*scale2 } },
+          // r1b = { sprite: { texture: '/word1b.svg', xScale: 0.73*scale2, yScale: 0.73*scale2 } },
+          // r2 = { sprite: { texture: '/word2.svg', xScale: 0.34*scale2, yScale: 0.34*scale2 } },
+          // r3 = { sprite: { texture: '/word3.svg', xScale: 0.74*scale2, yScale: 0.74*scale2 } },
+          // r4 = { sprite: { texture: '/word4.svg', xScale: 0.67*scale2, yScale: 0.67*scale2 } },
+          r1a = { sprite: { texture: '/word1a.svg', xScale: 0.7*scale2, yScale: 0.7*scale2 } },
+          r1b = { sprite: { texture: '/word1b.svg', xScale: 0.7*scale2, yScale: 0.7*scale2 } },
+           // art
+          r2 = { sprite: { texture: '/word2.svg', xScale: 0.7*scale2, yScale: 0.7*scale2 } },
+          // culture
+          r3 = { sprite: { texture: '/word3.svg', xScale: 0.70*scale2, yScale: 0.70*scale2 } },
+          // nature
+          r4 = { sprite: { texture: '/word4.svg', xScale: 0.7*scale2, yScale: 0.7*scale2 } },
+          Body1,
+          start = Math.floor((Math.random() * 30) + 100) * -1
+      
+      if (this.lang == 'en') {
+        Body1 = Bodies.rectangle(120 + space * 0, start-100, 232.27*scale, 41.29*scale, { 
+          restitution: rest, 
+          render: r1a 
+        })
+      } else {
+        Body1 = Bodies.rectangle(120 + space * 0, start-100, 230.83*scale, 52.46*scale, { 
+          restitution: rest, 
+          render: r1b 
+        })
+      }
+        
+      World.add(world, [
+        // walls
+        Bodies.rectangle(winW/2+p, winH+p, winW, 1, { isStatic: true, render: { visible: false } }),
+        Bodies.rectangle(0+p, winH/2+p, 1, winH, { isStatic: true, render: { visible: false } }),
+        Bodies.rectangle(winW+p, winH/2+p, 1, winH, { isStatic: true, render: { visible: false } }),
+        // Bodies.rectangle(winW/2+p, -100, winW, 1, { isStatic: true, render: { visible: true } })
+        
+        Body1,
+
+        Bodies.rectangle(100 + space * 1, start, 107.8*scale, 39.54*scale, { 
+          restitution: rest, 
+          render: r2, 
+          angle: -Math.PI * 0.03 
+        }),
+        
+        Bodies.rectangle(90 + space * 2, start+50, 242.83*scale, 41.29*scale, { 
+          restitution: rest, 
+          render: r3, 
+          angle: -Math.PI * 0.1
+        }),
+      
+        Bodies.rectangle(90 + space * 1, start+130, 213.33*scale, 40.41*scale, { 
+          restitution: rest, 
+          render: r4, 
+          angle: -Math.PI * -0.1
+        }),
+      ]);
+      
+      var mouse = Mouse.create(this.render.canvas),
+      mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+          stiffness: 0.9,
+          render: {
+            visible: false
+          }
+        }
+      });
+      mouseConstraint.mouse.element.removeEventListener("mousewheel", mouseConstraint.mouse.mousewheel);
+      mouseConstraint.mouse.element.removeEventListener("DOMMouseScroll", mouseConstraint.mouse.mousewheel);
+      World.add(world, mouseConstraint);
+      this.render.mouse = mouse;
+          
+      
+      Engine.run(engine);
+      
+      this.matterControl('run')
+      
+      this.matterLoaded = true
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+#splash {
+  display: none;
+}
+#matter {
+  width: 100vw;
+  height: calc(100vh - 50px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  // border: 3px red solid;
+  z-index: 0;
+  // background: rgba(255,255,0,0.1);
+  overflow: hidden;
+  mix-blend-mode: difference;
+  // filter: invert(1);
+}
+.intro {
+  display: none;
+  margin-top: 0.3rem;
+  // padding-top: 1rem;
+  padding-left: 0.75rem;
+  // padding-right: 0.75rem;
+  font-size: 0.86rem;
+  line-height: 1.2rem;
+  em {
+    font-size: 0.96rem;
+  }
+}
+.words {
+  color: white;
+  // mix-blend-mode: difference;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+@media (min-width: 960px) {
+  .intro {
+    display: none;
+  }
+}
+</style>

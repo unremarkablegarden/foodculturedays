@@ -1,13 +1,16 @@
 <template lang="pug">
   #app
+    #preloader
+      img(src="https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format")
     //- Loader
-    .body
+    .body(v-bind:class="{ 'splash': splash, 'loaded': loaded }")
       Logo
+      Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
+        .menu-button(@click='toggleMenu', v-if='isHome && isMobile') MENU
         Lang#lang
       transition(:name='transitionName')
-        //- xmp {{ lang }}
         router-view(class='child-view')
 </template>
 
@@ -25,33 +28,24 @@ import Lang from '~/components/Lang.vue'
 import Social from '~/components/Social.vue'
 import Loader from '~/components/Loader.vue'
 import Logo from '~/components/Logo.vue'
+import Splash from '~/components/Splash.vue'
 
 export default {
   components: {
-    Lang, Social, Loader, Logo
+    Lang, Social, Loader, Logo, Splash
   },
   data () {
     return {
       animating: false,
       menuShown: false,
-      // loading: true
+      splash: false,
+      winH: null,
+      winW: null,
+      isMobile: true,
+      isHome: false,
     }
   },
   computed: {
-    lang () {
-      // if (process.isClient) {
-      //   return location.pathname.substr(1,2)
-      // } else {
-      //   return 'en'
-      // }
-      // let i = 0
-      // if (location.pathname.substr(1,2) == 'fr') { i = 1 }
-      // return function() {
-      //   let i = 0
-      //   if (location.pathname.substr(1,2) == 'fr') i = 1
-      //   return this.$static.metadata.siteDescription[i]
-      // }
-    },
     transitionName () {
       return this.$store.state.transitionName
     },
@@ -61,15 +55,29 @@ export default {
       if (loaded) {
         setTimeout(() => {
           this.showMenu()
+          // this.showDesktop()
         }, 1800)
       }
       return loaded
-    }
+    },
   },
   watch: {
+    splash (val) {
+      if (this.loaded) {
+        // console.log('splash = ' + val);
+        this.hideMenu(true)
+        if (val == false) {
+          this.showMenu(true)
+        } 
+        if (val == true) {
+          this.hideMenu(true)
+        }
+      }
+    },
     loaded (loadedTrue) {
       if (loadedTrue) {
         this.showMenu()
+        // this.showDesktop()
       }
     },
     $route (to, from) {
@@ -83,9 +91,24 @@ export default {
       if (from.path == '/') {
         this.hideMenu()
       }
-
-      if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
+      // this.hideMenu()
+      
+      if (to.path == '/en/' && from.path == '/fr/' || to.path == '/fr/' && from.path == '/en/') {
+        // lang switch
+      }
+      else if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
         console.log('back home')
+        // setTimeout(() => {
+        //   this.splash = true  
+        // }, 500);
+        this.splash = true
+        this.isHome = true
+      } 
+      else {
+        console.log('route not back home');
+        if (this.isMobile) this.hideMenu(true)
+        this.splash = false
+        this.isHome = false
       }
     }
   },
@@ -94,9 +117,61 @@ export default {
     // set up the menu outside the screen while curtain is up
     this.hideMenu()
   },
+  created () {
+    if (!process.isClient) return
+    // window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.handleResize)
+    this.setSize()
+    this.checkPath()
+    this.checkMobile()
+  },
+  destroyed () {
+    if (!process.isClient) return
+    // window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
+  },
   methods: {
-    hideMenu () {
-      if (this.menuShown == false && this.$route.path !== '/') {
+    setSize () {
+      if (!process.isClient) return
+      let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+      let iw = (iOS) ? screen.width : window.innerWidth
+      let ih = (iOS) ? screen.height : window.innerHeight
+      this.winW = iw
+      this.winH = ih
+    },
+    handleResize (event) {
+      this.setSize()
+      this.checkMobile()
+    },
+    checkMobile () {
+      if (this.winW >= 960) {
+        this.isMobile = false
+        this.splash = false
+      } else {
+        this.isMobile = true
+        if (this.isHome) this.splash = true
+      }
+    },
+    checkPath () {
+      let p = this.$route.path
+      if (p == '/en/' || p == '/fr/' || p == '/fr/' || p == '/fr' || p == '/') {
+        // is home
+        this.splash = true  
+        this.isHome = true
+      } else {
+        // is page
+        this.splash = false
+        this.isHome = false
+      }
+    },
+    toggleMenu () {
+      console.log('toggle menu');
+      // this.menuActive = !this.menuActive
+      this.splash = !this.splash
+    },
+    hideMenu (bypass) {
+      if (!process.isClient) return
+      if (this.menuShown == false && this.$route.path !== '/' || bypass) {
         // console.log('hidemenu');
         this.$anime({
           targets: this.$el.querySelectorAll('.menu-item'),
@@ -106,43 +181,39 @@ export default {
           opacity: 0,
           delay: 0
         })
-
-        // this.$anime({
-        //   targets: this.$el.querySelector('#gallery'),
-        //   duration: 0,
-        //   easing: 'easeOutSine',
-        //   'margin-left': '-33%',
-        //   opacity: 0,
-        //   delay: 0
-        // })
       }
     },
-    showMenu () {
+    showMenu (bypass) {
       if (!process.isClient) return
 
-      if (this.menuShown == false && this.$route.path !== '/') {
-        // console.log('showmenu');
-        // console.log('animate')
-        this.$anime({
-          targets: this.$el.querySelectorAll('.menu-item'),
-          easing: 'easeInOutSine',
-          left: 0,
-          opacity: 1,
-          duration: 250,
-          delay: [this.$anime.stagger(50)]
-        })
-        this.menuShown = true
+      if (this.menuShown == false && this.$route.path !== '/' || bypass) {
+        
+        console.log(this.winW);
+        
+        if (this.winW >= 960 || bypass) {
+          // menu items
+          this.$anime({
+            targets: this.$el.querySelectorAll('.menu-item'),
+            easing: 'easeInOutSine',
+            left: 0,
+            opacity: 1,
+            duration: 250,
+            delay: [this.$anime.stagger(50)]
+          })
+          this.menuShown = true        
 
-        this.$anime({
-          targets: this.$el.querySelector('#gallery'),
-          easing: 'easeInOutSine',
-          'margin-left': 0,
-          opacity: 1,
-          duration: 700,
-          delay: 300,
-        })
+          // desktop side image
+          this.$anime({
+            targets: this.$el.querySelector('#gallery'),
+            easing: 'easeInOutSine',
+            'margin-left': 0,
+            opacity: 1,
+            duration: 700,
+            delay: 300,
+          })
+        }
       }
-    }
+    },
   },
   metaInfo() {
     function customMeta () {
@@ -170,29 +241,6 @@ export default {
     return {
       title: this.$static.metadata.siteName,
       meta: customMeta()
-
-      // [
-      //   {
-      //     key: 'description',
-      //     name: 'description',
-      //     content: '',
-      //     // content: this.$static.metadata.siteDescription[] || this.$static.metadata.siteDescription
-      //     // function () {
-      //     //   let description = this.$static.metadata.siteDescription
-      //     //   if (process.isClient) {
-      //     //     if (location.pathname.includes('/fr/')) {
-      //     //       description = 'Une plateforme multidisciplinaire d‘échange de connaissances'
-      //     //     }
-      //     //   }
-      //     //   return description
-      //     // }
-      //   },
-      //   {
-      //     key: 'og:image',
-      //     name: 'og:image',
-      //     content: 'https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format'
-      //   }
-      // ]
     }
   }
 }
@@ -204,8 +252,68 @@ $green: rgb(17,230,54);
 // $green: #11ff36;
 $headingSize: 2.2rem;
 
+#preloader { display: none !important; }
+
 // MOBILE
 @media (max-width: 960px) {
+  .splash {
+    #menu  {
+      display: none;
+    }
+    #splash {
+      .image {
+        background-image: url(https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format);
+        background-position: top center;
+        background-size: cover;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 0;
+      }
+      display: block;
+    }
+    #buttons {
+      background: transparent;
+      mix-blend-mode: color;
+    }
+    .menu-button {
+      mix-blend-mode: difference;
+      color: $green;
+      border: 1px $green solid;
+      background: transparent;
+    }
+    #menu .menu-item a {
+      color: white;
+      mix-blend-mode: difference;
+    }
+    .intro {
+      color: white;
+      mix-blend-mode: difference;
+    }
+    .index.intro {
+      display: block;
+    }
+  }
+  .splash.loaded {
+    #logo {
+      .part-wrapper {
+        filter: invert(100%);  
+      }
+      mix-blend-mode: difference; 
+    }
+  }
+  
+  .menu-button {
+    // color: $green;
+    color: white;
+    background: $green;
+    border: 1px $green solid;
+    padding: 0.48rem 0.6rem 0;
+    border-radius: 6px;
+  }
+  
   .desktop {
     display: none;
   }
@@ -213,9 +321,16 @@ $headingSize: 2.2rem;
     margin-top: 0.8rem;
   }
   .layout {
-    margin: 0 auto;
+    margin: 0 auto 0;
+    // margin: calc(95vw * 0.105) auto 0;
+    // position: absolute;
+    // top: 0;
+    // margin: 50px auto 0;
     padding-left: 0.7rem;
     padding-right: 0.7rem;
+    background: white;
+    
+    
   }
   #buttons {
     width: 100vw;
@@ -223,9 +338,13 @@ $headingSize: 2.2rem;
   }
 }
 
+
 // DESKTOP
 @media (min-width: 960px) {
   .mobile {
+    display: none;
+  }
+  .menu-button {
     display: none;
   }
   #logo {
@@ -454,7 +573,7 @@ xmp {
 .abs {
   position: absolute !important;
   bottom: 0;
-
+  background: transparent !important;
 }
 
 .slide-left-enter-active,
@@ -469,7 +588,19 @@ xmp {
   // width: calc(100vw - 1.4rem)
   box-sizing: border-box;
   width: 100vw;
+  
 }
+.slide-right-leave-active, .slide-left-leave-active {
+  top: 0;
+  padding-top: 50px; 
+  // z-index: 999; 
+  // border: 20px red solid;
+  
+}
+.slide-right-enter-active, .slide-left-enter-active {
+  // border: 20px blue solid;
+}
+
 
 .slide-left-enter,
 .slide-right-leave-active {

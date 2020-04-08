@@ -6,7 +6,7 @@
 
 <script>
 import {animatedScrollTo} from 'es6-scroll-to'
-import menu from '~/components/menu.js'
+import menujs from '~/components/menu.js'
 
 export default {
   name: 'Lang',
@@ -27,14 +27,9 @@ export default {
   },
   created () {
     if (!process.isClient) return
-
-    this.menu = menu
-    // set the language to french if its in the user browser setting
-    if (process.isClient) {
-      if (window.location.pathname.includes('fr')) {
-        this.lang = 1
-      }
-    }
+    this.menu = menujs
+    let lang = this.$store.state.lang    
+    if (lang == 'fr') this.lang = 1
   },
   computed: {
   },
@@ -54,6 +49,7 @@ export default {
                 to: 0
             })
             setTimeout(() => {
+              this.$store.dispatch('setLang', l)
               this.$router.push(newPath)
             }, top)
           }

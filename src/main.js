@@ -6,17 +6,21 @@ import { animatedScrollTo } from 'es6-scroll-to'
 import anime from 'animejs/lib/anime.min.js'
 import DefaultLayout from '~/layouts/Default.vue'
 
-// import * as PIXI from 'pixi.js'
-// const path = require('path')
-// const bulma = path.resolve('node_modules', 'bulma-scss/base/_all.scss')
-// require(bulma);
 
 export default function (Vue, { router, head, isClient, appOptions }) {
+  
+  let navLang = 'en'
+  if (process.isClient) {
+    navLang = navigator.language || navigator.userLanguage
+    navLang = navLang.toLowerCase()  
+  }
+  let lang = 'en'
+  if (navLang.includes('fr')) lang = 'fr'
+  
   Vue.use(Vuex)
-
   appOptions.store = new Vuex.Store({
     state: {
-      lang: 'en-gb',
+      lang: lang,
       loaded: false,
       transitionName: 'slide-left',
       img: {
@@ -39,13 +43,24 @@ export default function (Vue, { router, head, isClient, appOptions }) {
         state.loaded = val
       },
       setLang (state, val) {
-        // console.log('store = ' + val)
+        console.log('store = ' + val)
         state.lang = val
       },
       setTransitionName (state, val) {
         // console.log('set transition name: ' + val);
         state.transitionName = val
       }
+    },
+    actions: {
+      setLang ({commit}, val) {
+        let lang
+        if (val == 1) lang = 'fr'
+        else lang = 'en'
+        commit('setLang', lang)
+      }
+    },
+    getters: {
+      getLang: state => state.lang
     }
   })
 
@@ -84,10 +99,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       }, top);
     }
   }
-
-  // Add attributes to HTML tag
-  // var userLang = navigator.language || navigator.userLanguage;
-  // head.htmlAttrs = { lang: userLang.toLowerCase() }
 
   Vue.prototype.$prismic = {
     linkResolver() {
