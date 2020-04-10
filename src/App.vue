@@ -8,7 +8,7 @@
       Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
-        .menu-button(@click='toggleMenu', v-if='isHome && isMobile') MENU
+        .menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !splash }") MENU
         Lang#lang
       transition(:name='transitionName')
         router-view(class='child-view')
@@ -39,8 +39,8 @@ export default {
       animating: false,
       menuShown: false,
       splash: false,
-      winH: null,
-      winW: null,
+      winH: 0,
+      winW: 0,
       isMobile: true,
       isHome: false,
     }
@@ -119,7 +119,7 @@ export default {
   },
   created () {
     if (!process.isClient) return
-    // window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.handleResize)
     this.setSize()
     this.checkPath()
@@ -127,7 +127,7 @@ export default {
   },
   destroyed () {
     if (!process.isClient) return
-    // window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScroll)
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
@@ -153,7 +153,10 @@ export default {
       }
     },
     checkPath () {
+      if (!process.isClient) return
       let p = this.$route.path
+      // console.log('PATH ==== ' + p);
+      
       if (p == '/en/' || p == '/fr/' || p == '/fr/' || p == '/fr' || p == '/') {
         // is home
         this.splash = true  
@@ -270,7 +273,9 @@ $headingSize: 2.2rem;
         left: 0;
         height: 100vh;
         width: 100vw;
+        width: 100%;
         z-index: 0;
+        margin: 0 !important;
       }
       display: block;
     }
@@ -573,7 +578,12 @@ xmp {
 .abs {
   position: absolute !important;
   bottom: 0;
-  background: transparent !important;
+}
+
+@media (min-width: 960px) {
+  .abs {
+    background: transparent !important;  
+  }
 }
 
 .slide-left-enter-active,
@@ -612,6 +622,10 @@ xmp {
 .slide-right-enter {
   opacity: 0;
   transform: translate(-100vw, 0);
+}
+
+.is-hidden {
+  display: none;
 }
 
 
