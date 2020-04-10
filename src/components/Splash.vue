@@ -36,7 +36,10 @@ export default {
   data () {
     return {
       matterLoaded: false,
-      render: null
+      render: null,
+      winW: 0,
+      winH: 0,
+      // isMobile: true,
     }
   },
   computed: {
@@ -79,12 +82,47 @@ export default {
       }
     }
   },
+  created () {
+    if (!process.isClient) return
+    window.addEventListener('resize', this.handleResize)
+    this.setSize()
+    // this.checkPath()
+    // this.checkMobile()
+  },
+  destroyed () {
+    if (!process.isClient) return
+    window.removeEventListener('resize', this.handleResize)
+  },
   mounted () {
     console.log('Splash mounted')
+    this.setSize()
   },
   methods: {
+    setSize () {
+      if (!process.isClient) return
+      let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+      let iw = (iOS) ? screen.width : window.innerWidth
+      let ih = (iOS) ? screen.height : window.innerHeight
+      this.winW = iw
+      this.winH = ih
+    },
+    handleResize (event) {
+      this.setSize()
+      // this.checkMobile()
+    },
+    // checkMobile () {
+    //   if (this.winW >= 960) {
+    //     this.isMobile = false
+    //     this.splash = false
+    //   } else {
+    //     this.isMobile = true
+    //     if (this.isHome) this.splash = true
+    //   }
+    // },
     matterControl (cmd) {
       if (!process.isClient) return
+      if (this.winW >= 960) return
+      
       var Render = Matter.Render
       if (cmd == 'run') {
         console.log('run matter');
@@ -97,6 +135,8 @@ export default {
     },
     matterInit () {
       if (!process.isClient) return
+      if (this.winW >= 960) return
+      // if (!isMobile)
       console.log('MATTER IT');
       
       var Engine = Matter.Engine,

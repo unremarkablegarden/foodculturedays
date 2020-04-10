@@ -8,7 +8,7 @@
       Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
-        .menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !menuShown }") MENU
+        button.menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !menubuttonShown }") MENU
         Lang#lang
       transition(:name='transitionName')
         router-view(class='child-view')
@@ -37,12 +37,13 @@ export default {
   data () {
     return {
       animating: false,
-      menuShown: true,
+      menuShown: false,
       splash: false,
       winH: 0,
       winW: 0,
       isMobile: true,
       isHome: false,
+      menubuttonShown: true,
     }
   },
   computed: {
@@ -133,9 +134,10 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
-    hideMenu () {
-      return false
-    },
+    // hideMenu () {
+    //   console.log('hide menu');
+    //   return false
+    // },
     setSize () {
       if (!process.isClient) return
       let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
@@ -193,10 +195,12 @@ export default {
     },
     showMenu (bypass) {
       if (!process.isClient) return
+      // console.log(this.menuShown);
+      
 
       if (this.menuShown == false && this.$route.path !== '/' || bypass) {
         
-        console.log(this.winW);
+        // console.log(this.winW); 
         
         if (this.winW >= 960 || bypass) {
           // menu items
@@ -220,7 +224,7 @@ export default {
             delay: 300,
           })
         }
-      }
+      }  
     },
   },
   metaInfo() {
@@ -293,29 +297,15 @@ $headingSize: 2.2rem;
       color: $green;
       border: 1px $green solid;
       background: transparent;
-      font-size: 1rem;
-      font-weight: bold;
+      // font-size: 1rem;
+      // font-weight: bold;
+      // padding: 0.52rem 0.6rem 0.3rem !important;
     }
     #menu .menu-item a {
       color: white;
       mix-blend-mode: difference;
     }
-    
-    .menu-button, #lang .lang {
-      // transform: scale(0.8);
-      font-size: 0.8rem;
-      line-height: 1em;
-    }
-    #lang .lang {
-      padding: 0.52rem 0.6rem 0.3rem !important;
-    }
-    .menu-button {
-      // padding: 0.5rem 0.5rem 0.3rem;
-      height: 1.75rem;
-      box-sizing: border-box;
-      padding-top: 0.5rem
-    }
-      
+        
     .intro {
       color: white;
       mix-blend-mode: difference;
@@ -333,13 +323,36 @@ $headingSize: 2.2rem;
     }
   }
   
+    .menu-button, #lang .lang {
+      // transform: scale(0.8);
+      font-size: 0.8rem;
+      line-height: 1em;
+    }
+    #lang .lang {
+      padding: 0.52rem 0.6rem 0.3rem !important;
+      // padding: 0 !important;
+    }
+      
+    .menu-button {
+      // padding: 0.45rem 0.5rem 0.35rem;
+      // height: 1.75rem;
+      // box-sizing: border-box;
+      // padding-top: 0.5rem
+      padding: 0.52rem 0.6rem 0.3rem !important;
+    }
+  
+
   .menu-button {
     // color: $green;
     color: white;
     background: $green;
     border: 1px $green solid;
-    padding: 0.48rem 0.6rem 0;
+    // padding: 0.48rem 0.6rem 0;
+    // padding: 0.52rem 0.6rem 0.3rem !important;
     border-radius: 6px;
+    font-weight: bold;
+    // padding: 0.52rem 0.6rem 0.3rem !important;
+    font-size: 0.8rem;
   }
   
   .desktop {
@@ -357,8 +370,6 @@ $headingSize: 2.2rem;
     padding-left: 0.7rem;
     padding-right: 0.7rem;
     background: white;
-    
-    
   }
   #buttons {
     width: 100vw;
