@@ -115,7 +115,7 @@ export default {
           })
           
       var world = engine.world
-      world.gravity.y = 1.3;
+      world.gravity.y = 1.0;
       
       let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
       let winW = (iOS) ? screen.width : window.innerWidth
@@ -133,6 +133,7 @@ export default {
           pixelRatio: 2,
           // wireframes: true,
           wireframes: false,
+          showSleeping: false,
           // showAngleIndicator: true,
           // showCollisions: true
         }
@@ -147,7 +148,7 @@ export default {
       winW = winW - p2
       winH = winH - p2
       
-      var rest = 0.6,
+      var rest = 0.7,
       space = winW / 4,
       scale = 0.7,
       scale2 = 1
@@ -192,12 +193,16 @@ export default {
         })
       }
         
+      let vis = false
+      let t = 100
+      let t2 = 50
       World.add(world, [
         // walls
-        Bodies.rectangle(winW/2+p, winH+p, winW, 1, { isStatic: true, render: { visible: false } }),
-        Bodies.rectangle(0+p, winH/2+p, 1, winH, { isStatic: true, render: { visible: false } }),
-        Bodies.rectangle(winW+p, winH/2+p, 1, winH, { isStatic: true, render: { visible: false } }),
-        // Bodies.rectangle(winW/2+p, -100, winW, 1, { isStatic: true, render: { visible: true } })
+        
+        Bodies.rectangle(winW/2+p, winH+p+t2, winW, t, { isStatic: true, render: { visible: vis } }),
+        Bodies.rectangle(0+p-t2, winH/2+p, t, winH, { isStatic: true, render: { visible: vis } }),
+        Bodies.rectangle(winW+p+t2, winH/2+p, t, winH, { isStatic: true, render: { visible: vis } }),
+        // Bodies.rectangle(winW/2+p, -100, winW, 1, { isStatic: true, render: { visible: vis } })
         
         Body1,
 
@@ -219,6 +224,13 @@ export default {
           angle: -Math.PI * -0.1
         }),
       ]);
+      
+      // roof
+      setTimeout(() => {
+        World.add(world, [
+          Bodies.rectangle(winW/2+p, -100, winW, 100, { isStatic: true, render: { visible: vis } })  
+        ])
+      }, 2500);
       
       var mouse = Mouse.create(this.render.canvas),
       mouseConstraint = MouseConstraint.create(engine, {

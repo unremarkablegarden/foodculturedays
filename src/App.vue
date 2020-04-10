@@ -8,7 +8,7 @@
       Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
-        .menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !splash }") MENU
+        .menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !menuShown }") MENU
         Lang#lang
       transition(:name='transitionName')
         router-view(class='child-view')
@@ -37,7 +37,7 @@ export default {
   data () {
     return {
       animating: false,
-      menuShown: false,
+      menuShown: true,
       splash: false,
       winH: 0,
       winW: 0,
@@ -103,12 +103,14 @@ export default {
         // }, 500);
         this.splash = true
         this.isHome = true
+        // this.menuShown = true
       } 
       else {
         console.log('route not back home');
         if (this.isMobile) this.hideMenu(true)
         this.splash = false
         this.isHome = false
+        // this.menuShown = false
       }
     }
   },
@@ -131,6 +133,9 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    hideMenu () {
+      return false
+    },
     setSize () {
       if (!process.isClient) return
       let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
@@ -288,11 +293,29 @@ $headingSize: 2.2rem;
       color: $green;
       border: 1px $green solid;
       background: transparent;
+      font-size: 1rem;
+      font-weight: bold;
     }
     #menu .menu-item a {
       color: white;
       mix-blend-mode: difference;
     }
+    
+    .menu-button, #lang .lang {
+      // transform: scale(0.8);
+      font-size: 0.8rem;
+      line-height: 1em;
+    }
+    #lang .lang {
+      padding: 0.52rem 0.6rem 0.3rem !important;
+    }
+    .menu-button {
+      // padding: 0.5rem 0.5rem 0.3rem;
+      height: 1.75rem;
+      box-sizing: border-box;
+      padding-top: 0.5rem
+    }
+      
     .intro {
       color: white;
       mix-blend-mode: difference;
@@ -478,6 +501,7 @@ input {
   height: 3.75rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: fixed;
   // position: absolute;
   z-index: 888;
