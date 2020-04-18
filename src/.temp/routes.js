@@ -32,11 +32,11 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
-    path: "/fr/archives/2018/slow-food-vaud/",
+    path: "/fr/archives/2018/talia-feder/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
-    path: "/fr/archives/2018/talia-feder/",
+    path: "/fr/archives/2018/slow-food-vaud/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Archive.vue")
   },
   {
@@ -321,6 +321,10 @@ export default [
   },
   {
     path: "/fr/a-propos/",
+    component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
+  },
+  {
+    path: "/en/biennale/",
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {

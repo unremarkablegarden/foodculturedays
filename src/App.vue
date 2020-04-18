@@ -30,6 +30,11 @@ import Loader from '~/components/Loader.vue'
 import Logo from '~/components/Logo.vue'
 import Splash from '~/components/Splash.vue'
 
+if (process.isClient) {
+  var browserUpdate = require('browser-update')  
+}
+// import browserUpdate from 'browser-update'
+
 export default {
   components: {
     Lang, Social, Loader, Logo, Splash
@@ -119,6 +124,16 @@ export default {
     if (!process.isClient) return
     // set up the menu outside the screen while curtain is up
     this.hideMenu()
+    
+    browserUpdate({
+      required:{e:-4,f:-6,o:-3,s:-2,c:-6},
+      insecure:true,
+      unsupported:true,
+      api:2020.04,
+      // test: true,
+      shift_page_down: false
+    })
+    
   },
   created () {
     if (!process.isClient) return
@@ -688,4 +703,85 @@ xmp {
     font-style: normal;
 }
 
+</style>
+
+<style>
+  .buorg {
+    /* position: absolute; */
+    position: fixed;
+    z-index: 111111;
+    width: 50% !important;
+    top: 30% !important;
+    left: 25% !important;
+    border-bottom: 1px solid #A29330;
+    text-align: center;
+    color: #000;
+    background-color: #fff !important;
+    font: 18px Calibri, Helvetica, sans-serif;
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 0 1px black !important;
+    animation: 1s ease-out 0s buorgfly
+    }
+
+    .buorg-pad {
+      padding: 50px;
+      line-height: 1.7em;
+    }
+
+    .buorg-buttons {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #buorgig, #buorgul, #buorgpermanent {
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      /* box-shadow: 0 0 2px rgba(0, 0, 0, 0.4); */
+      box-shadow: 0 0 0 black !important;
+      padding: 1px 10px;
+      border-radius: 4px;
+      font-weight: normal;
+      background: #5ab400;
+      white-space: nowrap;
+      margin: 0 2px;
+      display: inline-block;
+    }
+
+    #buorgig {
+      /* background-color: #fff !important; */
+    }
+
+    @media only screen and (max-width: 700px) {
+        .buorg div {
+            padding: 5px 12px 5px 9px;
+            line-height: 1.3em;
+        }
+    }
+
+    @keyframes buorgfly {
+        from {
+            opacity: 0;
+            transform: translateY(-50px)
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0px)
+        }
+    }
+
+    .buorg-fadeout {
+        transition: visibility 0s 8.5s, opacity 8s ease-out .5s;
+    }
+
+    .buorg-icon {
+        width: 22px;
+        height: 16px;
+        vertical-align: middle;
+        position: relative;
+        top: -0.05em;
+        display: inline-block;
+        background: no-repeat 0px center;
+    }
 </style>

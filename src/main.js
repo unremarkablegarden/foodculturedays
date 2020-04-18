@@ -9,6 +9,11 @@ import DefaultLayout from '~/layouts/Default.vue'
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   
+  // head.script.push({
+  //   src: 'https://browser-update.org/update.min.js',
+  //   body: true
+  // })
+  
   let navLang = 'en'
   if (process.isClient) {
     navLang = navigator.language || navigator.userLanguage

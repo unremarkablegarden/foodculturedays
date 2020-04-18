@@ -9,6 +9,7 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "animejs": "^3.1.0",
+    "browser-update": "^3.3.16",
     "bulma-scss": "^0.8.1",
     "dom-helpers": "^5.1.4",
     "es6-scroll-to": "^1.1.2",
