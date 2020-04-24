@@ -24,7 +24,17 @@ export default {
   },
   computed: {
     msg () {
-      if (this.$store.state.lang.includes('fr')) {
+      if (!process.isClient) return
+      let lang = this.$store.state.lang
+      if (!lang) {
+        let path = window.location.pathname
+        if (path == '/en' || path.includes('/en/')) {
+          lang = 'en'
+        } else if (path == '/fr' || path.includes('/fr/')) {
+          lang = 'fr'
+        }
+      }
+      if (lang.includes('fr')) {
         return 'Page non trouvée'
       } else {
         return 'Page not found'

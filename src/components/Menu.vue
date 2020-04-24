@@ -36,11 +36,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      langCode: 'getLang'
-    }),
+    // ...mapGetters({
+    //   langCode: 'getLang'
+    // }),
     lang () {
-      if (this.langCode == 'fr') return 1
+      // if (this.langCode == 'fr') return 1
+      // else return 0
+      let lang = this.$store.state.lang
+      if (lang == 'fr') return 1
       else return 0
     },
     loaded () {
@@ -76,11 +79,11 @@ export default {
       }
     },
     $route (to, from){
-      if (to.path.includes('fr')) {
-        this.lang = 1
-      } else {
-        this.lang = 0
-      }
+      // if (to.path.includes('fr')) {
+      //   this.lang = 1
+      // } else {
+      //   this.lang = 0
+      // }
       if (to.path == '/en/' || to.path == '/fr/') {
         this.getGallery()
       }

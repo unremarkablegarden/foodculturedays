@@ -28,8 +28,29 @@ export default {
   created () {
     if (!process.isClient) return
     this.menu = menujs
-    let lang = this.$store.state.lang    
+    
+    let path = window.location.pathname
+    let lang
+    
+    // not root, but a page accessed through URL directly
+    if (path !== '/') {
+      if (path == '/en' || path.includes('/en/')) {
+        lang = 'en'
+      } else if (path == '/fr' || path.includes('/fr/')) {
+        lang = 'fr'
+      }
+    }
+    
+    let stateLang = this.$store.state.lang
+    // let userLang = this.$store.state.userLang
+    
+    if (!stateLang) {
+      this.$store.dispatch('setLang', lang)
+    }
+    
     if (lang == 'fr') this.lang = 1
+    else this.lang = 0
+    // console.log('LANGVUE this.$store.state.lang ' + this.$store.state.lang);
   },
   computed: {
   },

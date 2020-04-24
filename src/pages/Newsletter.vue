@@ -78,7 +78,16 @@ export default {
     }
   },
   created () {
+    if (!process.isClient) return
     let lang = this.$store.state.lang
+    if (!lang) {
+      let path = window.location.pathname
+      if (path == '/en' || path.includes('/en/')) {
+        lang = 'en'
+      } else if (path == '/fr' || path.includes('/fr/')) {
+        lang = 'fr'
+      }
+    }
     if (lang.includes('fr')) { this.lang = 'fr' }
   },
   watch: {

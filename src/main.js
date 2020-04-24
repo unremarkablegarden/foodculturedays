@@ -22,10 +22,13 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   let lang = 'en'
   if (navLang.includes('fr')) lang = 'fr'
   
+  console.log('MAINJS lang = ' + lang)
+  
   Vue.use(Vuex)
   appOptions.store = new Vuex.Store({
     state: {
-      lang: lang,
+      lang: null,
+      userLang: lang,
       loaded: false,
       transitionName: 'slide-left',
       img: {

@@ -179,6 +179,18 @@ export default {
       let p = this.$route.path
       // console.log('PATH ==== ' + p);
       
+      if (p == '/') {
+        // if at the root, determine language. get from state as set by 
+        let lang = this.$store.state.userLang
+        // set state lang to userLang if it's not set, FROM ROOT  ONLY
+        if (!this.$store.state.lang) {
+          this.$store.dispatch('setLang', lang)  
+        }
+        let path = '/' + lang + '/'
+        this.$router.push(path)
+      }  
+      
+      
       if (p == '/en/' || p == '/fr/' || p == '/fr/' || p == '/fr' || p == '/') {
         // is home
         this.splash = true  
@@ -289,7 +301,9 @@ $headingSize: 2.2rem;
     }
     #splash {
       .image {
-        background-image: url(https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format);
+        // background-image: url(https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format);
+        
+        background-image: url(https://images.prismic.io/foodculturedays2020/8234a78e-d78e-4366-ac51-6ef69205d070_new-home.jpg?auto=compress,format);
         background-position: top center;
         background-size: cover;
         position: fixed;
@@ -353,7 +367,8 @@ $headingSize: 2.2rem;
       // height: 1.75rem;
       // box-sizing: border-box;
       // padding-top: 0.5rem
-      padding: 0.52rem 0.6rem 0.3rem !important;
+      // padding: 0.52rem 0.6rem 0.3rem !important;
+      padding: 7px 10px !important;
     }
   
 
@@ -456,13 +471,14 @@ $headingSize: 2.2rem;
 
   #app {
     min-height: 100vh;
-    cursor: auto;
-    cursor: url(assets/cursor-1x.png) 15 15, auto;
   }
-
-  a, .link:hover, #pixi, #pixi1, #pixi2, button, .back, .clicker{
-    cursor: pointer;
-    cursor: url(assets/cursorB-1x.png) 12 12, auto !important;
+  
+  html, body, #app {  
+    cursor: url(assets/cursor-1x.png) 15 15, auto !important;
+  }
+  a, .link, #pixi, #pixi1, #pixi2, button, .back, .clicker {
+    // cursor: pointer;
+    cursor: url(assets/cursorB-1x.png) 12 12, pointer !important;
   }
 
   .gallery-column {

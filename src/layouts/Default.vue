@@ -21,15 +21,15 @@ export default {
     }
   },
   created () {
-    if (!process.isClient) return
+    // if (!process.isClient) return
 
-    let lang = navigator.language || navigator.userLanguage
-    if (lang.includes('fr')) { this.lang = 'fr' }
+    // let lang = navigator.language || navigator.userLanguage
+    // if (lang.includes('fr')) { this.lang = 'fr' }
 
-    if (window.location.pathname == '/') {
-      console.log('leaving root');
-      this.$router.push('/'+this.lang+'/')
-    }
+    // if (window.location.pathname == '/') {
+    //   console.log('leaving root');
+    //   this.$router.push('/'+this.lang+'/')
+    // }
   },
 
 }
