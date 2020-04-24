@@ -5,7 +5,7 @@
     //- Loader
     .body(v-bind:class="{ 'splash': splash, 'loaded': loaded }")
       Logo
-      //- Splash(v-bind:class="{ 'splash': splash }")
+      Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
         button.menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !menubuttonShown }") MENU
