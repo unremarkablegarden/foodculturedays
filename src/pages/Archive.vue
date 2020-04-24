@@ -21,8 +21,9 @@
             h2.serif {{ year.year }}
 
             .pages-wrapper
-              g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
-                .page
+              .archive-item(v-for='(page, index) in year.pages', :key='index')
+                //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
+                .page.link(@click='archiveRoute(page.node.context.path)')
                   h2
                     em {{ tc(page.node.project[0].text) }}
                     div {{ tc(page.node.artist[0].text) }}
@@ -78,8 +79,34 @@ export default {
     tc (text) {
       // return titleCaseFrench.convert(text)
       return text
+    },
+    archiveRoute (path) {
+      console.log(path)
+      this.$router.push(path)
+    }
+    // linkclicked (el) {
+    //   console.log(el);
+    // }
+  },
+  created () {
+    if (process.isClient) {
+      let lang = this.$context.lang
+      if (lang.includes('fr')) { this.lang = 'fr' }
     }
   },
+  // created () {
+  //   if (!process.isClient) return
+  //   let lang = this.$store.state.lang
+  //   if (!lang) {
+  //     let path = window.location.pathname
+  //     if (path == '/en' || path.includes('/en/')) {
+  //       lang = 'en'
+  //     } else if (path == '/fr' || path.includes('/fr/')) {
+  //       lang = 'fr'
+  //     }
+  //   }
+  //   if (lang.includes('fr')) { this.lang = 'fr' }
+  // },
   computed: {
     pages () {
       return this.$context.data
@@ -124,20 +151,14 @@ export default {
       return structure
     },
   },
-  created () {
-    if (process.isClient) {
-      let lang = this.$context.lang
-      if (lang.includes('fr')) { this.lang = 'fr' }
-    }
-  },
-  watch: {
-    $route (to){
-      if (to.path.includes('fr')) {
-        this.lang = 'fr'
-      } else {
-        this.lang = 'en'
-      }
-    }
-  }
+  // watch: {
+  //   $route (to){
+  //     if (to.path.includes('fr')) {
+  //       this.lang = 'fr'
+  //     } else {
+  //       this.lang = 'en'
+  //     }
+  //   }
+  // }
 }
 </script>

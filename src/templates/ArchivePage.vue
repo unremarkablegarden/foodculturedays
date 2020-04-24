@@ -42,6 +42,12 @@ $headingSize: 2.2rem;
   }
 }
 
+p em {
+  &:after, &:before {
+    content: ' '
+  }
+}
+
 .image {
   width: calc(100% + 1.4rem);
   height: 45vh;

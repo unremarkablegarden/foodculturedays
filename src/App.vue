@@ -5,7 +5,7 @@
     //- Loader
     .body(v-bind:class="{ 'splash': splash, 'loaded': loaded }")
       Logo
-      Splash(v-bind:class="{ 'splash': splash }")
+      //- Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
         button.menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !menubuttonShown }") MENU
@@ -319,10 +319,10 @@ $headingSize: 2.2rem;
     }
     #buttons {
       background: transparent;
-      mix-blend-mode: color;
+      // mix-blend-mode: color;
     }
     .menu-button {
-      mix-blend-mode: difference;
+      // mix-blend-mode: difference;
       color: $green;
       border: 1px $green solid;
       background: transparent;
@@ -332,12 +332,12 @@ $headingSize: 2.2rem;
     }
     #menu .menu-item a {
       color: white;
-      mix-blend-mode: difference;
+      // mix-blend-mode: difference;
     }
         
     .intro {
       color: white;
-      mix-blend-mode: difference;
+      // mix-blend-mode: difference;
     }
     .index.intro {
       display: block;

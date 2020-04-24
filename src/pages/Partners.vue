@@ -1,13 +1,12 @@
 <template lang="pug">
   layout
     #partners
-      //- xmp {{ $context }}
+      //- xmp {{ $context.data.node.body[3] }}
+      
       .page-wrapper
-        //- .title
-          h1 {{ title }}
         .img-wrapper
-          img(:src="img1").mobile
-          img(:src="img2", ).desktop
+          img(v-if='$context.data', :src="$context.data.node.body[1].url").mobile
+          img(v-if='$context.data',:src="$context.data.node.body[3].url").desktop
 </template>
 
 <style lang="scss" scoped>
@@ -35,25 +34,29 @@ export default {
     }
   },
   computed: {
-    title () {
-      if (process.isClient) {
-        return this.$context.data.node.title[0].text
-      }
+    page () {
+      // return this.$context.data
     },
+    // title () {
+    //   // if (process.isClient) {
+    //     return this.$context.data.node.title[0].text
+    //   // }
+    // },
     imgs () {
-      if (process.isClient) {
-        return this.$context.data.node.body.filter(el => el.type == 'image')
-      }
+      // if (process.isClient) {
+        // return this.$context.data.node.body.filter(el => el.type == 'image')
+      // }
     },
     img1 () {
-      if (process.isClient) {
-        return this.imgs[0].url
-      }
+      // if (process.isClient) {
+        // return this.imgs[0].url
+      // }
+      // return page.node.
     },
     img2 () {
-      if (process.isClient) {
-        return this.imgs[1].url
-      }
+      // if (process.isClient) {
+        // return this.imgs[1].url
+      // }
     }
   }
 }

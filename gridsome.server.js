@@ -124,7 +124,7 @@ module.exports = function (api, options) {
 
         createPage({
           path: path,
-          component: './src/templates/Archive.vue',
+          component: './src/templates/ArchivePage.vue',
           context: {
             node: node,
             uid: node._meta.uid,
@@ -277,6 +277,7 @@ module.exports = function (api, options) {
       context: {
         lang: 'en-gb',
         altPath: '/fr/partenaires',
+        title: 'Partners',
         data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partners')
       }
     })
