@@ -20,11 +20,11 @@
     //- .pixi2(v-bind:class="{ 'is-hidden': !showBlob }", v-if="enableBlob")#pixi2
 
     //- the if overloads the mobile webgl browser ???
-    #pixi2.pixi2(v-if='webgl', v-bind:class="{ 'is-hidden': !showBlob, 'is-hidden2': !showBlob }")
+    #pixi2.pixi2(v-if='webgl', v-bind:class="{ 'logo-is-hidden': !showBlob, 'logo-is-hidden2': !showBlob }")
       .clicker2(@click='logoHomeIfBlob')
       Pixi
 
-    #pixi2.pixi2(v-if='!webgl', v-bind:class="{ 'is-hidden': !showBlob, 'is-hidden2': !showBlob }")
+    #pixi2.pixi2(v-if='!webgl', v-bind:class="{ 'logo-is-hidden': !showBlob, 'logo-is-hidden2': !showBlob }")
       .clicker2(@click='logoHomeIfBlob')
       img(:src='$store.state.img.logoParts[1]')
 
@@ -308,7 +308,7 @@ $left: calc(95vw * 0.06);
 .is-moved {
   margin-left: -100vw;
 }
-.is-hidden {
+.logo-is-hidden {
   opacity: 0;
   transition: all 400ms;
   overflow: hidden;
@@ -318,7 +318,7 @@ $left: calc(95vw * 0.06);
   // cursor: auto !important;
   // cursor: url(/assets/cursor-1x.png) 15 15, auto !important;
 }
-.is-hidden2 {
+.logo-is-hidden2 {
   // transform: translateY(-100vh);
   height: 0;
   margin-top: 160vh;

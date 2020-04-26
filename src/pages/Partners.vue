@@ -18,9 +18,14 @@
     max-width: 100%;
   }
 }
+@media (max-width: 960px) {
+  #partners {
+    padding-top: 1rem;
+  }
+}
 @media (min-width: 960px) {
   #partners {
-    padding: 6vw 2rem 5rem;
+    padding: 7vw 2rem 5rem;
   }
 }
 </style>

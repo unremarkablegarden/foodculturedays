@@ -70,7 +70,9 @@ export default {
     },
     $route (to, from) {
       if (to.path !== '/fr/' && to.path !== '/en/') {
-        this.matterControl('stop')
+        if (this.matterLoaded) {
+          this.matterControl('stop')
+        }
       } else {
         setTimeout(() => {
           if (this.matterLoaded) {

@@ -3,8 +3,9 @@
   .columns
     //- transition(name='slide-left')
     .column.is-6.desktop.no-pad.gallery-column
-      .gallery(v-if='gallery && gallery.length')#gallery
-        .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }")
+      client-only
+        .gallery(v-if='gallery && gallery.length')#gallery
+          .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }")
 
     .column.is-6.menu.left
       .menu-item(v-for="(item, i) in menu", :key="item.title[lang]")
@@ -65,11 +66,11 @@ export default {
   },
   mounted () {
     // console.log('menu > mounted > loaded = ' + this.loaded);
-    if (this.$route.path == '/en/' || this.$route.path == '/fr/') {
-      if (!this.loaded) {
-        this.hideImage()
-      }
-    }
+    // if (this.$route.path == '/en/' || this.$route.path == '/fr/') {
+    //   if (!this.loaded) {
+    //     this.hideImage()
+    //   }
+    // }
   },
   watch: {
     loaded (loadedTrue) {
@@ -90,19 +91,19 @@ export default {
     }
   },
   methods: {
-    hideImage () {
-      if (!process.isClient) return
-      console.log('hide image');
+    // hideImage () {
+    //   if (!process.isClient) return
+    //   console.log('hide image');
 
-      this.$anime({
-        targets: this.$el.querySelector('#gallery'),
-        duration: 0,
-        easing: 'easeOutSine',
-        'margin-left': '-33%',
-        opacity: 0,
-        delay: 0
-      })
-    },
+    //   this.$anime({
+    //     targets: this.$el.querySelector('#gallery'),
+    //     duration: 0,
+    //     easing: 'easeOutSine',
+    //     'margin-left': '-33%',
+    //     opacity: 0,
+    //     delay: 0
+    //   })
+    // },
     showImage () {
       if (!process.isClient) return
       // this.$anime({
@@ -122,10 +123,13 @@ export default {
       if (c) {
         if ('node' in c) { c = c.node }
         if ('gallery' in c) { c = c.gallery }
+        this.total = c.length
+        this.gallery = c
       }
       // c.reverse()
-      this.total = c.length
-      this.gallery = c
+      // const c = this.$state.homepageGallery
+      // if (c)
+      
     }
   }
 }

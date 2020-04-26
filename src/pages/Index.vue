@@ -1,17 +1,17 @@
 <template lang="pug">
   layout
     //- Splash
-    Menu(v-if='notSlashIndex')
+    Menu(v-if='notSlashIndex && !isMobile')
 </template>
 
 <script>
 import Menu from '~/components/Menu.vue'
-// import Splash from '~/components/Splash.vue'
+import Splash from '~/components/Splash.vue'
 
 export default {
   components: {
     Menu, 
-    // Splash
+    Splash
   },
   metaInfo: {
     title: function () {
@@ -26,14 +26,34 @@ export default {
   },
   data () {
     return {
+      winH: 0,
+      winW: 0,
+      isMobile: true,
     }
   },
-  mounted () {
-    // console.log('were in index');
+  destroyed () {
+    if (!process.isClient) return
+    // window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
+  },
+  created () {
+    if (!process.isClient) return
+    // window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.handleResize)
+    this.setSize()
+    this.checkMobile()
+    let c = this.$context.gallery
+    if (c) {
+      if ('node' in c) { c = c.node }
+      if ('gallery' in c) { c = c.gallery }
+    }
+    // c.reverse()
+    this.total = c.length
+    this.gallery = c
+    // this.$store.dispatch('setHomepageGallery', c)
   },
   computed: {
     lang () {
-      // return this.$store.state.lang
       if (!process.isClient) return
       return this.$context.lang
     },
@@ -43,9 +63,32 @@ export default {
         return true
       }
     }
+  },
+  methods: {
+    handleResize (event) {
+      this.setSize()
+      this.checkMobile()
+    },
+    setSize () {
+      if (!process.isClient) return
+      let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+      let iw = (iOS) ? screen.width : window.innerWidth
+      let ih = (iOS) ? screen.height : window.innerHeight
+      this.winW = iw
+      this.winH = ih
+    },
+    handleResize (event) {
+      this.setSize()
+      this.checkMobile()
+    },
+    checkMobile () {
+      if (this.winW >= 960) {
+        this.isMobile = false
+      } else {
+        this.isMobile = true
+      }
+    },
+    
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

@@ -3,15 +3,19 @@
     #preloader
       img(src="https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format")
     //- Loader
-    .body(v-bind:class="{ 'splash': splash, 'loaded': loaded }")
+    .body(v-bind:class="{ 'splash': splash, 'loaded': loaded, 'home': isHome }")
       Logo
       Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
-        button.menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !menubuttonShown }") MENU
+        button.menu-button(@click='toggleMenu', v-bind:class="{ 'is-hidden': !menubuttonShown, 'on': menuShown }") MENU
         Lang#lang
+      //- Menu(v-if='notSlashIndex').global-menu
+      client-only
+        Menu(v-bind:class="{ 'is-hidden-menu': !menuShown }", v-if='isMobile').global-menu
       transition(:name='transitionName')
         router-view(class='child-view')
+      
 </template>
 
 <static-query>
@@ -29,6 +33,9 @@ import Social from '~/components/Social.vue'
 import Loader from '~/components/Loader.vue'
 import Logo from '~/components/Logo.vue'
 import Splash from '~/components/Splash.vue'
+import Menu from '~/components/Menu.vue'
+
+import {animatedScrollTo} from 'es6-scroll-to'
 
 if (process.isClient) {
   var browserUpdate = require('browser-update')  
@@ -37,7 +44,7 @@ if (process.isClient) {
 
 export default {
   components: {
-    Lang, Social, Loader, Logo, Splash
+    Lang, Social, Loader, Logo, Splash, Menu
   },
   data () {
     return {
@@ -57,20 +64,25 @@ export default {
     },
     loaded () {
       // show menu after loaded is set in store by Logo.vue
+      
       let loaded = this.$store.state.loaded
-      if (loaded) {
-        setTimeout(() => {
-          this.showMenu()
-          // this.showDesktop()
-        }, 1800)
+      
+      let path = this.$route.path
+      if (path == '/en/' || path == '/fr/') {   
+        if (loaded) {
+          setTimeout(() => {
+            this.showMenu()
+            // this.showDesktop()
+          }, 1800)
+        }
       }
       return loaded
     },
   },
   watch: {
     splash (val) {
+      console.log('splash = ' + val);
       if (this.loaded) {
-        // console.log('splash = ' + val);
         this.hideMenu(true)
         if (val == false) {
           this.showMenu(true)
@@ -82,7 +94,12 @@ export default {
     },
     loaded (loadedTrue) {
       if (loadedTrue) {
-        this.showMenu()
+        
+        let path = this.$route.path
+        if (path == '/en/' || path == '/fr/') {   
+          this.showMenu()
+        }
+        
         // this.showDesktop()
       }
     },
@@ -116,7 +133,7 @@ export default {
         if (this.isMobile) this.hideMenu(true)
         this.splash = false
         this.isHome = false
-        // this.menuShown = false
+        if (this.isMobile) this.menuShown = false
       }
     }
   },
@@ -158,6 +175,12 @@ export default {
     //   console.log('hide menu');
     //   return false
     // },
+    notSlashIndex () {
+      let path = this.$route.path
+      if (path !== '/') {
+        return true
+      }
+    },
     setSize () {
       if (!process.isClient) return
       let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
@@ -206,28 +229,72 @@ export default {
         this.isHome = false
       }
     },
+    hideImage () {
+      if (!process.isClient) return
+      console.log('hide image');
+
+      this.$anime({
+        targets: this.$el.querySelector('#gallery'),
+        duration: 0,
+        easing: 'easeOutSine',
+        'margin-left': '-33%',
+        opacity: 0,
+        delay: 0
+      })
+    },
     toggleMenu () {
       console.log('toggle menu');
       // this.menuActive = !this.menuActive
-      this.splash = !this.splash
+      
+      let homePath, path = window.location.pathname
+      
+      if (path == '/en/' || path == '/fr/') {
+        console.log('home toggle');
+        this.splash = !this.splash
+      }
+      
+      this.menuShown = !this.menuShown
+      
+      if (this.menuShown == true) {
+        let top = window.pageYOffset
+        animatedScrollTo({
+          duration: top,
+          to: 0
+        })
+        this.showMenu(true)
+      } else {
+        this.hideMenu(true)
+      }
+
     },
     hideMenu (bypass) {
       if (!process.isClient) return
       if (this.menuShown == false && this.$route.path !== '/' || bypass) {
         // console.log('hidemenu');
+        // this.$anime({
+        //   targets: this.$el.querySelectorAll('.menu-item'),
+        //   duration: 0,
+        //   easing: 'easeOutSine',
+        //   left: '-33%',
+        //   opacity: 0,
+        //   delay: 0
+        // })
+        
+        this.hideImage()
+        
         this.$anime({
           targets: this.$el.querySelectorAll('.menu-item'),
-          duration: 0,
-          easing: 'easeOutSine',
+          easing: 'easeInOutSine',
           left: '-33%',
           opacity: 0,
-          delay: 0
+          duration: 250,
+          delay: [this.$anime.stagger(50)]
         })
       }
     },
     showMenu (bypass) {
       if (!process.isClient) return
-      // console.log(this.menuShown);
+      console.log('SHOW MENU ' + this.menuShown);
       
 
       if (this.menuShown == false && this.$route.path !== '/' || bypass) {
@@ -300,7 +367,7 @@ $headingSize: 2.2rem;
 
 // MOBILE
 @media (max-width: 960px) {
-  .splash {
+  .home.splash {
     #menu  {
       display: none;
     }
@@ -348,7 +415,32 @@ $headingSize: 2.2rem;
       display: block;
     }
   }
-  .splash.loaded {
+  
+  .menu-button {
+      // mix-blend-mode: difference;
+      color: $green;
+      border: 1px $green solid;
+      background: transparent;
+      // font-size: 1rem;
+      // font-weight: bold;
+      // padding: 0.52rem 0.6rem 0.3rem !important;
+    }
+  .menu-button {
+    // color: $green;
+    // padding: 0.48rem 0.6rem 0;
+    // padding: 0.52rem 0.6rem 0.3rem !important;
+    border-radius: 6px;
+    font-weight: bold;
+    // padding: 0.52rem 0.6rem 0.3rem !important;
+    font-size: 0.8rem;
+  }
+  .menu-button.on {
+    color: white;
+    background: $green;
+    border: 1px $green solid;
+  }
+  
+  .home.splash.loaded {
     #logo {
       .part-wrapper {
         filter: invert(100%);  
@@ -376,20 +468,6 @@ $headingSize: 2.2rem;
       padding: 7px 10px !important;
     }
   
-
-  .menu-button {
-    // color: $green;
-    color: white;
-    background: $green;
-    border: 1px $green solid;
-    // padding: 0.48rem 0.6rem 0;
-    // padding: 0.52rem 0.6rem 0.3rem !important;
-    border-radius: 6px;
-    font-weight: bold;
-    // padding: 0.52rem 0.6rem 0.3rem !important;
-    font-size: 0.8rem;
-  }
-  
   .desktop {
     display: none;
   }
@@ -410,11 +488,29 @@ $headingSize: 2.2rem;
     width: 100vw;
     left: 0;
   }
+  .global-menu {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
 }
 
 
 // DESKTOP
 @media (min-width: 960px) {
+  // .home .layout {
+  //   z-index: 0;
+  //   // position: absolute;
+  //   display: none;
+  // }
+  .global-menu {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    display: none
+  }
+  .home .global-menu {
+    display: block;
+  }
   .mobile {
     display: none;
   }
@@ -699,6 +795,14 @@ xmp {
   display: none;
 }
 
+.global-menu, .is-hidden-menu {
+  transition: all 300ms;
+  height: 20rem;
+}
+.is-hidden-menu {
+  height: 0;  
+  overflow: hidden;
+}
 
 @font-face {
     font-family: 'CE';

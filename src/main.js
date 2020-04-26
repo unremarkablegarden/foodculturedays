@@ -43,7 +43,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
           'https://images.prismic.io/foodculturedays2020/4d8abd31-e023-4ded-a245-e728554fbe06_blob.svg?auto=compress,format',
           'https://images.prismic.io/foodculturedays2020/5ce3419c-a90f-4bda-b842-0a05ffcec96c_logo3.svg?auto=compress,format',
         ]
-      }
+      },
+      homepageGallery: null,
     },
     mutations: {
       setLoaded (state, val) {
@@ -57,6 +58,9 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       setTransitionName (state, val) {
         // console.log('set transition name: ' + val);
         state.transitionName = val
+      },
+      setHomepageGallery (state, val) {
+        state.homepageGallery = val
       }
     },
     actions: {
@@ -65,6 +69,9 @@ export default function (Vue, { router, head, isClient, appOptions }) {
         if (val == 1) lang = 'fr'
         else lang = 'en'
         commit('setLang', lang)
+      },
+      setHomepageGallery ({commit}, val) {
+        commit('setHomepageGallery', val)
       }
     },
     getters: {
