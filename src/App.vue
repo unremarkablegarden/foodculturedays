@@ -131,7 +131,12 @@ export default {
       unsupported:true,
       api:2020.04,
       // test: true,
-      shift_page_down: false
+      shift_page_down: false,
+      reminder: 9999,
+      // after how many hours should the message reappear
+      // 0 = show all the time
+      reminderClosed: 9999,
+      // if the user explicitly closes message it reappears after x hours
     })
     
   },
@@ -337,7 +342,7 @@ $headingSize: 2.2rem;
         
     .intro {
       color: white;
-      // mix-blend-mode: difference;
+      mix-blend-mode: difference;
     }
     .index.intro {
       display: block;
