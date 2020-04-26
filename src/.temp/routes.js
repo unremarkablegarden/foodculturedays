@@ -204,10 +204,6 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
   },
   {
-    path: "/en/archive/2018/emily-groves/",
-    component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
-  },
-  {
     path: "/en/archive/2017/benjamin-luzuy--diego-agullo/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
   },
@@ -217,6 +213,10 @@ export default [
   },
   {
     path: "/en/archive/2018/erika-marthins/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
+  },
+  {
+    path: "/en/archive/2018/emily-groves/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
   },
   {
@@ -264,10 +264,6 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
   },
   {
-    path: "/fr/archives/2019/ch/",
-    component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
-  },
-  {
     path: "/en/archive/2019/caique-tizzi/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
   },
@@ -277,6 +273,10 @@ export default [
   },
   {
     path: "/en/archive/2018/cie-sapharide/",
+    component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
+  },
+  {
+    path: "/fr/archives/2019/ch/",
     component: () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
   },
   {
@@ -304,20 +304,8 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--pages--partners-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Partners.vue")
   },
   {
-    path: "/fr/newsletter/",
-    component: () => import(/* webpackChunkName: "page--src--pages--newsletter-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Newsletter.vue")
-  },
-  {
-    path: "/en/newsletter/",
-    component: () => import(/* webpackChunkName: "page--src--pages--newsletter-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Newsletter.vue")
-  },
-  {
     path: "/fr/medias/",
     component: () => import(/* webpackChunkName: "page--src--pages--media-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Media.vue")
-  },
-  {
-    path: "/fr/du-26-au-29-novembre-2020-foodculture-days-presentera/",
-    component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {
     path: "/en/media/",
@@ -333,6 +321,10 @@ export default [
   },
   {
     path: "/en/contact/",
+    component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
+  },
+  {
+    path: "/fr/biennale/",
     component: () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
   },
   {

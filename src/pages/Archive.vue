@@ -14,19 +14,19 @@
             //- .item(style='padding: 10vw') The images are quite low-res in the archive so we can't use them big like this maybe... See sub-pages.
 
             //- prismic-image(:field='page.image', v-if='page.image')
+        client-only
+          .column.is-6.left
+            h1.title {{ title }}
+            .year(v-for='(year, index) in years', :key='index')
+              h2.serif {{ year.year }}
 
-        .column.is-6.left
-          h1.title {{ title }}
-          .year(v-for='(year, index) in years', :key='index')
-            h2.serif {{ year.year }}
-
-            .pages-wrapper
-              .archive-item(v-for='(page, index) in year.pages', :key='index')
-                //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
-                .page.link(@click='archiveRoute(page.node.context.path)')
-                  h2
-                    em {{ tc(page.node.project[0].text) }}
-                    div {{ tc(page.node.artist[0].text) }}
+              .pages-wrapper
+                .archive-item(v-for='(page, index) in year.pages', :key='index')
+                  //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
+                  .page.link(@click='archiveRoute(page.node.context.path)')
+                    h2
+                      em {{ tc(page.node.project[0].text) }}
+                      div {{ tc(page.node.artist[0].text) }}
 </template>
 
 <style lang="scss" scoped>
@@ -72,7 +72,7 @@ export default {
   },
   data () {
     return {
-      lang: 'en'
+      // lang: 'en'
     }
   },
   methods: {
@@ -81,18 +81,19 @@ export default {
       return text
     },
     archiveRoute (path) {
-      console.log(path)
-      this.$router.push(path)
+      console.log(path+'/')
+      this.$router.push(path+'/')
     }
     // linkclicked (el) {
     //   console.log(el);
     // }
   },
   created () {
-    if (process.isClient) {
-      let lang = this.$context.lang
-      if (lang.includes('fr')) { this.lang = 'fr' }
-    }
+    // if (process.isClient) {
+      // let lang = this.$context.lang
+      // if (lang.includes('fr')) { this.lang = 'fr' }
+      
+    // }
   },
   // created () {
   //   if (!process.isClient) return

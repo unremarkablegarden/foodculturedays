@@ -134,8 +134,10 @@ export default {
   methods: {
     goBack () {
       if (!process.isClient) return
-
-      let path = window.location.pathname.split('/')
+      
+      let path = window.location.pathname
+      path = path.replace(/\/$/, "")
+      path = path.split('/')
       path.pop(); path.pop();
       this.$router.push(path.join('/'))
     }

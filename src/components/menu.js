@@ -3,6 +3,9 @@ export default
     // -------------- No trailing slashes! ---------------
     // ABOUT
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
+    
+    // BIENALE
+    { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
     // PROJECTS
     // { title: ['Projects', 'Projets'], to: ['/en/projects', '/fr/projets'] },
     // PARTICIPANTS

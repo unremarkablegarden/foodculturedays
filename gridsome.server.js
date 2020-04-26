@@ -13,22 +13,22 @@ module.exports = function (api, options) {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
 
     // NEWSLETTER
-    createPage({
-      path: `/en/newsletter`,
-      component: './src/pages/Newsletter.vue',
-      context: {
-        lang: 'en-gb',
-        altPath: '/fr/newsletter/'
-      }
-    })
-    createPage({
-      path: `/fr/newsletter`,
-      component: './src/pages/Newsletter.vue',
-      context: {
-        lang: 'fr-ch',
-        altPath: '/en/newsletter/'
-      }
-    })
+    // createPage({
+    //   path: `/en/newsletter`,
+    //   component: './src/pages/Newsletter.vue',
+    //   context: {
+    //     lang: 'en-gb',
+    //     altPath: '/fr/newsletter/'
+    //   }
+    // })
+    // createPage({
+    //   path: `/fr/newsletter`,
+    //   component: './src/pages/Newsletter.vue',
+    //   context: {
+    //     lang: 'fr-ch',
+    //     altPath: '/en/newsletter/'
+    //   }
+    // })
 
 
 
