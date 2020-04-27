@@ -80,6 +80,15 @@ export default {
     },
   },
   watch: {
+    menuShown (val) {
+      console.log('menushown watcher')
+      if (val == true) {
+        document.body.classList.add("noscroll")
+      }
+      else {
+        document.body.classList.remove("noscroll")    
+      }
+    },
     splash (val) {
       console.log('splash = ' + val);
       if (this.loaded) {
@@ -796,6 +805,10 @@ xmp {
 
 .is-hidden {
   display: none;
+}
+
+.noscroll {
+  overflow: hidden !important;
 }
 
 .global-menu, .is-hidden-menu {
