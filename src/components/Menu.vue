@@ -34,7 +34,7 @@ export default {
       gallery: false,
       galleryItem: 0,
       total: null,
-      hideGallery: true
+      hideGallery: false
     }
   },
   computed: {
