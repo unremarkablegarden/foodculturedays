@@ -704,6 +704,9 @@ xmp {
   z-index: 1010;
   box-sizing: border-box;
 }
+.title.lowerz {
+  z-index: 0 !important;
+}
 .title.unstick {
   position: relative;
 }
@@ -797,11 +800,25 @@ xmp {
 
 .global-menu, .is-hidden-menu {
   transition: all 300ms;
-  height: 20rem;
+  // height: 20rem;
+  height: 100vh
+}
+.global-menu {
+  position: fixed;
+  left: 0;
+  // top: 0;
+  width: 100vw;
+  
+  box-sizing: border-box;
+  background: white;
+  z-index: 1020;
+  height: calc(100vh - 6.85rem);
 }
 .is-hidden-menu {
-  height: 0;  
+  height: 100vh;  
+  // width:
   overflow: hidden;
+  left: -100vw;
 }
 
 @font-face {
