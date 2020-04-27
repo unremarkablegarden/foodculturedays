@@ -4,7 +4,7 @@
     //- transition(name='slide-left')
     .column.is-6.desktop.no-pad.gallery-column
       client-only
-        .gallery(v-if='gallery && gallery.length')#gallery
+        #gallery.gallery(v-if='gallery && gallery.length', v-bind:class='{ hideGallery: hideGallery }')
           .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }")
 
     .column.is-6.menu.left
@@ -34,6 +34,7 @@ export default {
       gallery: false,
       galleryItem: 0,
       total: null,
+      hideGallery: true
     }
   },
   computed: {
@@ -67,16 +68,16 @@ export default {
   mounted () {
     // console.log('menu > mounted > loaded = ' + this.loaded);
     // if (this.$route.path == '/en/' || this.$route.path == '/fr/') {
-    //   if (!this.loaded) {
-    //     this.hideImage()
-    //   }
+      // if (!this.loaded) {
+      //   this.hideImage()
+      // }
     // }
   },
   watch: {
     loaded (loadedTrue) {
       if (!process.isClient) return
       if (loadedTrue) {
-        // this.showImage()
+        this.showImage()
       }
     },
     $route (to, from){
@@ -91,21 +92,29 @@ export default {
     }
   },
   methods: {
-    // hideImage () {
-    //   if (!process.isClient) return
-    //   console.log('hide image');
+    hideImage () {
+      if (!process.isClient) return
+      console.log('hide image');
 
-    //   this.$anime({
-    //     targets: this.$el.querySelector('#gallery'),
-    //     duration: 0,
-    //     easing: 'easeOutSine',
-    //     'margin-left': '-33%',
-    //     opacity: 0,
-    //     delay: 0
-    //   })
-    // },
+      this.$anime({
+        targets: this.$el.querySelector('#gallery'),
+        duration: 0,
+        easing: 'easeOutSine',
+        'margin-left': '-33%',
+        opacity: 0,
+        delay: 0
+      })
+    },
     showImage () {
       if (!process.isClient) return
+      console.log('SHOW IT');
+      
+      setTimeout(() => {
+        this.hideGallery = false
+      }, 200)
+      
+      
+      
       // this.$anime({
       //   targets: this.$el.querySelector('#gallery'),
       //   easing: 'easeInOutSine',
@@ -139,6 +148,20 @@ export default {
 // $green: #11ff36;
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
+
+
+#gallery {
+  left: 0;
+  transition: all 300ms;
+}
+#gallery, .hideGallery {
+  transition: all 300ms;
+}
+#gallery.hideGallery {
+  position: relative;
+  left: -50vw;
+  transition: all 300ms;
+}
 
 .menu {
   // display: flex;

@@ -83,10 +83,10 @@ export default {
     menuShown (val) {
       console.log('menushown watcher')
       if (val == true) {
-        document.body.classList.add("noscroll")
+        // document.body.classList.add("noscroll")
       }
       else {
-        document.body.classList.remove("noscroll")    
+        // document.body.classList.remove("noscroll")    
       }
     },
     splash (val) {
@@ -238,19 +238,19 @@ export default {
         this.isHome = false
       }
     },
-    hideImage () {
-      if (!process.isClient) return
-      console.log('hide image');
+    // hideImage () {
+    //   if (!process.isClient) return
+    //   console.log('hide image');
 
-      this.$anime({
-        targets: this.$el.querySelector('#gallery'),
-        duration: 0,
-        easing: 'easeOutSine',
-        'margin-left': '-33%',
-        opacity: 0,
-        delay: 0
-      })
-    },
+    //   this.$anime({
+    //     targets: this.$el.querySelector('#gallery'),
+    //     duration: 0,
+    //     easing: 'easeOutSine',
+    //     'margin-left': '-33%',
+    //     opacity: 0,
+    //     delay: 0
+    //   })
+    // },
     toggleMenu () {
       console.log('toggle menu');
       // this.menuActive = !this.menuActive
@@ -289,7 +289,7 @@ export default {
         //   delay: 0
         // })
         
-        this.hideImage()
+        // this.hideImage()
         
         this.$anime({
           targets: this.$el.querySelectorAll('.menu-item'),
@@ -323,14 +323,14 @@ export default {
           this.menuShown = true        
 
           // desktop side image
-          this.$anime({
-            targets: this.$el.querySelector('#gallery'),
-            easing: 'easeInOutSine',
-            'margin-left': 0,
-            opacity: 1,
-            duration: 700,
-            delay: 300,
-          })
+          // this.$anime({
+          //   targets: this.$el.querySelector('#gallery'),
+          //   easing: 'easeInOutSine',
+          //   'margin-left': 0,
+          //   opacity: 1,
+          //   duration: 700,
+          //   delay: 300,
+          // })
         }
       }  
     },

@@ -46,11 +46,9 @@ export default {
     if (c) {
       if ('node' in c) { c = c.node }
       if ('gallery' in c) { c = c.gallery }
+      this.total = c.length
+      this.gallery = c
     }
-    // c.reverse()
-    this.total = c.length
-    this.gallery = c
-    // this.$store.dispatch('setHomepageGallery', c)
   },
   computed: {
     lang () {
