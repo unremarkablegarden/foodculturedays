@@ -82,11 +82,13 @@ export default {
   watch: {
     menuShown (val) {
       console.log('menushown watcher')
-      if (val == true) {
-        // document.body.classList.add("noscroll")
-      }
-      else {
-        // document.body.classList.remove("noscroll")    
+      if (this.isMobile) {
+        if (val == true) {
+          document.body.classList.add("noscroll")
+        }
+        else {
+          document.body.classList.remove("noscroll")    
+        }
       }
     },
     splash (val) {
@@ -296,8 +298,10 @@ export default {
           easing: 'easeInOutSine',
           left: '-33%',
           opacity: 0,
-          duration: 250,
-          delay: [this.$anime.stagger(50)]
+          // duration: 250,
+          duration: 0,
+          // delay: [this.$anime.stagger(50)]
+          delay: 0
         })
       }
     },
