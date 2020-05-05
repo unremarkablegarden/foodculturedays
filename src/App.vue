@@ -660,7 +660,8 @@ input {
   align-items: center;
   position: fixed;
   // position: absolute;
-  z-index: 888;
+  // z-index: 888;
+  z-index: 1030;
   bottom: 0;
   // left: 0;
   margin: 0;
@@ -830,6 +831,7 @@ xmp {
   background: white;
   z-index: 1020;
   height: calc(100vh - 6.85rem);
+  // height: 0;
 }
 .is-hidden-menu {
   height: 100vh;  
