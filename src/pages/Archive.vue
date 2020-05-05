@@ -18,15 +18,15 @@
           .column.is-6.left
             h1.title {{ title }}
             .year(v-for='(year, index) in years', :key='index')
-              //- h2.serif {{ year.year }}
+              h2.serif {{ year.year }}
 
-              //- .pages-wrapper
-              .archive-item(v-for='(page, index) in year.pages', :key='index')
-                //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
-                .page.link(@click='archiveRoute(page.node.context.path)')
-                  h2
-                    em {{ tc(page.node.project[0].text) }}
-                    div {{ tc(page.node.artist[0].text) }}
+              .pages-wrapper
+                .archive-item(v-for='(page, index) in year.pages', :key='index')
+                  //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
+                  .page.link(@click='archiveRoute(page.node.context.path)')
+                    h2
+                      em {{ tc(page.node.project[0].text) }}
+                      div {{ tc(page.node.artist[0].text) }}
 </template>
 
 <style lang="scss" scoped>
@@ -50,11 +50,11 @@ em {
   margin-bottom: 2rem;
 }
 // replaces pages-wrapper (not year titles)
-h1.title {
-  border-bottom: 1px black solid;
-  margin-bottom: 0;
-  padding-bottom: 1rem;
-}
+// h1.title {
+//   border-bottom: 1px black solid;
+//   margin-bottom: 0;
+//   padding-bottom: 1rem;
+// }
 
 
 .column.is-6.left {
