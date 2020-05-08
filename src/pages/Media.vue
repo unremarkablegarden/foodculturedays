@@ -11,6 +11,7 @@
 
         .column.is-6.left
           h1.title {{ $context.pageTitle }}
+          .hr &nbsp;
           .year-wrapper(v-for='(page, index) in pages', :key='index')
             .year.serif {{ page.node.year }}
             .link-list
@@ -36,6 +37,13 @@ h1.title {
   width: 100vw;
 }
 
+.hr {
+  font-size: 0;
+  line-height: 0;
+  height: 0;
+  border-bottom: 1px black solid;
+}
+
 // desktop
 @media (min-width: 960px) {
   h1.title {
@@ -49,10 +57,14 @@ h1.title {
 
 .year {
   padding: 0.7rem 0 0 0;
+  display: none;
 }
 .link-list {
-  border-top: 1px black solid;
-  margin-bottom: 1.3rem;
+  // border-top: 1px black solid;
+}
+.link-list {
+  // border-top: 1px black solid;
+  // margin-bottom: 1.3rem;
 }
 .link {
   border-bottom: 1px black solid;
