@@ -38,9 +38,9 @@ h1.title {
 }
 
 .hr {
-  font-size: 0;
-  line-height: 0;
-  height: 0;
+  // font-size: 0;
+  // line-height: 0;
+  height: 1rem;
   border-bottom: 1px black solid;
 }
 
