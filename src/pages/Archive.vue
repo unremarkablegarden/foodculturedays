@@ -31,7 +31,7 @@
 
 <style lang="scss" scoped>
 h1 {
-  margin-top: 0.3rem;
+  // margin-top: 0.3rem;
   margin-bottom: 1rem;
 }
 h2 {
@@ -42,20 +42,21 @@ h2 {
   text-transform: uppercase;
 }
 em {
-  font-size: 1.05rem;
+  // font-size: 1.05rem;
+  font-size: 1.07rem;
 }
 .pages-wrapper {
   border-top: 1px black solid;
   // margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
 // replaces pages-wrapper (not year titles)
 // h1.title {
 //   border-bottom: 1px black solid;
 //   margin-bottom: 0;
 //   padding-bottom: 1rem;
 // }
-
 
 .column.is-6.left {
   padding-bottom: 5rem;

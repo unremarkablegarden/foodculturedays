@@ -13,6 +13,10 @@
               input.required.email#mce-EMAIL(type='email', name='EMAIL')
             .email-right
               input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
+    
+    .downloads
+      span.arrow.green &nbsp;&rarr;&nbsp;
+      a(href='https://mailchi.mp/4d5361a76a85/newsletter-2-les-futurs-possibles-de-fcd', target="_blank") Newsletter 2020 #1
 
 </template>
 
@@ -66,6 +70,11 @@ export default {
 
 <style lang="scss" scoped>
 #newsletter {
+  .downloads {
+    margin-top: 1rem;
+    .arrow {
+    }
+  }
   h1 {
     margin-top: 2rem;
   }

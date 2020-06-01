@@ -353,7 +353,7 @@ export default {
         {
           key: 'og:image',
           name: 'og:image',
-          content: 'https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format'
+          content: 'https://images.prismic.io/foodculturedays2020/ef88fb98-8648-4bff-90b5-971d79c14d8a_3644e5960676457228dbcfe5522e563c.jpg?auto=compress,format'
         },
         {
           key: 'description',
@@ -636,6 +636,7 @@ h1 {
   padding: 0;
   line-height: 1em;
   font-size: $headingSize;
+  margin-left: -0.15rem;
 }
 .titleLike {
   text-transform: uppercase;
@@ -645,6 +646,7 @@ h1 {
   padding: 0;
   line-height: 1em;
   font-size: $headingSize;
+  margin-left: -0.15rem;
 }
 
 input {

@@ -5,12 +5,26 @@
     .column.is-6.desktop.no-pad.gallery-column
       client-only
         #gallery(v-if='gallery && gallery.length', v-bind:class='{ showGallery: showGallery, gallery: true }')
-          .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }")
+          .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }", v-if='item.item')
 
     .column.is-6.menu.left
       .menu-item(v-for="(item, i) in menu", :key="item.title[lang]")
         span.linkwrap(@mouseover='galleryItem = (i+1)', @mouseleave='galleryItem = 0')
           g-link(:to="item.to[lang]") {{ item.title[lang] }}
+      
+      .marquee-wrapper
+        .marquee.marquee1.is-hidden-desktop
+          .subtitle
+            //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
+            span.sans Biennale:&nbsp;
+            span.serif 26–29.11.2020
+            span.sans &nbsp;Vevey
+        .marquee.marquee2.is-hidden-desktop
+          .subtitle
+            //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
+            span.sans Biennale:&nbsp;
+            span.serif 26–29.11.2020
+            span.sans &nbsp;Vevey
 </template>
 
 <script>
@@ -34,7 +48,11 @@ export default {
       gallery: false,
       galleryItem: 0,
       total: null,
-      showGallery: true
+      showGallery: true,
+      subtitle: {
+        en: 'Next Edition',
+        fr: 'Prochaine édition'
+      }
     }
   },
   computed: {
@@ -156,6 +174,63 @@ export default {
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
 
+.subtitle {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  // display: flex;
+  white-space: nowrap;
+  // background: red;
+  .spacer {
+    width: 20vw;
+  }
+  .serif {
+    font-size: 1.55rem;
+    margin: 0 0.3rem;
+  }
+  // width: 24rem;
+  // background: pink;;
+}
+
+@media (max-width: 960px) {
+  .marquee-wrapper {
+    display: block;
+  }  
+}
+@media (min-width: 960px) {
+  .marquee-wrapper {
+    display: none;
+  }  
+}
+.marquee-wrapper {
+  // position: fixed;
+  // bottom: 4rem;
+  width: 100vw; 
+  overflow: hidden;
+  // border: 1px red solid;
+  left: 0;  
+  height: 2rem;
+  position: absolute;
+  bottom: 1rem;
+}
+.marquee {
+  position: absolute;
+}
+.marquee1 { 
+ transform:translateX(100%);
+ animation: demo-1 6s linear infinite;
+//  padding-left: 50vw;
+//  background: red;
+  
+}
+.marquee2 { 
+//  transform:translateX(100%);
+//  animation: demo-1 6s linear infinite;
+ display: none;
+//  background: blue;
+ .subtitle {
+  //  padding-left: 25vw;
+ }
+}
 
 #gallery {
   margin-left: -50vw;
@@ -183,7 +258,8 @@ $headingSize: 2.2rem;
   // border: 1px blue solid;
   // padding-top: 0.63rem;
   &:first-child {
-    padding-top: 1.8rem;
+    // padding-top: 1.8rem;
+    padding-top: 1.0rem;
   }
   text-transform: uppercase;
   font-size: $headingSize;
@@ -213,4 +289,26 @@ $headingSize: 2.2rem;
 //   opacity: 0;
 //   margin-left: '-33%';
 // }
+
+
+@-moz-keyframes demo-1 {
+ 0%   { -moz-transform: translateX(100%); }
+ 100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes demo-1 {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes demo-1 {
+ 0%   { 
+ -moz-transform: translateX(100%); /* Firefox bug fix */
+ -webkit-transform: translateX(100%); /* Firefox bug fix */
+ transform: translateX(100%);       
+ }
+ 100% { 
+ -moz-transform: translateX(-100%); /* Firefox bug fix */
+ -webkit-transform: translateX(-100%); /* Firefox bug fix */
+ transform: translateX(-100%); 
+ }
+}
 </style>

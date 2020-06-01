@@ -12,6 +12,7 @@
           img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
 
         .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+        
         .page-wrapper
           prismic-rich-text(:field='page.project', v-if='page.project').project-title
           prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
@@ -19,8 +20,13 @@
           prismic-rich-text(:field='page.artist_body', v-if='page.artist_body').artist-body
 </template>
 
+<style lang="scss" scoped>
+  .page-wrapper {
+    margin-top: 1.6rem;
+  }
+</style>
 
-<style lang="scss" >
+<style lang="scss">
 // $green: #11ff36;
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
@@ -60,24 +66,31 @@ p em {
 }
 
 .back {
-  width: calc(100% + 1.4rem);
+  // width: calc(100% + 1.4rem);
   // cursor: pointer;
   text-transform: uppercase;
   color: $green;
   text-align: right;
   font-size: $headingSize;
-  background: white;
+  // background: white;
   // padding: 2rem 0.7rem 0.5rem;
   padding: 0.6rem 0.7rem 0.5rem;
-  margin-left: -0.7rem;
-
+  // margin-left: -0.7rem;
   box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 1010;
+  position: absolute;
   img {
     height: 1.8rem;
     width: auto;
+  }
+}
+@media (max-width: 960px) {
+  .back {
+    top: 45vh;
+    margin-top: 4rem;
+    right: 0rem;
   }
 }
 @media (min-width: 960px) {
@@ -87,14 +100,17 @@ p em {
     // width: 50vw;
   }
   .back {
+    top: 6vw;
+    margin-top: 1rem;
+    right: 2rem;
     // display: none;
     // width: calc(50vw - 2.5rem);
     // position: fixed;
     background: transparent;
     width: 3rem;
     // background: pink;
-    float: right;
-    margin-right: -2rem;
+    // float: right;
+    // margin-right: -2rem;
     // margin-top: 5.5vw;
     // left: 2rem;
     // top: 1rem;
