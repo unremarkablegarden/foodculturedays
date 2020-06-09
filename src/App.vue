@@ -109,6 +109,16 @@ export default {
         let path = this.$route.path
         if (path == '/en/' || path == '/fr/') {   
           this.showMenu()
+          
+          this.$anime({
+            targets: this.$el.querySelector('#buttons'),
+            easing: 'easeInOutSine',
+            bottom: 0,
+            opacity: 1,
+            duration: 250,
+            delay: 500
+          })
+          
         }
         
         // this.showDesktop()
@@ -152,6 +162,19 @@ export default {
     if (!process.isClient) return
     // set up the menu outside the screen while curtain is up
     this.hideMenu()
+    
+    let rp = this.$route.path
+    if (rp == '/en/' || rp == '/fr/' || rp == '/') {
+      this.$anime({
+        targets: this.$el.querySelector('#buttons'),
+        easing: 'easeInOutSine',
+        bottom: '-4rem',
+        opacity: 0,
+        duration: 0,
+        delay: 0
+      })
+    }
+    
     
     browserUpdate({
       // required: {e:-4,f:-6,o:-3,s:-2,c:-6},
@@ -306,17 +329,6 @@ export default {
         })
         
         // console.log(this.$route.path);
-        let rp = this.$route.path
-        if (rp == '/en/' || rp == '/fr/' || rp == '/') {
-          this.$anime({
-            targets: this.$el.querySelector('#buttons'),
-            easing: 'easeInOutSine',
-            bottom: '-4rem',
-            opacity: 0,
-            duration: 0,
-            delay: 0
-          })
-        }
       }
     },
     showMenu (bypass) {
@@ -340,18 +352,6 @@ export default {
           })
           this.menuShown = true
           
-          
-          this.$anime({
-            targets: this.$el.querySelector('#buttons'),
-            easing: 'easeInOutSine',
-            bottom: 0,
-            opacity: 1,
-            duration: 250,
-            delay: 500
-          })
-          
-          
-
           // desktop side image
           // this.$anime({
           //   targets: this.$el.querySelector('#gallery'),

@@ -51,6 +51,7 @@ export default {
     if (!process.isClient) return
 
     if (process.isClient) {
+      
       var thiss = this
       const w = window.outerWidth
       const h = window.outerHeight
