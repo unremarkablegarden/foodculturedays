@@ -6,6 +6,8 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 // var path = require('path')
+var slug = require('slug')
+
 
 module.exports = function (api, options) {
 
@@ -29,8 +31,6 @@ module.exports = function (api, options) {
     //     altPath: '/en/newsletter/'
     //   }
     // })
-
-
 
 
     const mediasQuery = await graphql(`{
@@ -59,6 +59,9 @@ module.exports = function (api, options) {
     }`)
 
     let archives = []
+    let allTags = {}
+    let enTags = {}
+    let frTags = {}
     let keepLoading = true
     let after = ''
 
@@ -80,6 +83,7 @@ module.exports = function (api, options) {
                 project_body
                 image
                 _meta {
+                  tags
                   uid
                   lang
                   alternateLanguages {
@@ -110,7 +114,7 @@ module.exports = function (api, options) {
           altArchive = 'archive'
           alt = 'en';
         }
-
+        
         const path = `/${lang}/${archive}/${node.year}/${node._meta.uid}`
         let altPath
         if (node._meta.alternateLanguages.length > 0) {
@@ -118,10 +122,51 @@ module.exports = function (api, options) {
         } else {
           altPath = ''
         }
-
-
-        console.log(path);
-
+        
+        // POPULATE TAGS OBJECT
+        let tagEntry
+        if (node._meta.tags.length > 0) {
+          
+          node._meta.tags.forEach(tag => {
+            tagEntry = {
+              artist: node.artist,
+              project: node.project,
+              year: node.year,
+              path: path,
+              altPath: altPath,
+              lang: lang,
+              slug: slug(tag),
+              image: node.image,
+              plainTitle: node.artist[0].text,
+              tags: node._meta.tags,
+            }
+            
+            // if (!tags[tag]) {
+            //   allTags[tag] = [tagEntry]
+            // } else {
+            //   allTags[tag] = [...allTags[tag], tagEntry]
+            // }
+            
+            if (lang == 'fr') {
+              if (!frTags[tag]) {
+                frTags[tag] = [tagEntry]
+              } else {
+                frTags[tag] = [...frTags[tag], tagEntry]
+              }
+            }
+            else {
+              if (!enTags[tag]) {
+                enTags[tag] = [tagEntry]
+              } else {
+                enTags[tag] = [...enTags[tag], tagEntry]
+              }
+            }
+            
+          })
+        }
+        
+        console.log(path)
+        
         createPage({
           path: path,
           component: './src/templates/ArchivePage.vue',
@@ -130,6 +175,7 @@ module.exports = function (api, options) {
             uid: node._meta.uid,
             lang: node._meta.lang,
             year: node.year,
+            tags: node._meta.tags,
             plainTitle: node.artist[0].text,
             altPath: altPath
           }
@@ -156,6 +202,85 @@ module.exports = function (api, options) {
         keepLoading = false
       }
     }
+    
+    // console.log('/////////////////////////////////////')
+    let tagsCreated = []
+    let langs = ['en', 'fr']
+    
+    langs.forEach(lang => {
+      
+      let tags
+      if (lang == 'en') {
+        tags = enTags
+      } else {
+        tags = frTags
+      }
+      
+      Object.keys(tags).forEach(tag => {
+        
+          // let t = tags[tag]
+          let tagSlug = slug(tag)
+          let path, altPath
+          
+          if (lang == 'fr') {
+            path = '/fr/archives/themes/' + tagSlug
+          } else {
+            path = '/en/archive/themes/' + tagSlug
+          }
+          
+          console.log(path + ' (' +tags[tag].length+ ')')
+          
+          let title = tag.charAt(0).toUpperCase() + tag.slice(1)
+          // let nodes = tags[tag]
+          
+        if (! tagsCreated.includes(path)) {
+          
+          createPage({
+            path: path,
+            component: './src/templates/ArchiveTag.vue',
+            context: {
+              // altPath: altPath,
+              // path: path,
+              // slug: tagSlug,
+              title: title,
+              node: tags[tag]
+              // node: nodes.filter(el => el.lang == lang)
+            }
+          })
+          
+          tagsCreated.push(path)
+        }
+      })
+      
+    })
+    
+    // console.log('/////////////////////////////////////')
+  
+    
+    
+    
+    // ARCHIVE THEME INDICES
+    // createPage({
+    //   path: `/en/archive/themes`,
+    //   component: './src/pages/ArchiveTags.vue',
+    //   context: {
+    //     lang: 'en-gb',
+    //     altPath: '/fr/archives/themes',
+    //     title: 'Themes',
+    //     data: tags['en']
+    //   }
+    // })
+    // createPage({
+    //   path: `/fr/archives/themes`,
+    //   component: './src/pages/ArchiveTags.vue',
+    //   context: {
+    //     lang: 'fr-ch',
+    //     altPath: '/en/archive/themes',
+    //     title: 'Thèmes',
+    //     data: tags['fr']
+    //   }
+    // })
+
 
 
 

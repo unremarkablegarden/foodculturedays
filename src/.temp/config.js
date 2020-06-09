@@ -3,6 +3,6 @@ export default {
   "pathPrefix": "",
   "titleTemplate": "%s - Foodculture days",
   "siteUrl": "",
-  "version": "0.7.14",
+  "version": "0.7.17",
   "catchLinks": true
 }

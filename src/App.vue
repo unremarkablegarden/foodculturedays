@@ -154,10 +154,11 @@ export default {
     this.hideMenu()
     
     browserUpdate({
-      required:{e:-4,f:-6,o:-3,s:-2,c:-6},
+      // required: {e:-4,f:-6,o:-3,s:-2,c:-6},
+      required: {e:-4,f:-6,o:-6,s:-3,c:-6},
       insecure:true,
       unsupported:true,
-      api:2020.04,
+      api:2020.06,
       // test: true,
       shift_page_down: false,
       reminder: 9999,
@@ -303,6 +304,19 @@ export default {
           // delay: [this.$anime.stagger(50)]
           delay: 0
         })
+        
+        // console.log(this.$route.path);
+        let rp = this.$route.path
+        if (rp == '/en/' || rp == '/fr/' || rp == '/') {
+          this.$anime({
+            targets: this.$el.querySelector('#buttons'),
+            easing: 'easeInOutSine',
+            bottom: '-4rem',
+            opacity: 0,
+            duration: 0,
+            delay: 0
+          })
+        }
       }
     },
     showMenu (bypass) {
@@ -324,7 +338,19 @@ export default {
             duration: 250,
             delay: [this.$anime.stagger(50)]
           })
-          this.menuShown = true        
+          this.menuShown = true
+          
+          
+          this.$anime({
+            targets: this.$el.querySelector('#buttons'),
+            easing: 'easeInOutSine',
+            bottom: 0,
+            opacity: 1,
+            duration: 250,
+            delay: 500
+          })
+          
+          
 
           // desktop side image
           // this.$anime({
