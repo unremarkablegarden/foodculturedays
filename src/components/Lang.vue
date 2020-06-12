@@ -27,6 +27,9 @@ export default {
   },
   created () {
     if (!process.isClient) return
+    
+    this.checkHide()
+    
     this.menu = menujs
     
     let path = window.location.pathname
@@ -54,12 +57,33 @@ export default {
   },
   computed: {
   },
+  watch: {
+    $route (to, from) {
+      let path = to.path
+      console.log(path);
+      
+      if (path.includes('/en/archive/themes/') || path.includes('/fr/archives/themes/')) {
+        this.hasTranslation = false
+      } else {
+        this.hasTranslation = true
+      }
+    }
+  },
   methods: {
+    checkHide (to) {
+      let path = window.location.pathname
+      
+      if (path.includes('/en/archive/themes/') || path.includes('/fr/archives/themes/')) {
+        this.hasTranslation = false
+      } 
+    },
     changeLang (l) {
       if (process.isClient) {
 
         let path = window.location.pathname
         let newPath = this.$context.altPath
+        
+        
         if (!newPath) {
           this.hasTranslation = false
         } else {
