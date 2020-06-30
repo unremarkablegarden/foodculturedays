@@ -30,6 +30,7 @@
 </template>
 
 <style lang="scss" scoped>
+
 h1 {
   // margin-top: 0.3rem;
   margin-bottom: 1rem;

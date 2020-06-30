@@ -1,12 +1,13 @@
 const c1 = () => import(/* webpackChunkName: "page--src--templates--archive-tag-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchiveTag.vue")
 const c2 = () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
 const c3 = () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
-const c4 = () => import(/* webpackChunkName: "page--src--pages--partners-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Partners.vue")
-const c5 = () => import(/* webpackChunkName: "page--src--pages--media-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Media.vue")
-const c6 = () => import(/* webpackChunkName: "page--src--pages--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Archive.vue")
-const c7 = () => import(/* webpackChunkName: "page--src--pages--newsletter-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Newsletter.vue")
-const c8 = () => import(/* webpackChunkName: "page--src--pages--index-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Index.vue")
-const c9 = () => import(/* webpackChunkName: "page--src--pages--404-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/404.vue")
+const c4 = () => import(/* webpackChunkName: "page--src--pages--tags-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Tags.vue")
+const c5 = () => import(/* webpackChunkName: "page--src--pages--partners-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Partners.vue")
+const c6 = () => import(/* webpackChunkName: "page--src--pages--media-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Media.vue")
+const c7 = () => import(/* webpackChunkName: "page--src--pages--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Archive.vue")
+const c8 = () => import(/* webpackChunkName: "page--src--pages--newsletter-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Newsletter.vue")
+const c9 = () => import(/* webpackChunkName: "page--src--pages--index-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Index.vue")
+const c10 = () => import(/* webpackChunkName: "page--src--pages--404-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/404.vue")
 
 export default [
   {
@@ -22,11 +23,11 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/territoire/",
+    path: "/en/archive/themes/visual-art/",
     component: c1
   },
   {
-    path: "/fr/archives/themes/technology/",
+    path: "/fr/archives/themes/territoire/",
     component: c1
   },
   {
@@ -42,7 +43,7 @@ export default [
     component: c1
   },
   {
-    path: "/en/archive/themes/textile/",
+    path: "/fr/archives/themes/technologie/",
     component: c1
   },
   {
@@ -63,6 +64,10 @@ export default [
   },
   {
     path: "/en/archive/themes/talk/",
+    component: c1
+  },
+  {
+    path: "/en/archive/themes/textile/",
     component: c1
   },
   {
@@ -98,11 +103,15 @@ export default [
     component: c1
   },
   {
+    path: "/en/archive/themes/radio/",
+    component: c1
+  },
+  {
     path: "/en/archive/themes/ressources/",
     component: c1
   },
   {
-    path: "/en/archive/themes/radio/",
+    path: "/en/archive/themes/resources/",
     component: c1
   },
   {
@@ -322,6 +331,10 @@ export default [
     component: c1
   },
   {
+    path: "/fr/archives/themes/art-visuel/",
+    component: c1
+  },
+  {
     path: "/en/archive/themes/bread/",
     component: c1
   },
@@ -442,11 +455,11 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/nina-gautier/",
+    path: "/en/archive/2018/maya-minder-marc-dusselier/",
     component: c2
   },
   {
-    path: "/en/archive/2018/maya-minder-marc-dusselier/",
+    path: "/fr/archives/2018/nina-gautier/",
     component: c2
   },
   {
@@ -462,15 +475,15 @@ export default [
     component: c2
   },
   {
-    path: "/en/archive/2018/nina-gautier/",
-    component: c2
-  },
-  {
     path: "/en/archive/2018/nikita-thevoz/",
     component: c2
   },
   {
     path: "/en/archive/2017/nom-artiste/",
+    component: c2
+  },
+  {
+    path: "/en/archive/2018/nina-gautier/",
     component: c2
   },
   {
@@ -550,15 +563,15 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/erika-marthins/",
-    component: c2
-  },
-  {
     path: "/fr/archives/2017/benjamin-luzuy--diego-agullo/",
     component: c2
   },
   {
     path: "/en/archive/2018/cacilia-verweyen--omer-polak/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/erika-marthins/",
     component: c2
   },
   {
@@ -590,11 +603,11 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/carpe-orem/",
+    path: "/fr/archives/2018/bonbock-residence-culinaire/",
     component: c2
   },
   {
-    path: "/fr/archives/2018/bonbock-residence-culinaire/",
+    path: "/fr/archives/2019/caique-tizzi1/",
     component: c2
   },
   {
@@ -602,7 +615,7 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2019/caique-tizzi1/",
+    path: "/fr/archives/2018/carpe-orem/",
     component: c2
   },
   {
@@ -622,15 +635,15 @@ export default [
     component: c2
   },
   {
-    path: "/en/archive/2019/caique-tizzi/",
-    component: c2
-  },
-  {
     path: "/en/archive/2018/charlotte-vuissoz/",
     component: c2
   },
   {
     path: "/en/archive/2018/ceres-collective/",
+    component: c2
+  },
+  {
+    path: "/en/archive/2019/caique-tizzi/",
     component: c2
   },
   {
@@ -650,24 +663,32 @@ export default [
     component: c3
   },
   {
+    path: "/fr/tags/",
+    component: c4
+  },
+  {
+    path: "/en/tags/",
+    component: c4
+  },
+  {
     path: "/en/test/",
     component: c3
   },
   {
     path: "/fr/partenaires/",
-    component: c4
+    component: c5
   },
   {
     path: "/en/partners/",
-    component: c4
+    component: c5
   },
   {
     path: "/fr/medias/",
-    component: c5
+    component: c6
   },
   {
     path: "/en/media/",
-    component: c5
+    component: c6
   },
   {
     path: "/fr/contact/",
@@ -678,11 +699,11 @@ export default [
     component: c3
   },
   {
-    path: "/en/contact/",
+    path: "/fr/a-propos/",
     component: c3
   },
   {
-    path: "/fr/a-propos/",
+    path: "/en/contact/",
     component: c3
   },
   {
@@ -691,7 +712,7 @@ export default [
   },
   {
     path: "/fr/archives/",
-    component: c6
+    component: c7
   },
   {
     path: "/en/about/",
@@ -699,45 +720,49 @@ export default [
   },
   {
     path: "/en/archive/",
-    component: c6
-  },
-  {
-    path: "/partners/",
-    component: c4
-  },
-  {
-    path: "/newsletter/",
     component: c7
   },
   {
-    path: "/media/",
+    path: "/tags/",
+    component: c4
+  },
+  {
+    path: "/partners/",
     component: c5
   },
   {
-    path: "/fr/",
+    path: "/newsletter/",
     component: c8
+  },
+  {
+    path: "/media/",
+    component: c6
+  },
+  {
+    path: "/fr/",
+    component: c9
   },
   {
     path: "/en/",
-    component: c8
+    component: c9
   },
   {
     path: "/archive/",
-    component: c6
+    component: c7
   },
   {
     name: "404",
     path: "/404/",
-    component: c9
+    component: c10
   },
   {
     name: "home",
     path: "/",
-    component: c8
+    component: c9
   },
   {
     name: "*",
     path: "*",
-    component: c9
+    component: c10
   }
 ]

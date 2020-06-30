@@ -256,7 +256,28 @@ module.exports = function (api, options) {
     
     // console.log('/////////////////////////////////////')
   
-    
+    // console.log(enTags)
+    // console.log(frTags)
+    createPage({
+      path: `/en/tags`,
+      component: './src/pages/Tags.vue',
+      context: {
+        title: 'Tags',
+        lang: 'en',
+        altPath: '/fr/tags',
+        data: enTags
+      }
+    })
+    createPage({
+      path: `/fr/tags`,
+      component: './src/pages/Tags.vue',
+      context: {
+        title: 'Tags',
+        lang: 'fr',
+        altPath: '/en/tags',
+        data: frTags
+      }
+    })
     
     
     // ARCHIVE THEME INDICES
