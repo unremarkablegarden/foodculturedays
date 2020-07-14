@@ -11,11 +11,11 @@ const c10 = () => import(/* webpackChunkName: "page--src--pages--404-vue" */ "/U
 
 export default [
   {
-    path: "/en/archive/themes/workshop/",
+    path: "/en/archive/themes/virtual-reality/",
     component: c1
   },
   {
-    path: "/en/archive/themes/virtual-reality/",
+    path: "/en/archive/themes/visual-art/",
     component: c1
   },
   {
@@ -23,7 +23,15 @@ export default [
     component: c1
   },
   {
-    path: "/en/archive/themes/visual-art/",
+    path: "/en/archive/themes/workshop/",
+    component: c1
+  },
+  {
+    path: "/fr/archives/themes/tea/",
+    component: c1
+  },
+  {
+    path: "/fr/archives/themes/technologie/",
     component: c1
   },
   {
@@ -35,15 +43,19 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/tea/",
-    component: c1
-  },
-  {
     path: "/fr/archives/themes/textile/",
     component: c1
   },
   {
-    path: "/fr/archives/themes/technologie/",
+    path: "/en/archive/themes/short-circuit/",
+    component: c1
+  },
+  {
+    path: "/en/archive/themes/talk/",
+    component: c1
+  },
+  {
+    path: "/en/archive/themes/tea/",
     component: c1
   },
   {
@@ -55,23 +67,7 @@ export default [
     component: c1
   },
   {
-    path: "/en/archive/themes/short-circuit/",
-    component: c1
-  },
-  {
-    path: "/en/archive/themes/tea/",
-    component: c1
-  },
-  {
-    path: "/en/archive/themes/talk/",
-    component: c1
-  },
-  {
     path: "/en/archive/themes/textile/",
-    component: c1
-  },
-  {
-    path: "/fr/archives/themes/son/",
     component: c1
   },
   {
@@ -83,7 +79,15 @@ export default [
     component: c1
   },
   {
+    path: "/fr/archives/themes/son/",
+    component: c1
+  },
+  {
     path: "/en/archive/themes/sound/",
+    component: c1
+  },
+  {
+    path: "/fr/archives/themes/radio/",
     component: c1
   },
   {
@@ -95,7 +99,7 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/radio/",
+    path: "/en/archive/themes/radio/",
     component: c1
   },
   {
@@ -103,15 +107,11 @@ export default [
     component: c1
   },
   {
-    path: "/en/archive/themes/radio/",
+    path: "/en/archive/themes/resources/",
     component: c1
   },
   {
     path: "/en/archive/themes/ressources/",
-    component: c1
-  },
-  {
-    path: "/en/archive/themes/resources/",
     component: c1
   },
   {
@@ -123,15 +123,11 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/projection/",
+    path: "/fr/archives/themes/patrimoine/",
     component: c1
   },
   {
     path: "/fr/archives/themes/performance/",
-    component: c1
-  },
-  {
-    path: "/fr/archives/themes/patrimoine/",
     component: c1
   },
   {
@@ -143,11 +139,19 @@ export default [
     component: c1
   },
   {
-    path: "/en/archive/themes/photography/",
+    path: "/fr/archives/themes/projection/",
+    component: c1
+  },
+  {
+    path: "/en/archive/themes/party/",
     component: c1
   },
   {
     path: "/en/archive/themes/performance/",
+    component: c1
+  },
+  {
+    path: "/en/archive/themes/photography/",
     component: c1
   },
   {
@@ -156,10 +160,6 @@ export default [
   },
   {
     path: "/en/archive/themes/projection/",
-    component: c1
-  },
-  {
-    path: "/en/archive/themes/party/",
     component: c1
   },
   {
@@ -227,7 +227,7 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/fete/",
+    path: "/fr/archives/themes/economie-solidaire/",
     component: c1
   },
   {
@@ -239,7 +239,7 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/economie-solidaire/",
+    path: "/fr/archives/themes/fete/",
     component: c1
   },
   {
@@ -247,11 +247,11 @@ export default [
     component: c1
   },
   {
-    path: "/en/archive/themes/fermentation/",
+    path: "/en/archive/themes/feminism/",
     component: c1
   },
   {
-    path: "/en/archive/themes/feminism/",
+    path: "/en/archive/themes/fermentation/",
     component: c1
   },
   {
@@ -267,15 +267,19 @@ export default [
     component: c1
   },
   {
+    path: "/fr/archives/themes/circuit-court/",
+    component: c1
+  },
+  {
+    path: "/fr/archives/themes/dechet/",
+    component: c1
+  },
+  {
     path: "/fr/archives/themes/decolonisation/",
     component: c1
   },
   {
     path: "/fr/archives/themes/decroissance/",
-    component: c1
-  },
-  {
-    path: "/fr/archives/themes/dechet/",
     component: c1
   },
   {
@@ -287,18 +291,6 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/circuit-court/",
-    component: c1
-  },
-  {
-    path: "/fr/archives/2019/workshop-social-fermentation-her--stories-with/",
-    component: c2
-  },
-  {
-    path: "/en/archive/themes/design/",
-    component: c1
-  },
-  {
     path: "/en/archive/themes/decay/",
     component: c1
   },
@@ -307,8 +299,12 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/corps/",
+    path: "/en/archive/themes/design/",
     component: c1
+  },
+  {
+    path: "/fr/archives/2019/workshop-social-fermentation-her--stories-with/",
+    component: c2
   },
   {
     path: "/fr/archives/themes/bio-hacking/",
@@ -319,15 +315,19 @@ export default [
     component: c1
   },
   {
+    path: "/fr/archives/themes/corps/",
+    component: c1
+  },
+  {
     path: "/en/archive/2019/workshop-social-fermentation-her--stories-with/",
     component: c2
   },
   {
-    path: "/en/archive/themes/collaboration/",
+    path: "/en/archive/themes/bio-hacking/",
     component: c1
   },
   {
-    path: "/en/archive/themes/bio-hacking/",
+    path: "/en/archive/themes/collaboration/",
     component: c1
   },
   {
@@ -335,15 +335,7 @@ export default [
     component: c1
   },
   {
-    path: "/en/archive/themes/bread/",
-    component: c1
-  },
-  {
     path: "/en/archive/themes/alternative-production/",
-    component: c1
-  },
-  {
-    path: "/en/archive/themes/bodies/",
     component: c1
   },
   {
@@ -351,7 +343,11 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/atelier/",
+    path: "/en/archive/themes/bodies/",
+    component: c1
+  },
+  {
+    path: "/en/archive/themes/bread/",
     component: c1
   },
   {
@@ -359,19 +355,15 @@ export default [
     component: c1
   },
   {
-    path: "/fr/archives/themes/audio/",
-    component: c1
-  },
-  {
     path: "/fr/archives/themes/architecture/",
     component: c1
   },
   {
-    path: "/fr/archives/2018/yvonne-buchheim/",
-    component: c2
+    path: "/fr/archives/themes/atelier/",
+    component: c1
   },
   {
-    path: "/en/archive/themes/architecture/",
+    path: "/fr/archives/themes/audio/",
     component: c1
   },
   {
@@ -379,15 +371,23 @@ export default [
     component: c1
   },
   {
+    path: "/en/archive/themes/architecture/",
+    component: c1
+  },
+  {
     path: "/en/archive/themes/audio/",
     component: c1
   },
   {
-    path: "/fr/archives/2017/pepe-dayaw---danilo-timm---asli-hatipoglu/",
+    path: "/fr/archives/2018/yvonne-buchheim/",
     component: c2
   },
   {
     path: "/en/archive/2018/yvonne-buchheim/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2017/pepe-dayaw---danilo-timm---asli-hatipoglu/",
     component: c2
   },
   {
@@ -399,7 +399,7 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/talia-feder/",
+    path: "/en/archive/2018/seducao-da-carne-vo/",
     component: c2
   },
   {
@@ -407,7 +407,7 @@ export default [
     component: c2
   },
   {
-    path: "/en/archive/2018/seducao-da-carne-vo/",
+    path: "/fr/archives/2018/talia-feder/",
     component: c2
   },
   {
@@ -427,7 +427,7 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/maya-minder-marc-dusselier/",
+    path: "/en/archive/2018/natascha-de-cortillas-diego/",
     component: c2
   },
   {
@@ -435,15 +435,11 @@ export default [
     component: c2
   },
   {
-    path: "/en/archive/2018/natascha-de-cortillas-diego/",
+    path: "/fr/archives/2018/maya-minder-marc-dusselier/",
     component: c2
   },
   {
-    path: "/fr/archives/2018/kadija-de-paula-chico-togni/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2018/nikita-thevoz/",
+    path: "/en/archive/2018/maya-minder-marc-dusselier/",
     component: c2
   },
   {
@@ -455,7 +451,11 @@ export default [
     component: c2
   },
   {
-    path: "/en/archive/2018/maya-minder-marc-dusselier/",
+    path: "/fr/archives/2018/kadija-de-paula-chico-togni/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/nikita-thevoz/",
     component: c2
   },
   {
@@ -463,7 +463,7 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/kunik-de-morsier-architects/",
+    path: "/en/archive/2017/nom-artiste/",
     component: c2
   },
   {
@@ -479,15 +479,11 @@ export default [
     component: c2
   },
   {
-    path: "/en/archive/2017/nom-artiste/",
-    component: c2
-  },
-  {
     path: "/en/archive/2018/nina-gautier/",
     component: c2
   },
   {
-    path: "/fr/archives/2018/karim-yassin-goessinger/",
+    path: "/fr/archives/2018/kunik-de-morsier-architects/",
     component: c2
   },
   {
@@ -495,15 +491,7 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/jonas-van-holanda/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2018/hong-kai-wang-and-laptopradio/",
-    component: c2
-  },
-  {
-    path: "/en/archive/2018/karim-yassin-goessinger/",
+    path: "/fr/archives/2018/karim-yassin-goessinger/",
     component: c2
   },
   {
@@ -511,7 +499,15 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/chef-mohcin-interprets-a-recipe-from-the-xixe-century/",
+    path: "/en/archive/2018/karim-yassin-goessinger/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/hong-kai-wang-and-laptopradio/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/jonas-van-holanda/",
     component: c2
   },
   {
@@ -523,11 +519,15 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/being-of-immigrant-descent-has-driven-suzan-inan-to/",
+    path: "/fr/archives/2018/chef-mohcin-interprets-a-recipe-from-the-xixe-century/",
     component: c2
   },
   {
     path: "/en/archive/2018/chef-mohcin-interprets-a-recipe-from-the-xixe-century/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/being-of-immigrant-descent-has-driven-suzan-inan-to/",
     component: c2
   },
   {
@@ -547,23 +547,11 @@ export default [
     component: c2
   },
   {
-    path: "/fr/archives/2018/cacilia-verweyen--omer-polak/",
-    component: c2
-  },
-  {
     path: "/en/archive/2017/foreplay--paradies/",
     component: c2
   },
   {
-    path: "/fr/archives/2018/emily-groves/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2018/cine-club-au-beurre/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2017/benjamin-luzuy--diego-agullo/",
+    path: "/fr/archives/2018/cacilia-verweyen--omer-polak/",
     component: c2
   },
   {
@@ -571,7 +559,27 @@ export default [
     component: c2
   },
   {
+    path: "/fr/archives/2017/benjamin-luzuy--diego-agullo/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/cine-club-au-beurre/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/emily-groves/",
+    component: c2
+  },
+  {
     path: "/fr/archives/2018/erika-marthins/",
+    component: c2
+  },
+  {
+    path: "/en/archive/2017/benjamin-luzuy--diego-agullo/",
+    component: c2
+  },
+  {
+    path: "/en/archive/2018/cine-club-au-beurre/",
     component: c2
   },
   {
@@ -583,35 +591,7 @@ export default [
     component: c2
   },
   {
-    path: "/en/archive/2018/cine-club-au-beurre/",
-    component: c2
-  },
-  {
-    path: "/en/archive/2017/benjamin-luzuy--diego-agullo/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2018/ceres-collective/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2018/cie-sapharide/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2018/charlotte-vuissoz/",
-    component: c2
-  },
-  {
     path: "/fr/archives/2018/bonbock-residence-culinaire/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2019/caique-tizzi1/",
-    component: c2
-  },
-  {
-    path: "/fr/archives/2019/caique-tizzi/",
     component: c2
   },
   {
@@ -619,23 +599,31 @@ export default [
     component: c2
   },
   {
+    path: "/fr/archives/2018/ceres-collective/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/charlotte-vuissoz/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2018/cie-sapharide/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2019/caique-tizzi/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2019/caique-tizzi1/",
+    component: c2
+  },
+  {
     path: "/en/archive/2018/bonbock-residence-culinaire/",
     component: c2
   },
   {
-    path: "/fr/archives/2019/ch/",
-    component: c2
-  },
-  {
-    path: "/en/archive/2019/caique-tizzi1/",
-    component: c2
-  },
-  {
-    path: "/en/archive/2018/cie-sapharide/",
-    component: c2
-  },
-  {
-    path: "/en/archive/2018/charlotte-vuissoz/",
+    path: "/en/archive/2018/carpe-orem/",
     component: c2
   },
   {
@@ -643,11 +631,23 @@ export default [
     component: c2
   },
   {
+    path: "/en/archive/2018/charlotte-vuissoz/",
+    component: c2
+  },
+  {
+    path: "/en/archive/2018/cie-sapharide/",
+    component: c2
+  },
+  {
     path: "/en/archive/2019/caique-tizzi/",
     component: c2
   },
   {
-    path: "/en/archive/2018/carpe-orem/",
+    path: "/en/archive/2019/caique-tizzi1/",
+    component: c2
+  },
+  {
+    path: "/fr/archives/2019/ch/",
     component: c2
   },
   {
@@ -695,7 +695,7 @@ export default [
     component: c3
   },
   {
-    path: "/fr/biennale/",
+    path: "/en/contact/",
     component: c3
   },
   {
@@ -703,7 +703,7 @@ export default [
     component: c3
   },
   {
-    path: "/en/contact/",
+    path: "/fr/biennale/",
     component: c3
   },
   {

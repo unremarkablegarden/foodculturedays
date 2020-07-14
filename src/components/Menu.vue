@@ -208,9 +208,11 @@ $headingSize: 2.2rem;
   overflow: hidden;
   // border: 1px red solid;
   left: 0;  
-  height: 2rem;
+  height: 3rem;
   position: absolute;
-  bottom: 1rem;
+  bottom: 3rem;
+  position: fixed;
+  bottom: 4rem;
 }
 .marquee {
   position: absolute;

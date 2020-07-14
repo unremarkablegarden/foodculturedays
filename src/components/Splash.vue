@@ -162,7 +162,8 @@ export default {
       let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
       let winW = (iOS) ? screen.width : window.innerWidth
       let winH = (iOS) ? screen.height : window.innerHeight
-          winH -= 160
+          // winH -= 160
+      winH = winH * 0.76
       
       this.render = Render.create({
         element: this.$el.querySelector('#matter'),
@@ -306,7 +307,8 @@ export default {
 }
 #matter {
   width: 100vw;
-  height: calc(100vh - 50px);
+  // height: calc(100vh - 50px);
+  // height: 95vh;
   position: fixed;
   top: 0;
   left: 0;
