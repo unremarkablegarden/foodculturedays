@@ -382,7 +382,7 @@ export default {
         {
           key: 'og:image',
           name: 'og:image',
-          content: 'https://images.prismic.io/foodculturedays2020/ef88fb98-8648-4bff-90b5-971d79c14d8a_3644e5960676457228dbcfe5522e563c.jpg?auto=compress,format'
+          content: 'https://images.prismic.io/foodculturedays2020/8234a78e-d78e-4366-ac51-6ef69205d070_new-home.jpg?auto=compress,format'
         },
         {
           key: 'description',
