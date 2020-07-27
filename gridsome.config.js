@@ -76,11 +76,12 @@ module.exports = {
     // {
     //   use: 'gridsome-plugin-tailwindcss',
     // }
-    {
-      use: '@gridsome/plugin-google-analytics',
-      options: {
-        id: 'UA-173657310-1'
-      }
-    }
+    // {
+    //   use: '@gridsome/plugin-google-analytics',
+    //   options: {
+    //     id: 'UA-173657310-1',
+    //     // router
+    //   }
+    // }
   ]
 }

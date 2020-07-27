@@ -37,6 +37,7 @@
     "title-case": "^3.0.2",
     "titlecase-french": "^1.0.1",
     "vivus": "^0.4.5",
+    "vue-analytics": "^5.22.1",
     "vue-scrollto": "^2.18.1",
     "vuex": "^3.5.1"
   },

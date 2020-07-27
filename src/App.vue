@@ -126,6 +126,9 @@ export default {
     },
     $route (to, from) {
       // if (!process.isClient) return
+      console.log('GA page > ' + to.path)
+      this.$ga.page(to.path)
+
 
       this.animating = true
       setTimeout(() => {
@@ -254,7 +257,7 @@ export default {
       }  
       
       
-      if (p == '/en/' || p == '/fr/' || p == '/fr/' || p == '/fr' || p == '/') {
+      if (p == '/en/' || p =='/en' || p == '/fr/' || p == '/fr' || p == '/') {
         // is home
         this.splash = true  
         this.isHome = true

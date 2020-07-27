@@ -5,10 +5,13 @@ import { common } from 'prismic-vue/components'
 import { animatedScrollTo } from 'es6-scroll-to'
 import anime from 'animejs/lib/anime.min.js'
 import DefaultLayout from '~/layouts/Default.vue'
-
+import VueAnalytics from 'vue-analytics'
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   
+  Vue.use(VueAnalytics, {
+    id: 'UA-173657310-1'
+  })
   // head.script.push({
   //   src: 'https://browser-update.org/update.min.js',
   //   body: true
