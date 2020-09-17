@@ -115,6 +115,10 @@ export default [
     component: c1
   },
   {
+    path: "/fr/archives/themes/perspectives-decoloniales/",
+    component: c1
+  },
+  {
     path: "/fr/archives/themes/production-alternative/",
     component: c1
   },
@@ -260,6 +264,10 @@ export default [
   },
   {
     path: "/fr/archives/themes/education/",
+    component: c1
+  },
+  {
+    path: "/en/archive/themes/decolonial-perspectives/",
     component: c1
   },
   {
