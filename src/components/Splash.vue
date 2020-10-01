@@ -123,7 +123,7 @@ export default {
     // },
     matterControl (cmd) {
       if (!process.isClient) return
-      if (this.winW >= 960) return
+      if (this.winW >= 736) return
       
       var Render = Matter.Render
       if (cmd == 'run') {
@@ -137,7 +137,7 @@ export default {
     },
     matterInit () {
       if (!process.isClient) return
-      if (this.winW >= 960) return
+      if (this.winW >= 736) return
       // if (!isMobile)
       console.log('MATTER IT');
       

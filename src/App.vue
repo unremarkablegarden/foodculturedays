@@ -56,6 +56,7 @@ export default {
       isMobile: true,
       isHome: false,
       menubuttonShown: true,
+      responsiveSize: 736
     }
   },
   computed: {
@@ -232,7 +233,8 @@ export default {
       this.checkMobile()
     },
     checkMobile () {
-      if (this.winW >= 960) {
+      
+      if (this.winW >= this.responsiveSize) {
         this.isMobile = false
         this.splash = false
       } else {
@@ -343,7 +345,7 @@ export default {
         
         // console.log(this.winW); 
         
-        if (this.winW >= 960 || bypass) {
+        if (this.winW >= this.responsiveSize || bypass) {
           // menu items
           this.$anime({
             targets: this.$el.querySelectorAll('.menu-item'),

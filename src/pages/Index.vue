@@ -80,7 +80,7 @@ export default {
       this.checkMobile()
     },
     checkMobile () {
-      if (this.winW >= 960) {
+      if (this.winW >= 736) {
         this.isMobile = false
       } else {
         this.isMobile = true
