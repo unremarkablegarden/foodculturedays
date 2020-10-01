@@ -45,7 +45,8 @@ h1.title {
 }
 
 // desktop
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   h1.title {
     // width: 50vw;
     width: auto;
@@ -82,7 +83,8 @@ h1.title {
   }
 }
 
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   .column.left {
     padding-right: 2.7rem;
   }

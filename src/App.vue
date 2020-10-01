@@ -408,7 +408,8 @@ $headingSize: 2.2rem;
 #preloader { display: none !important; }
 
 // MOBILE
-@media (max-width: 960px) {
+/* @media (max-width: 960px) { */
+@media (max-width: 736px) {
   .home.splash {
     #menu  {
       display: none;
@@ -538,7 +539,8 @@ $headingSize: 2.2rem;
 
 
 // DESKTOP
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   // .home .layout {
   //   z-index: 0;
   //   // position: absolute;
@@ -795,7 +797,8 @@ xmp {
   bottom: 0;
 }
 
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   .abs {
     background: transparent !important;  
   }

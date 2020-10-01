@@ -113,7 +113,8 @@ export default {
 <style lang="scss" scoped>
 $green: rgb(17,230,54);
 
-@media (max-width: 960px) {
+/* @media (max-width: 960px) { */
+@media (min-width: 737px) {
   .columns {
     display: flex;
     flex-direction: column-reverse;
@@ -129,7 +130,8 @@ $green: rgb(17,230,54);
     margin-bottom: 5rem;
   }
 }
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   .posts-col {
     padding-top: 2.3rem;
   }
@@ -148,7 +150,8 @@ $green: rgb(17,230,54);
     margin: 0 0.5rem 0.5rem 0;
     padding: 0.3rem 0.2rem 0.1rem;
     // transition: all 200ms;
-    @media (min-width: 960px) {
+    /* @media (min-width: 960px) { */
+    @media (min-width: 737px) {
       &:hover {
         background: #000;
         color: white;

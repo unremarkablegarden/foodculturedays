@@ -337,7 +337,8 @@ export default {
   font-size: 2rem;
   line-height: 2rem;
 }
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   .intro {
     display: none;
   }

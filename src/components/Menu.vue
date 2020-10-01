@@ -191,12 +191,14 @@ $headingSize: 2.2rem;
   // background: pink;;
 }
 
-@media (max-width: 960px) {
+/* @media (max-width: 960px) { */
+@media (max-width: 736px) {
   .marquee-wrapper {
     display: block;
   }  
 }
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   .marquee-wrapper {
     display: none;
   }  

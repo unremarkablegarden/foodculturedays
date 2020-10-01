@@ -126,7 +126,8 @@ p em {
 }
 
 // MOBILE
-@media (max-width: 960px) {
+/* @media (max-width: 960px) { */
+@media (max-width: 736px) {
   .back {
     // top: 45vh;
     position: sticky;
@@ -147,7 +148,8 @@ p em {
 }
 
 // DEKSTOP
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   .image {
     display: none;
     // margin-left: -1rem;

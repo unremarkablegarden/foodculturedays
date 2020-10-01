@@ -18,12 +18,14 @@
     max-width: 100%;
   }
 }
-@media (max-width: 960px) {
+/* @media (max-width: 960px) { */
+@media (max-width: 736px) {
   #partners {
     padding-top: 1rem;
   }
 }
-@media (min-width: 960px) {
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
   #partners {
     padding: 7vw 2rem 5rem;
   }
