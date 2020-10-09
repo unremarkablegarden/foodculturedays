@@ -30,7 +30,10 @@
               )
               //- .name {{ ucfirst(tag) }}
               .name {{ tag }}
-            
+        
+        .clear-filter.tags(v-if='anyFiltersAreSet')
+          .tag(@click='clearFilters') {{ resetLabel }}
+              
       .column.is-6.left.posts-col
         .inner(v-if='!moving')
           br
@@ -41,7 +44,10 @@
               .image
                 img(:src='p.node.image.url', v-if='p.node.image')
                 div(v-else) &nbsp;
-
+              
+              //- xmp {{ p.node.date_time }}
+              //- xmp {{ p.node.extra_days }}
+              
               h2
                 em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
                 div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
@@ -87,6 +93,13 @@ export default {
     }
   },
   computed: {
+    anyFiltersAreSet () {
+      if (this.toggledTags.length || this.toggledCats.length || this.toggledLocations.length || this.toggledDates.length) return true
+    },
+    resetLabel () {
+      if (this.lang == 'fr') return 'Réinitialiser les filtres'
+      else return "Reset filters"
+    },
     locationsTitle () {
       if (this.lang == 'en') return 'Locations'
       else return 'Lieux'
@@ -103,7 +116,14 @@ export default {
       let sel = []
       this.program.forEach(x => {
         if (x.node.date_time) {
+          console.log(x.node.date_time);
+          console.log(this.formatDate(x.node.date_time));
           sel.push(this.formatDate(x.node.date_time))
+        }
+        if (x.node.extra_days) {
+          x.node.extra_days.forEach(x2 => {
+            sel.push(this.formatDate(x2.date))  
+          })
         }
       })
       
@@ -218,8 +238,22 @@ export default {
       if (this.toggledDates.length) {
         program = program.filter(p => {
           if (p.node.date_time) {
-            return this.toggledDates.includes(this.formatDate(p.node.date_time))
+            let dates = []
+            dates.push(this.formatDate(p.node.date_time))
+            if (p.node.extra_days) {
+              p.node.extra_days.forEach(d => {
+                dates.push(this.formatDate(d.date))
+              })
+            }
+            let found = false
+            dates.forEach(d => {
+              if (this.toggledDates.includes(d)) {
+                found = true
+              }
+            })
+            return found
           }
+          // if (p.node.extra_days)
         })
       }
       
@@ -339,8 +373,16 @@ export default {
   //   }
   },
   methods: {
+    clearFilters () {
+      console.log('lcear');
+      this.toggledLocations = []
+      this.toggledDates = []
+      this.toggledLocations = []
+      this.toggledTags = []
+      this.toggledCats = []
+    },
     formatDate (date) {
-      if (this.lang == 'fr') return format(new Date(date), 'c MMMM', { locale: frLocale })
+      if (this.lang == 'fr') return format(new Date(date), 'd MMMM', { locale: frLocale })
       else return format(new Date(date), 'c MMMM')
     },
     moreData(project) {
@@ -441,6 +483,7 @@ $green: rgb(17,230,54);
   margin-bottom: 0.4rem;
 }
 .tags {
+  width: 100%;
   margin-bottom: 1rem;
   font-size: 0.9rem;
   line-height: 1em;
@@ -530,12 +573,14 @@ em {
 .locations, .dates {
   margin-bottom: 2rem;
   font-size: 0.95rem;
+  margin-left: 2rem;
   .location, .date {
     /* margin-bottom: 0.1rem; */
     /* background: red; */
     &:before {
       content: '';
-      background-image: url(https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg);
+      /* background-image: url(https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg); */
+      background-image: url(/assets/box.svg);
       background-size: 1rem auto;
       background-position: 0 4.15px;
       /* background-color: pink; */
@@ -544,11 +589,14 @@ em {
       height: 1.6rem;
       width: 1.1rem;
       margin-right: 0.8rem;
+      margin-left: -1.9rem;
+      /* padding-left: 2rem; */
       transform: translateY(0.4rem);
     }
     &.is-active {
       &:before {
-        background-image: url(https://prismic-io.s3.amazonaws.com/foodculturedays2020/2b2b5e66-db76-474a-80f8-1369f060d844_Asset+3.svg);
+        /* background-image: url(https://prismic-io.s3.amazonaws.com/foodculturedays2020/2b2b5e66-db76-474a-80f8-1369f060d844_Asset+3.svg); */
+        background-image: url(/assets/box-check.svg);
         background-size: 1rem auto;
         background-position: 0 0;
         
@@ -580,4 +628,7 @@ em {
   margin: 0 0 0.5rem;
 }
 
+.clear-filter .tag {
+  text-transform: none !important;
+}
 </style>

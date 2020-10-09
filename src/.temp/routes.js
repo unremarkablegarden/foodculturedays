@@ -83,15 +83,19 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/sound/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/sound/",
+    component: c1
+  },
+  {
     path: "/fr/programme/themes/radicalisation/",
     component: c1
   },
   {
     path: "/fr/programme/themes/recherche/",
-    component: c1
-  },
-  {
-    path: "/fr/programme/themes/recuperation/",
     component: c1
   },
   {
@@ -108,10 +112,6 @@ export default [
   },
   {
     path: "/en/program/themes/racialization/",
-    component: c1
-  },
-  {
-    path: "/en/program/themes/recovery/",
     component: c1
   },
   {
@@ -151,6 +151,10 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/performance/",
+    component: c1
+  },
+  {
     path: "/fr/programme/themes/philosophie/",
     component: c1
   },
@@ -160,6 +164,10 @@ export default [
   },
   {
     path: "/en/program/themes/party/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/performance/",
     component: c1
   },
   {
@@ -292,10 +300,6 @@ export default [
   },
   {
     path: "/fr/programme/themes/futur/",
-    component: c1
-  },
-  {
-    path: "/fr/programme/themes/futurime/",
     component: c1
   },
   {
@@ -583,6 +587,10 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/agriculture/",
+    component: c1
+  },
+  {
     path: "/fr/programme/themes/alchimie/",
     component: c1
   },
@@ -612,6 +620,10 @@ export default [
   },
   {
     path: "/en/program/themes/afrofuturism/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/agriculture/",
     component: c1
   },
   {
@@ -991,19 +1003,11 @@ export default [
     component: c3
   },
   {
-    path: "/fr/programme/2020/grace-denis/",
-    component: c3
-  },
-  {
     path: "/fr/programme/2020/grace-denis1/",
     component: c3
   },
   {
     path: "/en/program/2020/closing-ceremony-fcd--sound-performance/",
-    component: c3
-  },
-  {
-    path: "/en/program/2020/grace-denis/",
     component: c3
   },
   {

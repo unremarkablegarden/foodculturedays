@@ -91,6 +91,16 @@ module.exports = function (api, options) {
                     lang
                   }
                 }
+                categories {
+                  category {
+                    ... on prismic_Category {
+                      name
+                      _meta {
+                        uid
+                      }
+                    }
+                  }
+                }
               }
               cursor
             }
@@ -504,6 +514,9 @@ module.exports = function (api, options) {
                 project
                 project_body
                 date_time
+                extra_days {
+                  date 
+                }
                 location {
                   ... on prismic_Location {
                     location
@@ -520,6 +533,7 @@ module.exports = function (api, options) {
                 price
                 participants
                 duration
+                duration_richtext
                 activation
                 _meta {
                   tags

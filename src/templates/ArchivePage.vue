@@ -13,6 +13,10 @@
         .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
         
         .page-wrapper
+          div(v-if='"categories" in page')
+            .tags(v-if='page.categories').categories
+              .tag(v-for='cat in page.categories', v-if='cat.category !== null') 
+                | {{ cat.category.name }}
           .tags(v-if='page._meta.tags')
             g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
               .name {{ tag }}
@@ -23,9 +27,16 @@
 </template>
 
 <style lang="scss" scoped>
-  .page-wrapper {
-    margin-top: 1.6rem;
+.page-wrapper {
+  margin-top: 1.6rem;
+}
+.tags.categories {
+  margin-bottom: 0;
+  .tag:hover {
+    background: white;
+    color: black;
   }
+}
 </style>
 
 <style lang="scss">

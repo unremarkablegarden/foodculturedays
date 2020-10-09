@@ -13,14 +13,152 @@
         .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
         
         .page-wrapper
-          .tags(v-if='page._meta.tags')
-            g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
-              .name {{ tag }}
+          .tags(v-if='page.categories').categories
+            .tag(v-for='cat in page.categories') {{ cat.category.name }}
+          .tags(v-if='page._meta.tags').normal-tags
+            .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
+            //- g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
+            //-   .name {{ tag }}
+          
+          table.meta
+            tr.date(v-if='page.date_time && !page.extra_days && !page.extra_days') 
+              td.label Date
+              td {{ formatDate(page.date_time) }}
+            tr.date(v-else-if='page.date_time && page.extra_days') 
+              td.label 
+                span(v-if='fr') Dater
+                span(v-else) Dates
+              td 
+                //- xmp {{ page.date_time }}
+                //- xmp {{ page.extra_days }}
+                | {{ formatDate(page.date_time) }}
+                span(v-for='extra in page.extra_days')
+                  //- xmp {{ extra.date }}
+                  | , {{ formatDate(extra.date) }}
+            tr.location(v-if='page.location')
+              td.label(v-if='fr') Lieu
+              td.label(v-else) Venue
+              td {{ page.location.location[0].text }}
+            tr.price(v-if='page.price')
+              td.label(v-if='fr') Prix
+              td.label(v-else) Price
+              td {{ page.price }} 
+            tr.duration(v-if='page.duration || page.duration_richtext')
+              td.label(v-if='fr') Durée
+              td.label(v-else) Duration
+              td(v-if='page.duration_richtext')
+                prismic-rich-text(:field='page.duration_richtext')
+              td(v-else)
+                | {{ page.duration }} 
+            tr.participants(v-if='page.participants')
+              td(v-if='fr').label Remarquer
+              td(v-if='fr')
+                | Capacité maximale de {{ page.participants }} personnes
+              td(v-if='en').label Note
+              td(v-if='en')
+                | Maximum capacity of {{ page.participants }} people
+            tr.activation(v-if='page.activation')
+              td.label Activation
+              td {{ page.activation }}
+              
+              
           prismic-rich-text(:field='page.project', v-if='page.project').project-title
           prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
+          
           prismic-rich-text(:field='page.project_body', v-if='page.project_body').project-body
           prismic-rich-text(:field='page.artist_body', v-if='page.artist_body').artist-body
 </template>
+
+
+
+
+
+<script>
+// import Newsletter from '~/components/Newsletter.vue'
+import {format} from 'date-fns'
+import frLocale from 'date-fns/locale/fr-CH'
+var slug = require('slug')
+
+export default {
+  components: {
+    // Newsletter
+  },
+  data () {
+    return {
+      back: {
+        en: '←',
+        fr: '←'
+      }
+    }
+  },
+  metaInfo() {
+    return {
+      title: this.$context.plainTitle
+    }
+  },
+  methods: {
+    t (t1, t2) {
+      if (this.lang == 'fr') return t2
+      else t1
+    },
+    formatDate (date) {
+      if (this.lang == 'fr') return format(new Date(date), 'd MMMM', { locale: frLocale })
+      else return format(new Date(date), 'c MMMM')
+    },
+    tagLink (tag) {
+      let ret
+      if (this.lang == 'fr') {
+        ret = '/fr/programme/themes/'
+      } else {
+        ret = '/en/program/themes/'
+      }
+      return ret + slug(tag) + '/'
+    },
+    goBack () {
+      if (!process.isClient) return
+      
+      let path = window.location.pathname
+      path = path.replace(/\/$/, "")
+      path = path.split('/')
+      path.pop(); path.pop();
+      this.$router.push(path.join('/'))
+    }
+  },
+  computed: {
+    page () {
+      return this.$context.node
+    },
+    fr () {
+      if (this.lang == 'fr') return true
+    },
+    en () {
+      if (this.lang == 'en') return true
+    },
+    lang () {
+      let lang = this.page._meta.lang
+      if (lang.includes('fr')) { lang = 'fr' }
+      else { lang = 'en' }
+      return lang
+    },
+    // newsletterText () {
+    //   const en = 'Join our newsletter'
+    //   const fr = 'Abonnez-vous à notre newsletter'
+    //   if (this.lang == 'fr') { return fr }
+    //   else { return en }
+    // }
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
 
 <style lang="scss" scoped>
   .page-wrapper {
@@ -186,68 +324,50 @@ p em {
     width: 90%;
   }
 }
-
-</style>
-
-
-
-<script>
-// import Newsletter from '~/components/Newsletter.vue'
-var slug = require('slug')
-
-export default {
-  components: {
-    // Newsletter
-  },
-  data () {
-    return {
-      back: {
-        en: '←',
-        fr: '←'
-      }
-    }
-  },
-  metaInfo() {
-    return {
-      title: this.$context.plainTitle
-    }
-  },
-  methods: {
-    tagLink (tag) {
-      let ret
-      if (this.lang == 'fr') {
-        ret = '/fr/programme/themes/'
-      } else {
-        ret = '/en/program/themes/'
-      }
-      return ret + slug(tag) + '/'
-    },
-    goBack () {
-      if (!process.isClient) return
-      
-      let path = window.location.pathname
-      path = path.replace(/\/$/, "")
-      path = path.split('/')
-      path.pop(); path.pop();
-      this.$router.push(path.join('/'))
-    }
-  },
-  computed: {
-    page () {
-      return this.$context.node
-    },
-    lang () {
-      let lang = this.page._meta.lang
-      if (lang.includes('fr')) { lang = 'fr' }
-      else { lang = 'en' }
-      return lang
-    },
-    // newsletterText () {
-    //   const en = 'Join our newsletter'
-    //   const fr = 'Abonnez-vous à notre newsletter'
-    //   if (this.lang == 'fr') { return fr }
-    //   else { return en }
-    // }
+.meta {
+  p {
+    margin: 0 !important; 
+    padding: 0 !important;
   }
 }
-</script>
+    
+</style>
+
+<style lang='scss' scoped>
+.tags.categories {
+  margin-bottom: 0;
+}
+.normal-tags {
+  .tag {
+    /* opacity: 0.5; */
+    /* font-size: 0.7rem; */
+  }  
+}
+.tags {
+  /* font-size: 0.7rem; */
+  .tag:hover {
+    background: white;
+    color: black;
+  }
+}
+.meta {
+  font-size: 0.9rem;
+  line-height: 1.2em;
+  margin: 0 0 1.8rem;
+  border: 1px black solid;
+  padding: 0.35rem 0.5rem 0.4rem;
+  width: 100%;
+  td {
+    margin: 0.2rem 0
+  }
+}
+.label {
+  font-weight: bold;
+  display: inline-block;
+  /* min-width: 4rem; */
+  padding-right: 0.7rem;
+  
+  /* text-align: right; */
+  width: 100%;
+}
+</style>
