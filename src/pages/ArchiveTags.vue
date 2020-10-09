@@ -124,6 +124,7 @@ $green: rgb(17,230,54);
   }
   .tags-col {
     padding-top: 1rem;
+    margin-top: 4rem;
   }
   .links {
     margin-top: 0 !important;

@@ -12,6 +12,7 @@
     "animejs": "^3.2.0",
     "browser-update": "^3.3.19",
     "bulma-scss": "^0.9.0",
+    "date-fns": "^2.16.1",
     "dom-helpers": "^5.1.4",
     "es6-scroll-to": "^1.1.2",
     "feature.js": "^1.1.1",

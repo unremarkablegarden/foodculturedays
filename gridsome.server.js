@@ -259,22 +259,22 @@ module.exports = function (api, options) {
     // console.log(enTags)
     // console.log(frTags)
     createPage({
-      path: `/en/tags`,
-      component: './src/pages/Tags.vue',
+      path: `/en/archive/themes`,
+      component: './src/pages/ArchiveTags.vue',
       context: {
-        title: 'Tags',
+        title: 'Themes',
         lang: 'en',
-        altPath: '/fr/tags',
+        altPath: '/fr/archives/themes',
         data: enTags
       }
     })
     createPage({
-      path: `/fr/tags`,
-      component: './src/pages/Tags.vue',
+      path: `/fr/archives/themes`,
+      component: './src/pages/ArchiveTags.vue',
       context: {
-        title: 'Tags',
+        title: 'Themes',
         lang: 'fr',
-        altPath: '/en/tags',
+        altPath: '/en/archive/themes',
         data: frTags
       }
     })
@@ -465,6 +465,286 @@ module.exports = function (api, options) {
       }
     })
 
+    
+    ////////////////////////////////////
+    
+    
+    
+    let programs = []
+    allProgramTags = {}
+    enProgramTags = {}
+    frProgramTags = {}
+    keepLoading = true
+    after = ''
+
+    while (keepLoading) {
+      let programsQuery = await graphql(`{
+        prismic {
+          allPrograms(after: "${after}") {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            edges {
+              node {
+                categories {
+                  category {
+                    ... on prismic_Category {
+                      name
+                      _meta {
+                        uid
+                      }
+                    }
+                  }
+                }
+                year
+                country
+                artist
+                artist_body
+                project
+                project_body
+                date_time
+                location {
+                  ... on prismic_Location {
+                    location
+                    short_name
+                    _meta {
+                      uid
+                    }
+                  }
+                }
+                image
+                gallery {
+                  gallery_image
+                }
+                price
+                participants
+                duration
+                activation
+                _meta {
+                  tags
+                  uid
+                  lang
+                  alternateLanguages {
+                    uid
+                    lang
+                  }
+                }
+              } 
+              cursor
+            }
+          }
+        }
+      }`)
+
+      let data = programsQuery.data.prismic.allPrograms
+
+      data.edges.forEach(({ node }) => {
+        let lang, program, alt, altProgram
+        if (node._meta.lang == 'en-gb') {
+          lang = 'en'
+          program = 'program'
+          altProgram = 'programme'
+          alt = 'fr'
+        }
+        if (node._meta.lang == 'fr-ch') {
+          lang = 'fr';
+          program = 'programme'
+          altProgram = 'program'
+          alt = 'en';
+        }
+        
+        const path = `/${lang}/${program}/${node.year}/${node._meta.uid}`
+        let altPath
+        if (node._meta.alternateLanguages.length > 0) {
+          altPath = `/${alt}/${altProgram}/${node.year}/${node._meta.alternateLanguages[0].uid}`
+        } else {
+          altPath = ''
+        }
+        
+        // POPULATE TAGS OBJECT
+        let tagEntry
+        if (node._meta.tags.length > 0) {
+          
+          node._meta.tags.forEach(tag => {
+            tagEntry = {
+              artist: node.artist,
+              project: node.project,
+              year: node.year,
+              path: path,
+              altPath: altPath,
+              lang: lang,
+              slug: slug(tag),
+              image: node.image,
+              // plainTitle: node.artist[0].text,
+              tags: node._meta.tags,
+            }
+            
+            // if (!tags[tag]) {
+            //   allProgramTags[tag] = [tagEntry]
+            // } else {
+            //   allProgramTags[tag] = [...allProgramTags[tag], tagEntry]
+            // }
+            
+            if (lang == 'fr') {
+              if (!frProgramTags[tag]) {
+                frProgramTags[tag] = [tagEntry]
+              } else {
+                frProgramTags[tag] = [...frProgramTags[tag], tagEntry]
+              }
+            }
+            else {
+              if (!enProgramTags[tag]) {
+                enProgramTags[tag] = [tagEntry]
+              } else {
+                enProgramTags[tag] = [...enProgramTags[tag], tagEntry]
+              }
+            }
+            
+          })
+        }
+        
+        console.log(path)
+        
+        createPage({
+          path: path,
+          component: './src/templates/ProgramPage.vue',
+          context: {
+            node: node,
+            uid: node._meta.uid,
+            lang: node._meta.lang,
+            year: node.year,
+            tags: node._meta.tags,
+            // plainTitle: node.artist[0].text,
+            altPath: altPath
+          }
+        })
+
+        node['context'] = {
+          uid: node._meta.uid,
+          lang: node._meta.lang,
+          year: node.year,
+          // plainTitle: node.artist[0].text,
+          path: path,
+          altPath: altPath
+        }
+      })
+
+      // set next page to load in the loop
+      after = data.pageInfo.endCursor
+
+      // add to master programs array
+      programs = programs.concat(data.edges)
+
+      // while loop breaker
+      if (! data.pageInfo.hasNextPage) {
+        keepLoading = false
+      }
+    }
+    
+    // PROGRAM INDICES
+    createPage({
+      path: `/en/program`,
+      component: './src/pages/Program.vue',
+      context: {
+        lang: 'en-gb',
+        altPath: '/fr/programme',
+        title: 'Program',
+        data: programs.filter(el => el.node._meta.lang == 'en-gb')
+      }
+    })
+    createPage({
+      path: `/fr/programme`,
+      component: './src/pages/Program.vue',
+      context: {
+        lang: 'fr-ch',
+        altPath: '/en/program',
+        title: 'Programme',
+        data: programs.filter(el => el.node._meta.lang == 'fr-ch')
+      }
+    })
+    
+    //////////////////// program tags////////////////////
+    
+    tagsCreated = []
+    langs = ['en', 'fr']
+    
+    langs.forEach(lang => {
+      
+      let tags
+      if (lang == 'en') {
+        tags = enProgramTags
+      } else {
+        tags = frProgramTags
+      }
+      
+      Object.keys(tags).forEach(tag => {
+        
+          // let t = tags[tag]
+          let tagSlug = slug(tag)
+          let path, altPath
+          
+          if (lang == 'fr') {
+            path = '/fr/programme/themes/' + tagSlug
+          } else {
+            path = '/en/program/themes/' + tagSlug
+          }
+          
+          console.log(path + ' (' +tags[tag].length+ ')')
+          
+          let title = tag.charAt(0).toUpperCase() + tag.slice(1)
+          // let nodes = tags[tag]
+          
+        if (! tagsCreated.includes(path)) {
+          
+          createPage({
+            path: path,
+            component: './src/templates/ProgramTag.vue',
+            context: {
+              // altPath: altPath,
+              // path: path,
+              // slug: tagSlug,
+              title: title,
+              node: tags[tag]
+              // node: nodes.filter(el => el.lang == lang)
+            }
+          })
+          
+          tagsCreated.push(path)
+        }
+      })
+      
+    })
+    
+    createPage({
+      path: `/en/program/themes`,
+      component: './src/pages/ProgramTags.vue',
+      context: {
+        title: 'Themes',
+        lang: 'en',
+        altPath: '/fr/programme/themes',
+        dataTags: enProgramTags,
+        program: programs.filter(el => el.node._meta.lang == 'en-gb')
+        
+      }
+    })
+    createPage({
+      path: `/fr/programme/themes`,
+      component: './src/pages/ProgramTags.vue',
+      context: {
+        title: 'Themes',
+        lang: 'fr',
+        altPath: '/en/program/themes',
+        dataTags: frProgramTags,
+        program: programs.filter(el => el.node._meta.lang == 'fr-ch')
+      }
+    })
+    
+    
+    
+    
+    
+    
   })
 
 }
