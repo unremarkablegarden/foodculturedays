@@ -16,6 +16,7 @@
           
           h2.tagtitle {{ activitiesTitle }}
           .categories.tags
+            //- xmp {{ categories }}
             .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
               span {{ cat }}
               
@@ -34,10 +35,13 @@
         .inner(v-if='!moving')
           br
           .links(v-if='program.length')
-            .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.path)', :key='i')
-              //- xmp {{ p.node }}
+            .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
+              //- xmp {{ p.node._meta.uid }}
               //- .date {{ formatDate(p.node.date_time) }}
-              
+              .image
+                img(:src='p.node.image.url', v-if='p.node.image')
+                div(v-else) &nbsp;
+
               h2
                 em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
                 div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
@@ -146,8 +150,9 @@ export default {
       // this.program.forEach(x => {
         let c = x.node.categories
         c.forEach(y => {
-          cats.push(y.category.name)
+          if (y.category && y.category.name) cats.push(y.category.name)
         })
+        
       })
       
       let added = []
@@ -373,11 +378,15 @@ export default {
         this.toggledTags = this.toggledTags.filter(item => item !== tag)
       }
     },
-    programRoute (path) {
-      // this.toggledTags = []
-      this.moving = true
-      console.log(path+'/')
-      this.$router.push(path+'/')
+    programRoute (slug) {
+      // this.moving = true
+      // console.log(this.$router);
+      let path
+      if (this.lang == 'fr') path = '/fr/programme/2020/' + slug + '/'
+      else path = '/en/program/2020/' + slug + '/'
+      
+      console.log(path)
+      this.$router.push(path)
     },
     toggledLocation (loc) {
       if (this.toggledLocations.includes(loc)) return 'is-active'
@@ -424,7 +433,7 @@ $green: rgb(17,230,54);
 /* @media (min-width: 960px) { */
 @media (min-width: 737px) {
   .posts-col {
-    padding-top: 4rem;
+    padding-top: 6vw;
   }
 }
 
@@ -520,8 +529,10 @@ em {
 
 .locations, .dates {
   margin-bottom: 2rem;
+  font-size: 0.95rem;
   .location, .date {
     /* margin-bottom: 0.1rem; */
+    /* background: red; */
     &:before {
       content: '';
       background-image: url(https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg);
@@ -532,7 +543,7 @@ em {
       display: inline-block;
       height: 1.6rem;
       width: 1.1rem;
-      margin-right: 1rem;
+      margin-right: 0.8rem;
       transform: translateY(0.4rem);
     }
     &.is-active {
@@ -559,6 +570,14 @@ em {
     /* height: 100%; */
     /* overflow-y: auto; */
   }  
+}
+
+.image {
+  height: 7rem;
+  width: 100%;
+  background: #fee;  
+  display: block;
+  margin: 0 0 0.5rem;
 }
 
 </style>

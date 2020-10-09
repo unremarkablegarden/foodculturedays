@@ -2,13 +2,13 @@ const c1 = () => import(/* webpackChunkName: "page--src--templates--program-tag-
 const c2 = () => import(/* webpackChunkName: "page--src--templates--archive-tag-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchiveTag.vue")
 const c3 = () => import(/* webpackChunkName: "page--src--templates--program-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ProgramPage.vue")
 const c4 = () => import(/* webpackChunkName: "page--src--templates--archive-page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ArchivePage.vue")
-const c5 = () => import(/* webpackChunkName: "page--src--pages--program-tags-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/ProgramTags.vue")
-const c6 = () => import(/* webpackChunkName: "page--src--pages--archive-tags-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/ArchiveTags.vue")
-const c7 = () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
-const c8 = () => import(/* webpackChunkName: "page--src--pages--partners-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Partners.vue")
-const c9 = () => import(/* webpackChunkName: "page--src--pages--program-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Program.vue")
-const c10 = () => import(/* webpackChunkName: "page--src--pages--media-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Media.vue")
-const c11 = () => import(/* webpackChunkName: "page--src--pages--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Archive.vue")
+const c5 = () => import(/* webpackChunkName: "page--src--pages--archive-tags-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/ArchiveTags.vue")
+const c6 = () => import(/* webpackChunkName: "page--src--templates--page-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/Page.vue")
+const c7 = () => import(/* webpackChunkName: "page--src--pages--partners-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Partners.vue")
+const c8 = () => import(/* webpackChunkName: "page--src--templates--program-tags-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/templates/ProgramTags.vue")
+const c9 = () => import(/* webpackChunkName: "page--src--pages--media-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Media.vue")
+const c10 = () => import(/* webpackChunkName: "page--src--pages--archive-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Archive.vue")
+const c11 = () => import(/* webpackChunkName: "page--src--pages--program-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Program.vue")
 const c12 = () => import(/* webpackChunkName: "page--src--pages--newsletter-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Newsletter.vue")
 const c13 = () => import(/* webpackChunkName: "page--src--pages--index-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/Index.vue")
 const c14 = () => import(/* webpackChunkName: "page--src--pages--404-vue" */ "/Users/euklides/Development/foodculturedays/fcd-gridsome/src/pages/404.vue")
@@ -811,10 +811,6 @@ export default [
     component: c2
   },
   {
-    path: "/fr/programme/2020/lorem-ipsum-olle-holmberg/",
-    component: c3
-  },
-  {
     path: "/en/archive/themes/circular-economy/",
     component: c2
   },
@@ -1319,96 +1315,84 @@ export default [
     component: c4
   },
   {
-    path: "/fr/programme/themes/",
-    component: c5
-  },
-  {
-    path: "/en/program/themes/",
-    component: c5
-  },
-  {
     path: "/fr/archives/themes/",
-    component: c6
+    component: c5
   },
   {
     path: "/en/archive/themes/",
-    component: c6
-  },
-  {
-    path: "/fr/test-fr/",
-    component: c7
-  },
-  {
-    path: "/en/test/",
-    component: c7
-  },
-  {
-    path: "/fr/partenaires/",
-    component: c8
-  },
-  {
-    path: "/fr/programme/",
-    component: c9
-  },
-  {
-    path: "/en/partners/",
-    component: c8
-  },
-  {
-    path: "/en/program/",
-    component: c9
-  },
-  {
-    path: "/fr/medias/",
-    component: c10
-  },
-  {
-    path: "/en/media/",
-    component: c10
-  },
-  {
-    path: "/fr/contact/",
-    component: c7
-  },
-  {
-    path: "/en/contact/",
-    component: c7
-  },
-  {
-    path: "/fr/a-propos/",
-    component: c7
-  },
-  {
-    path: "/fr/biennale/",
-    component: c7
-  },
-  {
-    path: "/en/biennale/",
-    component: c7
-  },
-  {
-    path: "/fr/archives/",
-    component: c11
-  },
-  {
-    path: "/en/about/",
-    component: c7
-  },
-  {
-    path: "/en/archive/",
-    component: c11
-  },
-  {
-    path: "/program-tags/",
     component: c5
   },
   {
-    path: "/partners/",
+    path: "/fr/test-fr/",
+    component: c6
+  },
+  {
+    path: "/en/test/",
+    component: c6
+  },
+  {
+    path: "/fr/partenaires/",
+    component: c7
+  },
+  {
+    path: "/fr/programme/",
     component: c8
   },
   {
-    path: "/program/",
+    path: "/en/partners/",
+    component: c7
+  },
+  {
+    path: "/en/program/",
+    component: c8
+  },
+  {
+    path: "/fr/medias/",
     component: c9
+  },
+  {
+    path: "/en/media/",
+    component: c9
+  },
+  {
+    path: "/fr/contact/",
+    component: c6
+  },
+  {
+    path: "/en/contact/",
+    component: c6
+  },
+  {
+    path: "/fr/a-propos/",
+    component: c6
+  },
+  {
+    path: "/fr/biennale/",
+    component: c6
+  },
+  {
+    path: "/en/biennale/",
+    component: c6
+  },
+  {
+    path: "/fr/archives/",
+    component: c10
+  },
+  {
+    path: "/en/about/",
+    component: c6
+  },
+  {
+    path: "/en/archive/",
+    component: c10
+  },
+  {
+    path: "/partners/",
+    component: c7
+  },
+  {
+    path: "/program/",
+    component: c11
   },
   {
     path: "/newsletter/",
@@ -1416,7 +1400,7 @@ export default [
   },
   {
     path: "/media/",
-    component: c10
+    component: c9
   },
   {
     path: "/fr/",
@@ -1428,11 +1412,11 @@ export default [
   },
   {
     path: "/archive-tags/",
-    component: c6
+    component: c5
   },
   {
     path: "/archive/",
-    component: c11
+    component: c10
   },
   {
     name: "404",

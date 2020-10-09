@@ -14,8 +14,8 @@
                 .page.link(@click='archiveRoute(tag.path)')
                   //- xmp {{ tag }}
                   h2
-                    em {{ tag.project[0].text }}
-                    div {{ tag.artist[0].text }}
+                    em(v-if='tag.project') {{ tag.project[0].text }}
+                    div(v-if='tag.artist') {{ tag.artist[0].text }}
                     //- xmp {{ tag.path }}
                     //- xmp {{ tag.altPath }}
 </template>
@@ -53,7 +53,10 @@ export default {
         let max = this.page.length
         let r = rand(0,max)
         let post = this.page[r]
-        let img = post.image.url
+        let img
+        if (post.image && post.image.url) {
+          img = post.image.url  
+        }
         if(img) return img
       }
     },

@@ -643,26 +643,26 @@ module.exports = function (api, options) {
     }
     
     // PROGRAM INDICES
-    createPage({
-      path: `/en/program`,
-      component: './src/pages/Program.vue',
-      context: {
-        lang: 'en-gb',
-        altPath: '/fr/programme',
-        title: 'Program',
-        data: programs.filter(el => el.node._meta.lang == 'en-gb')
-      }
-    })
-    createPage({
-      path: `/fr/programme`,
-      component: './src/pages/Program.vue',
-      context: {
-        lang: 'fr-ch',
-        altPath: '/en/program',
-        title: 'Programme',
-        data: programs.filter(el => el.node._meta.lang == 'fr-ch')
-      }
-    })
+    // createPage({
+    //   path: `/en/program`,
+    //   component: './src/pages/Program.vue',
+    //   context: {
+    //     lang: 'en-gb',
+    //     altPath: '/fr/programme',
+    //     title: 'Program',
+    //     data: programs.filter(el => el.node._meta.lang == 'en-gb')
+    //   }
+    // })
+    // createPage({
+    //   path: `/fr/programme`,
+    //   component: './src/pages/Program.vue',
+    //   context: {
+    //     lang: 'fr-ch',
+    //     altPath: '/en/program',
+    //     title: 'Programme',
+    //     data: programs.filter(el => el.node._meta.lang == 'fr-ch')
+    //   }
+    // })
     
     //////////////////// program tags////////////////////
     
@@ -717,24 +717,24 @@ module.exports = function (api, options) {
     })
     
     createPage({
-      path: `/en/program/themes`,
-      component: './src/pages/ProgramTags.vue',
+      path: `/en/program`,
+      component: './src/templates/ProgramTags.vue',
       context: {
-        title: 'Themes',
+        title: 'Program',
         lang: 'en',
-        altPath: '/fr/programme/themes',
+        altPath: '/fr/programme',
         dataTags: enProgramTags,
         program: programs.filter(el => el.node._meta.lang == 'en-gb')
         
       }
     })
     createPage({
-      path: `/fr/programme/themes`,
-      component: './src/pages/ProgramTags.vue',
+      path: `/fr/programme`,
+      component: './src/templates/ProgramTags.vue',
       context: {
-        title: 'Themes',
+        title: 'Programme',
         lang: 'fr',
-        altPath: '/en/program/themes',
+        altPath: '/en/program',
         dataTags: frProgramTags,
         program: programs.filter(el => el.node._meta.lang == 'fr-ch')
       }

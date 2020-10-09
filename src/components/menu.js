@@ -6,6 +6,10 @@ export default
     
     // BIENALE
     { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
+    
+    // PROGRAM
+    { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
+    
     // PROJECTS
     // { title: ['Projects', 'Projets'], to: ['/en/projects', '/fr/projets'] },
     // PARTICIPANTS
