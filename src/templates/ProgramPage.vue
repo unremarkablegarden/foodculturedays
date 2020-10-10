@@ -320,7 +320,7 @@ p em {
   background: transparent;
   
   img {
-    height: 1.8rem;
+    height: 1.95rem;
     width: auto;
   }
 }

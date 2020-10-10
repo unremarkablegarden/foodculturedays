@@ -491,8 +491,8 @@ $green: rgb(17,230,54);
   .posts-col {
     /* margin-top: 1rem; */
     /* padding-top: 1rem; */
-    padding-top: 1.6rem;
-    /* padding-top: 3rem; */
+    /* padding-top: 1.6rem; */
+    padding-top: 3rem;
   }
   .tags-col {
     padding-top: 1rem;
