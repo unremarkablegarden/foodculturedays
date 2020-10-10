@@ -44,7 +44,7 @@
               
       .column.is-6.left.posts-col
         .inner(v-if='!moving')
-          br
+          //- br
           .links(v-if='program.length')
             .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
               //- xmp {{ p.node._meta.uid }}
@@ -84,6 +84,7 @@
 <script>
 import {format} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
+import { parse } from "date-fns"
 
 export default {
   metaInfo() {
@@ -402,8 +403,14 @@ export default {
       this.mobileCurrentFilter = null
     },
     formatDate (date) {
-      if (this.lang == 'fr') return format(new Date(date), 'd MMMM', { locale: frLocale })
-      else return format(new Date(date), 'd MMMM')
+      // 2020-11-26T17:00:00+0000
+      // console.log(date);
+      date = date.slice(0,10)
+      let jsDate = parse(date, "yyyy-MM-dd", new Date())
+      // let jsDate = new Date(date)
+      
+      if (this.lang == 'fr') return format(jsDate, 'd MMMM', { locale: frLocale })
+      else return format(jsDate, 'd MMMM')
     },
     moreData(project) {
       let slug = project.path.split('/').slice(-1)[0]
@@ -649,7 +656,8 @@ em {
   font-size: 1.07rem;
 }
 .links {
-  margin-top: 1.9rem;
+  /* margin-top: 1.9rem; */
+  margin-top: 0.9rem;
   border-top: 1px black solid;
 }
 .link {
