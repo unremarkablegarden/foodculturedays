@@ -418,13 +418,16 @@ p em {
       top: 0;
       left: 0;
       display: none;
+      background-size: contain;
+      /* background-color: white; */
       &.is-active {
         display: block;
       }
     }  
   }
   .dots {
-    $c: white;
+    /* $c: white; */
+    $c: rgba(0,0,0,1);
     /* mix-blend-mode: difference; */
     /* filter: invert(100); */
     width: 50vw;
