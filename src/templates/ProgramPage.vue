@@ -2,15 +2,17 @@
   layout
     .columns.program-page
       .column.is-6.no-pad.gallery-column
+        //- xmp {{ page.gallery }}
         .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
           //- xmp {{ page.gallery }}
           .items
             .item(v-for='(item, i) in page.gallery', :style="'background-image: url('+item.gallery_image.url+')'", :data-n='i', :class='{ "is-active": (i == gallery.n)  }', @click='mobileNext()')
-          .dots
-            .dot(v-for='(item, i) in page.gallery', :data-n='i', :class='{ "is-active": (i == gallery.n)  }')
-          .control
-            .left(@click='galleryNav("-1")')
-            .right(@click='galleryNav("+1")')
+          .navs(v-if='page.gallery.length > 1')
+            .dots
+              .dot(v-for='(item, i) in page.gallery', :data-n='i', :class='{ "is-active": (i == gallery.n)  }')
+            .control
+              .left(@click='galleryNav("-1")')
+              .right(@click='galleryNav("+1")')
           
         .gallery(v-if='page.image && !page.gallery.length')
           .item(:style="'background-image: url('+page.image.url+')'")
@@ -428,6 +430,72 @@ p em {
   .project-title, .artist-title {
     width: 90%;
   }
+  
+  
+  .gallery.slider {
+  .items {
+    .item {
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: none;
+      background-size: contain;
+      /* background-color: white; */
+      &.is-active {
+        display: block;
+      }
+    }  
+  }
+  .dots {
+    $c: rgba(0,0,0,1);
+    width: 50vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dot {
+      background: transparent;
+      border: 1.5px $c solid;
+      height: 0.6rem;
+      width: 0.6rem;
+      border-radius: 1rem;
+      margin: 1rem;
+      margin-bottom: 1.5rem;
+      &.is-active {
+        background: $c;  
+      }
+    }
+  }
+  .control {
+    .left, .right {
+      height: 100vh;
+      width: 25vw;
+      position: fixed;
+      top: 0;
+    }
+    .left {
+      left: 0;
+      cursor: w-resize;
+      &:hover {
+        background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
+      }
+    }
+    .right {
+      left: 25vw;
+      cursor: e-resize;
+      
+      &:hover {
+        background: linear-gradient(-90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
+      }
+    }
+  }
+  
+}
+  
 }
 
 .meta {
