@@ -44,18 +44,17 @@
               
       .column.is-6.left.posts-col
         .inner(v-if='!moving')
-          //- br
           .links(v-if='program.length')
             .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
-              //- xmp {{ p.node._meta.uid }}
-              //- .date {{ formatDate(p.node.date_time) }}
-              .image(v-if='p.node.image', :style='"background-image: url("+p.node.image.url+")"')
-                //- img(:src='', )
-                //- div(v-else) &nbsp
               
-              //- xmp {{ p.node.date_time }}
-              //- xmp {{ p.node.extra_days }}
+              //- .image(v-if='p.node.image', :style='"background-image: url("+p.node.image.url+"&w=1280&h=900&fit=crop)"')
               
+              .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
+              
+              
+              
+              //- div(v-if='p.node.image') {{ p.node.image.url }}
+                
               h2
                 em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
                 div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
@@ -389,6 +388,10 @@ export default {
   //   }
   },
   methods: {
+    resizeImage (url) {
+      let image = url.split('?')[0] + '?auto=compress,format&w=1280&h=900&fit=crop'
+      return image
+    },
     toggleFilter (which) {
       if (this.mobileCurrentFilter == which) this.mobileCurrentFilter = null
       else this.mobileCurrentFilter = which
@@ -403,14 +406,14 @@ export default {
       this.mobileCurrentFilter = null
     },
     formatDate (date) {
-      // 2020-11-26T17:00:00+0000
-      // console.log(date);
-      date = date.slice(0,10)
-      let jsDate = parse(date, "yyyy-MM-dd", new Date())
-      // let jsDate = new Date(date)
-      
-      if (this.lang == 'fr') return format(jsDate, 'd MMMM', { locale: frLocale })
-      else return format(jsDate, 'd MMMM')
+      if (date !== null) {
+        let time = date.split('T')[1].split('+')[0].slice(0,-3)
+        let datetime = date.replace('T', ' ')
+        let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
+        let form = 'd MMMM'
+        if (this.lang == 'fr') return format(d, form, { locale: frLocale })
+        else return format(d, form)
+      }
     },
     moreData(project) {
       let slug = project.path.split('/').slice(-1)[0]
@@ -563,6 +566,7 @@ $green: rgb(17,230,54);
 @media (min-width: 737px) {
   .posts-col {
     padding-top: 6vw;
+    padding-bottom: 5rem;
   }
   .columns.scroll {
     .column {

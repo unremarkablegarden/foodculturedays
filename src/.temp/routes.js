@@ -155,7 +155,7 @@ export default [
     component: c1
   },
   {
-    path: "/fr/programme/themes/pratique-collaborative/",
+    path: "/fr/programme/themes/pratiques-collaboratives/",
     component: c1
   },
   {

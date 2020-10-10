@@ -6,10 +6,21 @@
         .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
           //- xmp {{ page.gallery }}
           .items
-            .item(v-for='(item, i) in page.gallery', :style="'background-image: url('+item.gallery_image.url+')'", :data-n='i', :class='{ "is-active": (i == gallery.n)  }', @click='mobileNext()')
+            .item(
+              v-for='(item, i) in page.gallery', 
+              :style="'background-image: url('+item.gallery_image.url+')'", 
+              :data-n='i', 
+              :class='{ "is-active": (i == gallery.n)  }', 
+              @click='mobileNext()', 
+              v-if='item.gallery_image'
+            )
           .navs(v-if='page.gallery.length > 1')
             .dots
-              .dot(v-for='(item, i) in page.gallery', :data-n='i', :class='{ "is-active": (i == gallery.n)  }')
+              .dot(
+                v-for='(item, i) in page.gallery', 
+                :data-n='i', 
+                :class='{ "is-active": (i == gallery.n)  }',
+              )
             .control
               .left(@click='galleryNav("-1")')
               .right(@click='galleryNav("+1")')
@@ -44,7 +55,7 @@
                 //- xmp {{ page.date_time }}
                 //- xmp {{ page.extra_days }}
                 | {{ formatDate(page.date_time) }}
-                div(v-for='extra in page.extra_days', v-if='"date" in extra')
+                div(v-for='extra in page.extra_days', v-if='"extra_day" in extra')
                   //- xmp {{ extra.extra_day }}
                   //- | , {{ formatDate(extra.extra_day) }}
                   | {{ formatDate(extra.extra_day) }}
@@ -90,6 +101,7 @@
 // import Newsletter from '~/components/Newsletter.vue'
 import {format} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
+import { parse } from "date-fns"
 var slug = require('slug')
 
 export default {
@@ -119,6 +131,10 @@ export default {
     galleryNav(dir) {
       if (this.page.gallery) {
         const max = this.page.gallery.length -1
+        // let max = 0
+        // this.page.gallery.forEach(x => {
+        //   if(x.gallery_item) max += 1
+        // })
         let frame = this.gallery.n
         if (dir == '+1') frame += 1
         else if (dir == '-1') frame -= 1
@@ -132,13 +148,24 @@ export default {
       else t1
     },
     formatDate (date) {
-      let checkTime = format(new Date(date), 'HH:mm')
-      let form = 'd MMMM'
-      if (checkTime !== '01:00') {
-        form = 'd MMMM — HH:mm'  
+      // 2020-11-26T17:00:00+0000
+      // date = date.slice(0,10) + ' '+date.slice(11,16)
+      // let time = date.slice(11,16)
+      // let jsDate = parse(date, "yyyy-MM-dd HH:mm", new Date())
+      // let jsTime = parse(time, "HH:mm", new Date())
+      
+      if (date !== null) {
+        let time = date.split('T')[1].split('+')[0].slice(0,-3)
+        let datetime = date.replace('T', ' ')
+        let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
+        let form = 'd MMMM'
+        if (time !== '01:00' && time !== '00:00') {
+          form = 'd MMMM — HH:mm'
+        }
+        if (this.lang == 'fr') return format(d, form, { locale: frLocale })
+        else return format(d, form)
       }
-      if (this.lang == 'fr') return format(new Date(date), form, { locale: frLocale })
-      else return format(new Date(date), form)
+  
     },
     tagLink (tag) {
       let ret
