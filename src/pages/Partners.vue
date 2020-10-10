@@ -1,13 +1,13 @@
 <template lang="pug">
   layout
     #partners
-      //- xmp {{ $context.data.node.body[3] }}
-      
       .page-wrapper
-        .img-wrapper
-          img(v-if='$context.data', :src="$context.data.node.body[1].url").mobile
-          img(v-if='$context.data',:src="$context.data.node.body[3].url").desktop
+        .img-wrapper(v-if='$context.data')
+          img(:src="image.mobile").mobile
+          img(:src="image.desktop").desktop
 </template>
+
+
 
 <style lang="scss" scoped>
 .img-wrapper {
@@ -41,30 +41,22 @@ export default {
     }
   },
   computed: {
-    page () {
-      // return this.$context.data
+    image() {
+      let images = {
+        mobile: null,
+        desktop: null,
+      }      
+      if (this.$context.data.node.gallery.length) {
+        let i1 = this.$context.data.node.gallery[0]
+        let i2 = this.$context.data.node.gallery[1]
+        if (i1.item.dimensions.width > i2.item.dimensions.width) {
+          images.mobile = i2.item.url
+          images.desktop = i1.item.url
+        }
+      }
+      
+      return images
     },
-    // title () {
-    //   // if (process.isClient) {
-    //     return this.$context.data.node.title[0].text
-    //   // }
-    // },
-    imgs () {
-      // if (process.isClient) {
-        // return this.$context.data.node.body.filter(el => el.type == 'image')
-      // }
-    },
-    img1 () {
-      // if (process.isClient) {
-        // return this.imgs[0].url
-      // }
-      // return page.node.
-    },
-    img2 () {
-      // if (process.isClient) {
-        // return this.imgs[1].url
-      // }
-    }
   }
 }
 </script>

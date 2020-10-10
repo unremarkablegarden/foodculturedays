@@ -23,7 +23,19 @@ export default [
     component: c1
   },
   {
+    path: "/en/program/themes/woman/",
+    component: c1
+  },
+  {
+    path: "/fr/programme/themes/vegetarisme/",
+    component: c1
+  },
+  {
     path: "/fr/programme/themes/vietnam/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/vegetarism/",
     component: c1
   },
   {
@@ -43,6 +55,10 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/terroir/",
+    component: c1
+  },
+  {
     path: "/fr/programme/themes/terroire/",
     component: c1
   },
@@ -52,6 +68,10 @@ export default [
   },
   {
     path: "/fr/programme/themes/traditions/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/street-food/",
     component: c1
   },
   {
@@ -83,11 +103,11 @@ export default [
     component: c1
   },
   {
-    path: "/fr/programme/themes/sound/",
+    path: "/fr/programme/themes/sororite/",
     component: c1
   },
   {
-    path: "/en/program/themes/sound/",
+    path: "/en/program/themes/sorority/",
     component: c1
   },
   {
@@ -99,15 +119,11 @@ export default [
     component: c1
   },
   {
-    path: "/fr/programme/themes/repas/",
+    path: "/fr/programme/themes/recuperation/",
     component: c1
   },
   {
     path: "/fr/programme/themes/ressources/",
-    component: c1
-  },
-  {
-    path: "/fr/programme/themes/rights/",
     component: c1
   },
   {
@@ -151,10 +167,6 @@ export default [
     component: c1
   },
   {
-    path: "/fr/programme/themes/performance/",
-    component: c1
-  },
-  {
     path: "/fr/programme/themes/philosophie/",
     component: c1
   },
@@ -164,10 +176,6 @@ export default [
   },
   {
     path: "/en/program/themes/party/",
-    component: c1
-  },
-  {
-    path: "/en/program/themes/performance/",
     component: c1
   },
   {
@@ -200,10 +208,6 @@ export default [
   },
   {
     path: "/fr/programme/themes/migration/",
-    component: c1
-  },
-  {
-    path: "/en/program/themes/meal/",
     component: c1
   },
   {
@@ -243,7 +247,15 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/italie/",
+    component: c1
+  },
+  {
     path: "/en/program/themes/interaction/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/italy/",
     component: c1
   },
   {
@@ -271,7 +283,15 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/gastronomie/",
+    component: c1
+  },
+  {
     path: "/en/program/themes/economics-of-solidarity/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/gastronomy/",
     component: c1
   },
   {
@@ -291,11 +311,11 @@ export default [
     component: c1
   },
   {
-    path: "/fr/programme/themes/fete/",
+    path: "/fr/programme/themes/femmes/",
     component: c1
   },
   {
-    path: "/fr/programme/themes/food/",
+    path: "/fr/programme/themes/fete/",
     component: c1
   },
   {
@@ -312,14 +332,6 @@ export default [
   },
   {
     path: "/en/program/themes/feminism/",
-    component: c1
-  },
-  {
-    path: "/en/program/themes/food/",
-    component: c1
-  },
-  {
-    path: "/en/program/themes/futur/",
     component: c1
   },
   {
@@ -427,10 +439,6 @@ export default [
     component: c2
   },
   {
-    path: "/fr/programme/themes/dechet/",
-    component: c1
-  },
-  {
     path: "/fr/programme/themes/dechets/",
     component: c1
   },
@@ -479,6 +487,10 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/cloture/",
+    component: c1
+  },
+  {
     path: "/fr/programme/themes/collaboration/",
     component: c1
   },
@@ -504,6 +516,10 @@ export default [
   },
   {
     path: "/en/program/themes/class/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/closing/",
     component: c1
   },
   {
@@ -603,10 +619,6 @@ export default [
     component: c1
   },
   {
-    path: "/fr/programme/themes/art/",
-    component: c1
-  },
-  {
     path: "/en/archive/themes/performance/",
     component: c2
   },
@@ -632,10 +644,6 @@ export default [
   },
   {
     path: "/en/program/themes/architecture/",
-    component: c1
-  },
-  {
-    path: "/en/program/themes/art/",
     component: c1
   },
   {

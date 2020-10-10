@@ -515,7 +515,7 @@ module.exports = function (api, options) {
                 project_body
                 date_time
                 extra_days {
-                  date 
+                  extra_day
                 }
                 location {
                   ... on prismic_Location {
@@ -551,6 +551,7 @@ module.exports = function (api, options) {
         }
       }`)
 
+      console.log(programsQuery);
       let data = programsQuery.data.prismic.allPrograms
 
       data.edges.forEach(({ node }) => {

@@ -2,10 +2,18 @@
   layout
     .columns.program-page
       .column.is-6.desktop.no-pad.gallery-column
-        .gallery
-          .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
-          //- .item(v-else) Add a featured image to this page in Prismic
-          //- prismic-image(:field='page.image', v-if='page.image')
+        .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
+          //- xmp {{ page.gallery }}
+          .items
+            .item(v-for='(item, i) in page.gallery', :style="'background-image: url('+item.gallery_image.url+')'", :data-n='i', :class='{ "is-active": (i == gallery.n)  }')
+          .dots
+            .dot(v-for='(item, i) in page.gallery', :data-n='i', :class='{ "is-active": (i == gallery.n)  }')
+          .control
+            .left(@click='galleryNav("-1")')
+            .right(@click='galleryNav("+1")')
+          
+        .gallery(v-if='page.image')
+          .item(:style="'background-image: url('+page.image.url+')'")
 
       .column.is-6.left
         .back(@click='goBack')
@@ -13,15 +21,16 @@
         .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
         
         .page-wrapper
+          //- xmp {{ page.categories }}
           .tags(v-if='page.categories').categories
-            .tag(v-for='cat in page.categories') {{ cat.category.name }}
+            .tag(v-for='cat in page.categories', v-if='cat.category !== null') {{ cat.category.name }}
           .tags(v-if='page._meta.tags').normal-tags
             .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
             //- g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
             //-   .name {{ tag }}
           
           table.meta
-            tr.date(v-if='page.date_time && !page.extra_days && !page.extra_days') 
+            tr.date(v-if='page.date_time && !page.extra_days') 
               td.label Date
               td {{ formatDate(page.date_time) }}
             tr.date(v-else-if='page.date_time && page.extra_days') 
@@ -32,9 +41,10 @@
                 //- xmp {{ page.date_time }}
                 //- xmp {{ page.extra_days }}
                 | {{ formatDate(page.date_time) }}
-                span(v-for='extra in page.extra_days')
-                  //- xmp {{ extra.date }}
-                  | , {{ formatDate(extra.date) }}
+                div(v-for='extra in page.extra_days', v-if='"date" in extra')
+                  //- xmp {{ extra.extra_day }}
+                  //- | , {{ formatDate(extra.extra_day) }}
+                  | {{ formatDate(extra.extra_day) }}
             tr.location(v-if='page.location')
               td.label(v-if='fr') Lieu
               td.label(v-else) Venue
@@ -46,7 +56,7 @@
             tr.duration(v-if='page.duration || page.duration_richtext')
               td.label(v-if='fr') Durée
               td.label(v-else) Duration
-              td(v-if='page.duration_richtext')
+              td(v-if='page.duration_richtext').duration-text
                 prismic-rich-text(:field='page.duration_richtext')
               td(v-else)
                 | {{ page.duration }} 
@@ -85,6 +95,9 @@ export default {
   },
   data () {
     return {
+      gallery: {
+        n: 0,
+      },
       back: {
         en: '←',
         fr: '←'
@@ -97,13 +110,29 @@ export default {
     }
   },
   methods: {
+    galleryNav(dir) {
+      if (this.page.gallery) {
+        const max = this.page.gallery.length -1
+        let frame = this.gallery.n
+        if (dir == '+1') frame += 1
+        else if (dir == '-1') frame -= 1
+        if (frame < 0) frame = max
+        if (frame > max) frame = 0
+        this.gallery.n = frame
+      }
+    },
     t (t1, t2) {
       if (this.lang == 'fr') return t2
       else t1
     },
     formatDate (date) {
-      if (this.lang == 'fr') return format(new Date(date), 'd MMMM', { locale: frLocale })
-      else return format(new Date(date), 'c MMMM')
+      let checkTime = format(new Date(date), 'HH:mm')
+      let form = 'd MMMM'
+      if (checkTime !== '01:00') {
+        form = 'd MMMM — HH:mm'  
+      }
+      if (this.lang == 'fr') return format(new Date(date), form, { locale: frLocale })
+      else return format(new Date(date), form)
     },
     tagLink (tag) {
       let ret
@@ -326,18 +355,29 @@ p em {
 }
 .meta {
   p {
-    margin: 0 !important; 
-    padding: 0 !important;
+    
+  }
+  .duration-text {
+    p {
+      margin: 0.2rem 0;
+      padding: 0;
+    }
   }
 }
+
     
 </style>
 
 <style lang='scss' scoped>
 .tags.categories {
   margin-bottom: 0;
+  width: 95%;
+}
+.project-title, .artist-title {
+  width: 100%;
 }
 .normal-tags {
+  width: 100%;
   .tag {
     /* opacity: 0.5; */
     /* font-size: 0.7rem; */
@@ -369,5 +409,72 @@ p em {
   
   /* text-align: right; */
   width: 100%;
+}
+.gallery.slider {
+  .items {
+    .item {
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: none;
+      &.is-active {
+        display: block;
+      }
+    }  
+  }
+  .dots {
+    $c: white;
+    /* mix-blend-mode: difference; */
+    /* filter: invert(100); */
+    width: 50vw;
+    position: fixed;
+    /* position: absolute; */
+    left: 0;
+    bottom: 0;
+    height: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dot {
+      background: transparent;
+      border: 1.5px $c solid;
+      height: 0.6rem;
+      width: 0.6rem;
+      border-radius: 1rem;
+      margin: 1rem;
+      margin-bottom: 1.5rem;
+      /* opacity: 0.3; */
+      /* background-blend-mode: difference; */
+      &.is-active {
+        /* opacity: 0.9; */
+        background: $c;  
+      }
+    }
+  }
+  .control {
+    .left, .right {
+      height: 100vh;
+      width: 25vw;
+      position: fixed;
+      top: 0;
+    }
+    .left {
+      left: 0;
+      cursor: w-resize;
+      &:hover {
+        background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
+      }
+    }
+    .right {
+      left: 25vw;
+      cursor: e-resize;
+      
+      &:hover {
+        background: linear-gradient(-90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
+      }
+    }
+  }
+  
 }
 </style>

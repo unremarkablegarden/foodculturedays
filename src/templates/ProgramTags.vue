@@ -41,9 +41,9 @@
             .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
               //- xmp {{ p.node._meta.uid }}
               //- .date {{ formatDate(p.node.date_time) }}
-              .image
-                img(:src='p.node.image.url', v-if='p.node.image')
-                div(v-else) &nbsp;
+              .image(v-if='p.node.image', :style='"background-image: url("+p.node.image.url+")"')
+                //- img(:src='', )
+                //- div(v-else) &nbsp
               
               //- xmp {{ p.node.date_time }}
               //- xmp {{ p.node.extra_days }}
@@ -116,13 +116,15 @@ export default {
       let sel = []
       this.program.forEach(x => {
         if (x.node.date_time) {
-          console.log(x.node.date_time);
-          console.log(this.formatDate(x.node.date_time));
+          // console.log(x.node.date_time);
+          // console.log(this.formatDate(x.node.date_time));
           sel.push(this.formatDate(x.node.date_time))
         }
         if (x.node.extra_days) {
           x.node.extra_days.forEach(x2 => {
-            sel.push(this.formatDate(x2.date))  
+            if (x2.extra_day) {
+              sel.push(this.formatDate(x2.extra_day))    
+            }
           })
         }
       })
@@ -242,7 +244,7 @@ export default {
             dates.push(this.formatDate(p.node.date_time))
             if (p.node.extra_days) {
               p.node.extra_days.forEach(d => {
-                dates.push(this.formatDate(d.date))
+                dates.push(this.formatDate(d.extra_day))
               })
             }
             let found = false
@@ -272,7 +274,11 @@ export default {
           
           
           let pCats = []
-          p.node.categories.forEach(c => pCats.push(c.category.name))
+          p.node.categories.forEach(c => {
+            if (c.category && c.category.name) {
+              pCats.push(c.category.name)  
+            }
+          })
           
           return this.toggledCats.every(x => pCats.includes(x))
           
@@ -374,7 +380,7 @@ export default {
   },
   methods: {
     clearFilters () {
-      console.log('lcear');
+      // console.log('lcear');
       this.toggledLocations = []
       this.toggledDates = []
       this.toggledLocations = []
@@ -383,7 +389,7 @@ export default {
     },
     formatDate (date) {
       if (this.lang == 'fr') return format(new Date(date), 'd MMMM', { locale: frLocale })
-      else return format(new Date(date), 'c MMMM')
+      else return format(new Date(date), 'd MMMM')
     },
     moreData(project) {
       let slug = project.path.split('/').slice(-1)[0]
@@ -615,17 +621,18 @@ em {
   .column {
     height: 100vh;
     overflow: auto;
-    /* height: 100%; */
-    /* overflow-y: auto; */
   }  
 }
 
 .image {
-  height: 7rem;
+  height: 30vw;
   width: 100%;
   background: #fee;  
   display: block;
   margin: 0 0 0.5rem;
+  background-color: #f5f5f5;
+  background-size: cover;
+  background-position: center;
 }
 
 .clear-filter .tag {
