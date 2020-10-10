@@ -874,6 +874,9 @@ xmp {
   // width:
   overflow: hidden;
   left: -100vw;
+  .marquee-wrapper {
+    display: none;
+  }
 }
 
 @font-face {

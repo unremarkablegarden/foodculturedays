@@ -5,7 +5,7 @@
         .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
           //- xmp {{ page.gallery }}
           .items
-            .item(v-for='(item, i) in page.gallery', :style="'background-image: url('+item.gallery_image.url+')'", :data-n='i', :class='{ "is-active": (i == gallery.n)  }')
+            .item(v-for='(item, i) in page.gallery', :style="'background-image: url('+item.gallery_image.url+')'", :data-n='i', :class='{ "is-active": (i == gallery.n)  }', @click='mobileNext()')
           .dots
             .dot(v-for='(item, i) in page.gallery', :data-n='i', :class='{ "is-active": (i == gallery.n)  }')
           .control
@@ -111,6 +111,9 @@ export default {
     }
   },
   methods: {
+    mobileNext() {
+      this.galleryNav('+1')
+    },
     galleryNav(dir) {
       if (this.page.gallery) {
         const max = this.page.gallery.length -1
@@ -312,18 +315,86 @@ p em {
     // position: relative;
     // z-index: 999;
   }
-  /* .gallery.slider {
-    height: 50vh;
-    
-  } */
+  .page-wrapper {
+    margin-top: 0rem !important;
+  }
+  
+  .gallery.slider {
+    position: relative;
+    z-index: 2000;
+    .items {
+      height: 50vh;
+      .item {
+        height: 50vh;
+        width: calc(100% + 1.4rem);
+        margin-left: -0.7rem;
+        /* height: 100vh; */
+        /* position: fixed; */
+        /* top: 0; */
+        /* left: 0; */
+        display: none;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #f5f5f5;
+        /* background-color: white; */
+        &.is-active {
+          display: block;
+        }
+      }  
+    }
+    .dots {
+      $c: rgba(0,0,0,1);
+      /* width: 50vw; */
+      /* position: fixed; */
+      /* left: 0; */
+      /* bottom: 0; */
+      /* height: 4vw; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(0.5rem);
+      .dot {
+        background: transparent;
+        border: 1px $c solid;
+        height: 0.3rem;
+        width: 0.3rem;
+        border-radius: 1rem;
+        margin: 0.4rem;
+        margin-bottom: 0rem;
+        &.is-active {
+          background: $c;  
+        }
+      }
+    }
+    .control {
+      /* position: relative; */
+      /* background: rgba(255,0,0,0.5);
+      margin-top: -100%;
+      height: 50vw;
+      width: 100%; */
+      .left, .right {
+      }
+      .left {
+        
+      }
+      .right {
+        
+      }
+    }
+  }
+  
 
 }
 
 // DEKSTOP
 /* @media (min-width: 960px) { */
 @media (min-width: 737px) {
+
+  
+  
   .image {
-    display: none;
+    /* display: none; */
     // margin-left: -1rem;
     // width: 50vw;
   }
@@ -358,6 +429,7 @@ p em {
     width: 90%;
   }
 }
+
 .meta {
   p {
     
@@ -415,67 +487,6 @@ p em {
   /* text-align: right; */
   width: 100%;
 }
-.gallery.slider {
-  .items {
-    .item {
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: none;
-      background-size: contain;
-      /* background-color: white; */
-      &.is-active {
-        display: block;
-      }
-    }  
-  }
-  .dots {
-    $c: rgba(0,0,0,1);
-    width: 50vw;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    height: 4vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .dot {
-      background: transparent;
-      border: 1.5px $c solid;
-      height: 0.6rem;
-      width: 0.6rem;
-      border-radius: 1rem;
-      margin: 1rem;
-      margin-bottom: 1.5rem;
-      &.is-active {
-        background: $c;  
-      }
-    }
-  }
-  .control {
-    .left, .right {
-      height: 100vh;
-      width: 25vw;
-      position: fixed;
-      top: 0;
-    }
-    .left {
-      left: 0;
-      cursor: w-resize;
-      &:hover {
-        background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
-      }
-    }
-    .right {
-      left: 25vw;
-      cursor: e-resize;
-      
-      &:hover {
-        background: linear-gradient(-90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
-      }
-    }
-  }
-  
-}
+
+
 </style>

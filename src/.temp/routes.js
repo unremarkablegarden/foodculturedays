@@ -187,11 +187,19 @@ export default [
     component: c1
   },
   {
+    path: "/fr/programme/themes/non-humain/",
+    component: c1
+  },
+  {
     path: "/fr/programme/themes/non-local/",
     component: c1
   },
   {
     path: "/en/program/themes/national-identity/",
+    component: c1
+  },
+  {
+    path: "/en/program/themes/non-human/",
     component: c1
   },
   {
@@ -437,6 +445,10 @@ export default [
   {
     path: "/fr/archives/themes/soin/",
     component: c2
+  },
+  {
+    path: "/fr/programme/themes/dechet/",
+    component: c1
   },
   {
     path: "/fr/programme/themes/dechets/",
@@ -943,6 +955,10 @@ export default [
     component: c3
   },
   {
+    path: "/fr/programme/2020/inbal-yomtovian-ir/",
+    component: c3
+  },
+  {
     path: "/en/archive/2018/yvonne-buchheim/",
     component: c4
   },
@@ -1036,6 +1052,10 @@ export default [
   },
   {
     path: "/en/program/2020/elisa-da-prato/",
+    component: c3
+  },
+  {
+    path: "/en/program/2020/free-entry/",
     component: c3
   },
   {
