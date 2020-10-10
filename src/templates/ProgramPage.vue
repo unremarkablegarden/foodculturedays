@@ -1,7 +1,7 @@
 <template lang="pug">
   layout
     .columns.program-page
-      .column.is-6.desktop.no-pad.gallery-column
+      .column.is-6.no-pad.gallery-column
         .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
           //- xmp {{ page.gallery }}
           .items
@@ -12,13 +12,14 @@
             .left(@click='galleryNav("-1")')
             .right(@click='galleryNav("+1")')
           
-        .gallery(v-if='page.image')
+        .gallery(v-if='page.image && !page.gallery.length')
           .item(:style="'background-image: url('+page.image.url+')'")
 
       .column.is-6.left
         .back(@click='goBack')
           img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
-        .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+        
+        //- .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
         
         .page-wrapper
           //- xmp {{ page.categories }}
@@ -311,6 +312,10 @@ p em {
     // position: relative;
     // z-index: 999;
   }
+  /* .gallery.slider {
+    height: 50vh;
+    
+  } */
 
 }
 
@@ -426,13 +431,9 @@ p em {
     }  
   }
   .dots {
-    /* $c: white; */
     $c: rgba(0,0,0,1);
-    /* mix-blend-mode: difference; */
-    /* filter: invert(100); */
     width: 50vw;
     position: fixed;
-    /* position: absolute; */
     left: 0;
     bottom: 0;
     height: 4vw;
@@ -447,10 +448,7 @@ p em {
       border-radius: 1rem;
       margin: 1rem;
       margin-bottom: 1.5rem;
-      /* opacity: 0.3; */
-      /* background-blend-mode: difference; */
       &.is-active {
-        /* opacity: 0.9; */
         background: $c;  
       }
     }

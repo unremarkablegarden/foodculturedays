@@ -1,35 +1,43 @@
 <template lang="pug">
   layout
+    .filters.mobile
+      .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
+      .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }') {{ locationsTitle }}
+      .toggle(@click='toggleFilter("categories")', :class='{ "is-active": (mobileCurrentFilter == "categories") }') {{ activitiesTitle }}
+      .toggle(@click='toggleFilter("tags")', :class='{ "is-active": (mobileCurrentFilter == "tags") }') {{ themesTitle }}
+      .togglex(@click='clearFilters') 
+        span(v-if='anyFiltersAreSet') X
+        span(v-else).white X
+      
     .columns.tags-page.scroll
-      .column.is-6.right
+      .column.is-6.right.my-filters
         .inner
           .flex-wrapper
-            .flex
+            .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }')
               h2.tagtitle {{ locationsTitle }}
               .locations
                 .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
                 
-            .flex
+            .flex.filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
               h2.tagtitle Dates
               .dates
                 .date(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
           
-          h2.tagtitle {{ activitiesTitle }}
-          .categories.tags
-            //- xmp {{ categories }}
-            .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
-              span {{ cat }}
-              
-          h2.tagtitle {{ themesTitle }}
-          .tags
-            //- xmp {{ tags }}
-            .tag(
-                v-for='(tag, i) in tags', 
-                @click='tagToggle(tag)'
-                v-bind:class='toggledTag(tag)'
-              )
-              //- .name {{ ucfirst(tag) }}
-              .name {{ tag }}
+          .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
+            h2.tagtitle {{ activitiesTitle }}
+            .categories.tags
+              .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
+                span {{ cat }}
+          
+          .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
+            h2.tagtitle {{ themesTitle }}
+            .tags
+              .tag(
+                  v-for='(tag, i) in tags', 
+                  @click='tagToggle(tag)'
+                  v-bind:class='toggledTag(tag)'
+                )
+                .name {{ tag }}
         
         .clear-filter.tags(v-if='anyFiltersAreSet')
           .tag(@click='clearFilters') {{ resetLabel }}
@@ -90,6 +98,7 @@ export default {
       toggledCats: [],
       toggledLocations: [],
       toggledDates: [],
+      mobileCurrentFilter: null
     }
   },
   computed: {
@@ -379,6 +388,10 @@ export default {
   //   }
   },
   methods: {
+    toggleFilter (which) {
+      if (this.mobileCurrentFilter == which) this.mobileCurrentFilter = null
+      else this.mobileCurrentFilter = which
+    },
     clearFilters () {
       // console.log('lcear');
       this.toggledLocations = []
@@ -386,6 +399,7 @@ export default {
       this.toggledLocations = []
       this.toggledTags = []
       this.toggledCats = []
+      this.mobileCurrentFilter = null
     },
     formatDate (date) {
       if (this.lang == 'fr') return format(new Date(date), 'd MMMM', { locale: frLocale })
@@ -459,14 +473,15 @@ export default {
 $green: rgb(17,230,54);
 
 /* @media (max-width: 960px) { */
-@media (min-width: 737px) {
+@media (max-width: 737px) {
   .columns {
     display: flex;
     flex-direction: column-reverse;
   }
   .posts-col {
     /* margin-top: 1rem; */
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
+    padding-top: 1.6rem;
     /* padding-top: 3rem; */
   }
   .tags-col {
@@ -477,12 +492,84 @@ $green: rgb(17,230,54);
     margin-top: 0 !important;
     margin-bottom: 5rem;
   }
+  .clear-filter {
+    display: none;
+    /* .tag {
+      font-family: 'CE', Times, serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1em;
+      div {
+        text-transform: lowercase !important;    
+      }
+    } */
+  }
+  .filters {
+    position: fixed;
+    z-index: 1;
+    /* top: 11vw; */
+    top: 2.7rem;
+    width: calc(100vw - 1.4rem);
+    display: flex;
+    margin: 1rem 0;
+    justify-content: space-between;
+    .toggle {
+      background: white;
+      font-family: 'CE', Times, serif;
+      font-style: italic;
+      padding: 0.3rem 0.3rem 0.1rem;
+      border: 1px black solid;
+      font-size: 0.9rem;
+      line-height: 1em;
+      text-transform: lowercase;
+      &.is-active {
+        background: #000;
+        color: white;
+      }
+      
+    }
+    .togglex {
+      font-size: 1.2rem;
+      /* padding: 0.2rem 0.2rem 0 0; */
+      transform: translate(-.25rem, .25rem);
+      .white {
+        color: transparent;
+      }
+    }
+  }
+  .my-filters {
+    position: absolute;
+    top: 0;
+    background: white;
+    width: 100vw;
+    padding-top: 26vw;
+    /* padding-bottom: 1rem; */
+    .filter-section {
+      display: none;
+      &.is-active {
+        display: block;
+      }
+    }
+  }  
 }
 /* @media (min-width: 960px) { */
 @media (min-width: 737px) {
   .posts-col {
     padding-top: 6vw;
   }
+  .columns.scroll {
+    .column {
+      height: 100vh;
+      overflow: auto;
+    }  
+  }
+  .flex-wrapper {
+    display: flex;
+    .flex {
+      width: 50%;
+    }
+  }
+
 }
 
 .tagtitle {
@@ -609,19 +696,6 @@ em {
       }
     }
   }
-}
-.flex-wrapper {
-  display: flex;
-  .flex {
-    width: 50%;
-  }
-}
-
-.columns.scroll {
-  .column {
-    height: 100vh;
-    overflow: auto;
-  }  
 }
 
 .image {
