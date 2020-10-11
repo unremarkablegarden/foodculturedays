@@ -76,7 +76,7 @@
               td(v-else)
                 | {{ page.duration }} 
             tr.participants(v-if='page.participants')
-              td(v-if='fr').label Remarquer
+              td(v-if='fr').label Notes
               td(v-if='fr')
                 | Capacité maximale de {{ page.participants }} personnes
               td(v-if='en').label Note
