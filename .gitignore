@@ -21,3 +21,6 @@ yarn-error.log*
 *.sw?
 .cache
 .now
+
+.temp
+src/.temp
