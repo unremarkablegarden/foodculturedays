@@ -26,7 +26,7 @@
               .right(@click='galleryNav("+1")')
           
         .gallery(v-if='page.image && !page.gallery.length')
-          .item(:style="'background-image: url('+page.image.url+')'")
+          .item(:style="'background-image: url('+page.image.url+')'", v-if='page.image')
 
       .column.is-6.left
         .back(@click='goBack')
@@ -188,7 +188,11 @@ export default {
   },
   computed: {
     page () {
-      return this.$context.node
+      let page = this.$context.node
+      page.gallery = page.gallery.filter(p => {
+        return p.gallery_image  !== null
+      })
+      return page
     },
     fr () {
       if (this.lang == 'fr') return true
