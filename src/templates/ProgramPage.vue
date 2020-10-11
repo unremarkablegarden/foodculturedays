@@ -46,45 +46,65 @@
           
           table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
             tr.date(v-if='page.date_time && !page.extra_days') 
-              td.label Date
-              td {{ formatDate(page.date_time) }}
+              td.label 
+                .inside Date
+              td 
+                .inside {{ formatDate(page.date_time) }}
             tr.date(v-else-if='page.date_time && page.extra_days') 
               td.label 
-                span(v-if='fr') Dater
-                span(v-else) Dates
+                .inside 
+                  span(v-if='fr') Dater
+                  span(v-else) Dates
               td 
-                //- xmp {{ page.date_time }}
-                //- xmp {{ page.extra_days }}
-                | {{ formatDate(page.date_time) }}
-                div(v-for='extra in page.extra_days', v-if='"extra_day" in extra')
-                  //- xmp {{ extra.extra_day }}
-                  //- | , {{ formatDate(extra.extra_day) }}
-                  | {{ formatDate(extra.extra_day) }}
+                .inside 
+                  //- xmp {{ page.date_time }}
+                  //- xmp {{ page.extra_days }}
+                  | {{ formatDate(page.date_time) }}
+                  div(v-for='extra in page.extra_days', v-if='"extra_day" in extra')
+                    //- xmp {{ extra.extra_day }}
+                    //- | , {{ formatDate(extra.extra_day) }}
+                    | {{ formatDate(extra.extra_day) }}
             tr.location(v-if='page.location')
-              td.label(v-if='fr') Lieu
-              td.label(v-else) Venue
-              td {{ page.location.location[0].text }}
+              td.label(v-if='fr') 
+                .inside Lieu
+              td.label(v-else) 
+                .inside Venue
+              td 
+                .inside {{ page.location.location[0].text }}
             tr.price(v-if='page.price')
-              td.label(v-if='fr') Prix
-              td.label(v-else) Price
-              td {{ page.price }} 
+              td.label(v-if='fr') 
+                .inside Prix
+              td.label(v-else) 
+                .inside Price
+              td 
+                .inside {{ page.price }} 
             tr.duration(v-if='page.duration || page.duration_richtext')
-              td.label(v-if='fr') Durée
-              td.label(v-else) Duration
+              td.label(v-if='fr') 
+                .inside Durée
+              td.label(v-else) 
+                .inside Duration
               td(v-if='page.duration_richtext').duration-text
-                prismic-rich-text(:field='page.duration_richtext')
+                .inside 
+                  prismic-rich-text(:field='page.duration_richtext')
               td(v-else)
-                | {{ page.duration }} 
+                .inside 
+                  | {{ page.duration }} 
             tr.participants(v-if='page.participants')
-              td(v-if='fr').label Notes
+              td(v-if='fr').label 
+                .inside Notes
               td(v-if='fr')
-                | Capacité maximale de {{ page.participants }}
-              td(v-if='en').label Note
+                .inside 
+                  | Capacité maximale de {{ page.participants }}
+              td(v-if='en').label 
+                .inside Note
               td(v-if='en')
-                | Maximum capacity of {{ page.participants }}
+                .inside 
+                  | Maximum capacity of {{ page.participants }}
             tr.activation(v-if='page.activation')
-              td.label Activation
-              td {{ page.activation }}
+              td.label 
+                .inside Activation
+              td 
+                .inside {{ page.activation }}
               
               
           prismic-rich-text(:field='page.project', v-if='page.project').project-title
@@ -191,13 +211,13 @@ export default {
     browserTitle () {
       let p = this.page.project
       let a = this.page.artist
-      if (p && a) {
-        p = p[0].text
-        a = a[0].text
-      }
-      let t = p + ' / ' + a
+      if (p) { p = p[0].text }
+      if (a) { a = a[0].text }
+      let t = p
+      if (a) {  t = t + ' / ' + a }
       return t
     },
+    
     page () {
       let page = this.$context.node
       page.gallery = page.gallery.filter(p => {
@@ -546,7 +566,7 @@ p em {
   }
   .duration-text {
     p {
-      margin: 0.2rem 0;
+      /* margin: 0.2rem 0; */
       padding: 0;
     }
   }
@@ -585,7 +605,16 @@ p em {
   padding: 0.35rem 0.5rem 0.4rem;
   width: 100%;
   td {
-    margin: 0.2rem 0
+    /* margin: 0.2rem 0 */
+  }
+  tr {
+    /* padding: 0.2rem 0 */
+  }
+  .inside {
+    font-size: 0.9rem;
+    line-height: 1.2em;
+    /* background: pink; */
+    padding: 0.2rem 0;
   }
 }
 .label {
