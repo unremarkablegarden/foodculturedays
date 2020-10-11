@@ -43,7 +43,8 @@
             //- g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
             //-   .name {{ tag }}
           
-          table.meta
+          
+          table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
             tr.date(v-if='page.date_time && !page.extra_days') 
               td.label Date
               td {{ formatDate(page.date_time) }}
@@ -121,7 +122,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$context.plainTitle
+      title: this.browserTitle
     }
   },
   methods: {
@@ -187,6 +188,16 @@ export default {
     }
   },
   computed: {
+    browserTitle () {
+      let p = this.page.project
+      let a = this.page.artist
+      if (p && a) {
+        p = p[0].text
+        a = a[0].text
+      }
+      let t = p + ' / ' + a
+      return t
+    },
     page () {
       let page = this.$context.node
       page.gallery = page.gallery.filter(p => {
