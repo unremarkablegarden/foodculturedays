@@ -420,7 +420,9 @@ $headingSize: 2.2rem;
       .image {
         // background-image: url(https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format);
         
-        background-image: url(https://images.prismic.io/foodculturedays2020/8234a78e-d78e-4366-ac51-6ef69205d070_new-home.jpg?auto=compress,format);
+        /* background-image: url(https://images.prismic.io/foodculturedays2020/8234a78e-d78e-4366-ac51-6ef69205d070_new-home.jpg?auto=compress,format); */
+        
+        background-image: url(https://images.prismic.io/foodculturedays2020/4c9181ba-1442-434d-95f7-b208c5d4199a_FCD_agenda_riviera_2.jpg?auto=compress,format);
         background-position: top center;
         background-size: cover;
         position: fixed;
