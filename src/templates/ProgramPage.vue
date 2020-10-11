@@ -78,10 +78,10 @@
             tr.participants(v-if='page.participants')
               td(v-if='fr').label Notes
               td(v-if='fr')
-                | Capacité maximale de {{ page.participants }} personnes
+                | Capacité maximale de {{ page.participants }}
               td(v-if='en').label Note
               td(v-if='en')
-                | Maximum capacity of {{ page.participants }} people
+                | Maximum capacity of {{ page.participants }}
             tr.activation(v-if='page.activation')
               td.label Activation
               td {{ page.activation }}
