@@ -53,8 +53,9 @@
             tr.date(v-else-if='page.date_time && page.extra_days') 
               td.label 
                 .inside 
-                  span(v-if='fr') Dater
-                  span(v-else) Dates
+                  //- span(v-if='fr') Dater
+                  //- span(v-else) Dates
+                  span Dates
               td 
                 .inside 
                   //- xmp {{ page.date_time }}
