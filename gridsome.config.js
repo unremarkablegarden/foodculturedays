@@ -16,7 +16,7 @@
 // if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require('./purgecss.config.js')))
 
 module.exports = {
-  siteName: 'Foodculture days',
+  siteName: 'foodculture days',
   // siteDescription: "A multidisciplinary platform for knowledge exchange",
   siteDescription: 'A multidisciplinary platform for knowledge exchange',
 
