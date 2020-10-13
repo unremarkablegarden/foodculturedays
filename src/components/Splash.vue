@@ -158,12 +158,23 @@ export default {
           
       var world = engine.world
       world.gravity.y = 1.0;
+        
       
       let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
       let winW = (iOS) ? screen.width : window.innerWidth
-      let winH = (iOS) ? screen.height : window.innerHeight
+      // let winH = (iOS) ? screen.height : window.innerHeight
+      let winH = (iOS) ? (screen.availHeight - 160) : (window.innerHeight * 0.76)
+      
+      let iPhone = /iPhone/.test(navigator.userAgent) && !window.MSStream
+      let aspect = window.screen.width / window.screen.height
+      if (iPhone && aspect.toFixed(3) === "0.462") {
+        // I'm an iPhone X or 11...
+        winH -= 60
+      }
+      // console.log(navigator.userAgent);
+      
           // winH -= 160
-      winH = winH * 0.76
+      // winH = winH * 0.76
       
       this.render = Render.create({
         element: this.$el.querySelector('#matter'),

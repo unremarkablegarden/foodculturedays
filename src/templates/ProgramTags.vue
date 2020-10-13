@@ -519,6 +519,7 @@ $green: rgb(17,230,54);
     z-index: 1;
     /* top: 11vw; */
     top: 2.7rem;
+    /* left: 0; */
     width: calc(100vw - 1.4rem);
     display: flex;
     margin: 1rem 0;
@@ -550,6 +551,7 @@ $green: rgb(17,230,54);
   .my-filters {
     position: absolute;
     top: 0;
+    left: 0;
     background: white;
     width: 100vw;
     padding-top: 26vw;

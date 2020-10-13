@@ -386,7 +386,7 @@ p em {
   
   .gallery.slider {
     position: relative;
-    z-index: 2000;
+    z-index: 888;
     .items {
       height: 50vh;
       .item {

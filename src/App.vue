@@ -868,7 +868,8 @@ xmp {
   box-sizing: border-box;
   background: white;
   z-index: 1020;
-  height: calc(100vh - 6.85rem);
+  /* height: calc(100vh - 6.85rem); */
+  height: calc(100vh);
   // height: 0;
 }
 .is-hidden-menu {
