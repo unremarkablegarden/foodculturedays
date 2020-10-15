@@ -17,17 +17,30 @@
               h2.tagtitle {{ locationsTitle }}
               .locations
                 .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+              .close-filter.tags
+                .tag(@click='toggleFilter("close")')
+                  span(v-if="lang == 'en'") close
+                  span(v-else) fermer
+              
                 
             .flex.filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
               h2.tagtitle Dates
               .dates
                 .date(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
+              .close-filter.tags
+                .tag(@click='toggleFilter("close")')
+                  span(v-if="lang == 'en'") close
+                  span(v-else) fermer
           
           .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
             h2.tagtitle {{ activitiesTitle }}
             .categories.tags
               .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
                 span {{ cat }}
+            .close-filter.tags
+              .tag(@click='toggleFilter("close")')
+                span(v-if="lang == 'en'") close
+                span(v-else) fermer
           
           .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
             h2.tagtitle {{ themesTitle }}
@@ -38,6 +51,10 @@
                   v-bind:class='toggledTag(tag)'
                 )
                 .name {{ tag }}
+            .close-filter.tags
+              .tag(@click='toggleFilter("close")')
+                span(v-if="lang == 'en'") close
+                span(v-else) fermer
         
         .clear-filter.tags(v-if='anyFiltersAreSet')
           .tag(@click='clearFilters') {{ resetLabel }}
@@ -393,7 +410,8 @@ export default {
       return image
     },
     toggleFilter (which) {
-      if (this.mobileCurrentFilter == which) this.mobileCurrentFilter = null
+      if (which == 'close') this.mobileCurrentFilter = null
+      else if (this.mobileCurrentFilter == which) this.mobileCurrentFilter = null
       else this.mobileCurrentFilter = which
     },
     clearFilters () {
@@ -486,7 +504,8 @@ $green: rgb(17,230,54);
 @media (max-width: 737px) {
   .columns {
     display: flex;
-    flex-direction: column-reverse;
+    /* flex-direction: column-reverse; */
+    flex-direction: column;
   }
   .posts-col {
     /* margin-top: 1rem; */
@@ -515,10 +534,12 @@ $green: rgb(17,230,54);
     } */
   }
   .filters {
-    position: fixed;
+    /* position: fixed; */
+    
+    position: relative;
     z-index: 1;
     /* top: 11vw; */
-    top: 2.7rem;
+    /* top: 2.7rem; */
     /* left: 0; */
     width: calc(100vw - 1.4rem);
     display: flex;
@@ -549,13 +570,16 @@ $green: rgb(17,230,54);
     }
   }
   .my-filters {
-    position: absolute;
-    top: 0;
-    left: 0;
+    /* position: absolute; */
+    /* top: 0; */
+    /* left: 0; */
+    position: relative;
     background: white;
-    width: 100vw;
-    padding-top: 26vw;
+    /* width: 100vw; */
+    /* padding-top: 26vw; */
     /* padding-bottom: 1rem; */
+    /* padding-top: 3rem; */
+    margin-bottom: -3rem;
     .filter-section {
       display: none;
       &.is-active {
@@ -566,6 +590,9 @@ $green: rgb(17,230,54);
 }
 /* @media (min-width: 960px) { */
 @media (min-width: 737px) {
+  .close-filter {
+    display: none !important;
+  }
   .posts-col {
     padding-top: 6vw;
     padding-bottom: 5rem;
@@ -679,6 +706,9 @@ em {
 
 .locations, .dates {
   margin-bottom: 2rem;
+  @media (max-width: 737px) {
+    margin-bottom: 1rem;
+  }
   font-size: 0.95rem;
   margin-left: 2rem;
   .location, .date {
@@ -726,4 +756,11 @@ em {
 .clear-filter .tag {
   text-transform: none !important;
 }
+
+.close-filter .tag {
+  text-transform: lowercase !important;
+  font-family: 'CE', Times, serif;
+  font-style: italic;
+}
+
 </style>
