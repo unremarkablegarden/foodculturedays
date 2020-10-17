@@ -1,6 +1,6 @@
 <template lang="pug">
   layout
-    .columns.program-page(v-if='showit')
+    .columns.program-page
       .column.is-6.no-pad.gallery-column
         //- xmp {{ page.gallery }}
         .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
@@ -139,7 +139,7 @@ export default {
         en: '←',
         fr: '←'
       },
-      showit: false
+      // showit: false
     }
   },
   metaInfo() {
@@ -148,15 +148,15 @@ export default {
     }
   },
   created () {
-    this.showit = true
+    // this.showit = true
   },
   mounted () {
-    this.showit = true
+    // this.showit = true
   },
   watch:{
     $route (to, from){
       console.log('router change')
-      this.showit = false
+      // this.showit = false
     }
   },
   beforeDestroy () {
@@ -164,7 +164,7 @@ export default {
   },
   destroyed () {
     console.log('destroyed');
-    this.showit = false
+    // this.showit = false
   },
   methods: {
     mobileNext() {
