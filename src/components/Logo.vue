@@ -82,7 +82,11 @@ export default {
         let path = this.$route.path
         if (path.includes('/fr/')) { home = '/fr/'}
         if (path !== '/en/' && path !== '/fr/' && path !== '/' ) {
-          this.$router.push(home)
+          if (path.includes('/2020/')) {
+            window.location.replace(home) 
+          } else {
+            this.$router.push(home)  
+          }
         }
       }, top);
     },
