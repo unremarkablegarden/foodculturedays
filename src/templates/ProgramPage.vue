@@ -1,6 +1,6 @@
 <template lang="pug">
   layout
-    .columns.program-page
+    .columns.program-page(v-if='showit')
       .column.is-6.no-pad.gallery-column
         //- xmp {{ page.gallery }}
         .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
@@ -138,13 +138,33 @@ export default {
       back: {
         en: '←',
         fr: '←'
-      }
+      },
+      showit: false
     }
   },
   metaInfo() {
     return {
       title: this.browserTitle
     }
+  },
+  created () {
+    this.showit = true
+  },
+  mounted () {
+    this.showit = true
+  },
+  watch:{
+    $route (to, from){
+      console.log('router change')
+      this.showit = false
+    }
+  },
+  beforeDestroy () {
+    console.log('beforeDestroy');
+  },
+  destroyed () {
+    console.log('destroyed');
+    this.showit = false
   },
   methods: {
     mobileNext() {
@@ -386,7 +406,7 @@ p em {
   
   .gallery.slider {
     position: relative;
-    // z-index: 888;
+    z-index: 888;
     .items {
       height: 50vh;
       .item {
@@ -408,6 +428,9 @@ p em {
         }
       }  
     }
+    .navs {
+      height: 0;
+    }
     .dots {
       $c: rgba(0,0,0,1);
       /* width: 50vw; */
@@ -418,7 +441,7 @@ p em {
       display: flex;
       justify-content: center;
       align-items: center;
-      transform: translateY(0.5rem);
+      transform: translateY(-1.5rem);
       .dot {
         background: transparent;
         border: 1px $c solid;

@@ -2,6 +2,7 @@
   layout
     #partners
       .page-wrapper
+        //- xmp {{ this.$context.data.node.gallery }}
         .img-wrapper(v-if='$context.data')
           img(:src="image.mobile").mobile
           img(:src="image.desktop").desktop
@@ -49,7 +50,7 @@ export default {
       if (this.$context.data.node.gallery.length) {
         let i1 = this.$context.data.node.gallery[0]
         let i2 = this.$context.data.node.gallery[1]
-        if (i1.item.dimensions.width > i2.item.dimensions.width) {
+        if (i1.item.dimensions.width >= i2.item.dimensions.width) {
           images.mobile = i2.item.url
           images.desktop = i1.item.url
         }
