@@ -186,7 +186,7 @@ export default {
       insecure:true,
       unsupported:true,
       api:2020.06,
-      // test: true,
+      test: false,
       shift_page_down: false,
       reminder: 9999,
       // after how many hours should the message reappear
@@ -987,4 +987,14 @@ xmp {
         display: inline-block;
         background: no-repeat 0px center;
     }
+</style>
+
+
+<style lang='scss'>
+.buorg-pad {
+  padding: 20px !important;
+}
+#buorgig, #buorgul, #buorgpermanent {
+  background: black !important;
+}
 </style>

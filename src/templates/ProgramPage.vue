@@ -2,9 +2,7 @@
   layout
     .columns.program-page
       .column.is-6.no-pad.gallery-column
-        //- xmp {{ page.gallery }}
         .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
-          //- xmp {{ page.gallery }}
           .items
             .item(
               v-for='(item, i) in page.gallery', 
@@ -32,16 +30,13 @@
         .back(@click='goBack')
           img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
         
-        //- .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
-        
         .page-wrapper
-          //- xmp {{ page.categories }}
           .tags(v-if='page.categories').categories
             .tag(v-for='cat in page.categories', v-if='cat.category !== null') {{ cat.category.name }}
           .tags(v-if='page._meta.tags').normal-tags
-            .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
-            //- g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
-            //-   .name {{ tag }}
+            //- .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
+            g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
+              .name {{ tag }}
           
           
           table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
@@ -234,7 +229,11 @@ export default {
       let a = this.page.artist
       if (p) { p = p[0].text }
       if (a) { a = a[0].text }
-      let t = p
+      
+      let t
+      if (p) t = p
+      
+      console.log(p);
       if (a) {  t = t + ' / ' + a }
       return t
     },

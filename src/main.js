@@ -6,6 +6,8 @@ import { animatedScrollTo } from 'es6-scroll-to'
 import anime from 'animejs/lib/anime.min.js'
 import DefaultLayout from '~/layouts/Default.vue'
 import VueAnalytics from 'vue-analytics'
+// import XBrowserUpdate from 'x-browser-update'
+
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   
@@ -14,8 +16,10 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   })
   // head.script.push({
   //   src: 'https://browser-update.org/update.min.js',
-  //   body: true
+  //   body: true,
+  //   test: true,
   // })
+  // Vue.use(XBrowserUpdate)
   
   let navLang = 'en'
   if (process.isClient) {
