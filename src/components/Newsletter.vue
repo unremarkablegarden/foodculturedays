@@ -16,6 +16,9 @@
     
     .downloads
       .newsletter-link
+        a(href='https://mailchi.mp/887a59a62196/foodculturedays-26-29-nov-2020-on-ne-gardera-que-les-miettes', target="_blank") Newsletter 2020 #3
+        span.arrow.green &nbsp;&rarr;&nbsp;
+      .newsletter-link
         a(href='https://mailchi.mp/111aefccdaec/notre-biennale-2020', target="_blank") Newsletter 2020 #2
         span.arrow.green &nbsp;&rarr;&nbsp;
       .newsletter-link
