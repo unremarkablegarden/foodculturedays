@@ -10,6 +10,11 @@ export default
     // PROGRAM
     { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
     
+    
+    // Tickets / Billetterie
+    { title: ['Tickets', 'Billetterie'], to: ['/en/tickets', '/fr/billetterie'] },
+    
+    
     // PROJECTS
     // { title: ['Projects', 'Projets'], to: ['/en/projects', '/fr/projets'] },
     // PARTICIPANTS
