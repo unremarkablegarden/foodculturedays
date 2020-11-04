@@ -1,7 +1,7 @@
 <template lang="pug">
   #app
     #preloader
-      img(src="https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format")
+      //- img(src="https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format")
     //- Loader
     .body(v-bind:class="{ 'splash': splash, 'loaded': loaded, 'home': isHome }")
       Logo
@@ -34,6 +34,7 @@ import Loader from '~/components/Loader.vue'
 import Logo from '~/components/Logo.vue'
 import Splash from '~/components/Splash.vue'
 import Menu from '~/components/Menu.vue'
+// import Statement from '~/components/Statement.vue'
 
 import {animatedScrollTo} from 'es6-scroll-to'
 

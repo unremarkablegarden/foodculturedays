@@ -1,17 +1,20 @@
 <template lang="pug">
   layout
     //- Splash
+    Statement
     Menu(v-if='notSlashIndex && !isMobile')
 </template>
 
 <script>
 import Menu from '~/components/Menu.vue'
 import Splash from '~/components/Splash.vue'
+import Statement from '~/components/Statement.vue'
 
 export default {
   components: {
     Menu, 
-    Splash
+    Splash,
+    Statement
   },
   metaInfo: {
     title: function () {

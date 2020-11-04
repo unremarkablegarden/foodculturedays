@@ -329,6 +329,7 @@ module.exports = function (api, options) {
               gallery {
                 item
               }
+              excerpt
               _meta {
                 uid
                 lang
