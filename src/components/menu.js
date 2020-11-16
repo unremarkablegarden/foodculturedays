@@ -12,7 +12,7 @@ export default
     
     
     // Tickets / Billetterie
-    { title: ['Tickets', 'Billetterie'], to: ['/en/tickets', '/fr/billetterie'] },
+    // { title: ['Tickets', 'Billetterie'], to: ['/en/tickets', '/fr/billetterie'] },
     
     
     // PROJECTS

@@ -16,7 +16,9 @@
             .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }')
               h2.tagtitle {{ locationsTitle }}
               .locations
-                .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+                .location.is-active RADIO-40
+                //- .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+                .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
               .close-filter.tags
                 .tag(@click='toggleFilter("close")')
                   span(v-if="lang == 'en'") close
@@ -26,7 +28,8 @@
             .flex.filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
               h2.tagtitle Dates
               .dates
-                .date(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
+                //- .date(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
+                .date.disabled(v-for='date in dates')  {{ date }}
               .close-filter.tags
                 .tag(@click='toggleFilter("close")')
                   span(v-if="lang == 'en'") close
@@ -703,6 +706,11 @@ em {
 //     content: ' '
 //   }
 // }
+
+.location.disabled,
+.date.disabled {
+  opacity: 0.3;
+}
 
 .locations, .dates {
   margin-bottom: 2rem;
