@@ -39,7 +39,7 @@
               .name {{ tag }}
           
           
-          table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
+          //- table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
             tr.date(v-if='page.date_time && !page.extra_days') 
               td.label 
                 .inside Date
