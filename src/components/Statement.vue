@@ -93,14 +93,17 @@ export default {
 }
 @media (max-width: 736px) {
   #statement {
-    width: 90vw;
-    font-size: 0.9rem;
+    width: 94vw;
+    font-size: 0.8rem;
     padding: 0.5rem 1rem;
+    top: 7vh;
+    left: 3vw;
+    transform: none;
     h4 {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
     em {
-      font-size: 0.97rem !important;
+      font-size: 0.87rem !important;
     }
   }
 }
