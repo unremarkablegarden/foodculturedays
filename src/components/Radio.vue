@@ -30,7 +30,7 @@ export default {
   position: fixed;
   bottom: 1.5rem;
   @media (max-width: 736px) {
-    bottom: 3.5rem;
+    bottom: 4.5rem;
   }
   left: 1.5rem;
   /* width: calc(100vh - 2rem); */

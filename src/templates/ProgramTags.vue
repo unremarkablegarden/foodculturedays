@@ -74,6 +74,15 @@
               
       .column.is-6.left.posts-col
         .inner(v-if='!moving')
+          .icons-mobile
+            .icon
+              img(src='/doc.png')
+              a(href='/menu.pdf', target='_blank') Menus à emporter 
+              span.small (PDF)
+            .icon
+              img(src='/doc.png', target='_blank')
+              a(href='/programme.pdf') Radio programme 
+              span.small (PDF)
           .links(v-if='program.length')
             .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
               
@@ -513,6 +522,15 @@ export default {
 <style lang="scss" scoped>
 $green: rgb(17,230,54);
 
+.icons-mobile {
+  display: none;
+}
+@media (max-width: 737px) {
+  .icons-mobile {
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
 .icon {
   img {
     height: 1rem;
