@@ -5,6 +5,7 @@
     //- Loader
     .body(v-bind:class="{ 'splash': splash, 'loaded': loaded, 'home': isHome }")
       Logo
+      Radio
       Splash(v-bind:class="{ 'splash': splash }")
       #buttons(v-bind:class="{ 'abs': animating }")
         Social#social
@@ -35,6 +36,7 @@ import Logo from '~/components/Logo.vue'
 import Splash from '~/components/Splash.vue'
 import Menu from '~/components/Menu.vue'
 // import Statement from '~/components/Statement.vue'
+import Radio from '~/components/Radio.vue'
 
 import {animatedScrollTo} from 'es6-scroll-to'
 
@@ -45,7 +47,7 @@ if (process.isClient) {
 
 export default {
   components: {
-    Lang, Social, Loader, Logo, Splash, Menu
+    Lang, Social, Loader, Logo, Splash, Menu, Radio
   },
   data () {
     return {

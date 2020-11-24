@@ -30,6 +30,16 @@
               .dates
                 //- .date(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
                 .date.disabled(v-for='date in dates')  {{ date }}
+              .icon
+                img(src='/doc.png')
+                a(href='/menu.pdf', target='_blank') Menus à emporter 
+                span.small (PDF)
+              .icon
+                img(src='/doc.png', target='_blank')
+                a(href='/programme.pdf') Radio programme 
+                span.small (PDF)
+                
+              
               .close-filter.tags
                 .tag(@click='toggleFilter("close")')
                   span(v-if="lang == 'en'") close
@@ -502,6 +512,26 @@ export default {
 
 <style lang="scss" scoped>
 $green: rgb(17,230,54);
+
+.icon {
+  img {
+    height: 1rem;
+    width: auto;
+    margin-right: 0.4rem;
+    margin-top: 0.3rem;
+    transform: translate(0px, 1.7px);
+  }
+  a {
+    padding-bottom: 0.1rem;
+    display: inline-block;
+    font-size: 0.95rem;
+  }
+  .small {
+    font-size: 0.7rem;
+    transform: translate(5px, -1px);
+    display: inline-block;
+  }
+}
 
 /* @media (max-width: 960px) { */
 @media (max-width: 737px) {
