@@ -30,13 +30,13 @@
               .dates
                 //- .date(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
                 .date.disabled(v-for='date in dates')  {{ date }}
-              .icon
+              //- .icon
                 img(src='/doc.png')
                 a(href='/menu.pdf', target='_blank') Menus à emporter 
                 span.small (PDF)
               .icon
                 img(src='/doc.png', target='_blank')
-                a(href='/programme.pdf') Radio programme 
+                a(href='/programme.pdf') Radio program 
                 span.small (PDF)
                 
               
@@ -81,7 +81,7 @@
               span.small (PDF)
             .icon
               img(src='/doc.png', target='_blank')
-              a(href='/programme.pdf') Radio programme 
+              a(href='/programme.pdf') Radio program 
               span.small (PDF)
           .links(v-if='program.length')
             .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
