@@ -75,7 +75,7 @@
       .column.is-6.left.posts-col
         .inner(v-if='!moving')
           .icons-mobile
-            .icon
+            //- .icon
               img(src='/doc.png')
               a(href='/menu.pdf', target='_blank') Menus à emporter 
               span.small (PDF)
