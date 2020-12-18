@@ -36,7 +36,7 @@
                 span.small (PDF)
               .icon
                 img(src='/doc.png', target='_blank')
-                a(href='/programme.pdf') Radio program 
+                a(href='/programme.pdf') Program 
                 span.small (PDF)
                 
               
@@ -81,7 +81,7 @@
               span.small (PDF)
             .icon
               img(src='/doc.png', target='_blank')
-              a(href='/programme.pdf') Radio program 
+              a(href='/programme.pdf') Program 
               span.small (PDF)
           .links(v-if='program.length')
             .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
