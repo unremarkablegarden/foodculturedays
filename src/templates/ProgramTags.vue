@@ -36,7 +36,9 @@
                 span.small (PDF)
               .icon
                 img(src='/doc.png', target='_blank')
-                a(href='/programme.pdf') Program 
+                a(href='/programme.pdf')
+                  span(v-if="lang == 'en'") Program
+                  span(v-else) Programme 
                 span.small (PDF)
                 
               
@@ -81,7 +83,9 @@
               span.small (PDF)
             .icon
               img(src='/doc.png', target='_blank')
-              a(href='/programme.pdf') Program 
+              a(href='/programme.pdf')
+                span(v-if="lang == 'en'") Program
+                span(v-else) Programme 
               span.small (PDF)
           .links(v-if='program.length')
             .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
