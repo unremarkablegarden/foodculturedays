@@ -16,6 +16,9 @@
     
     .downloads
       .newsletter-link
+        a(href='https://mailchi.mp/3b0276b08d50/aux-priphries-de-la-table-at-the-periphery-of-the-table', target="_blank") Newsletter 2021 #1
+        span.arrow.green &nbsp;&rarr;&nbsp;
+      .newsletter-link
         a(href='https://mailchi.mp/68976c293d4b/volution-de-fcd2020-radio-foodlab-paniers-repas-5525574', target="_blank") Newsletter 2020 #4
         span.arrow.green &nbsp;&rarr;&nbsp;
       .newsletter-link
