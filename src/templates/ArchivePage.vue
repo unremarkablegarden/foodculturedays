@@ -24,6 +24,9 @@
           prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
           prismic-rich-text(:field='page.project_body', v-if='page.project_body').project-body
           prismic-rich-text(:field='page.artist_body', v-if='page.artist_body').artist-body
+          
+          .embed(v-if='page.embed', v-html='page.embed')
+          
 </template>
 
 <style lang="scss" scoped>
@@ -37,12 +40,16 @@
     color: black;
   }
 }
+.embed {
+  margin-top: 2rem;
+}
 </style>
 
 <style lang="scss">
 // $green: #11ff36;
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
+
 
 
 .project-title, .artist-title {

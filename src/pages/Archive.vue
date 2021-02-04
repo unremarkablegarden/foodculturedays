@@ -25,8 +25,8 @@
                   //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
                   .page.link(@click='archiveRoute(page.node.context.path)')
                     h2
-                      em {{ tc(page.node.project[0].text) }}
-                      div {{ tc(page.node.artist[0].text) }}
+                      em(v-if='page.node.project') {{ tc(page.node.project[0].text) }}
+                      div(v-if='page.node.artist') {{ tc(page.node.artist[0].text) }}
 </template>
 
 <style lang="scss" scoped>

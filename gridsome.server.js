@@ -81,6 +81,7 @@ module.exports = function (api, options) {
                 artist_body
                 project
                 project_body
+                embed
                 image
                 _meta {
                   tags
@@ -177,6 +178,8 @@ module.exports = function (api, options) {
         
         console.log(path)
         
+        let plainTitle = node.artist ? node.artist[0].text : node.project[0].text
+        
         createPage({
           path: path,
           component: './src/templates/ArchivePage.vue',
@@ -186,7 +189,7 @@ module.exports = function (api, options) {
             lang: node._meta.lang,
             year: node.year,
             tags: node._meta.tags,
-            plainTitle: node.artist[0].text,
+            plainTitle: plainTitle,
             altPath: altPath
           }
         })
@@ -195,7 +198,7 @@ module.exports = function (api, options) {
           uid: node._meta.uid,
           lang: node._meta.lang,
           year: node.year,
-          plainTitle: node.artist[0].text,
+          plainTitle: plainTitle,
           path: path,
           altPath: altPath
         }
