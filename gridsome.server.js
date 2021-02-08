@@ -134,6 +134,14 @@ module.exports = function (api, options) {
           altPath = ''
         }
         
+        
+        
+        let a = node.artist ? node.artist[0].text : ''
+        let p = node.project ? node.project[0].text : ''
+        
+        let plainTitle = node.artist ? a : p
+        
+        
         // POPULATE TAGS OBJECT
         let tagEntry
         if (node._meta.tags.length > 0) {
@@ -148,7 +156,8 @@ module.exports = function (api, options) {
               lang: lang,
               slug: slug(tag),
               image: node.image,
-              plainTitle: node.artist[0].text,
+              // plainTitle: node.artist[0].text,
+              plainTitle: plainTitle,
               tags: node._meta.tags,
             }
             
@@ -177,8 +186,6 @@ module.exports = function (api, options) {
         }
         
         console.log(path)
-        
-        let plainTitle = node.artist ? node.artist[0].text : node.project[0].text
         
         createPage({
           path: path,

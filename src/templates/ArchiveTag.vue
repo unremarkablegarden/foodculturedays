@@ -14,8 +14,8 @@
                 .page.link(@click='archiveRoute(tag.path)')
                   //- xmp {{ tag }}
                   h2
-                    em {{ tag.project[0].text }}
-                    div {{ tag.artist[0].text }}
+                    em(v-if='tag.project') {{ tag.project[0].text }}
+                    div(v-if='tag.artist') {{ tag.artist[0].text }}
                     //- xmp {{ tag.path }}
                     //- xmp {{ tag.altPath }}
 </template>
