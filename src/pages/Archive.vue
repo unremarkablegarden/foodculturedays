@@ -12,7 +12,7 @@
             
             //- .item(style="background-image: url(https://images.prismic.io/foodculturedays2020/70016f6a-2c5b-41bc-8adc-ed85add086f4_IMG_0901.jpg?auto=compress,format)")
             
-            .item(style="background-image: url(https://images.prismic.io/foodculturedays2020/f23c2ded-df54-4f93-8013-d436bcc2e68d_2020_09_25_RAW_academie_Anna_Tje%CC%81-5-2+c.+Mathilde+Assier+copie.jpg?auto=compress,format)")
+            .item(style="background-image: url(https://images.prismic.io/foodculturedays2020/f23c2ded-df54-4f93-8013-d436bcc2e68d_2020_09_25_RAW_academie_Anna_Tje%CC%81-5-2+c.+Mathilde+Assier+copie.jpg?auto=compress,format); background-position: center center; background-size: cover;")
 
             //- .item(style='padding: 10vw') The images are quite low-res in the archive so we can't use them big like this maybe... See sub-pages.
 
@@ -28,6 +28,10 @@
                   //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
                   .page.link(@click='archiveRoute(page.node.context.path)')
                     h2
+                      
+                      div(v-if='!page.node.artist && !page.node.project') 
+                        strong ERROR with this page. Fix in Prismic:
+                        xmp(style='text-transform: none;') {{ page.node }}
                       em(v-if='page.node.project') {{ tc(page.node.project[0].text) }}
                       div(v-if='page.node.artist') {{ tc(page.node.artist[0].text) }}
 </template>
@@ -147,10 +151,22 @@ export default {
 
       years.forEach(year => {
         let p = pages.filter(el => el.node.year == year)
+        
+        console.log(p)
 
         p.sort((a, b) => {
-          const sortA = a.node.artist[0].text
-          const sortB = b.node.artist[0].text
+          const Aartist = a.node.artist ? a.node.artist[0].text : false
+          const Aproject = a.node.project ? a.node.project[0].text : a.node._meta.uid
+          
+          const Bartist = b.node.artist ? b.node.artist[0].text : false
+          const Bproject = b.node.project ? b.node.project[0].text : b.node._meta.uid
+          
+          const sortA = Aartist ? Aartist : Aproject
+          const sortB = Bartist ? Bartist : Bproject
+          
+          // const sortA = a.node.artist ? a.node.artist[0].text : a.node.project[0].text
+          // const sortB = b.node.artist ? b.node.artist[0].text : b.node.project[0].text
+          
           if(sortA > sortB) { return -1 }
           if(sortA < sortB) { return 1 }
           return 0
