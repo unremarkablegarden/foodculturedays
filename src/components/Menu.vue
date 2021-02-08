@@ -17,13 +17,13 @@
           .subtitle
             //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
             span.sans Biennale:&nbsp;
-            span.serif 26–29.11.2020
+            span.serif 2/2: 27-30 may 2021,
             span.sans &nbsp;Vevey
         .marquee.marquee2.is-hidden-desktop
           .subtitle
             //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
             span.sans Biennale:&nbsp;
-            span.serif 26–29.11.2020
+            span.serif 2/2: 27-30 may 2021,
             span.sans &nbsp;Vevey
 </template>
 
