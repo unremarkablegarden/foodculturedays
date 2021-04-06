@@ -8,7 +8,7 @@ export default
     { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
     
     // PROGRAM
-    { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
+    // { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
     
     
     // Tickets / Billetterie

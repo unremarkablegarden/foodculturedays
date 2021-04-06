@@ -136,6 +136,7 @@ export default {
   },
   data () {
     return {
+      year: 2020,
       moving: false,
       toggledTags: [],
       toggledCats: [],
@@ -265,7 +266,14 @@ export default {
       return this.$context.dataTags
     },
     program () {
-      return this.$context.program
+      let p = this.$context.program
+      console.log('program');
+      
+      p.forEach(p => {
+        let year = p.node.year
+        console.log(year);
+      })
+      return p
     },
     lang () {
       return this.$context.lang
