@@ -16,6 +16,9 @@
     
     .downloads
       .newsletter-link
+        a(href='https://ckarchive.com/b/e5uph7hgw83l', target="_blank") Newsletter 2021 #2
+        span.arrow.green &nbsp;&rarr;&nbsp;
+      .newsletter-link
         a(href='https://mailchi.mp/3b0276b08d50/aux-priphries-de-la-table-at-the-periphery-of-the-table', target="_blank") Newsletter 2021 #1
         span.arrow.green &nbsp;&rarr;&nbsp;
       .newsletter-link
