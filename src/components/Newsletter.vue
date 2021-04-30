@@ -15,8 +15,12 @@
               input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
     
     .downloads
+    
       .newsletter-link
-        a(href='https://ckarchive.com/b/e5uph7hgw83l', target="_blank") Newsletter 2021 #2
+        a(href='https://ckarchive.com/b/o8ukhqhvr08n%20', target="_blank") Newsletter 2021: BIENNALE #3
+        span.arrow.green &nbsp;&rarr;&nbsp;
+      .newsletter-link
+        a(href='https://ckarchive.com/b/e5uph7hgw83l', target="_blank") Newsletter 2021: BIENNALE #2
         span.arrow.green &nbsp;&rarr;&nbsp;
       .newsletter-link
         a(href='https://mailchi.mp/3b0276b08d50/aux-priphries-de-la-table-at-the-periphery-of-the-table', target="_blank") Newsletter 2021 #1
