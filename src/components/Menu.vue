@@ -16,15 +16,33 @@
         .marquee.marquee1.is-hidden-desktop
           .subtitle
             //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
-            span.sans Biennale:&nbsp;
-            span.serif 2/2: 27-30 may 2021,
-            span.sans &nbsp;Vevey
+            //- span.sans Biennale:&nbsp;
+            //- span.serif 2/2: 27-30 may 2021,
+            //- span.sans &nbsp;Vevey
+            span(v-if='lang === 0')
+              span.sans « Edition 2020/2021:&nbsp;
+              span.serif Chapter 2 « From the forest ashes »  27–30 May 2021&nbsp;
+              span.sans Online/Vevey »&nbsp;
+            span(v-else)
+              span.sans « Édition 2021/2021:&nbsp;
+              span.serif Chapitre 2 « Depuis la cendre des forêts »&nbsp;
+              span.sans 27—30 Mai 2021, En ligne/Vevey&nbsp;
+            
+          
         .marquee.marquee2.is-hidden-desktop
           .subtitle
             //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
-            span.sans Biennale:&nbsp;
-            span.serif 2/2: 27-30 may 2021,
-            span.sans &nbsp;Vevey
+            //- span.sans Biennale:&nbsp;
+            //- span.serif 2/2: 27-30 may 2021,
+            //- span.sans &nbsp;Vevey
+            span(v-if='lang === 0')
+              span.sans « Edition 2020/2021:&nbsp;
+              span.serif Chapter 2 « From the forest ashes »  27–30 May 2021&nbsp;
+              span.sans Online/Vevey »&nbsp;
+            span(v-else)
+              span.sans « Édition 2021/2021:&nbsp;
+              span.serif Chapitre 2 « Depuis la cendre des forêts »&nbsp;
+              span.sans 27—30 Mai 2021, En ligne/Vevey&nbsp;
 </template>
 
 <script>
@@ -215,25 +233,35 @@ $headingSize: 2.2rem;
   bottom: 3rem;
   position: fixed;
   bottom: 4rem;
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: flex-start; */
 }
 .marquee {
   position: absolute;
 }
 .marquee1 { 
- transform:translateX(100%);
- animation: demo-1 6s linear infinite;
-//  padding-left: 50vw;
-//  background: red;
-  
+  /* position: absolute; */
+  transform: translateX(0%);
+  animation: demo-1 13s linear infinite;
+  //  padding-left: 50vw;
+  /* background: red; */
+  /* .subtitle {
+    margin-right: 25vw;
+  } */
 }
 .marquee2 { 
-//  transform:translateX(100%);
-//  animation: demo-1 6s linear infinite;
+  /* position: absolute; */
+  transform: translateX(0%);
+  /* translateY(-100%); */
+  bottom: 10vh;
+  
+  /* animation: demo-1 13s linear infinite; */
  display: none;
-//  background: blue;
- .subtitle {
-  //  padding-left: 25vw;
- }
+  background: blue;
+  /* .subtitle {
+   margin-left: 25vw;
+  } */
 }
 
 #gallery {
@@ -296,18 +324,18 @@ $headingSize: 2.2rem;
 
 
 @-moz-keyframes demo-1 {
- 0%   { -moz-transform: translateX(100%); }
+ 0%   { -moz-transform: translateX(100vw); }
  100% { -moz-transform: translateX(-100%); }
 }
 @-webkit-keyframes demo-1 {
- 0%   { -webkit-transform: translateX(100%); }
+ 0%   { -webkit-transform: translateX(100vw); }
  100% { -webkit-transform: translateX(-100%); }
 }
 @keyframes demo-1 {
  0%   { 
- -moz-transform: translateX(100%); /* Firefox bug fix */
- -webkit-transform: translateX(100%); /* Firefox bug fix */
- transform: translateX(100%);       
+ -moz-transform: translateX(100vw); /* Firefox bug fix */
+ -webkit-transform: translateX(100vw); /* Firefox bug fix */
+ transform: translateX(100vw);       
  }
  100% { 
  -moz-transform: translateX(-100%); /* Firefox bug fix */
