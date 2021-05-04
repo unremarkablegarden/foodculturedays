@@ -9,7 +9,7 @@ export default
     
     // PROGRAM
     // { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
-    { title: ['Public Program', 'Programme Public'], to: ['/en/online-public-program', '/fr/programme-public-en-ligne'] },
+    { title: ['Online Dialogues', 'Dialogues en ligne'], to: ['/en/online-dialogues', '/fr/dialogues-en-ligne'] },
     
     
     // Tickets / Billetterie
