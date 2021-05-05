@@ -766,6 +766,21 @@ module.exports = function (api, options) {
       }
     })
     
+    createPage({
+      path: `/chapter2`,
+      component: './src/templates/CustomPage.vue',
+      context: {
+        node: {
+          title: 'Coming Soon',
+          content: ''
+        },
+        uid: 'chapter2',
+        lang: 'en',
+        plainTitle: 'Coming Soon',
+        altPath: '/chapter2',
+      }
+    })
+    
     
     
     

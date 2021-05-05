@@ -12,7 +12,7 @@
           prismic-rich-text(:field='page.title').title
           prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
           .content
-            prismic-rich-text(:field='page.body')
+            prismic-rich-text(v-if='page.body', :field='page.body')
 
           Newsletter
 
