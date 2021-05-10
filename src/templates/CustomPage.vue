@@ -7,15 +7,15 @@
       //-     .item(v-else) Add a featured image to this page in Prismic
       //-     //- prismic-image(:field='page.image', v-if='page.image')
 
-      .column.is-6.left
-        .page-wrapper
+      //- .column.is-6.left
+        .page-wrapper(v-if='page')
           //- prismic-rich-text(:field='page.title').title
           .title {{ page.title }}
           //- prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
           .content
             prismic-rich-text(:field='page.body')
 
-          Newsletter
+          //- Newsletter
 
 </template>
 
@@ -26,11 +26,11 @@ $green: rgb(17,230,54);
 </style>
 
 <script>
-import Newsletter from '~/components/Newsletter.vue'
+// import Newsletter from '~/components/Newsletter.vue'
 
 export default {
   components: {
-    Newsletter
+    // Newsletter
   },
   name: 'Page',
   metaInfo() {
@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     page () {
-      return this.$context.node
+      // return this.$context.node
     }
   }
 }
