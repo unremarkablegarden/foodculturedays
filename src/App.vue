@@ -790,6 +790,10 @@ xmp {
   a {
     color: black;
   }
+  a strong {
+    color: $green;
+    text-decoration: underline;
+  }
 }
 .page-wrapper {
   padding-bottom: 6rem;
