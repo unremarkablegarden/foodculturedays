@@ -17,6 +17,9 @@
     .downloads
     
       .newsletter-link
+        a(href='https://ckarchive.com/b/p9ueh9h0mwe8', target="_blank") Newsletter 2021: BIENNALE #5
+        span.arrow.green &nbsp;&rarr;&nbsp;
+      .newsletter-link
         a(href='https://ckarchive.com/b/5quvh7h87nxq', target="_blank") Newsletter 2021: BIENNALE #4
         span.arrow.green &nbsp;&rarr;&nbsp;
       .newsletter-link
