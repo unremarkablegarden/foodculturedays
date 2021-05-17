@@ -8,7 +8,9 @@ export default
     { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
     
     // PROGRAM
-    // { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
+    { title: ['Program', 'Programme'], to: ['/FCD_program_EN.pdf', '/FCD_program_FR.pdf'], blank: true },
+    
+    // DIALOGUES
     { title: ['Online Dialogues', 'Dialogues en ligne'], to: ['/en/online-dialogues', '/fr/dialogues-en-ligne'] },
     
     

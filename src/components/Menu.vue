@@ -10,7 +10,9 @@
     .column.is-6.menu.left
       .menu-item(v-for="(item, i) in menu", :key="item.title[lang]")
         span.linkwrap(@mouseover='galleryItem = (i+1)', @mouseleave='galleryItem = 0')
-          g-link(:to="item.to[lang]") {{ item.title[lang] }}
+          div(v-if='item.blank')
+            a(:href="item.to[lang]", target="_blank") {{ item.title[lang] }}
+          g-link(v-else, :to="item.to[lang]") {{ item.title[lang] }}
       
       .marquee-wrapper
         .marquee.marquee1.is-hidden-desktop
