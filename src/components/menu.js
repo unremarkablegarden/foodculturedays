@@ -13,6 +13,10 @@ export default
     // DIALOGUES
     { title: ['Online Dialogues', 'Dialogues en ligne'], to: ['/en/online-dialogues', '/fr/dialogues-en-ligne'] },
     
+    // CULTURAL
+    { title: ['Cultural Mediation', 'Médiation Culturelle'], to: ['/en/cultural-mediation', '/fr/mediation-culturelle'] },
+  
+    
     
     // Tickets / Billetterie
     // { title: ['Tickets', 'Billetterie'], to: ['/en/tickets', '/fr/billetterie'] },

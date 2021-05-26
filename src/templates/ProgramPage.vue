@@ -168,10 +168,6 @@ export default {
     galleryNav(dir) {
       if (this.page.gallery) {
         const max = this.page.gallery.length -1
-        // let max = 0
-        // this.page.gallery.forEach(x => {
-        //   if(x.gallery_item) max += 1
-        // })
         let frame = this.gallery.n
         if (dir == '+1') frame += 1
         else if (dir == '-1') frame -= 1

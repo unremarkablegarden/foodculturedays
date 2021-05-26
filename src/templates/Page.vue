@@ -2,8 +2,31 @@
   layout
     .columns
       .column.is-6.desktop.no-pad.gallery-column
-        .gallery
-          .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+        .gallery(v-if='page.gallery.length && page.gallery[0].item !== null').slider
+          .items
+            .item(
+              v-for='(item, i) in page.gallery', 
+              :style="'background-image: url('+item.item.url+')'", 
+              :data-n='i', 
+              :class='{ "is-active": (i == gallery.n)  }', 
+              @click='mobileNext()', 
+              v-if='item.item'
+            )
+          .navs(v-if='page.gallery.length > 1')
+            .dots
+              .dot(
+                v-for='(item, i) in page.gallery', 
+                :data-n='i', 
+                :class='{ "is-active": (i == gallery.n)  }',
+              )
+            .control
+              .left(@click='galleryNav("-1")')
+              .right(@click='galleryNav("+1")')
+          
+        .gallery(v-if='page.image && !page.gallery.length')
+          .item(:style="'background-image: url('+page.image.url+')'", v-if='page.image')
+        
+          //- .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
           .item(v-else) Add a featured image to this page in Prismic
           //- prismic-image(:field='page.image', v-if='page.image')
 
@@ -22,6 +45,157 @@
 <style lang="scss">
 // $green: #11ff36;
 $green: rgb(17,230,54);
+
+// MOBILE
+/* @media (max-width: 960px) { */
+@media (max-width: 736px) {
+  .back {
+    position: sticky;
+    background: white;
+    width: 100vw;
+    margin-left: -0.7rem;
+    top: 0;
+  }
+  
+  .page-wrapper {
+    margin-top: 0rem !important;
+  }
+  
+  .gallery.slider {
+    position: relative;
+    z-index: 888;
+    .items {
+      height: 50vh;
+      .item {
+        height: 50vh;
+        width: calc(100% + 1.4rem);
+        margin-left: -0.7rem;
+        display: none;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #f5f5f5;
+        &.is-active {
+          display: block;
+        }
+      }  
+    }
+    .navs {
+      height: 0;
+    }
+    .dots {
+      $c: rgba(0,0,0,1);
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-1.5rem);
+      .dot {
+        background: transparent;
+        border: 1px $c solid;
+        height: 0.3rem;
+        width: 0.3rem;
+        border-radius: 1rem;
+        margin: 0.4rem;
+        margin-bottom: 0rem;
+        &.is-active {
+          background: $c;  
+        }
+      }
+    }
+  }
+  
+
+}
+
+// DEKSTOP
+/* @media (min-width: 960px) { */
+@media (min-width: 737px) {
+
+  
+  .tags {
+    width: 90%;
+  }
+  .back {
+    top: 6vw;
+    margin-top: 1rem;
+    right: 2rem;
+    background: transparent;
+    width: 3rem;
+    z-index: 99;
+    position: absolute;
+  }
+  .project-title, .artist-title {
+    width: 90%;
+  }
+  
+  
+  .gallery.slider {
+  .items {
+    .item {
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: none;
+      background-size: contain;
+      &.is-active {
+        display: block;
+      }
+    }  
+  }
+  .dots {
+    $c: rgba(0,0,0,1);
+    width: 50vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dot {
+      background: transparent;
+      border: 1.5px $c solid;
+      height: 0.6rem;
+      width: 0.6rem;
+      border-radius: 1rem;
+      margin: 1rem;
+      margin-bottom: 1.5rem;
+      &.is-active {
+        background: $c;  
+      }
+    }
+  }
+  .control {
+    .left, .right {
+      height: 100vh;
+      width: 25vw;
+      position: fixed;
+      top: 0;
+    }
+    .left {
+      left: 0;
+      cursor: w-resize;
+      &:hover {
+        background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
+      }
+    }
+    .right {
+      left: 25vw;
+      cursor: e-resize;
+      
+      &:hover {
+        background: linear-gradient(-90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 30%);
+      }
+    }
+  }
+  
+}
+  
+}
+
+
 </style>
 
 <script>
@@ -39,13 +213,36 @@ export default {
   },
   data () {
     return {
-      gallery: false
+      // gallery: false,
+      gallery: {
+        n: 0,
+      },
+      back: {
+        en: '←',
+        fr: '←'
+      },
     }
   },
   computed: {
     page () {
       return this.$context.node
     }
+  },
+  methods: {
+    mobileNext() {
+      this.galleryNav('+1')
+    },
+    galleryNav(dir) {
+      if (this.page.gallery) {
+        const max = this.page.gallery.length -1
+        let frame = this.gallery.n
+        if (dir == '+1') frame += 1
+        else if (dir == '-1') frame -= 1
+        if (frame < 0) frame = max
+        if (frame > max) frame = 0
+        this.gallery.n = frame
+      }
+    },
   }
 }
 </script>
