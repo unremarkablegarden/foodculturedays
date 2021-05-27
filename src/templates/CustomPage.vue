@@ -19,7 +19,7 @@ export default {
   created () {
     if (!process.isClient) return
     const lang = navigator.language || navigator.userLanguage
-    const fr = 'https://www.depuislacendredesforets.com/'
+    const fr = 'http://depuislacendredesforets.com/'
     const en = 'https://www.fromtheforestsashes.com/'
     let link = en
     if (lang.includes('fr')) link = fr
