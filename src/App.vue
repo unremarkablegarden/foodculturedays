@@ -790,7 +790,7 @@ xmp {
   a {
     color: black;
   }
-  a strong {
+  strong a, a strong {
     color: $green;
     text-decoration: underline;
   }
