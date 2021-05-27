@@ -6,7 +6,7 @@ export default
     
     // BIENALE
     // { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
-    { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.depuislacendredesforets.com/'], blank: true },
+    { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'http://depuislacendredesforets.com/'], blank: true },
     
     // PROGRAM
     // { title: ['Program', 'Programme'], to: ['/FCD_program_EN.pdf', '/FCD_program_FR.pdf'], blank: true },
