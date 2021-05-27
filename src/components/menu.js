@@ -5,13 +5,14 @@ export default
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
     // BIENALE
-    { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
+    // { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
+    { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.depuislacendredesforets.com/'], blank: true },
     
     // PROGRAM
-    { title: ['Program', 'Programme'], to: ['/FCD_program_EN.pdf', '/FCD_program_FR.pdf'], blank: true },
+    // { title: ['Program', 'Programme'], to: ['/FCD_program_EN.pdf', '/FCD_program_FR.pdf'], blank: true },
     
     // DIALOGUES
-    { title: ['Online Dialogues', 'Dialogues en ligne'], to: ['/en/online-dialogues', '/fr/dialogues-en-ligne'] },
+    // { title: ['Online Dialogues', 'Dialogues en ligne'], to: ['/en/online-dialogues', '/fr/dialogues-en-ligne'] },
     
     // CULTURAL
     { title: ['Cultural Mediation', 'Médiation Culturelle'], to: ['/en/cultural-mediation', '/fr/mediation-culturelle'] },

@@ -18,11 +18,12 @@ export default {
   },
   created () {
     if (!process.isClient) return
-    
-    // depuislacendredesforets.com
+    const lang = navigator.language || navigator.userLanguage
+    const fr = 'https://www.depuislacendredesforets.com/'
     const en = 'https://www.fromtheforestsashes.com/'
-    
-    window.location.replace(en);
+    let link = en
+    if (lang.includes('fr')) link = fr
+    window.location.replace(link)
   },
 }
 </script>
