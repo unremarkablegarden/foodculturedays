@@ -3,8 +3,8 @@
     #media
       .columns
         .column.is-6.desktop.no-pad.gallery-column
-          .gallery
-            .item(v-if='pages && pages[0].node.image.url', :style="'background-image: url('+pages[0].node.image.url+')'")
+          .gallery(v-if='pages')
+            .item(:style="'background-image: url('+pages[0].node.image.url+')'")
             //- .item(v-if='$context.image', :style="'background-image: url('+$context.image.node.image.url+')'")
             //- .item(v-if='image', :style="'background-image: url('+image.url+')'")
           //- prismic-image(:field='page.image', v-if='page.image')
