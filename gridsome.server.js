@@ -38,6 +38,7 @@ module.exports = function (api, options) {
         allMedias {
           edges {
             node {
+              title
               year
               image
               links {
@@ -460,7 +461,8 @@ module.exports = function (api, options) {
     })
 
 
-    let image = mediasQuery.data.prismic.allMedias.edges.find(el => el.node.image !== null)
+    // let image = mediasQuery.data.prismic.allMedias.edges.find(el => el.node.image !== null)
+    let images = mediasQuery.data.prismic.allMedias.edges.filter(el => el.node.image !== null)
 
     // MEDIA
     createPage({
@@ -471,7 +473,8 @@ module.exports = function (api, options) {
         lang: 'en-gb',
         altPath: '/fr/medias',
         data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'en-gb'),
-        image: image
+        // image: image
+        images: images
       }
     })
     createPage({
@@ -482,7 +485,8 @@ module.exports = function (api, options) {
         lang: 'fr-ch',
         altPath: '/en/media',
         data: mediasQuery.data.prismic.allMedias.edges.filter(el => el.node._meta.lang == 'fr-ch'),
-        image: image
+        // image: image
+        images: images
       }
     })
 

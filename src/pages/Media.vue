@@ -3,9 +3,9 @@
     #media
       .columns
         .column.is-6.desktop.no-pad.gallery-column
-          //- xmp {{ $context.image }}
           .gallery
-            .item(v-if='$context.image', :style="'background-image: url('+$context.image.node.image.url+')'")
+            .item(v-if='pages && pages[0].node.image.url', :style="'background-image: url('+pages[0].node.image.url+')'")
+            //- .item(v-if='$context.image', :style="'background-image: url('+$context.image.node.image.url+')'")
             //- .item(v-if='image', :style="'background-image: url('+image.url+')'")
           //- prismic-image(:field='page.image', v-if='page.image')
 
@@ -13,7 +13,8 @@
           h1.title {{ $context.pageTitle }}
           .hr &nbsp;
           .year-wrapper(v-for='(page, index) in pages', :key='index')
-            .year.serif {{ page.node.year }}
+            //- .year.serif {{ page.node.year }}
+            .year.serif(v-if='page.node.title') {{ page.node.title[0].text }}
             .link-list
               .link(v-for='(link, index) in page.node.links' :key='index', v-if='link.title')
                 a(:href='link.link', target="_blank") {{ link.title }}
@@ -58,7 +59,7 @@ h1.title {
 
 .year {
   padding: 0.7rem 0 0 0;
-  display: none;
+  /* display: none; */
 }
 .link-list {
   // border-top: 1px black solid;
@@ -100,7 +101,7 @@ export default {
   },
   data () {
     return {
-      image: false
+      // image: false
     }
   },
   computed: {
@@ -117,6 +118,18 @@ export default {
       })
       return p
     },
+    // image () {
+    //   if (!process.isClient) return
+    //   let p = this.$context.data
+    //   p.sort((a, b) => {
+    //     const sortA = a.node.year
+    //     const sortB = b.node.year
+    //     if(sortA > sortB) { return -1 }
+    //     if(sortA < sortB) { return 1 }
+    //     return 0
+    //   })
+    //   return p[0]
+    // }
     // image () {
     //   if (!process.isClient) return
     //   return this.pages[0].image
