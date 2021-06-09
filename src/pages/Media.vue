@@ -3,8 +3,9 @@
     #media
       .columns
         .column.is-6.desktop.no-pad.gallery-column
-          .gallery(v-if='pages')
-            .item(:style="'background-image: url('+pages[0].node.image.url+')'")
+          .gallery
+            //- xmp {{ image }}
+            .item(:style="'background-image: url('+image+')'")
             //- .item(v-if='$context.image', :style="'background-image: url('+$context.image.node.image.url+')'")
             //- .item(v-if='image', :style="'background-image: url('+image.url+')'")
           //- prismic-image(:field='page.image', v-if='page.image')
@@ -99,11 +100,15 @@ export default {
       title: this.$context.pageTitle,
     }
   },
-  data () {
-    return {
-      // image: false
-    }
-  },
+  // data () {
+  //   return {
+  //     image: false
+  //   }
+  // },
+  // created () {
+  //   if (!process.isClient) return
+  //   this.image = this.pages[0].node.image.url
+  // },
   computed: {
     pages () {
       if (!process.isClient) return
@@ -118,22 +123,10 @@ export default {
       })
       return p
     },
-    // image () {
-    //   if (!process.isClient) return
-    //   let p = this.$context.data
-    //   p.sort((a, b) => {
-    //     const sortA = a.node.year
-    //     const sortB = b.node.year
-    //     if(sortA > sortB) { return -1 }
-    //     if(sortA < sortB) { return 1 }
-    //     return 0
-    //   })
-    //   return p[0]
-    // }
-    // image () {
-    //   if (!process.isClient) return
-    //   return this.pages[0].image
-    // }
+    image () {
+      if (!process.isClient) return
+      return this.pages[0].node.image.url || false
+    }
   }
 }
 </script>
