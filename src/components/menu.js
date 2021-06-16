@@ -33,15 +33,16 @@ export default
     // { title: ['Locations', 'Lieux'], to: ['/en/locations', '/fr/lieux'] },
     // PROGRAM
     // { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
+    
+    // ARCHIVE
+    { title: ['Archive', 'Archives'], to: ['/en/archive', '/fr/archives'] },
+    // PARTNERS
+    { title: ['Partners', 'Partenaires'], to: ['/en/partners', '/fr/partenaires'] },
 
     // MEDIA
     { title: ['Media', 'Médias'], to: ['/en/media', '/fr/medias'] },
     // VIDEO
     // { title: ['Video', 'Vidéo'], to: ['https://vimeo.com/user72160049', 'https://vimeo.com/user72160049'] },
-    // PARTNERS
-    { title: ['Partners', 'Partenaires'], to: ['/en/partners', '/fr/partenaires'] },
-    // ARCHIVE
-    { title: ['Archive', 'Archives'], to: ['/en/archive', '/fr/archives'] },
     // CONTACT
     { title: ['Contact', 'Contact'], to: ['/en/contact', '/fr/contact'] },
 
