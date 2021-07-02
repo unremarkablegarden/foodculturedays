@@ -15,7 +15,7 @@ export default
     // { title: ['Online Dialogues', 'Dialogues en ligne'], to: ['/en/online-dialogues', '/fr/dialogues-en-ligne'] },
     
     // CULTURAL
-    { title: ['Artistic Mediation', 'Médiation Artistique'], to: ['/en/artistic-mediation', '/fr/mediation-mediation-artistique'] },
+    { title: ['Artistic Mediation', 'Médiation Artistique'], to: ['/en/artistic-mediation', '/fr/mediation-artistique'] },
   
     
     
