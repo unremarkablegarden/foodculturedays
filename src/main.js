@@ -21,6 +21,13 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   // })
   // Vue.use(XBrowserUpdate)
   
+  head.script.push({
+    src: 'https://cdn.oribi.io/Xy0yMDc5ODMzNTMw/oribi.js',
+    async: true,
+    id: 'ORIBIscript'   
+  })
+  // <script async="" src="" id=""></script>
+  
   let navLang = 'en'
   if (process.isClient) {
     navLang = navigator.language || navigator.userLanguage
