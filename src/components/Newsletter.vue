@@ -15,7 +15,12 @@
               input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
     
     .downloads
-    
+      //- .newsletter-link
+      //-   a(href='', target="_blank") 
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      .newsletter-link
+        a(href='https://motivated-pioneer-4893.ck.page/posts/la-recolte-commune-the-common-harvestThan', target="_blank") Newsletter 2021 #7
+        span.arrow.green &nbsp;&rarr;&nbsp;
       .newsletter-link
         a(href='https://ckarchive.com/b/lmuehmhmzgk3', target="_blank") Newsletter 2021: BIENNALE #6
         span.arrow.green &nbsp;&rarr;&nbsp;
