@@ -14,7 +14,7 @@
             a(:href="item.to[lang]", target="_blank") {{ item.title[lang] }}
           g-link(v-else, :to="item.to[lang]") {{ item.title[lang] }}
       
-      .marquee-wrapper
+      //- .marquee-wrapper
         .marquee.marquee1.is-hidden-desktop
           .subtitle
             //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
