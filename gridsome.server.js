@@ -324,7 +324,36 @@ module.exports = function (api, options) {
     // })
 
 
-
+    // NEWSLETTERS
+    const newslettersQuery = await graphql(`{
+      prismic {
+        allNewsletterss {
+          edges {
+            node {
+              max
+              newsletters {
+                title
+                link
+              }
+              _meta {
+                lang
+              }
+            }
+          }
+        }
+      }
+    }`)
+    
+    let newsletters = {}
+    newsletters['fr'] = false
+    newsletters['en'] = false
+    newslettersQuery.data.prismic.allNewsletterss.edges.forEach(({ node }) => {
+      if (node._meta.lang == 'fr-ch') {
+        newsletters['fr'] = node
+      } else {
+        newsletters['en'] = node
+      }      
+    })
 
 
     // CREATE THE PAGES
@@ -354,6 +383,8 @@ module.exports = function (api, options) {
         }
       }
     }`)
+    
+    
     if (pagesQuery.hasOwnProperty('data')) {
       pagesQuery.data.prismic.allPages.edges.forEach(({ node }) => {
         let lang, alt
@@ -363,7 +394,7 @@ module.exports = function (api, options) {
         let altPath
 
         const skip = ['partners', 'partenaires', 'homepage', 'archive', 'archives', 'media', 'medias']
-
+        
         if (! skip.includes(node._meta.uid)) {
           if (node._meta.alternateLanguages.length > 0) {
             altPath = `/${alt}/${node._meta.alternateLanguages[0].uid}/`
@@ -377,7 +408,8 @@ module.exports = function (api, options) {
               lang: node._meta.lang,
               plainTitle: node.title[0].text,
               altPath: altPath,
-              gallery: node.gallery
+              gallery: node.gallery,
+              newsletters: newsletters[lang]
             }
           })
         }

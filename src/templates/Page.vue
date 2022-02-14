@@ -37,7 +37,7 @@
           .content
             prismic-rich-text(v-if='page.body', :field='page.body')
 
-          Newsletter
+          Newsletter(:newsletters='$context.newsletters')
 
 </template>
 

@@ -18,7 +18,8 @@
 module.exports = {
   siteName: 'foodculture days',
   // siteDescription: "A multidisciplinary platform for knowledge exchange",
-  siteDescription: 'A multidisciplinary platform for knowledge exchange',
+  // siteDescription: 'A multidisciplinary platform for knowledge exchange',
+  siteDescription: 'foodculture days is a transdisciplinary knowledge-sharing platform based in Vevey (Switzerland)',
 
   chainWebpack (config) {
     config.mode('development')

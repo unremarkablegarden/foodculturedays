@@ -15,42 +15,48 @@
               input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
     
     .downloads
+      .newsletter-link(v-for='(item, i) in newsletters.newsletters.reverse()', :key="item.title", v-if='i < newsletters.max')
+        a(:href='item.link', target="_blank") {{ item.title }}
+        span.arrow.green &nbsp;&rarr;&nbsp;
+      
+        
+        
       //- .newsletter-link
       //-   a(href='', target="_blank") 
       //-   span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://ckarchive.com/b/qdu8h7hkzezd', target="_blank") Newsletter 2021 #7
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://ckarchive.com/b/lmuehmhmzgk3', target="_blank") Newsletter 2021: BIENNALE #6
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://ckarchive.com/b/p9ueh9h0mwe8', target="_blank") Newsletter 2021: BIENNALE #5
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://ckarchive.com/b/5quvh7h87nxq', target="_blank") Newsletter 2021: BIENNALE #4
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://ckarchive.com/b/o8ukhqhvr08n%20', target="_blank") Newsletter 2021: BIENNALE #3
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://ckarchive.com/b/e5uph7hgw83l', target="_blank") Newsletter 2021: BIENNALE #2
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://mailchi.mp/3b0276b08d50/aux-priphries-de-la-table-at-the-periphery-of-the-table', target="_blank") Newsletter 2021 #1
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://mailchi.mp/68976c293d4b/volution-de-fcd2020-radio-foodlab-paniers-repas-5525574', target="_blank") Newsletter 2020 #4
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://mailchi.mp/887a59a62196/foodculturedays-26-29-nov-2020-on-ne-gardera-que-les-miettes', target="_blank") Newsletter 2020 #3
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://mailchi.mp/111aefccdaec/notre-biennale-2020', target="_blank") Newsletter 2020 #2
-        span.arrow.green &nbsp;&rarr;&nbsp;
-      .newsletter-link
-        a(href='https://mailchi.mp/4d5361a76a85/newsletter-2-les-futurs-possibles-de-fcd', target="_blank") Newsletter 2020 #1
-        span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://ckarchive.com/b/qdu8h7hkzezd', target="_blank") Newsletter 2021 #7
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://ckarchive.com/b/lmuehmhmzgk3', target="_blank") Newsletter 2021: BIENNALE #6
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://ckarchive.com/b/p9ueh9h0mwe8', target="_blank") Newsletter 2021: BIENNALE #5
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://ckarchive.com/b/5quvh7h87nxq', target="_blank") Newsletter 2021: BIENNALE #4
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://ckarchive.com/b/o8ukhqhvr08n', target="_blank") Newsletter 2021: BIENNALE #3
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://ckarchive.com/b/e5uph7hgw83l', target="_blank") Newsletter 2021: BIENNALE #2
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://mailchi.mp/3b0276b08d50/aux-priphries-de-la-table-at-the-periphery-of-the-table', target="_blank") Newsletter 2021 #1
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://mailchi.mp/68976c293d4b/volution-de-fcd2020-radio-foodlab-paniers-repas-5525574', target="_blank") Newsletter 2020 #4
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://mailchi.mp/887a59a62196/foodculturedays-26-29-nov-2020-on-ne-gardera-que-les-miettes', target="_blank") Newsletter 2020 #3
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://mailchi.mp/111aefccdaec/notre-biennale-2020', target="_blank") Newsletter 2020 #2
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
+      //- .newsletter-link
+      //-   a(href='https://mailchi.mp/4d5361a76a85/newsletter-2-les-futurs-possibles-de-fcd', target="_blank") Newsletter 2020 #1
+      //-   span.arrow.green &nbsp;&rarr;&nbsp;
       
 
 </template>
@@ -86,6 +92,7 @@ export default {
       }
     }
   },
+  props: ['newsletters'],
   created () {
     if (!process.isClient) return
     let lang = this.$store.state.lang
