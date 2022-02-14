@@ -400,8 +400,8 @@ export default {
         if (location.pathname.substr(1,2) == 'fr') i = 1
       }
       let descs = [
-        'A multidisciplinary platform for knowledge exchange',
-        'Une plateforme multidisciplinaire d‘échange de connaissances'
+        'foodculture days is a transdisciplinary knowledge-sharing platform based in Vevey (Switzerland)',
+        'foodculture days est une plateforme transdisciplinaire de partage de connaissances basée à Vevey (Suisse)'
       ]
       return [
         {

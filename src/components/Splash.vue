@@ -13,17 +13,28 @@
         //- | and a platform for 
         //- em knowledge exchange 
         //- | based in Vevey (Switzerland)
-        | Foodculture days is an interdisciplinary 
-        em platform 
-        | for 
-        em knowledge exchange 
+        
+        //- | Foodculture days is an interdisciplinary 
+        //- em platform 
+        //- | for 
+        //- em knowledge exchange 
+        //- | based in Vevey (Switzerland)
+        
+        | foodculture days is a transdisciplinary 
+        em knowledge-sharing platform 
         | based in Vevey (Switzerland)
 
       .text(v-else)
-        | Foodculture days est une 
+        //- | Foodculture days est une 
+        //- em plateforme 
+        //- | interdisciplinaire 
+        //- em d’échange de connaissances 
+        //- | basée à Vevey (Suisse)
+        
+        | foodculture days est une 
         em plateforme 
-        | interdisciplinaire 
-        em d’échange de connaissances 
+        | transdisciplinaire 
+        em de partage de connaissances 
         | basée à Vevey (Suisse)
 
 </template>
