@@ -15,11 +15,10 @@
               input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
     
     .downloads
-      .newsletter-link(v-for='(item, i) in newsletters.newsletters.reverse()', :key="item.title", v-if='i < newsletters.max')
+      //- xmp {{ newsletters }}
+      .newsletter-link(v-for='(item, i) in nletters', :key="i")
         a(:href='item.link', target="_blank") {{ item.title }}
         span.arrow.green &nbsp;&rarr;&nbsp;
-      
-        
         
       //- .newsletter-link
       //-   a(href='', target="_blank") 
@@ -93,6 +92,16 @@ export default {
     }
   },
   props: ['newsletters'],
+  computed: {
+    nletters () {
+      if (this.newsletters && this.newsletters.newsletters) {
+        let max = this.newsletters.max
+        if (!max) max = 5
+        const length = this.newsletters.newsletters.length
+        return this.newsletters.newsletters.slice(length-max, length).reverse()
+      }
+    }
+  },
   created () {
     if (!process.isClient) return
     let lang = this.$store.state.lang
