@@ -25,7 +25,8 @@ export default {
         }
       }
       return title
-    }
+    },
+    titleTemplate: 'foodculture days'
   },
   data () {
     return {

@@ -418,6 +418,7 @@ export default {
     }
     return {
       title: this.$static.metadata.siteName,
+      titleTemplate: '%s — ' + this.$static.metadata.siteName,
       meta: customMeta()
     }
   }
