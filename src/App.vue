@@ -809,7 +809,8 @@ xmp {
     margin-block-start: 0;
   }
   a {
-    color: black;
+    /* color: black; */
+    color: $green;
   }
   strong a, a strong {
     color: $green;
