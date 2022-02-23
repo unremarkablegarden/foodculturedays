@@ -6,7 +6,7 @@
           .items
             .item(
               v-for='(item, i) in page.gallery', 
-              :style="'background-image: url('+item.gallery_image.url+')'", 
+              :style="'background-image: url('+constrainImageUrl(item.gallery_image.url)+')'", 
               :data-n='i', 
               :class='{ "is-active": (i == gallery.n)  }', 
               @click='mobileNext()', 
@@ -24,7 +24,7 @@
               .right(@click='galleryNav("+1")')
           
         .gallery(v-if='page.image && !page.gallery.length')
-          .item(:style="'background-image: url('+page.image.url+')'", v-if='page.image')
+          .item(:style="'background-image: url('+constrainImageUrl(page.image.url)+')'", v-if='page.image')
 
       .column.is-6.left
         .back(@click='goBack')
@@ -162,6 +162,11 @@ export default {
     // this.showit = false
   },
   methods: {
+    constrainImageUrl (url) {
+      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      console.log(newUrl)
+      return newUrl
+    },
     mobileNext() {
       this.galleryNav('+1')
     },

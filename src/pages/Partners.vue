@@ -51,12 +51,17 @@ export default {
         let i1 = this.$context.data.node.gallery[0]
         let i2 = this.$context.data.node.gallery[1]
         if (i1.item.dimensions.width >= i2.item.dimensions.width) {
-          images.mobile = i2.item.url
-          images.desktop = i1.item.url
+          images.mobile = this.constrainImageUrl(i2.item.url)
+          images.desktop = this.constrainImageUrl(i1.item.url)
         }
       }
       
       return images
+    },
+    constrainImageUrl (url) {
+      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=2400&auto=compress,format=auto')
+      console.log(newUrl)
+      return newUrl
     },
   }
 }

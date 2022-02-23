@@ -186,7 +186,7 @@ module.exports = function (api, options) {
           })
         }
         
-        console.log(path)
+        // console.log(path)
         
         createPage({
           path: path,
@@ -249,7 +249,7 @@ module.exports = function (api, options) {
             path = '/en/archive/themes/' + tagSlug
           }
           
-          console.log(path + ' (' +tags[tag].length+ ')')
+          // console.log(path + ' (' +tags[tag].length+ ')')
           
           let title = tag.charAt(0).toUpperCase() + tag.slice(1)
           // let nodes = tags[tag]
@@ -357,42 +357,56 @@ module.exports = function (api, options) {
 
 
     // CREATE THE PAGES
-    const pagesQuery = await graphql(`{
-      prismic {
-        allPages {
-          edges {
-            node {
-              title
-              subtitle
-              body
-              image
-              gallery {
-                item
-              }
-              excerpt
-              _meta {
-                uid
-                lang
-                alternateLanguages {
+    let pages = []
+    let pagesQuery
+    keepLoading = true
+    after = ''
+    
+    while (keepLoading) {
+      pagesQuery = await graphql(`{
+        prismic {
+          allPages(after: "${after}") {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            edges {
+              node {
+                title
+                subtitle
+                body
+                image
+                gallery {
+                  item
+                }
+                excerpt
+                _meta {
                   uid
                   lang
+                  alternateLanguages {
+                    uid
+                    lang
+                  }
                 }
               }
+              cursor
             }
           }
         }
-      }
-    }`)
-    
-    
-    if (pagesQuery.hasOwnProperty('data')) {
-      pagesQuery.data.prismic.allPages.edges.forEach(({ node }) => {
+      }`)
+      
+      
+      let pagesData = pagesQuery.data.prismic.allPages
+      
+      pagesData.edges.forEach(({ node }) => {
         let lang, alt
         if (node._meta.lang == 'en-gb') { lang = 'en'; alt = 'fr'; }
         if (node._meta.lang == 'fr-ch') { lang = 'fr'; alt = 'en'; }
         const path = `/${lang}/${node._meta.uid}`
         let altPath
 
+        console.log('PAGE > ' + path)
+        
         const skip = ['partners', 'partenaires', 'homepage', 'archive', 'archives', 'media', 'medias']
         
         if (! skip.includes(node._meta.uid)) {
@@ -414,8 +428,22 @@ module.exports = function (api, options) {
           })
         }
       })
+      
+      // set next page to load in the loop
+      after = pagesData.pageInfo.endCursor
+
+      // add to master programs array
+      pages = pages.concat(pagesData.edges)
+
+      // while loop breaker
+      if (! pagesData.pageInfo.hasNextPage) {
+        keepLoading = false
+      }
+      
     }
 
+    // pagesQuery = pages
+    // console.log(pagesQuery)
 
     // INDEX
     createPage({
@@ -424,7 +452,8 @@ module.exports = function (api, options) {
       context: {
         lang: 'en-gb',
         altPath: '/fr/',
-        gallery:  pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+        // gallery:  pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+        gallery:  pages.find(el => el.node._meta.uid == 'homepage')
       }
     })
     createPage({
@@ -433,7 +462,8 @@ module.exports = function (api, options) {
       context: {
         lang: 'en-gb',
         altPath: '/fr/',
-        gallery:  pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+        // gallery:  pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+        gallery:  pages.find(el => el.node._meta.uid == 'homepage')
       }
     })
     createPage({
@@ -442,7 +472,7 @@ module.exports = function (api, options) {
       context: {
         lang: 'fr-ch',
         altPath: '/en/',
-        gallery: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'homepage')
+        gallery: pages.find(el => el.node._meta.uid == 'homepage')
       }
     })
 
@@ -478,7 +508,8 @@ module.exports = function (api, options) {
         lang: 'en-gb',
         altPath: '/fr/partenaires',
         title: 'Partners',
-        data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partners')
+        // data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partners')
+        data: pages.find(el => el.node._meta.uid == 'partners')
       }
     })
     createPage({
@@ -488,7 +519,8 @@ module.exports = function (api, options) {
         lang: 'fr-ch',
         altPath: '/en/partners',
         title: 'Partenaires',
-        data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partenaires')
+        // data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partenaires')
+        data: pages.find(el => el.node._meta.uid == 'partenaires')
       }
     })
 
@@ -598,7 +630,7 @@ module.exports = function (api, options) {
         }
       }`)
 
-      console.log(programsQuery);
+      // console.log(programsQuery);
       let data = programsQuery.data.prismic.allPrograms
 
       data.edges.forEach(({ node }) => {
@@ -666,7 +698,7 @@ module.exports = function (api, options) {
           })
         }
         
-        console.log(path)
+        // console.log(path)
         
         createPage({
           path: path,
@@ -752,7 +784,7 @@ module.exports = function (api, options) {
             path = '/en/program/themes/' + tagSlug
           }
           
-          console.log(path + ' (' +tags[tag].length+ ')')
+          // console.log(path + ' (' +tags[tag].length+ ')')
           
           let title = tag.charAt(0).toUpperCase() + tag.slice(1)
           // let nodes = tags[tag]

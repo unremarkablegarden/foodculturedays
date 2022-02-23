@@ -5,7 +5,7 @@
     .column.is-6.desktop.no-pad.gallery-column
       client-only
         #gallery(v-if='gallery && gallery.length', v-bind:class='{ showGallery: showGallery, gallery: true }')
-          .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+item.item.url+')'", v-bind:class="{ active: i == galleryItem }", v-if='item.item')
+          .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+constrainImageUrl(item.item.url)+')'", v-bind:class="{ active: i == galleryItem }", v-if='item.item')
 
     .column.is-6.menu.left
       .menu-item(v-for="(item, i) in menu", :key="item.title[lang]")
@@ -139,6 +139,11 @@ export default {
     }
   },
   methods: {
+    constrainImageUrl (url) {
+      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      console.log(newUrl)
+      return newUrl
+    },
     hideImage () {
       if (!process.isClient) return
       console.log('hide image');

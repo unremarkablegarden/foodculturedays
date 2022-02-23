@@ -6,7 +6,7 @@
           .items
             .item(
               v-for='(item, i) in page.gallery', 
-              :style="'background-image: url('+item.item.url+')'", 
+              :style="'background-image: url('+constrainImageUrl(item.item.url)+')'", 
               :data-n='i', 
               :class='{ "is-active": (i == gallery.n)  }', 
               @click='mobileNext()', 
@@ -24,7 +24,7 @@
               .right(@click='galleryNav("+1")')
           
         .gallery(v-if='page.image && !page.gallery.length')
-          .item(:style="'background-image: url('+page.image.url+')'", v-if='page.image')
+          .item(:style="'background-image: url('+constrainImageUrl(page.image.url)+')'", v-if='page.image')
         
           //- .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
           .item(v-else) Add a featured image to this page in Prismic
@@ -40,6 +40,62 @@
           Newsletter(:newsletters='$context.newsletters')
 
 </template>
+
+<script>
+import Newsletter from '~/components/Newsletter.vue'
+
+export default {
+  components: {
+    Newsletter
+  },
+  name: 'Page',
+  metaInfo() {
+    return {
+      title: this.$context.plainTitle
+    }
+  },
+  data () {
+    return {
+      // gallery: false,
+      gallery: {
+        n: 0,
+      },
+      back: {
+        en: '←',
+        fr: '←'
+      },
+    }
+  },
+  computed: {
+    page () {
+      return this.$context.node
+    }
+  },
+  methods: {
+    constrainImageUrl (url) {
+      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      console.log(newUrl)
+      return newUrl
+    },
+    mobileNext() {
+      this.galleryNav('+1')
+    },
+    galleryNav(dir) {
+      if (this.page.gallery) {
+        const max = this.page.gallery.length -1
+        let frame = this.gallery.n
+        if (dir == '+1') frame += 1
+        else if (dir == '-1') frame -= 1
+        if (frame < 0) frame = max
+        if (frame > max) frame = 0
+        this.gallery.n = frame
+      }
+    },
+  }
+}
+</script>
+
+
 
 
 <style lang="scss">
@@ -197,52 +253,3 @@ $green: rgb(17,230,54);
 
 
 </style>
-
-<script>
-import Newsletter from '~/components/Newsletter.vue'
-
-export default {
-  components: {
-    Newsletter
-  },
-  name: 'Page',
-  metaInfo() {
-    return {
-      title: this.$context.plainTitle
-    }
-  },
-  data () {
-    return {
-      // gallery: false,
-      gallery: {
-        n: 0,
-      },
-      back: {
-        en: '←',
-        fr: '←'
-      },
-    }
-  },
-  computed: {
-    page () {
-      return this.$context.node
-    }
-  },
-  methods: {
-    mobileNext() {
-      this.galleryNav('+1')
-    },
-    galleryNav(dir) {
-      if (this.page.gallery) {
-        const max = this.page.gallery.length -1
-        let frame = this.gallery.n
-        if (dir == '+1') frame += 1
-        else if (dir == '-1') frame -= 1
-        if (frame < 0) frame = max
-        if (frame > max) frame = 0
-        this.gallery.n = frame
-      }
-    },
-  }
-}
-</script>

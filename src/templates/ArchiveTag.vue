@@ -4,7 +4,7 @@
       .columns
         .column.is-6.desktop.no-pad.gallery-column
           .gallery(v-if='image')
-            .item(:style="'background-image: url('+image+')'")
+            .item(:style="'background-image: url('+constrainImageUrl(image)+')'")
         client-only
           .column.is-6.left
             //- xmp.item {{ $context }}
@@ -32,6 +32,11 @@ export default {
     }
   },
   methods: {
+    constrainImageUrl (url) {
+      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      console.log(newUrl)
+      return newUrl
+    },
     // goBack () {
     //   if (!process.isClient) return
       

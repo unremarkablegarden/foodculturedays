@@ -5,7 +5,7 @@
         .column.is-6.desktop.no-pad.gallery-column
           .gallery
             //- xmp {{ image }}
-            .item(:style="'background-image: url('+image+')'")
+            .item(:style="'background-image: url('+constrainImageUrl(image)+')'")
             //- .item(v-if='$context.image', :style="'background-image: url('+$context.image.node.image.url+')'")
             //- .item(v-if='image', :style="'background-image: url('+image.url+')'")
           //- prismic-image(:field='page.image', v-if='page.image')
@@ -109,6 +109,13 @@ export default {
   //   if (!process.isClient) return
   //   this.image = this.pages[0].node.image.url
   // },
+  methods: {
+    constrainImageUrl (url) {
+      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      console.log(newUrl)
+      return newUrl
+    },
+  },
   computed: {
     pages () {
       if (!process.isClient) return

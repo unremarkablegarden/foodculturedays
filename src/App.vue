@@ -666,7 +666,8 @@ $headingSize: 2.2rem;
   }
 
   .gallery {
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
+    background:white;
     color: #ccc;
     height: 100%;
     width: 50vw;

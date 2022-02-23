@@ -3,14 +3,14 @@
     .columns.archive-page
       .column.is-6.desktop.no-pad.gallery-column
         .gallery
-          .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+          .item(v-if='page.image', :style="'background-image: url('+constrainImageUrl(page.image.url)+')'")
           //- .item(v-else) Add a featured image to this page in Prismic
           //- prismic-image(:field='page.image', v-if='page.image')
 
       .column.is-6.left
         .back(@click='goBack')
           img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
-        .image(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+        .image(v-if='page.image', :style="'background-image: url('+constrainImageUrl(page.image.url)+')'")
         
         .page-wrapper
           div(v-if='"categories" in page')
@@ -231,6 +231,11 @@ export default {
     }
   },
   methods: {
+    constrainImageUrl (url) {
+      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      console.log(newUrl)
+      return newUrl
+    },
     tagLink (tag) {
       let ret
       if (this.lang == 'fr') {
