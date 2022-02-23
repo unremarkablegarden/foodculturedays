@@ -4,6 +4,9 @@ export default
     // ABOUT
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
+    // FIELD RESEARCH
+    { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
+    
     // BIENALE
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'http://depuislacendredesforets.com/'], blank: true },
     
