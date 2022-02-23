@@ -111,9 +111,13 @@ export default {
   // },
   methods: {
     constrainImageUrl (url) {
-      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
-      console.log(newUrl)
-      return newUrl
+      if (url) {
+        if (url.indexOf('?auto=compress,format') > -1) {
+          return url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+        } else {
+          return url
+        }
+      }
     },
   },
   computed: {

@@ -46,13 +46,15 @@ export default {
       let images = {
         mobile: null,
         desktop: null,
-      }      
+      }
       if (this.$context.data.node.gallery.length) {
         let i1 = this.$context.data.node.gallery[0]
         let i2 = this.$context.data.node.gallery[1]
         if (i1.item.dimensions.width >= i2.item.dimensions.width) {
-          images.mobile = this.constrainImageUrl(i2.item.url)
-          images.desktop = this.constrainImageUrl(i1.item.url)
+          // images.mobile = this.constrainImageUrl(i2.item.url)
+          // images.desktop = this.constrainImageUrl(i1.item.url)
+          images.mobile = i2.item.url
+          images.desktop = i1.item.url
         }
       }
       
