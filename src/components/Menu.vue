@@ -141,7 +141,7 @@ export default {
   methods: {
     constrainImageUrl (url) {
       let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
-      console.log(newUrl)
+      // console.log(newUrl)
       return newUrl
     },
     hideImage () {

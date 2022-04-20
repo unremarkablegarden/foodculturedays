@@ -8,6 +8,7 @@ export default
     { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
     
     // BIENALE
+    { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'http://depuislacendredesforets.com/'], blank: true },
     
     // PROGRAM
