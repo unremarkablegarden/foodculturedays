@@ -4,12 +4,13 @@ export default
     // ABOUT
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
-    // FIELD RESEARCH
-    { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
-    
     // BIENALE
     { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'http://depuislacendredesforets.com/'], blank: true },
+    
+    // FIELD RESEARCH
+    { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
+    
     
     // PROGRAM
     // { title: ['Program', 'Programme'], to: ['/FCD_program_EN.pdf', '/FCD_program_FR.pdf'], blank: true },
