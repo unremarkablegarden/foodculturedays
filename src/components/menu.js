@@ -5,8 +5,8 @@ export default
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
     // BIENALE
-    { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
-    // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'http://depuislacendredesforets.com/'], blank: true },
+    // { title: ['Biennale', 'Biennale'], to: ['/en/biennale', '/fr/biennale'] },
+    { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.fromtheforestsashes.com/'], blank: true },
     
     // OPEN CALL
     { title: ['Open Call 2023', 'Appel à Projets 2023'], to: ['/OpenCall_2023_EN.pdf', '/OpenCall_2023_FR.pdf'], blank: true },

@@ -28,13 +28,13 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   })
   // <script async="" src="" id=""></script>
   
-  let navLang = 'en'
+  let navLang = 'fr'
   if (process.isClient) {
     navLang = navigator.language || navigator.userLanguage
     navLang = navLang.toLowerCase()  
   }
-  let lang = 'en'
-  if (navLang.includes('fr')) lang = 'fr'
+  let lang = 'fr'
+  if (navLang.includes('en')) lang = 'en'
   
   console.log('MAINJS lang = ' + lang)
   
