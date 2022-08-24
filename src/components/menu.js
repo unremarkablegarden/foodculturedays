@@ -11,6 +11,9 @@ export default
     // OPEN CALL
     // { title: ['Open Call 2023', 'Appel à Projets 2023'], to: ['/OpenCall_2023_EN.pdf', '/OpenCall_2023_FR.pdf'], blank: true },
     
+    // EVENTS 2022
+    { title: ['Events 2022', 'Évènements 2022'], to: ['/en/events-2022', '/fr/evenements-2022'] },
+    
     // FIELD RESEARCH
     { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
     
