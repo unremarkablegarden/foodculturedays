@@ -127,12 +127,16 @@ $green: rgb(17,230,54);
         width: calc(100% + 1.4rem);
         margin-left: -0.7rem;
         display: none;
-        background-size: contain;
+        /* background-size: contain; */
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         background-color: #f5f5f5;
         &.is-active {
           display: block;
+        }
+        &.contain {
+          background-size: contain;
         }
       }  
     }
@@ -194,7 +198,8 @@ $green: rgb(17,230,54);
       top: 0;
       left: 0;
       display: none;
-      background-size: contain;
+      /* background-size: contain; */
+      background-size: cover;
       &.is-active {
         display: block;
       }
