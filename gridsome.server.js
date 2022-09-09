@@ -354,6 +354,8 @@ module.exports = function (api, options) {
         newsletters['en'] = node
       }      
     })
+    
+    // console.log(newsletters)
 
 
     // CREATE THE PAGES
