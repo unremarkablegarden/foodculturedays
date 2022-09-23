@@ -11,6 +11,9 @@ export default
     // OPEN CALL
     // { title: ['Open Call 2023', 'Appel à Projets 2023'], to: ['/OpenCall_2023_EN.pdf', '/OpenCall_2023_FR.pdf'], blank: true },
     
+    // BOCA
+    { title: ['Editorial Project', 'Projet Éditorial'], to: ['https://boca-a-boca.foodculturedays.com/en/', 'https://boca-a-boca.foodculturedays.com/'], blank: true },
+    
     // EVENTS 2022
     { title: ['Events 2022', 'Évènements 2022'], to: ['/en/events-2022', '/fr/evenements-2022'] },
     
