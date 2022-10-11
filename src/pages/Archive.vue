@@ -21,7 +21,12 @@
           .column.is-6.left
             h1.title {{ title }}
             .year(v-for='(year, index) in years', :key='index')
-              h2.serif {{ year.year }}
+              h2.serif 
+                span {{ year.year }}
+                template(v-if='year.year === "2020"') 
+                  span &nbsp;
+                  span(v-if='lang === "fr"') PROGRAMME RADIO
+                  span(v-else) RADIO PROGRAM
 
               .pages-wrapper
                 .archive-item(v-for='(page, index) in year.pages', :key='index')
@@ -89,7 +94,7 @@ export default {
   },
   data () {
     return {
-      // lang: 'en'
+      lang: 'fr'
     }
   },
   methods: {
@@ -98,33 +103,35 @@ export default {
       return text
     },
     archiveRoute (path) {
-      console.log(path+'/')
+      // console.log(path+'/')
       this.$router.push(path+'/')
     }
     // linkclicked (el) {
     //   console.log(el);
     // }
   },
-  created () {
+  // created () {
     // if (process.isClient) {
       // let lang = this.$context.lang
       // if (lang.includes('fr')) { this.lang = 'fr' }
-      
     // }
-  },
-  // created () {
-  //   if (!process.isClient) return
-  //   let lang = this.$store.state.lang
-  //   if (!lang) {
-  //     let path = window.location.pathname
-  //     if (path == '/en' || path.includes('/en/')) {
-  //       lang = 'en'
-  //     } else if (path == '/fr' || path.includes('/fr/')) {
-  //       lang = 'fr'
-  //     }
-  //   }
-  //   if (lang.includes('fr')) { this.lang = 'fr' }
   // },
+  mounted () {
+    if (!process.isClient) return
+    let lang = this.$store.state.lang
+    if (!lang) {
+      let path = window.location.pathname
+      if (path.includes('en/')) { this.lang = 'en' }
+      // if (path == '/en' || path.includes('/en/')) {
+      //   lang = 'en'
+      // } else if (path == '/fr' || path.includes('/fr/')) {
+      //   lang = 'fr'
+      // }
+    } else {
+      this.lang = lang
+    }
+    // if (lang.includes('fr')) { this.lang = 'fr' }
+  },
   computed: {
     pages () {
       return this.$context.data
@@ -152,7 +159,7 @@ export default {
       years.forEach(year => {
         let p = pages.filter(el => el.node.year == year)
         
-        console.log(p)
+        // console.log(p)
 
         p.sort((a, b) => {
           const Aartist = a.node.artist ? a.node.artist[0].text : false
@@ -181,14 +188,14 @@ export default {
       return structure
     },
   },
-  // watch: {
-  //   $route (to){
-  //     if (to.path.includes('fr')) {
-  //       this.lang = 'fr'
-  //     } else {
-  //       this.lang = 'en'
-  //     }
-  //   }
-  // }
+  watch: {
+    $route (to){
+      if (to.path.includes('fr/')) {
+        this.lang = 'fr'
+      } else {
+        this.lang = 'en'
+      }
+    }
+  }
 }
 </script>
