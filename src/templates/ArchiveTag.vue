@@ -33,9 +33,11 @@ export default {
   },
   methods: {
     constrainImageUrl (url) {
-      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
-      console.log(newUrl)
-      return newUrl
+      if (url) {   
+        let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+        console.log(newUrl)
+        return newUrl
+      }
     },
     // goBack () {
     //   if (!process.isClient) return
@@ -58,8 +60,10 @@ export default {
         let max = this.page.length
         let r = rand(0,max)
         let post = this.page[r]
-        let img = post.image.url
-        if(img) return img
+        if (post && post.image && post.image.url) {
+          let img = post.image.url
+          if(img) return img
+        }
       }
     },
     title () {
