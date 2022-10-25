@@ -31,6 +31,11 @@ export default
     { title: ['Cultural Mediation', 'Médiation Culturelle'], to: ['/en/cultural-mediation', '/fr/mediation-culturelle'] },
     // { title: ['Artistic Mediation', 'Médiation Artistique'], to: ['/en/artistic-mediation', '/fr/mediation-artistique'] },
   
+    // Perennial actions
+    { title: ['Perennial actions on the territory', 'Actions pérennes sur le territoire'], to: ['/en/perennial-projects-on-the-territory', '/fr/projets-perennes-sur-le-territoire'] },
+    
+    // Job
+    { title: ['Job', 'Job'], to: ['/en/job', '/fr/job'], hide: 'en' },
     
     
     // Tickets / Billetterie

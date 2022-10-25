@@ -8,7 +8,7 @@
           .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+constrainImageUrl(item.item.url)+')'", v-bind:class="{ active: i == galleryItem }", v-if='item.item')
 
     .column.is-6.menu.left
-      .menu-item(v-for="(item, i) in menu", :key="item.title[lang]")
+      .menu-item(v-for="(item, i) in menu", :key="item.title[lang]", v-if='! item.hide || item.hide === "en" && lang === 1 || item.hide === "fr" && lang === 0')
         span.linkwrap(@mouseover='galleryItem = (i+1)', @mouseleave='galleryItem = 0')
           div(v-if='item.blank')
             a(:href="item.to[lang]", target="_blank") {{ item.title[lang] }}
