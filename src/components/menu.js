@@ -15,7 +15,7 @@ export default
     { title: ['Editorial Project', 'Projet Éditorial'], to: ['https://boca-a-boca.foodculturedays.com/en/', 'https://boca-a-boca.foodculturedays.com/'], blank: true },
     
     // EVENTS 2022
-    { title: ['Events 2022', 'Évènements 2022'], to: ['/en/events-2022', '/fr/evenements-2022'] },
+    // { title: ['Events 2022', 'Évènements 2022'], to: ['/en/events-2022', '/fr/evenements-2022'] },
     
     // FIELD RESEARCH
     { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
