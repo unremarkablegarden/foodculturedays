@@ -14,6 +14,9 @@ export default
     // BOCA
     { title: ['Editorial Project', 'Projet Éditorial'], to: ['https://boca-a-boca.foodculturedays.com/en/', 'https://boca-a-boca.foodculturedays.com/'], blank: true },
     
+    // Perennial actions
+    { title: ['Perennial actions on the territory', 'Actions pérennes sur le territoire'], to: ['/en/perennial-projects-on-the-territory', '/fr/projets-perennes-sur-le-territoire'] },
+    
     // EVENTS 2022
     // { title: ['Events 2022', 'Évènements 2022'], to: ['/en/events-2022', '/fr/evenements-2022'] },
     
@@ -31,8 +34,7 @@ export default
     { title: ['Cultural Mediation', 'Médiation Culturelle'], to: ['/en/cultural-mediation', '/fr/mediation-culturelle'] },
     // { title: ['Artistic Mediation', 'Médiation Artistique'], to: ['/en/artistic-mediation', '/fr/mediation-artistique'] },
   
-    // Perennial actions
-    { title: ['Perennial actions on the territory', 'Actions pérennes sur le territoire'], to: ['/en/perennial-projects-on-the-territory', '/fr/projets-perennes-sur-le-territoire'] },
+    
     
     // Job
     { title: ['Job', 'Job'], to: ['/en/job', '/fr/job'], hide: 'en' },
