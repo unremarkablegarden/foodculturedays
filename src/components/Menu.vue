@@ -198,6 +198,7 @@ export default {
 // $green: #11ff36;
 $green: rgb(17,230,54);
 $headingSize: 2.2rem;
+$headingSizeMobile: 1.9rem;
 
 .subtitle {
   text-transform: uppercase;
@@ -302,6 +303,10 @@ $headingSize: 2.2rem;
   }
   text-transform: uppercase;
   font-size: $headingSize;
+  /* define for mobile */
+  @media (max-width: 736px) {
+    font-size: $headingSizeMobile;
+  }
   // line-height: 1.3em;
   line-height: 1.0em;
   font-weight: normal;
