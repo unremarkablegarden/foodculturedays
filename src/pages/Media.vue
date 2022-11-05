@@ -4,8 +4,8 @@
       .columns
         .column.is-6.desktop.no-pad.gallery-column
           .gallery
-            //- xmp {{ image }}
-            .item(:style="'background-image: url('+constrainImageUrl(image)+')'")
+            //- xmp {{ images }}
+            .item(v-if='image', :style="'background-image: url('+constrainImageUrl(image)+')'")
             //- .item(v-if='$context.image', :style="'background-image: url('+$context.image.node.image.url+')'")
             //- .item(v-if='image', :style="'background-image: url('+image.url+')'")
           //- prismic-image(:field='page.image', v-if='page.image')
@@ -132,11 +132,29 @@ export default {
         if(sortA < sortB) { return 1 }
         return 0
       })
+      // p.forEach(e => {
+      //   console.log(e.node.year)
+      // });
       return p
+    },
+    images () {
+      // array of this.pages[0].node.image.url of all pages
+      if (!process.isClient) return
+      let p = this.pages
+      let images = []
+      p.forEach(e => {
+        if (e.node.image) {
+          images.push(e.node.image.url)
+        }
+      })
+      return images
     },
     image () {
       if (!process.isClient) return
-      return this.pages[0].node.image.url || false
+      return this.images[0]
+      // if (this.pages[0].node.image && this.pages[0].node.image.url) {
+      //   return this.pages[0].node.image.url || false
+      // }
     }
   }
 }
