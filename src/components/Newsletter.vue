@@ -32,7 +32,8 @@ export default {
       t: {
         en: {
           title: 'NEXT EDITION (III) 26 – 29.11.2020, VEVEY',
-          subtitle: 'Join our newsletter',
+          // subtitle: 'Join our newsletter',
+          subtitle: 'Subscribe to our newsletter',
           form: [
             'Email address',
             'First name',
