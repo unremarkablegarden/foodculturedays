@@ -37,7 +37,7 @@ export default
     
     
     // Job
-    { title: ['Job', 'Job'], to: ['/en/job', '/fr/job'], hide: 'en' },
+    // { title: ['Job', 'Job'], to: ['/en/job', '/fr/job'], hide: 'en' },
     
     
     // Tickets / Billetterie
