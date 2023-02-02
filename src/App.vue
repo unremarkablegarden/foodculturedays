@@ -14,6 +14,7 @@
       //- Menu(v-if='notSlashIndex').global-menu
       client-only
         Menu(v-bind:class="{ 'is-hidden-menu': !menuShown }", v-if='isMobile').global-menu
+        Cookies
       transition(:name='transitionName')
         router-view(class='child-view')
 </template>
@@ -34,6 +35,7 @@ import Loader from '~/components/Loader.vue'
 import Logo from '~/components/Logo.vue'
 import Splash from '~/components/Splash.vue'
 import Menu from '~/components/Menu.vue'
+import Cookies from '~/components/Cookies.vue'
 // import Statement from '~/components/Statement.vue'
 // import Radio from '~/components/Radio.vue'
 
@@ -46,7 +48,7 @@ if (process.isClient) {
 
 export default {
   components: {
-    Lang, Social, Loader, Logo, Splash, Menu, 
+    Lang, Social, Loader, Logo, Splash, Menu, Cookies,
     // Radio
   },
   data () {
