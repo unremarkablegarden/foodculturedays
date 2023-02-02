@@ -39,8 +39,8 @@ export default {
     this.lang = this.pathLang()
   },
   mounted () {
-    // const accepted = localStorage.getItem('cookiesAccepted')
-    const accepted = false
+    const accepted = localStorage.getItem('cookiesAccepted')
+    // const accepted = false
     this.$nextTick(() => {
       setTimeout(() => {
         if (!accepted) this.show = true
