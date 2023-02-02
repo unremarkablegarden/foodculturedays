@@ -13,8 +13,63 @@
         button.btn(@click='accept')
           span(v-if='lang === "en"') I understand
           span(v-else) J'ai compris
-  
+        
+        //- xmp lang {{  lang  }}
+        
 </template>
+
+
+<script>
+export default {
+  data () {
+    return {
+      show: false,
+      lang: null
+    }
+  },
+  
+  watch: {
+    // watch route change
+    $route (to, from) {
+      this.lang = this.pathLang()
+    }
+    
+  },
+  created() {
+    this.lang = this.pathLang()
+  },
+  mounted () {
+    // const accepted = localStorage.getItem('cookiesAccepted')
+    const accepted = false
+    this.$nextTick(() => {
+      setTimeout(() => {
+        if (!accepted) this.show = true
+      }, 3000);
+    })
+    // this.show = true
+  },
+  methods: {
+    accept () {
+      localStorage.setItem('cookiesAccepted', true)
+      this.show = false
+    },
+    
+    pathLang () {
+      let path = window.location.pathname
+      let pathLang = null
+      if (path !== '/') {
+        if (path == '/en' || path.includes('/en/')) {
+          pathLang = 'en'
+        } else if (path == '/fr' || path.includes('/fr/')) {
+          pathLang = 'fr'
+        }
+      }
+      return pathLang
+    }
+  }
+}
+</script>
+
 
 <style lang="scss">
 .notice {
@@ -46,60 +101,15 @@
   }
   border: 2px solid white;
 }
-// define classes .col-8 and .col-4
-// @for $i from 1 through 12 {
-//   .col-#{$i} {
-//     flex: 0 0 auto;
-//     width: percentage($i / 12);
-//   }
-// }
-// .mt-2
 .mt-2 {
   margin-top: 0.5rem;
 }
-</style>
-
-<script>
-export default {
-  data () {
-    return {
-      show: false
-    }
-  },
-  // props: {
-  //   lang: {
-  //     type: String,
-  //     default: 'fr',
-  //   }
-  // },
-  computed: {
-    lang () {
-      let path = window.location.pathname
-      let pathLang = null
-      if (path !== '/') {
-        if (path == '/en' || path.includes('/en/')) {
-          pathLang = 'en'
-        } else if (path == '/fr' || path.includes('/fr/')) {
-          pathLang = 'fr'
-        }
-      }
-      // state lang
-      // let stateLang = this.$store.state.lang
-      return pathLang
-    }
-  },
-  mounted () {
-    const accepted = localStorage.getItem('cookiesAccepted')
-    this.$nextTick(() => {
-      if (!accepted) this.show = true
-    })
-    // this.show = true
-  },
-  methods: {
-    accept () {
-      localStorage.setItem('cookiesAccepted', true)
-      this.show = false
-    }
-  }
+// fade transition vue
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s
 }
-</script>
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
+</style>
