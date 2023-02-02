@@ -181,7 +181,7 @@ export default {
         delay: 0
       })
     }
-    
+
     
     browserUpdate({
       // required: {e:-4,f:-6,o:-3,s:-2,c:-6},
@@ -265,6 +265,23 @@ export default {
         if (this.isHome) this.splash = true
       }
     },
+    checkLang () {
+      // new 2023
+      let path = window.location.pathname
+      let pathLang = null
+      if (path !== '/') {
+        if (path == '/en' || path.includes('/en/')) {
+          pathLang = 'en'
+        } else if (path == '/fr' || path.includes('/fr/')) {
+          pathLang = 'fr'
+        }
+      }
+      let stateLang = this.$store.state.lang
+      if (pathLang !== stateLang) {
+        this.$store.dispatch('setLang', pathLang)
+        console.log('set lang from path', pathLang)
+      }  
+    },  
     checkPath () {
       if (!process.isClient) return
       let p = this.$route.path
@@ -279,7 +296,10 @@ export default {
         }
         let path = '/' + lang + '/'
         this.$router.push(path)
-      }  
+      } else {
+        // not root, maybe loading /fr or /en directly, check the lang based on path
+        this.checkLang()
+      }
       
       
       if (p == '/en/' || p =='/en' || p == '/fr/' || p == '/fr' || p == '/') {

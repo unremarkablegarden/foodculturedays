@@ -17,7 +17,7 @@ query {
 export default {
   data () {
     return {
-      lang: 'en'
+      // lang: 'en'
     }
   },
   created () {

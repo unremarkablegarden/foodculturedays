@@ -82,8 +82,24 @@ export default {
     lang () {
       // if (this.langCode == 'fr') return 1
       // else return 0
-      let lang = this.$store.state.lang
-      if (lang == 'fr') return 1
+      
+      // let lang = this.$store.state.lang
+      // console.log('lang: computed in menu', lang);
+      
+      let path = window.location.pathname
+      let pathLang = null
+      if (path !== '/') {
+        if (path == '/en' || path.includes('/en/')) {
+          pathLang = 'en'
+        } else if (path == '/fr' || path.includes('/fr/')) {
+          pathLang = 'fr'
+        }
+      }
+      // let stateLang = this.$store.state.lang
+      
+      
+      // if (lang == 'fr') return 1
+      if (pathLang == 'fr') return 1
       else return 0
     },
     loaded () {
