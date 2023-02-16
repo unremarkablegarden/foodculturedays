@@ -31,7 +31,7 @@
           //- prismic-image(:field='page.image', v-if='page.image')
 
       .column.is-6.left
-        .page-wrapper
+        .page-wrapper(:class='page._meta.uid')
           prismic-rich-text(:field='page.title').title
           prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
           .content
@@ -256,5 +256,9 @@ $green: rgb(17,230,54);
   
 }
 
-
+.page-wrapper.biennale .title h1 {
+  font-family: 'Maxi';
+  font-size: 2.7rem;
+  color: black;
+}
 </style>

@@ -88,7 +88,8 @@ export default {
           this.hasTranslation = false
         } else {
           if (path !== newPath) {
-            let top = window.pageYOffset
+            // let top = window.pageYOffset
+            let top = 500
             animatedScrollTo({
                 duration: top,
                 to: 0
@@ -151,6 +152,16 @@ export default {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-left: 0;
+    }
+  }
+  .biennale #lang button {
+    transition: all 500ms ease-in-out;
+    // black
+    color: #000;
+    border: 1px #000 solid;
+    &.is-active {
+      color: white;
+      background: #000;
     }
   }
 </style>

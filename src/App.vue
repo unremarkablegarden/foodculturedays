@@ -1,5 +1,5 @@
 <template lang="pug">
-  #app
+  #app(:class='uid')
     #preloader
       //- img(src="https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format")
     //- Loader
@@ -61,7 +61,8 @@ export default {
       isMobile: true,
       isHome: false,
       menubuttonShown: true,
-      responsiveSize: 736
+      responsiveSize: 736,
+      uid: '',
     }
   },
   computed: {
@@ -131,6 +132,14 @@ export default {
       }
     },
     $route (to, from) {
+      // get last part of route
+      let uid = to.path
+      if (uid[uid.length - 1] == '/') uid = uid.slice(0, -1)
+      uid = uid.split('/')
+      uid = uid[uid.length - 1]
+      this.uid = uid
+      console.log('uid change = ' + uid)
+      
       // if (!process.isClient) return
       console.log('GA page > ' + to.path)
       this.$ga.page(to.path)
@@ -287,6 +296,13 @@ export default {
     checkPath () {
       if (!process.isClient) return
       let p = this.$route.path
+      
+      let uid = p
+      if (uid[uid.length - 1] == '/') uid = uid.slice(0, -1)
+      uid = uid.split('/')
+      uid = uid[uid.length - 1]
+      this.uid = uid
+      
       // console.log('PATH ==== ' + p);
       
       if (p == '/') {
@@ -955,6 +971,14 @@ xmp {
     src: url('./assets/ce.woff2') format('woff2'),
          url('./assets/ce.woff') format('woff');
     font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Maxi';
+    src: url('./assets/ABCMaxiRound-Light.woff2') format('woff2'),
+         url('./assets/ABCMaxiRound-Light.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
 }
 

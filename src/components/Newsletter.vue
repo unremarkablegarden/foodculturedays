@@ -169,4 +169,12 @@ export default {
   }
 
 }
+.biennale #newsletter {
+  .arrow.green {
+    color: black;
+  }
+  a {
+    color: black;
+  }
+}
 </style>

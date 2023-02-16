@@ -8,7 +8,8 @@
           .item(v-for="(item, i) in gallery", :key="i", :style="'background-image: url('+constrainImageUrl(item.item.url)+')'", v-bind:class="{ active: i == galleryItem }", v-if='item.item')
 
     .column.is-6.menu.left
-      .menu-item(v-for="(item, i) in menu", :key="item.title[lang]", v-if='! item.hide || item.hide === "en" && lang === 1 || item.hide === "fr" && lang === 0')
+      .menu-item(v-for="(item, i) in menu", :key="item.title[lang]", v-if='! item.hide || item.hide === "en" && lang === 1 || item.hide === "fr" && lang === 0', :class='slug(item.to[lang])')
+        //- xmp {{ item }}
         span.linkwrap(@mouseover='galleryItem = (i+1)', @mouseleave='galleryItem = 0')
           div(v-if='item.blank')
             a(:href="item.to[lang]", target="_blank") {{ item.title[lang] }}
@@ -72,36 +73,37 @@ export default {
       subtitle: {
         en: 'Next Edition',
         fr: 'Prochaine édition'
-      }
+      },
+      lang: 0
     }
   },
   computed: {
     // ...mapGetters({
     //   langCode: 'getLang'
     // }),
-    lang () {
-      // if (this.langCode == 'fr') return 1
-      // else return 0
+    // lang () {
+    //   // if (this.langCode == 'fr') return 1
+    //   // else return 0
       
-      // let lang = this.$store.state.lang
-      // console.log('lang: computed in menu', lang);
+    //   let lang = this.$store.state.lang
+    //   // console.log('lang: computed in menu', lang);
       
-      let path = window.location.pathname
-      let pathLang = null
-      if (path !== '/') {
-        if (path == '/en' || path.includes('/en/')) {
-          pathLang = 'en'
-        } else if (path == '/fr' || path.includes('/fr/')) {
-          pathLang = 'fr'
-        }
-      }
-      // let stateLang = this.$store.state.lang
+    //   // let path = window.location.pathname
+    //   // let pathLang = null
+    //   // if (path !== '/') {
+    //   //   if (path == '/en' || path.includes('/en/')) {
+    //   //     pathLang = 'en'
+    //   //   } else if (path == '/fr' || path.includes('/fr/')) {
+    //   //     pathLang = 'fr'
+    //   //   }
+    //   // }
+    //   // let stateLang = this.$store.state.lang
       
       
-      // if (lang == 'fr') return 1
-      if (pathLang == 'fr') return 1
-      else return 0
-    },
+    //   if (lang == 'fr') return 1
+    //   // if (pathLang == 'fr') return 1
+    //   else return 0
+    // },
     loaded () {
       // show menu after loaded is set in store by Logo.vue
       let loaded = this.$store.state.loaded
@@ -125,6 +127,8 @@ export default {
     if (this.$route.path !== '/') {
       this.getGallery()
     }
+    
+    this.checkPath()
   },
   mounted () {
     // console.log('menu > mounted > loaded = ' + this.loaded);
@@ -152,9 +156,27 @@ export default {
         this.getGallery()
         this.showGallery = true
       }
+      this.checkPath()
     }
   },
   methods: {
+    checkPath () {
+      if (this.$route.path.includes('fr')) {
+        this.lang = 1
+      } else {
+        this.lang = 0
+      }
+      // console.log('checkPath' , this.lang);
+    },
+    slug (url) {
+      // remove trailing slash
+      if (url.substr(-1) == '/') {
+        url = url.substr(0, url.length - 1)
+      }
+      // get last part of url
+      let slug = url.substr(url.lastIndexOf('/') + 1)
+      return slug
+    },
     constrainImageUrl (url) {
       let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
       // console.log(newUrl)
@@ -370,5 +392,8 @@ $headingSizeMobile: 1.9rem;
  -webkit-transform: translateX(-100%); /* Firefox bug fix */
  transform: translateX(-100%); 
  }
+}
+.menu-item.biennale a {
+  color: $green;
 }
 </style>
