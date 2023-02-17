@@ -256,9 +256,15 @@ $green: rgb(17,230,54);
   
 }
 
-.page-wrapper.biennale .title h1 {
+.page-wrapper.biennale .title h1,
+.page-wrapper.biennale h1
+{
   font-family: 'Maxi';
   font-size: 2.7rem;
   color: black;
 }
+.page-wrapper.biennale h1:not(:first-child) {
+  text-align: center;
+}
+
 </style>

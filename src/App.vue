@@ -474,6 +474,7 @@ $headingSize: 2.2rem;
 // MOBILE
 /* @media (max-width: 960px) { */
 @media (max-width: 736px) {
+  
   .home.splash {
     #menu  {
       display: none;
@@ -547,6 +548,18 @@ $headingSize: 2.2rem;
     color: white;
     background: $green;
     border: 1px $green solid;
+  }
+  
+  .biennale {
+    .menu-button {
+      color: black;
+      border: 1px black solid;
+    }
+    .menu-button.on {
+      // color: white;
+      background: black;
+      border: 1px black solid;
+    }
   }
   
   .home.splash.loaded {
