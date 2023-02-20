@@ -481,11 +481,15 @@ $headingSize: 2.2rem;
     }
     #splash {
       .image {
+        background-image: url(https://images.prismic.io/foodculturedays2020/030721da-4fee-4898-a855-b80ad7daf65b_1.jpg?h=2400&auto=compress,format);
+        // background-image: url(https://images.prismic.io/foodculturedays2020/ec37bea2-c3c1-4890-9e55-d9e4a16f4f7b_POSTER_VISUAL2.jpg?auto=compress,format);
+        
+        
+        
         // background-image: url(https://images.prismic.io/foodculturedays2020/acb5863c-bbf5-4f37-9c82-14176e46a8a8_191123_FCD45580.jpg?auto=compress,format);
         
-        // background-image: url(https://images.prismic.io/foodculturedays2020/030721da-4fee-4898-a855-b80ad7daf65b_1.jpg?h=2400&auto=compress,format);
         
-        background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?auto=compress,format);
+        // background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?auto=compress,format);
         
         /* background-image: url(https://images.prismic.io/foodculturedays2020/4c9181ba-1442-434d-95f7-b208c5d4199a_FCD_agenda_riviera_2.jpg?auto=compress,format); */
         background-position: top center;
