@@ -42,6 +42,15 @@ export default {
       } else if (path == '/fr' || path.includes('/fr/')) {
         lang = 'fr'
       }
+    } 
+    // set the language by browser language
+    else {
+      let browserLang = navigator.language || navigator.userLanguage
+      if (browserLang.includes('fr')) {
+        lang = 'fr'
+      } else {
+        lang = 'en'
+      }
     }
     
     let stateLang = this.$store.state.lang

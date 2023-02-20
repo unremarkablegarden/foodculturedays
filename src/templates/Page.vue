@@ -277,6 +277,10 @@ $green: rgb(17,230,54);
   font-family: 'Maxi';
   font-size: 2.7rem;
   color: black;
+  font-weight: normal !important;
+}
+.biennale h1 strong, .biennale h2 strong {
+  font-weight: normal !important;
 }
 .biennale .content h2 {
   font-family: 'Maxi';
@@ -284,5 +288,6 @@ $green: rgb(17,230,54);
   font-size: 3rem;
   line-height: 0em;
   margin-top: 1.0em;
+  font-weight: normal !important;
 }
 </style>
