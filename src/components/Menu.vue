@@ -15,7 +15,7 @@
             a(:href="item.to[lang]", target="_blank") {{ item.title[lang] }}
           g-link(v-else, :to="item.to[lang]") {{ item.title[lang] }}
       
-      //- .marquee-wrapper
+      .marquee-wrapper
         .marquee.marquee1.is-hidden-desktop
           .subtitle
             //- span.sans {{ subtitle[langpath[lang]] }}&nbsp;
@@ -23,14 +23,16 @@
             //- span.serif 2/2: 27-30 may 2021,
             //- span.sans &nbsp;Vevey
             span(v-if='lang === 0')
-              span.sans « Edition 2020/2021:&nbsp;
-              span.serif Chapter 2 « From the forest ashes »  27–30 May 2021&nbsp;
-              span.sans Online/Vevey »&nbsp;
+              span.sans « Art Biennale:&nbsp;
+              span.serif May 26 — June 4, Vevey - Full 2023 Program Announcement:&nbsp;
+              span.sans 15 March 2023 »&nbsp;
             span(v-else)
-              span.sans « Édition 2021/2021:&nbsp;
-              span.serif Chapitre 2 « Depuis la cendre des forêts »&nbsp;
-              span.sans 27—30 Mai 2021, En ligne/Vevey&nbsp;
-            
+              span.sans « Biennale D’Art&nbsp;
+              span.serif 26 Mai — 4 Juin 2023, Vevey - Divulgation Du Programme 2023 Compet:&nbsp;
+              span.sans 15 Mars&nbsp;
+          
+              
+              
           
         .marquee.marquee2.is-hidden-desktop
           .subtitle
@@ -39,13 +41,13 @@
             //- span.serif 2/2: 27-30 may 2021,
             //- span.sans &nbsp;Vevey
             span(v-if='lang === 0')
-              span.sans « Edition 2020/2021:&nbsp;
-              span.serif Chapter 2 « From the forest ashes »  27–30 May 2021&nbsp;
-              span.sans Online/Vevey »&nbsp;
+              span.sans « Art Biennale:&nbsp;
+              span.serif May 26 — June 4, Vevey - Full 2023 Program Announcement:&nbsp;
+              span.sans 15 March 2023 »&nbsp;
             span(v-else)
-              span.sans « Édition 2021/2021:&nbsp;
-              span.serif Chapitre 2 « Depuis la cendre des forêts »&nbsp;
-              span.sans 27—30 Mai 2021, En ligne/Vevey&nbsp;
+              span.sans « Biennale D’Art&nbsp;
+              span.serif 26 Mai — 4 Juin 2023, Vevey - Divulgation Du Programme 2023 Compet:&nbsp;
+              span.sans 15 Mars&nbsp;
 </template>
 
 <script>

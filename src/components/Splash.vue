@@ -25,7 +25,8 @@
         //- | based in Vevey (Switzerland)
         
         em foodculture days 
-        | is a knowledge sharing platform based in Vevey, Switzerland.
+        | is a knowledge-sharing platform based in Vevey, Switzerland.
+        
 
 
       .text(v-else)

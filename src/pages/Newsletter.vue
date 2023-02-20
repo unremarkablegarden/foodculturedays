@@ -1,6 +1,7 @@
 <template lang="pug">
   layout
     #newsletter
+      
       h1 {{ t[lang].title }}
       .subtitle {{ t[lang].subtitle }}
 

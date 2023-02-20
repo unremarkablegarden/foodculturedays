@@ -35,6 +35,7 @@
           prismic-rich-text(:field='page.title').title
           prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
           .content
+            //- xmp {{ page.body }}
             prismic-rich-text(v-if='page.body', :field='page.body')
 
           Newsletter(:newsletters='$context.newsletters')
@@ -68,7 +69,21 @@ export default {
   },
   computed: {
     page () {
-      return this.$context.node
+      // {
+      //   "type": "paragraph",
+      //   "text": "*\n*\n*",
+      //   "spans": []
+      // },
+      var data = this.$context.node
+      data.body.forEach(el => {
+        if (el && el.type == 'paragraph') {
+          if (el.text == '*\n*\n*') {
+            el.text = '*'
+            el.type = 'heading2'
+          }
+        }
+      })
+      return data
     }
   },
   methods: {
@@ -263,8 +278,11 @@ $green: rgb(17,230,54);
   font-size: 2.7rem;
   color: black;
 }
-.page-wrapper.biennale h1:not(:first-child) {
+.biennale .content h2 {
+  font-family: 'Maxi';
   text-align: center;
+  font-size: 3rem;
+  line-height: 0em;
+  margin-top: 1.0em;
 }
-
 </style>

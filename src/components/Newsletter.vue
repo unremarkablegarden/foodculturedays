@@ -177,4 +177,13 @@ export default {
     color: black;
   }
 }
+// .biennale 
+.biennale #newsletter {
+  opacity: 0.6;
+}
+.biennale #newsletter .subtitle {
+  border-top: 1px black solid;
+  padding-top: 1.4rem;
+  margin-top: 6rem;
+}
 </style>
