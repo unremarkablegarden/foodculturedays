@@ -555,6 +555,31 @@ module.exports = function (api, options) {
         images: images
       }
     })
+    
+    
+    // LEGAL
+    createPage({
+      path: `/en/legal`,
+      component: './src/pages/Legal.vue',
+      context: {
+        lang: 'en-gb',
+        altPath: '/fr/legales',
+        title: 'Legal',
+        // data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partners')
+        data: pages.find(el => el.node._meta.uid == 'legal')
+      }
+    })
+    createPage({
+      path: `/fr/legales`,
+      component: './src/pages/Legal.vue',
+      context: {
+        lang: 'fr-ch',
+        altPath: '/en/legal',
+        title: 'Mentions Légales',
+        // data: pagesQuery.data.prismic.allPages.edges.find(el => el.node._meta.uid == 'partenaires')
+        data: pages.find(el => el.node._meta.uid == 'legales')
+      }
+    })
 
     
     ////////////////////////////////////

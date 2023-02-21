@@ -105,6 +105,7 @@ export default {
             })
             setTimeout(() => {
               this.$store.dispatch('setLang', l)
+              console.log('change lang ==>', newPath);
               this.$router.push(newPath)
             }, top)
           }

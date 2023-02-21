@@ -715,6 +715,10 @@ $headingSize: 2.2rem;
     top: 0;
     left: 50vw;
   }
+  
+  .column.is-8 {
+    width: 66.6666666667%;
+  }
 
   .body {
     min-height: 100vh;

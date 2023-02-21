@@ -20,7 +20,14 @@
         a(:href='item.link', target="_blank") 
           | {{ item.title }}
           span.arrow.green &nbsp;&rarr;&nbsp;
-      
+    
+    #legal
+      .en(v-if='lang === "en"')
+        a(href='/en/legal') Legal note / Privacy policy &rarr;
+      .fr(v-else)
+        a(href='/fr/legales') Mentions Légales &rarr;
+        
+        
 
 </template>
 
@@ -185,5 +192,17 @@ export default {
   border-top: 1px black solid;
   padding-top: 1.4rem;
   margin-top: 6rem;
+}
+
+#legal {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #666;
+  a {
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.56rem 0.36rem;
+    border: 1px solid #666;
+    color: #666;
+  }
 }
 </style>
