@@ -481,9 +481,9 @@ $headingSize: 2.2rem;
     }
     #splash {
       .image {
-        background-image: url(https://images.prismic.io/foodculturedays2020/83b8c76d-b3cb-458a-a1b1-65598cf92502_web+1.jpg?auto=compress,format);
+        // background-image: url(https://images.prismic.io/foodculturedays2020/83b8c76d-b3cb-458a-a1b1-65598cf92502_web+1.jpg?auto=compress,format);
         
-        // background-image: url(https://images.prismic.io/foodculturedays2020/4122721b-1ec3-449f-b8c0-9a39ef133b14_web+2.jpg?auto=compress,format);
+        background-image: url(https://images.prismic.io/foodculturedays2020/4122721b-1ec3-449f-b8c0-9a39ef133b14_web+2.jpg?auto=compress,format);
         
         // background-image: url(https://images.prismic.io/foodculturedays2020/030721da-4fee-4898-a855-b80ad7daf65b_1.jpg?h=2400&auto=compress,format);
         // background-image: url(https://images.prismic.io/foodculturedays2020/ec37bea2-c3c1-4890-9e55-d9e4a16f4f7b_POSTER_VISUAL2.jpg?auto=compress,format);
@@ -623,6 +623,23 @@ $headingSize: 2.2rem;
   .global-menu {
     padding-left: 0.7rem;
     padding-right: 0.7rem;
+  }
+  .splash.home #buttons {
+    #social a {
+      color: white !important;
+    }
+    .menu-button {
+      color: white !important;
+      border-color: white !important;
+    }
+    #lang button{ 
+      border-color: white !important;
+      color: white !important;
+      &.is-active {
+        background: white !important;
+        color: black !important;
+      }
+    }
   }
 }
 
