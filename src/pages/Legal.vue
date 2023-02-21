@@ -434,6 +434,7 @@ export default {
   },
   methods: {
     checkLang () {
+      if (!process.isClient) return
       let path = window.location.pathname
       let pathLang = null
       if (path !== '/') {
