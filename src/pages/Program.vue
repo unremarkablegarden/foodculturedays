@@ -1,36 +1,36 @@
 <template lang="pug">
-  layout
-    #program
-      .columns
-        .column.is-6.desktop.no-pad.gallery-column
-          .gallery
+layout
+  #program
+    .columns
+      .column.is-6.desktop.no-pad.gallery-column
+        .gallery
+          //- .year(v-for='(year, index) in years', :key='index')
+          //-   //- h2.serif {{ year.year }}
+          //-   .item(v-for='(page, index) in year.pages', :key='index', v-if='page.node.image.url', :style="'background-image: url('+page.node.image.url+')'")
+
+          //- .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
+          //- .item(style="background-image: url(https://images.prismic.io/foodculturedays2020/70016f6a-2c5b-41bc-8adc-ed85add086f4_IMG_0901.jpg?auto=compress,format)")
+
+          //- .item(style='padding: 10vw') The images are quite low-res in the program so we can't use them big like this maybe... See sub-pages.
+
+          //- prismic-image(:field='page.image', v-if='page.image')
+      client-only
+        .column.is-6.left
+          h1.title {{ title }}
+          div(v-for='page in pages')
+            //- xmp {{ page }}
             //- .year(v-for='(year, index) in years', :key='index')
-            //-   //- h2.serif {{ year.year }}
-            //-   .item(v-for='(page, index) in year.pages', :key='index', v-if='page.node.image.url', :style="'background-image: url('+page.node.image.url+')'")
+              //- h2.serif {{ year.year }}
 
-            //- .item(v-if='page.image', :style="'background-image: url('+page.image.url+')'")
-            //- .item(style="background-image: url(https://images.prismic.io/foodculturedays2020/70016f6a-2c5b-41bc-8adc-ed85add086f4_IMG_0901.jpg?auto=compress,format)")
-
-            //- .item(style='padding: 10vw') The images are quite low-res in the program so we can't use them big like this maybe... See sub-pages.
-
-            //- prismic-image(:field='page.image', v-if='page.image')
-        client-only
-          .column.is-6.left
-            h1.title {{ title }}
-            div(v-for='page in pages')
-              //- xmp {{ page }}
-              //- .year(v-for='(year, index) in years', :key='index')
-                //- h2.serif {{ year.year }}
-
-              .pages-wrapper
-                .program-item(v-for='(page, index) in pages', :key='index')
-                  g-link(:to='page.node.context.path').link
-                  .page.link(@click='programRoute(page.node.context.path)')
-                    .image(v-if='page.node.image')
-                      img(:src='page.node.image.url', v-if='page.node.image')
-                    h2
-                      em(v-if='page.node.project') {{ tc(page.node.project[0].text) }}
-                      div(v-if='page.node.artist') {{ tc(page.node.artist[0].text) }}
+            .pages-wrapper
+              .program-item(v-for='(page, index) in pages', :key='index')
+                g-link(:to='page.node.context.path').link
+                .page.link(@click='programRoute(page.node.context.path)')
+                  .image(v-if='page.node.image')
+                    img(:src='page.node.image.url', v-if='page.node.image')
+                  h2
+                    em(v-if='page.node.project') {{ tc(page.node.project[0].text) }}
+                    div(v-if='page.node.artist') {{ tc(page.node.artist[0].text) }}
 </template>
 
 

@@ -1,113 +1,114 @@
 <template lang="pug">
-  layout
-    .columns.program-page
-      .column.is-6.no-pad.gallery-column
-        .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
-          .items
-            .item(
+layout
+  //- single program page
+  .columns.program-page
+    .column.is-6.no-pad.gallery-column
+      .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
+        .items
+          .item(
+            v-for='(item, i) in page.gallery', 
+            :style="'background-image: url('+constrainImageUrl(item.gallery_image.url)+')'", 
+            :data-n='i', 
+            :class='{ "is-active": (i == gallery.n)  }', 
+            @click='mobileNext()', 
+            v-if='item.gallery_image'
+          )
+        .navs(v-if='page.gallery.length > 1')
+          .dots
+            .dot(
               v-for='(item, i) in page.gallery', 
-              :style="'background-image: url('+constrainImageUrl(item.gallery_image.url)+')'", 
               :data-n='i', 
-              :class='{ "is-active": (i == gallery.n)  }', 
-              @click='mobileNext()', 
-              v-if='item.gallery_image'
+              :class='{ "is-active": (i == gallery.n)  }',
             )
-          .navs(v-if='page.gallery.length > 1')
-            .dots
-              .dot(
-                v-for='(item, i) in page.gallery', 
-                :data-n='i', 
-                :class='{ "is-active": (i == gallery.n)  }',
-              )
-            .control
-              .left(@click='galleryNav("-1")')
-              .right(@click='galleryNav("+1")')
-          
-        .gallery(v-if='page.image && !page.gallery.length')
-          .item(:style="'background-image: url('+constrainImageUrl(page.image.url)+')'", v-if='page.image')
-
-      .column.is-6.left
-        .back(@click='goBack')
-          img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
+          .control
+            .left(@click='galleryNav("-1")')
+            .right(@click='galleryNav("+1")')
         
-        .page-wrapper
-          .tags(v-if='page.categories').categories
-            .tag(v-for='cat in page.categories', v-if='cat.category !== null') {{ cat.category.name }}
-          .tags(v-if='page._meta.tags').normal-tags
-            //- .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
-            g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
-              .name {{ tag }}
-          
-          
-          //- table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
-            tr.date(v-if='page.date_time && !page.extra_days') 
-              td.label 
-                .inside Date
-              td 
-                .inside {{ formatDate(page.date_time) }}
-            tr.date(v-else-if='page.date_time && page.extra_days') 
-              td.label 
-                .inside 
-                  //- span(v-if='fr') Dater
-                  //- span(v-else) Dates
-                  span Dates
-              td 
-                .inside 
-                  //- xmp {{ page.date_time }}
-                  //- xmp {{ page.extra_days }}
-                  | {{ formatDate(page.date_time) }}
-                  div(v-for='extra in page.extra_days', v-if='"extra_day" in extra')
-                    //- xmp {{ extra.extra_day }}
-                    //- | , {{ formatDate(extra.extra_day) }}
-                    | {{ formatDate(extra.extra_day) }}
-            tr.location(v-if='page.location')
-              td.label(v-if='fr') 
-                .inside Lieu
-              td.label(v-else) 
-                .inside Venue
-              td 
-                .inside {{ page.location.location[0].text }}
-            tr.price(v-if='page.price')
-              td.label(v-if='fr') 
-                .inside Prix
-              td.label(v-else) 
-                .inside Price
-              td 
-                .inside {{ page.price }} 
-            tr.duration(v-if='page.duration || page.duration_richtext')
-              td.label(v-if='fr') 
-                .inside Durée
-              td.label(v-else) 
-                .inside Duration
-              td(v-if='page.duration_richtext').duration-text
-                .inside 
-                  prismic-rich-text(:field='page.duration_richtext')
-              td(v-else)
-                .inside 
-                  | {{ page.duration }} 
-            tr.participants(v-if='page.participants')
-              td(v-if='fr').label 
-                .inside Notes
-              td(v-if='fr')
-                .inside 
-                  | Capacité maximale de {{ page.participants }}
-              td(v-if='en').label 
-                .inside Note
-              td(v-if='en')
-                .inside 
-                  | Maximum capacity of {{ page.participants }}
-            tr.activation(v-if='page.activation')
-              td.label 
-                .inside Activation
-              td 
-                .inside {{ page.activation }}
-              
-              
-          prismic-rich-text(:field='page.project', v-if='page.project').project-title
-          prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
-          
-          prismic-rich-text(:field='page.project_body', v-if='page.project_body').project-body
-          prismic-rich-text(:field='page.artist_body', v-if='page.artist_body').artist-body
+      .gallery(v-if='page.image && !page.gallery.length')
+        .item(:style="'background-image: url('+constrainImageUrl(page.image.url)+')'", v-if='page.image')
+
+    .column.is-6.left
+      .back(@click='goBack')
+        img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
+      
+      .page-wrapper
+        .tags(v-if='page.categories').categories
+          .tag(v-for='cat in page.categories', v-if='cat.category !== null') {{ cat.category.name }}
+        .tags(v-if='page._meta.tags').normal-tags
+          //- .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
+          g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
+            .name {{ tag }}
+        
+        
+        //- table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
+          tr.date(v-if='page.date_time && !page.extra_days') 
+            td.label 
+              .inside Date
+            td 
+              .inside {{ formatDate(page.date_time) }}
+          tr.date(v-else-if='page.date_time && page.extra_days') 
+            td.label 
+              .inside 
+                //- span(v-if='fr') Dater
+                //- span(v-else) Dates
+                span Dates
+            td 
+              .inside 
+                //- xmp {{ page.date_time }}
+                //- xmp {{ page.extra_days }}
+                | {{ formatDate(page.date_time) }}
+                div(v-for='extra in page.extra_days', v-if='"extra_day" in extra')
+                  //- xmp {{ extra.extra_day }}
+                  //- | , {{ formatDate(extra.extra_day) }}
+                  | {{ formatDate(extra.extra_day) }}
+          tr.location(v-if='page.location')
+            td.label(v-if='fr') 
+              .inside Lieu
+            td.label(v-else) 
+              .inside Venue
+            td 
+              .inside {{ page.location.location[0].text }}
+          tr.price(v-if='page.price')
+            td.label(v-if='fr') 
+              .inside Prix
+            td.label(v-else) 
+              .inside Price
+            td 
+              .inside {{ page.price }} 
+          tr.duration(v-if='page.duration || page.duration_richtext')
+            td.label(v-if='fr') 
+              .inside Durée
+            td.label(v-else) 
+              .inside Duration
+            td(v-if='page.duration_richtext').duration-text
+              .inside 
+                prismic-rich-text(:field='page.duration_richtext')
+            td(v-else)
+              .inside 
+                | {{ page.duration }} 
+          tr.participants(v-if='page.participants')
+            td(v-if='fr').label 
+              .inside Notes
+            td(v-if='fr')
+              .inside 
+                | Capacité maximale de {{ page.participants }}
+            td(v-if='en').label 
+              .inside Note
+            td(v-if='en')
+              .inside 
+                | Maximum capacity of {{ page.participants }}
+          tr.activation(v-if='page.activation')
+            td.label 
+              .inside Activation
+            td 
+              .inside {{ page.activation }}
+            
+            
+        prismic-rich-text(:field='page.project', v-if='page.project').project-title
+        prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
+        
+        prismic-rich-text(:field='page.project_body', v-if='page.project_body').project-body
+        prismic-rich-text(:field='page.artist_body', v-if='page.artist_body').artist-body
 </template>
 
 
@@ -299,8 +300,12 @@ $headingSize: 2.2rem;
   }
 }
 .project-title {
-  font-family: 'CE', Times, serif;
-  font-style: italic;
+  // font-family: 'CE', Times, serif;
+  // font-style: italic;
+  font-family: 'Maxi';
+  h1 {
+    font-size: 2.1rem;
+  }
   h2 {
     text-transform: uppercase;
     // color: #11e636;

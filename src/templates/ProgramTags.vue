@@ -1,126 +1,142 @@
 <template lang="pug">
-  layout
-    .filters.mobile
-      .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
-      .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }') {{ locationsTitle }}
-      .toggle(@click='toggleFilter("categories")', :class='{ "is-active": (mobileCurrentFilter == "categories") }') {{ activitiesTitle }}
-      .toggle(@click='toggleFilter("tags")', :class='{ "is-active": (mobileCurrentFilter == "tags") }') {{ themesTitle }}
-      .togglex(@click='clearFilters') 
-        span(v-if='anyFiltersAreSet') X
-        span(v-else).white X
-      
-    .columns.tags-page.scroll
-      .column.is-6.right.my-filters
-        .inner
-          .flex-wrapper
-            .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }')
-              h2.tagtitle {{ locationsTitle }}
-              .locations
-                .location.is-active RADIO-40
-                //- .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
-                .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
-              .close-filter.tags
-                .tag(@click='toggleFilter("close")')
-                  span(v-if="lang == 'en'") close
-                  span(v-else) fermer
-              
-                
-            .flex.filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
-              h2.tagtitle Dates
-              .dates
-                //- .date(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
-                .date.disabled(v-for='date in dates')  {{ date }}
-              //- .icon
-                img(src='/doc.png')
-                a(href='/menu.pdf', target='_blank') Menus à emporter 
-                span.small (PDF)
-              .icon
-                img(src='/doc.png', target='_blank')
-                a(href='/programme.pdf')
-                  span(v-if="lang == 'en'") Program
-                  span(v-else) Programme 
-                span.small (PDF)
-                
-              
-              .close-filter.tags
-                .tag(@click='toggleFilter("close")')
-                  span(v-if="lang == 'en'") close
-                  span(v-else) fermer
-          
-          .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
-            h2.tagtitle {{ activitiesTitle }}
-            .categories.tags
-              .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
-                span {{ cat }}
-            .close-filter.tags
-              .tag(@click='toggleFilter("close")')
-                span(v-if="lang == 'en'") close
-                span(v-else) fermer
-          
-          .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
-            h2.tagtitle {{ themesTitle }}
-            .tags
-              .tag(
-                  v-for='(tag, i) in tags', 
-                  @click='tagToggle(tag)'
-                  v-bind:class='toggledTag(tag)'
-                )
-                .name {{ tag }}
+layout
+  //- program overview page
+  .filters.mobile
+    .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
+    //- .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }') {{ locationsTitle }}
+    .toggle(@click='toggleFilter("artists")', :class='{ "is-active": (mobileCurrentFilter == "artists") }') {{ artistsTitle }}
+    .toggle(@click='toggleFilter("categories")', :class='{ "is-active": (mobileCurrentFilter == "categories") }') {{ activitiesTitle }}
+    .toggle(@click='toggleFilter("tags")', :class='{ "is-active": (mobileCurrentFilter == "tags") }') {{ themesTitle }}
+    .togglex(@click='clearFilters') 
+      span(v-if='anyFiltersAreSet') X
+      span(v-else).white X
+    
+  .columns.tags-page.scroll
+
+    .column.is-6.left.my-filters
+      .inner
+        //- .flex-wrapper
+        
+          //- .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }')
+            h2.tagtitle {{ locationsTitle }}
+            .locations
+              //- .location.is-active RADIO-40
+              //- .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
+              .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+            
             .close-filter.tags
               .tag(@click='toggleFilter("close")')
                 span(v-if="lang == 'en'") close
                 span(v-else) fermer
         
-        .clear-filter.tags(v-if='anyFiltersAreSet')
-          .tag(@click='clearFilters') {{ resetLabel }}
+        .filter-section(style='margin: 0.5rem 0 1rem;')
+          .icon
+            img(src='/doc.png', target='_blank')
+            a(href='/programme.pdf')
+              span(v-if="lang == 'en'") Program
+              span(v-else) Programme 
+            span.small (PDF)    
+            
+        .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
+          h2.tagtitle Dates
+          .dates2.tags
+            .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
+            //- .date.disabled(v-for='date in dates')  {{ date }}
+          //- .icon
+            img(src='/doc.png')
+            a(href='/menu.pdf', target='_blank') Menus à emporter 
+            span.small (PDF)
+          //- .icon
+          //-   img(src='/doc.png', target='_blank')
+          //-   a(href='/programme.pdf')
+          //-     span(v-if="lang == 'en'") Program
+          //-     span(v-else) Programme 
+          //-   span.small (PDF)
+            
+          
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
+        
+        .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
+          h2.tagtitle {{ activitiesTitle }}
+          .categories.tags
+            .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
+              span {{ cat }}
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
+        
+        .filter-section(data-filter='artists', :class='{ "is-active": (mobileCurrentFilter == "artists") }')
+          h2.tagtitle {{ artistsTitle }}
+          .artists.tags
+            .artist(v-for='artist in artists', :key='artist', v-bind:class='toggledArtist(artist)', @click='artistToggle(artist)').tag
+              span {{ artist }}
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
+        
+        .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
+          h2.tagtitle {{ themesTitle }}
+          .tags
+            .tag(
+                v-for='(tag, i) in tags', 
+                @click='tagToggle(tag)'
+                v-bind:class='toggledTag(tag)'
+              )
+              .name {{ tag }}
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
+      
+      .clear-filter.tags(v-if='anyFiltersAreSet')
+        .tag(@click='clearFilters') {{ resetLabel }}
+
+  
+    .column.is-6.right.posts-col
+      .wallpaper(v-if='!anyFiltersAreSet')
+      .inner(v-else-if='anyFiltersAreSet && !moving')
+        .icons-mobile
+          //- .icon
+            img(src='/doc.png')
+            a(href='/menu.pdf', target='_blank') Menus à emporter 
+            span.small (PDF)
+          //- .icon
+            img(src='/doc.png', target='_blank')
+            a(href='/programme.pdf')
+              span(v-if="lang == 'en'") Program
+              span(v-else) Programme 
+            span.small (PDF)
+        .links(v-if='program.length')
+          .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
+            
+            .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
+            
+            h2
+              em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
+              div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
               
-      .column.is-6.left.posts-col
-        .inner(v-if='!moving')
-          .icons-mobile
-            //- .icon
-              img(src='/doc.png')
-              a(href='/menu.pdf', target='_blank') Menus à emporter 
-              span.small (PDF)
-            .icon
-              img(src='/doc.png', target='_blank')
-              a(href='/programme.pdf')
-                span(v-if="lang == 'en'") Program
-                span(v-else) Programme 
-              span.small (PDF)
-          .links(v-if='program.length')
-            .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
-              
-              //- .image(v-if='p.node.image', :style='"background-image: url("+p.node.image.url+"&w=1280&h=900&fit=crop)"')
-              
-              .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
-              
-              
-              
-              //- div(v-if='p.node.image') {{ p.node.image.url }}
-                
-              h2
-                em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
-                div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
-                
-              //- .tags {{ p.node._meta.tags }}
-              
-              //- .tags.small
-                div(v-if='p.node.location')
-                  .small {{ p.node.location.short_name }}
-                div
-                  //- .small Activities
-                  .tag(v-for='(cat) in p.node.categories', v-bind:class='toggledCat(cat.category.name)')
-                    .name {{ cat.category.name }}
-                div
-                  //- .small Themes
-                  .tag(v-for='(tag) in p.node._meta.tags', v-bind:class='toggledTag(tag)')
-                    .name {{ ucfirst(tag) }}
-                    
-              //- xmp {{ moreData(project) }}  
-    
-    .preload.is-hidden
-      img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg')
-      img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/2b2b5e66-db76-474a-80f8-1369f060d844_Asset+3.svg')
+            //- .tags {{ p.node._meta.tags }}
+            //- .tags.small
+              div(v-if='p.node.location')
+                .small {{ p.node.location.short_name }}
+              div
+                //- .small Activities
+                .tag(v-for='(cat) in p.node.categories', v-bind:class='toggledCat(cat.category.name)')
+                  .name {{ cat.category.name }}
+              div
+                //- .small Themes
+                .tag(v-for='(tag) in p.node._meta.tags', v-bind:class='toggledTag(tag)')
+                  .name {{ ucfirst(tag) }}
+
+  
+  .preload.is-hidden
+    img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg')
+    img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/2b2b5e66-db76-474a-80f8-1369f060d844_Asset+3.svg')
 </template>
 
 <script>
@@ -136,18 +152,19 @@ export default {
   },
   data () {
     return {
-      year: 2020,
+      year: 2023,
       moving: false,
       toggledTags: [],
       toggledCats: [],
       toggledLocations: [],
       toggledDates: [],
+      toggledArtists: [],
       mobileCurrentFilter: null
     }
   },
   computed: {
     anyFiltersAreSet () {
-      if (this.toggledTags.length || this.toggledCats.length || this.toggledLocations.length || this.toggledDates.length) return true
+      if (this.toggledTags.length || this.toggledCats.length || this.toggledLocations.length || this.toggledDates.length || this.toggledArtists.length) return true
     },
     resetLabel () {
       if (this.lang == 'fr') return 'Réinitialiser les filtres'
@@ -164,6 +181,10 @@ export default {
     themesTitle () {
       if (this.lang == 'en') return 'Themes'
       else return 'Themes'
+    },
+    artistsTitle () {
+      if (this.lang == 'en') return 'Artists'
+      else return 'Artistes'
     },
     dates () {
       let sel = []
@@ -219,6 +240,56 @@ export default {
       
       return filtered.sort()
     },
+    
+    // artists () {
+    //   let sel = []
+    //   this.program.forEach(x => {
+    //     let c = x.node
+    //     if (c && c.artist && c.artist.length) {
+    //       let name
+    //       if (c.artist[0] && c.artist[0].text) {
+    //         name = c.artist[0].text
+    //         sel.push(name)  
+    //       }
+    //     }
+    //   })
+      
+    //   let added = []
+    //   let filtered = []
+    //   sel.forEach(cat => {
+    //     if (! added.includes(cat) ) {
+    //       added.push(cat)
+    //       filtered.push(cat)
+    //     }
+    //   })
+      
+    //   return filtered.sort()
+    // },
+    
+    artists () {
+      let artists = []
+      this.filteredProgram.forEach(x => {
+        let c = x.node.artist
+        
+        if (c && c.length) { 
+          c.forEach(y => {
+            if (y.text) artists.push(y.text)
+          })
+        }
+      })
+      
+      let added = []
+      let artistsFiltered = []
+      artists.forEach(artist => {
+        if (! added.includes(artist) ) {
+          added.push(artist)
+          artistsFiltered.push(artist)
+        }
+      })
+      
+      return artistsFiltered.sort()
+    },
+    
     categories () {
       let cats = []
       this.filteredProgram.forEach(x => {
@@ -267,11 +338,11 @@ export default {
     },
     program () {
       let p = this.$context.program
-      console.log('program');
+      // console.log('program');
       
       p.forEach(p => {
         let year = p.node.year
-        console.log(year);
+        // console.log(year);
       })
       return p
     },
@@ -316,6 +387,25 @@ export default {
             return found
           }
           // if (p.node.extra_days)
+        })
+      }
+      
+      
+      // artists
+      if (this.toggledArtists.length) {
+        program = program.filter(p => {
+          console.log(p.node.artist)
+          if (p.node.artist && p.node.artist.length) {
+            return this.toggledArtists.includes(p.node.artist[0].text)
+          }
+          // if (p.node.artist && p.node.artist.length) {
+            
+          //   // p.node.artist.forEach(a => {
+          //   //   if (this.toggledArtists.includes(a.text)) {
+          //   //     return true
+          //   //   }
+          //   // })
+          // }
         })
       }
       
@@ -455,6 +545,7 @@ export default {
       this.toggledLocations = []
       this.toggledTags = []
       this.toggledCats = []
+      this.toggledArtists = []
       this.mobileCurrentFilter = null
     },
     formatDate (date) {
@@ -495,6 +586,14 @@ export default {
         this.toggledCats = this.toggledCats.filter(item => item !== cat)
       }
     },
+    artistToggle (artist) {
+      if (! this.toggledArtists.includes(artist)) {
+        this.toggledArtists.push(artist)
+      } else {
+        this.toggledArtists = this.toggledArtists.filter(item => item !== artist)
+      }
+      console.log(this.toggledArtists)
+    },
     tagToggle (tag) {
       if (! this.toggledTags.includes(tag)) {
         this.toggledTags.push(tag)
@@ -509,7 +608,7 @@ export default {
       if (this.lang == 'fr') path = '/fr/programme/2020/' + slug + '/'
       else path = '/en/program/2020/' + slug + '/'
       
-      console.log(path)
+      // console.log(path)
       this.$router.push(path)
     },
     toggledLocation (loc) {
@@ -520,6 +619,9 @@ export default {
     },
     toggledCat (cat) {
       if (this.toggledCats.includes(cat)) return 'is-active'
+    },
+    toggledArtist (artist) {
+      if (this.toggledArtists.includes(artist)) return 'is-active'
     },
     toggledTag (tag) {
       if (this.toggledTags.includes(tag)) return 'is-active'
@@ -533,6 +635,29 @@ export default {
 
 <style lang="scss" scoped>
 $green: rgb(17,230,54);
+
+.wallpaper {
+  background-image: url(https://images.prismic.io/foodculturedays2020/d60351a7-80f6-461f-a0de-f3f4e22c4c48_POSTER_DIGITAL_A43.jpg?auto=compress,format);
+  background-size: contain;
+  // background-size: cover;
+  // background-color: rgb(219,194,190);
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 50vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+@media (max-width: 737px) {
+  .wallpaper {
+    width: 100vw;
+    top: 7rem;
+    height: calc(100vh - 60px - 7rem);
+  }
+}
+
 
 .icons-mobile {
   display: none;
@@ -574,7 +699,7 @@ $green: rgb(17,230,54);
     /* margin-top: 1rem; */
     /* padding-top: 1rem; */
     /* padding-top: 1.6rem; */
-    padding-top: 3rem;
+    // padding-top: 3rem;
   }
   .tags-col {
     padding-top: 1rem;
@@ -637,12 +762,13 @@ $green: rgb(17,230,54);
     /* top: 0; */
     /* left: 0; */
     position: relative;
+    z-index: 999;
     background: white;
     /* width: 100vw; */
     /* padding-top: 26vw; */
     /* padding-bottom: 1rem; */
-    /* padding-top: 3rem; */
-    margin-bottom: -3rem;
+    // padding-top: 3rem;
+    margin-bottom: -1rem;
     .filter-section {
       display: none;
       &.is-active {
@@ -657,8 +783,9 @@ $green: rgb(17,230,54);
     display: none !important;
   }
   .posts-col {
-    padding-top: 6vw;
-    padding-bottom: 5rem;
+    padding-top: 0.5rem;
+    // padding-top: 6vw;
+    // padding-bottom: 5rem;
   }
   .columns.scroll {
     .column {
@@ -672,11 +799,19 @@ $green: rgb(17,230,54);
       width: 50%;
     }
   }
+  .my-filters {
+    .inner {
+      padding-bottom: 3rem;
+    }
+  }
 
 }
 
 .tagtitle {
-  margin-bottom: 0.4rem;
+  margin-bottom: 1rem;
+  font-family: 'Maxi';
+  font-size: 1.8rem;
+  line-height: 1.2em;
 }
 .tags {
   width: 100%;
@@ -753,7 +888,7 @@ em {
 }
 .links {
   /* margin-top: 1.9rem; */
-  margin-top: 0.9rem;
+  // margin-top: 0.9rem;
   border-top: 1px black solid;
 }
 .link {
