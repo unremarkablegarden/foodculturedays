@@ -340,10 +340,31 @@ export default {
       let p = this.$context.program
       // console.log('program');
       
-      p.forEach(p => {
-        let year = p.node.year
-        // console.log(year);
+      // p.forEach(p => {
+      //   let year = p.node.year
+      //   console.log(year);
+      // })
+      // filter out all posts where p.node.year is not equal to this.year
+      
+      // get the hash of the current URL
+      if (process.isClient) {
+        let hash = window.location.hash
+        if (hash) {
+          let hashSplit = hash.split('#')
+          if (hashSplit.length > 1) {
+            let hashYear = hashSplit[1]
+            if (hashYear) {
+              this.year = parseInt(hashYear)
+              console.log('year from hash: ' + this.year)
+            }
+          }
+        }
+      }
+      
+      p = p.filter(p => {
+        return p.node.year == this.year
       })
+            
       return p
     },
     lang () {
@@ -394,7 +415,7 @@ export default {
       // artists
       if (this.toggledArtists.length) {
         program = program.filter(p => {
-          console.log(p.node.artist)
+          // console.log(p.node.artist)
           if (p.node.artist && p.node.artist.length) {
             return this.toggledArtists.includes(p.node.artist[0].text)
           }
@@ -592,7 +613,7 @@ export default {
       } else {
         this.toggledArtists = this.toggledArtists.filter(item => item !== artist)
       }
-      console.log(this.toggledArtists)
+      // console.log(this.toggledArtists)
     },
     tagToggle (tag) {
       if (! this.toggledTags.includes(tag)) {
