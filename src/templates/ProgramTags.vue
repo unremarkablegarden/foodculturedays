@@ -31,11 +31,18 @@ layout
         
         .filter-section(style='margin: 0.5rem 0 1rem;')
           .icon
-            img(src='/doc.png', target='_blank')
-            a(href='/programme.pdf')
-              span(v-if="lang == 'en'") Program
-              span(v-else) Programme 
+            img(src='/doc.png')
+            a(href='/programme.pdf', target='_blank')
+              span(v-if="lang == 'en'") Download full program
+              span(v-else) Télécharger le programme complet
             span.small (PDF)    
+          .icon
+            span(style="display: inline-block; padding-right: 3px;") &rarr;
+            span(v-if="lang == 'en'") 
+              a(href='/en/biennale') About the Biennale
+            span(v-else)
+              a(href='/fr/biennale') À propos de la Biennale
+            //- span.small (PDF)    
             
         .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
           h2.tagtitle Dates
@@ -73,7 +80,7 @@ layout
           h2.tagtitle {{ artistsTitle }}
           .artists.tags
             .artist(v-for='artist in artists', :key='artist', v-bind:class='toggledArtist(artist)', @click='artistToggle(artist)').tag
-              span {{ artist }}
+              span {{ stripCountry(artist) }}
           .close-filter.tags
             .tag(@click='toggleFilter("close")')
               span(v-if="lang == 'en'") close
@@ -98,8 +105,9 @@ layout
 
   
     .column.is-6.right.posts-col
-      .wallpaper(v-if='!anyFiltersAreSet')
-      .inner(v-else-if='anyFiltersAreSet && !moving')
+      //- .wallpaper(v-if='!anyFiltersAreSet')
+      //- .inner(v-else-if='anyFiltersAreSet && !moving')
+      .inner(v-if='!moving')
         .icons-mobile
           //- .icon
             img(src='/doc.png')
@@ -112,6 +120,18 @@ layout
               span(v-else) Programme 
             span.small (PDF)
         .links(v-if='program.length')
+          .link.about(@click='$router.push("/en/biennale")', v-if="lang == 'en' && !anyFiltersAreSet")
+            .image(style='background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1600&w=1200&auto=compress,format=auto)')
+            h2
+              em About the Biennale
+              div foodculture days
+          .link.about(@click='$router.push("/fr/biennale")', v-else-if="lang == 'fr' && !anyFiltersAreSet")
+            .image(style='background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1600&w=1200&auto=compress,format=auto)')
+            h2
+              em À propos de la Biennale
+              div foodculture days
+          
+            
           .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
             
             .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
@@ -550,6 +570,11 @@ export default {
   //   }
   },
   methods: {
+    stripCountry(artist) {
+      // remove any language code in parentheses at the end of artist name
+      let name = artist.split('(')[0].trim()
+      return name
+    },
     resizeImage (url) {
       let image = url.split('?')[0] + '?auto=compress,format&w=1280&h=900&fit=crop'
       return image
