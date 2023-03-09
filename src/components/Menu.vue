@@ -28,7 +28,7 @@
               span.sans 15 March 2023 »&nbsp;
             span(v-else)
               span.sans « Biennale D’Art&nbsp;
-              span.serif 26 Mai — 4 Juin 2023, Vevey - Divulgation Du Programme 2023 Compet:&nbsp;
+              span.serif 26 Mai — 4 Juin 2023, Vevey - Divulgation Du Programme 2023 Complet&nbsp;
               span.sans 15 Mars&nbsp;
           
               
