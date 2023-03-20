@@ -30,7 +30,7 @@ layout
                 span(v-else) fermer
         
         .filter-section(style='margin: 0.5rem 0 1rem;')
-          .icon
+          //- .icon
             img(src='/doc.png')
             a(href='/programme.pdf', target='_blank')
               span(v-if="lang == 'en'") Download full program
@@ -212,12 +212,13 @@ export default {
         if (x.node.date_time) {
           // console.log(x.node.date_time);
           // console.log(this.formatDate(x.node.date_time));
-          sel.push(this.formatDate(x.node.date_time))
+          // sel.push(this.formatDate(x.node.date_time))
+          sel.push(x.node.date_time)
         }
         if (x.node.extra_days) {
           x.node.extra_days.forEach(x2 => {
             if (x2.extra_day) {
-              sel.push(this.formatDate(x2.extra_day))    
+              sel.push(x2.extra_day)
             }
           })
         }
@@ -232,7 +233,17 @@ export default {
         }
       })
       
-      return filtered.sort()
+      filtered = filtered.sort()
+      
+      let formatted = []
+      filtered.forEach(x => {
+        let f = this.formatDate(x)
+        if (! formatted.includes(f) ) {
+          formatted.push(f)
+        }
+      })
+      
+      return formatted
     },
     locations () {
       let sel = []
@@ -505,6 +516,15 @@ export default {
         })
       }
       
+      // sort program by: el.node.project[0].text
+      program = program.sort((a,b) => {
+        let aTitle = a.node.project[0].text
+        let bTitle = b.node.project[0].text
+        if (aTitle < bTitle) return -1
+        if (aTitle > bTitle) return 1
+        return 0
+      })
+      
       return program
     },
     
@@ -651,8 +671,8 @@ export default {
       // this.moving = true
       // console.log(this.$router);
       let path
-      if (this.lang == 'fr') path = '/fr/programme/2020/' + slug + '/'
-      else path = '/en/program/2020/' + slug + '/'
+      if (this.lang == 'fr') path = '/fr/programme/'+this.year+'/' + slug + '/'
+      else path = '/en/program/'+this.year+'/' + slug + '/'
       
       // console.log(path)
       this.$router.push(path)
