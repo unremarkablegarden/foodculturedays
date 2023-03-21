@@ -33,9 +33,11 @@ export default {
   },
   methods: {
     constrainImageUrl (url) {
-      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
-      console.log(newUrl)
-      return newUrl
+      if (url) {
+        return url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      } else {
+        return rul
+      }
     },
     // goBack () {
     //   if (!process.isClient) return
