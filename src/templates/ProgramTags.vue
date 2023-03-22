@@ -80,7 +80,8 @@ layout
           h2.tagtitle {{ artistsTitle }}
           .artists.tags
             .artist(v-for='artist in artists', :key='artist', v-bind:class='toggledArtist(artist)', @click='artistToggle(artist)').tag
-              span {{ stripCountry(artist) }}
+              span {{ artist }}
+              //- span {{ stripCountry(artist) }}
           .close-filter.tags
             .tag(@click='toggleFilter("close")')
               span(v-if="lang == 'en'") close
@@ -245,6 +246,7 @@ export default {
       
       return formatted
     },
+    
     locations () {
       let sel = []
       this.program.forEach(x => {
@@ -304,7 +306,26 @@ export default {
         
         if (c && c.length) { 
           c.forEach(y => {
-            if (y.text) artists.push(y.text)
+            if (y.text) {
+              let z = this.stripCountry(y.text)
+              // artists.push(z)
+              if (z.includes('/')) {
+                z.split('/').forEach(a => {
+                  artists.push(a.trim())
+                })
+              } else {
+                artists.push(z.trim())
+              }
+              
+              // const z = y.text.split('/')
+              // remove spaces at the start and end
+              // z.forEach(a => {
+              //   artists.push(a.trim())
+              // })
+              
+              // old
+              // artists.push(y.text)
+            }
           })
         }
       })
@@ -448,7 +469,19 @@ export default {
         program = program.filter(p => {
           // console.log(p.node.artist)
           if (p.node.artist && p.node.artist.length) {
-            return this.toggledArtists.includes(p.node.artist[0].text)
+            // OLD: return this.toggledArtists.includes(p.node.artist[0].text)
+            // NEW: if one of the names in this.toggledArtists can be found in the string p.node.artist[0].text, return true
+            let found = false
+            p.node.artist.forEach(a => {
+              if (a.text) {
+                this.toggledArtists.forEach(t => {
+                  if (a.text.includes(t)) {
+                    found = true
+                  }
+                })
+              }
+            })
+            return found
           }
           // if (p.node.artist && p.node.artist.length) {
             

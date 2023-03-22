@@ -105,7 +105,12 @@ layout
             
             
         prismic-rich-text(:field='page.project', v-if='page.project').project-title
-        prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
+        
+        //- prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
+        h1.artist-title(v-if='page.artist && page.artist.length')
+          .artist(v-for='artist in page.artist[0].text.split("/")') 
+            span.name {{ artist }}
+            //- span.sep ,&nbsp;
         
         prismic-rich-text(:field='page.project_body', v-if='page.project_body').project-body
         prismic-rich-text(:field='page.artist_body', v-if='page.artist_body').artist-body
@@ -282,6 +287,9 @@ export default {
 <style lang="scss" scoped>
   .page-wrapper {
     margin-top: 1.6rem;
+  }
+  .artist:last-child .sep {
+    display: none;
   }
 </style>
 
