@@ -36,7 +36,7 @@ export default {
       if (url) {
         return url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
       } else {
-        return rul
+        return url
       }
     },
     // goBack () {
