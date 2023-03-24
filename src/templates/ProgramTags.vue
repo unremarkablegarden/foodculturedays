@@ -1045,7 +1045,7 @@ em {
 }
 
 .image {
-  height: 30vw;
+  height: 60vw;
   width: 100%;
   background: #fee;  
   display: block;

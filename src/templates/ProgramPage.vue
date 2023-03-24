@@ -3,6 +3,7 @@ layout
   //- single program page
   .columns.program-page
     .column.is-6.no-pad.gallery-column
+      //- xmp {{ gallery }}
       .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
         .items
           .item(
@@ -13,6 +14,7 @@ layout
             @click='mobileNext()', 
             v-if='item.gallery_image'
           )
+            //- xmp {{ i }} + {{ gallery.n }}
         .navs(v-if='page.gallery.length > 1')
           .dots
             .dot(
@@ -23,9 +25,11 @@ layout
           .control
             .left(@click='galleryNav("-1")')
             .right(@click='galleryNav("+1")')
-        
+      
       .gallery(v-if='page.image && !page.gallery.length')
-        .item(:style="'background-image: url('+constrainImageUrl(page.image.url)+')'", v-if='page.image')
+        .item(:style="'background-image: url('+constrainImageUrl(page.image.url)+')'", v-if='page.image').is-desktop
+        .item.is-mobile
+          img(:src='constrainImageUrl(page.image.url)', style='max-width: 100%; height: auto;')
 
     .column.is-6.left
       .back(@click='goBack')
