@@ -345,7 +345,7 @@ p em {
   margin-bottom: 1rem;
   font-size: 0.9rem;
   line-height: 1em;
-  text-transform: capitalize;
+  // text-transform: capitalize;
   .tag {
     border: 1px black solid;
     color: black;
