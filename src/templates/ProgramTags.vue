@@ -167,7 +167,7 @@ import { parse } from "date-fns"
 
 export default {
   metaInfo() {
-    const img = 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1200&w=675&auto=compress,format=auto'
+    const img = 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=crop&h=675&w=1200&auto=compress,format=auto'
     return {
       title: this.$context.title,
       meta: [

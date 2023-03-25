@@ -148,7 +148,7 @@ export default {
     }
   },
   metaInfo() {
-    let img = this.page.image ? this.constrainImageUrlShare(this.page.image.url) : 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1200&w=675&auto=compress,format=auto'
+    let img = this.page.image ? this.constrainImageUrlShare(this.page.image.url) : 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=crop&h=675&w=1200&auto=compress,format=auto'
     return {
       title: this.browserTitle,
       meta: [
@@ -189,7 +189,7 @@ export default {
       return newUrl
     },
     constrainImageUrlShare (url) {
-      let newUrl = url.replace('?auto=compress,format', '?fit=crop&h=1200&w=675&auto=compress,format=auto')
+      let newUrl = url.replace('?auto=compress,format', '?fit=crop&h=675&w=1200&auto=compress,format=auto')
       // console.log(newUrl)
       return newUrl
     },
