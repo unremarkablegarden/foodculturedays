@@ -167,8 +167,19 @@ import { parse } from "date-fns"
 
 export default {
   metaInfo() {
+    const img = 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1200&w=675&auto=compress,format=auto'
     return {
-      title: this.$context.title
+      title: this.$context.title,
+      meta: [
+        {
+          property: 'og:image',
+          content: img
+        },
+        {
+          property: 'twitter:card',
+          content: 'summary_large_image'
+        }
+      ]
     }
   },
   data () {
@@ -1063,6 +1074,13 @@ em {
   text-transform: lowercase !important;
   font-family: 'CE', Times, serif;
   font-style: italic;
+}
+
+// for desktop only
+@media (min-width: 737px) {
+  .image {
+    height: 31vw;
+  }
 }
 
 </style>
