@@ -32,10 +32,12 @@ layout
           img(:src='constrainImageUrl(page.image.url)', style='max-width: 100%; height: auto;')
 
     .column.is-6.left
-      .back(@click='goBack')
-        img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
+      
       
       .page-wrapper
+        .back(@click='goBack')
+          img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
+          
         .tags(v-if='page.categories').categories
           .tag(v-for='cat in page.categories', v-if='cat.category !== null') {{ cat.category.name }}
         .tags(v-if='page._meta.tags').normal-tags
@@ -43,6 +45,7 @@ layout
           g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
             .name {{ tag }}
         
+
         
         //- table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
           tr.date(v-if='page.date_time && !page.extra_days') 
@@ -419,14 +422,17 @@ p em {
 @media (max-width: 736px) {
   .back {
     // top: 45vh;
-    position: sticky;
+    // position: sticky;
     // position: relative;
     // background: pink;
     // background: white;
-    background: white;
+    // background: white;
     width: 100vw;
     margin-left: -0.7rem;
-    top: 0;
+    // top: 0;
+    position: absolute;
+    margin-top: -0.5rem;
+    
     // display: inline;  
   }
   .layout {
@@ -512,8 +518,6 @@ p em {
 /* @media (min-width: 960px) { */
 @media (min-width: 737px) {
 
-  
-  
   .image {
     /* display: none; */
     // margin-left: -1rem;
@@ -551,7 +555,11 @@ p em {
   }
   
   
-  .gallery.slider {
+.gallery-column {
+  position: fixed;
+  top: 0;
+}
+.gallery.slider {
   .items {
     .item {
       height: 100vh;
@@ -635,13 +643,14 @@ p em {
 <style lang='scss' scoped>
 .tags.categories {
   margin-bottom: 0;
-  width: 95%;
+  width: 91%;
 }
 .project-title, .artist-title {
   width: 100%;
 }
 .normal-tags {
-  width: 100%;
+  // width: 100%;
+  width: 91%;
   .tag {
     /* opacity: 0.5; */
     /* font-size: 0.7rem; */

@@ -35,7 +35,9 @@
           img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
         .page-wrapper(:class='page._meta.uid')
           
-          prismic-rich-text(:field='page.title').title
+          .title
+            .inner
+              prismic-rich-text(:field='page.title')
           prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
           .content
             //- xmp {{ page.body }}
@@ -133,15 +135,24 @@ $headingSize: 2.2rem;
   // padding: 0.6rem 0.7rem 0.5rem;
   padding: 0;
   box-sizing: border-box;
-  z-index: 1020;
+  z-index: 1010;
   background: transparent;
   img {
     height: 1.95rem;
     width: auto;
   }
-  position: absolute;
+  // position: absolute;
   width: calc(50vw - 2.6rem);
-  margin-top: 1rem;
+  // margin-top: 1rem;
+  height: 0;
+  position: sticky;
+  // margin-left: -1.7rem;
+  top: 0rem;
+  z-index: 1018;
+  // padding-top: 2rem;
+  margin-top: 0;
+  padding-top: 0;
+  transform: translateY(2rem);
 }
 
 // MOBILE
@@ -156,10 +167,26 @@ $headingSize: 2.2rem;
   // }
   .back {
     position: sticky;
-    background: white;
+    height: 0;
+    // position: fixed;
+    background: transparent;
     width: 100vw;
-    margin-left: -0.7rem;
-    top: 0;
+    margin-left: -1.7rem;
+    // margin-top: 2rem;
+    top: 2rem;
+    // z-index: 1015;
+    // // padding-top: 2rem;
+    // margin-top: 0;
+    // padding-top: 0;
+    // transform: translateY(2rem);
+  }
+  .biennale .title {
+    position: relative;
+    background: transparent;
+  }
+  
+  .title .inner {
+    max-width: 90%;
   }
   
   .page-wrapper {

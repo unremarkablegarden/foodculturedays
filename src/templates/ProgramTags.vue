@@ -3,7 +3,7 @@ layout
   //- program overview page
   .filters.mobile
     .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
-    //- .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }') {{ locationsTitle }}
+    .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length') {{ locationsTitle }}
     .toggle(@click='toggleFilter("artists")', :class='{ "is-active": (mobileCurrentFilter == "artists") }') {{ artistsTitle }}
     .toggle(@click='toggleFilter("categories")', :class='{ "is-active": (mobileCurrentFilter == "categories") }') {{ activitiesTitle }}
     .toggle(@click='toggleFilter("tags")', :class='{ "is-active": (mobileCurrentFilter == "tags") }') {{ themesTitle }}
@@ -17,17 +17,7 @@ layout
       .inner
         //- .flex-wrapper
         
-          //- .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }')
-            h2.tagtitle {{ locationsTitle }}
-            .locations
-              //- .location.is-active RADIO-40
-              //- .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
-              .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
-            
-            .close-filter.tags
-              .tag(@click='toggleFilter("close")')
-                span(v-if="lang == 'en'") close
-                span(v-else) fermer
+          
         
         .filter-section(style='margin: 0.5rem 0 1rem;')
           //- .icon
@@ -65,7 +55,19 @@ layout
             .tag(@click='toggleFilter("close")')
               span(v-if="lang == 'en'") close
               span(v-else) fermer
-        
+
+        .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
+          h2.tagtitle {{ locationsTitle }}
+          .locations
+            //- .location.is-active RADIO-40
+            //- .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
+            .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+          
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
+
         .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
           h2.tagtitle {{ activitiesTitle }}
           .categories.tags
@@ -100,6 +102,7 @@ layout
             .tag(@click='toggleFilter("close")')
               span(v-if="lang == 'en'") close
               span(v-else) fermer
+              
       
       .clear-filter.tags(v-if='anyFiltersAreSet')
         .tag(@click='clearFilters') {{ resetLabel }}
@@ -376,12 +379,18 @@ export default {
       return catsFiltered.sort()
     },
     tags () {
+      let excluded = [
+        'réservation conseillée', 'booking recommended', 'free entry', 'entrée libre', 'paid', 'payant', 'booking needed', 'réservation nécessaire'
+      ]
       let tags = []
+      
       this.filteredProgram.forEach(x => {
         // this.program.forEach(x => {
         let t = x.node._meta.tags
         t.forEach(y => {
-          tags.push(y)
+          if (!excluded.includes(y.toLowerCase())) {
+            tags.push(y)
+          }
         })
       })
       
@@ -845,16 +854,18 @@ $green: rgb(17,230,54);
     justify-content: space-between;
     .toggle {
       background: white;
-      font-family: 'CE', Times, serif;
-      font-style: italic;
-      padding: 0.3rem 0.3rem 0.1rem;
+      // font-family: 'CE', Times, serif;
+      font-family: 'Maxi', sans-serif;
+      // font-style: italic;
+      padding: 0.2rem 0.3rem 0.2rem 0.2rem;
       border: 1px black solid;
       font-size: 0.9rem;
       line-height: 1em;
-      text-transform: lowercase;
+      // text-transform: lowercase;
+      text-transform: uppercase;
       &.is-active {
-        background: #000;
-        color: white;
+        background: #000 !important;
+        color: white !important;
       }
       
     }
@@ -919,7 +930,7 @@ $green: rgb(17,230,54);
 
 .tagtitle {
   margin-bottom: 1rem;
-  font-family: 'Maxi';
+  font-family: 'Maxi', sans-serif;
   font-size: 1.8rem;
   line-height: 1.2em;
 }
@@ -939,13 +950,13 @@ $green: rgb(17,230,54);
     /* @media (min-width: 960px) { */
     @media (min-width: 737px) {
       &:hover {
-        background: #000;
-        color: white;
+        background: #000 !important;
+        color: white !important;
       }
     }
     &.is-active {
-      background: #000;
-      color: white;
+      background: #000 !important;
+      color: white !important;
     }
   }
 }
@@ -1071,9 +1082,12 @@ em {
 }
 
 .close-filter .tag {
-  text-transform: lowercase !important;
-  font-family: 'CE', Times, serif;
-  font-style: italic;
+  // text-transform: lowercase !important;
+  // font-family: 'CE', Times, serif;
+  font-family: 'Maxi', sans-serif;
+  // font-style: italic;
+  text-transform: uppercase !important;
+  padding: 0.2rem 0.3rem 0.2rem 0.2rem;
 }
 
 // for desktop only

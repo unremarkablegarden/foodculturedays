@@ -90,10 +90,13 @@ export default {
   }
 }
 .btn {
-  padding: 3px 4px 0px;
+  padding: 3px 4px 2px;
   cursor: pointer;
   // text-transform: uppercase;
   font-weight: bold;
+  color: black;
+  background-color: white;
+  border-color: black;
   &:hover {
     background-color: black;
     color: white;
