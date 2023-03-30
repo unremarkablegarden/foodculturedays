@@ -48,7 +48,7 @@ layout
         
 
         
-        //- table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
+        table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
           tr.date(v-if='page.date_time && !page.extra_days') 
             td.label 
               .inside Date
@@ -694,7 +694,8 @@ p em {
   line-height: 1.2em;
   margin: 0 0 1.8rem;
   border: 1px black solid;
-  padding: 0.35rem 0.5rem 0.4rem;
+  // padding: 0.35rem 0.5rem 0.4rem;
+  padding: 0.35rem 0.5rem 0.2rem;
   width: 100%;
   td {
     /* margin: 0.2rem 0 */
