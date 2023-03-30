@@ -26,6 +26,7 @@ export default
     
     // PROGRAM
     { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'], blank: true },
+    
     // { title: ['Program', 'Programme'], to: ['/FCD_program_EN.pdf', '/FCD_program_FR.pdf'], blank: true },
     
     // DIALOGUES
