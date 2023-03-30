@@ -34,7 +34,20 @@ layout
               a(href='/fr/biennale') À propos de la Biennale
             //- span.small (PDF)    
             
-        .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
+        
+        .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
+          h2.tagtitle {{ locationsTitle }}
+          .locations
+            //- .location.is-active RADIO-40
+            //- .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
+            .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+          
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
+
+              .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
           h2.tagtitle Dates
           .dates2.tags
             .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
@@ -56,17 +69,6 @@ layout
               span(v-if="lang == 'en'") close
               span(v-else) fermer
 
-        .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
-          h2.tagtitle {{ locationsTitle }}
-          .locations
-            //- .location.is-active RADIO-40
-            //- .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
-            .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
-          
-          .close-filter.tags
-            .tag(@click='toggleFilter("close")')
-              span(v-if="lang == 'en'") close
-              span(v-else) fermer
 
         .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
           h2.tagtitle {{ activitiesTitle }}
