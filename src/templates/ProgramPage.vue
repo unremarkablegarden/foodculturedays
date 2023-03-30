@@ -213,6 +213,8 @@ export default {
         }
 
         return url
+      } else {
+        return url
       }
     },
     mobileNext() {
