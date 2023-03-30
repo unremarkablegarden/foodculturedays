@@ -8,6 +8,9 @@ export default
     { title: ['Art Biennale', "Biennale D'Art"], to: ['/en/biennale', '/fr/biennale'] },
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.fromtheforestsashes.com/'], blank: true },
     
+    // PROGRAM
+    { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'], blank: true },
+    
     // OPEN CALL
     // { title: ['Open Call 2023', 'Appel à Projets 2023'], to: ['/OpenCall_2023_EN.pdf', '/OpenCall_2023_FR.pdf'], blank: true },
     
@@ -24,8 +27,6 @@ export default
     { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
     
     
-    // PROGRAM
-    { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'], blank: true },
     
     // { title: ['Program', 'Programme'], to: ['/FCD_program_EN.pdf', '/FCD_program_FR.pdf'], blank: true },
     
