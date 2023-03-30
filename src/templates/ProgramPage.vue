@@ -582,7 +582,7 @@ p em {
 }
 .gallery {
   .item {
-    backdrop-filter: blur(10px) brightness(110%) contrast(90%) saturate(90%);
+    backdrop-filter: blur(10px) brightness(110%) contrast(90%) saturate(50%);
   }
 }
 .gallery.slider {
