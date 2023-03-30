@@ -198,20 +198,22 @@ export default {
       return newUrl
     },
     constrainImageUrlMobile (url) {
-      let urlParts = url.split('?')
-      
-      // url = IMG_1673.jpg?auto=compress,format&rect=0,0,3456,5184&w=1200&h=1800
+      if (url) {
+        let urlParts = url.split('?')
+        
+        // url = IMG_1673.jpg?auto=compress,format&rect=0,0,3456,5184&w=1200&h=1800
 
-      const w = urlParts[1].split('&').filter(p => p.includes('w='))[0].split('=')[1]
-      const h = urlParts[1].split('&').filter(p => p.includes('h='))[0].split('=')[1]
-      const ratio = w/h
-      if (ratio <= 0.67) {
-        url = urlParts[0] + '?fit=crop&w=1200&h=1400&auto=compress,format=auto'
-      } else {
-        url = urlParts[0] + '?fit=max&w=1200&auto=compress,format=auto'
+        const w = urlParts[1].split('&').filter(p => p.includes('w='))[0].split('=')[1]
+        const h = urlParts[1].split('&').filter(p => p.includes('h='))[0].split('=')[1]
+        const ratio = w/h
+        if (ratio <= 0.67) {
+          url = urlParts[0] + '?fit=crop&w=1200&h=1400&auto=compress,format=auto'
+        } else {
+          url = urlParts[0] + '?fit=max&w=1200&auto=compress,format=auto'
+        }
+
+        return url
       }
-
-      return url
     },
     mobileNext() {
       this.galleryNav('+1')
