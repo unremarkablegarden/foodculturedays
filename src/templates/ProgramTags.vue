@@ -1,15 +1,23 @@
 <template lang="pug">
 layout
   //- program overview page
-  .filters.mobile
-    .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
-    .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length') {{ locationsTitle }}
-    .toggle(@click='toggleFilter("artists")', :class='{ "is-active": (mobileCurrentFilter == "artists") }') {{ artistsTitle }}
-    .toggle(@click='toggleFilter("categories")', :class='{ "is-active": (mobileCurrentFilter == "categories") }') {{ activitiesTitle }}
-    .toggle(@click='toggleFilter("tags")', :class='{ "is-active": (mobileCurrentFilter == "tags") }') {{ themesTitle }}
-    .togglex(@click='clearFilters') 
-      span(v-if='anyFiltersAreSet') X
-      span(v-else).white X
+  .mobile
+    .filters
+      .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
+      .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length') {{ locationsTitle }}
+      .toggle(@click='toggleFilter("artists")', :class='{ "is-active": (mobileCurrentFilter == "artists") }') {{ artistsTitle }}
+      .toggle(@click='toggleFilter("categories")', :class='{ "is-active": (mobileCurrentFilter == "categories") }') {{ activitiesTitle }}
+      .toggle(@click='toggleFilter("tags")', :class='{ "is-active": (mobileCurrentFilter == "tags") }') {{ themesTitle }}
+      .togglex(@click='clearFilters') 
+        span(v-if='anyFiltersAreSet') X
+        span(v-else).white X
+    .about
+      .icon
+        span(style="display: inline-block; padding-right: 3px;") &rarr;
+        span(v-if="lang == 'en'") 
+          a(href='/en/biennale') About the Biennale
+        span(v-else)
+          a(href='/fr/biennale') À propos de la Biennale
     
   .columns.tags-page.scroll
 
@@ -47,7 +55,8 @@ layout
               span(v-if="lang == 'en'") close
               span(v-else) fermer
 
-              .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
+        .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
+              
           h2.tagtitle Dates
           .dates2.tags
             .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
@@ -108,6 +117,9 @@ layout
       
       .clear-filter.tags(v-if='anyFiltersAreSet')
         .tag(@click='clearFilters') {{ resetLabel }}
+        br
+        br
+        br
 
   
     .column.is-6.right.posts-col
@@ -125,13 +137,14 @@ layout
               span(v-if="lang == 'en'") Program
               span(v-else) Programme 
             span.small (PDF)
+            
         .links(v-if='program.length')
-          .link.about(@click='$router.push("/en/biennale")', v-if="lang == 'en' && !anyFiltersAreSet")
+          //- .link.about(@click='$router.push("/en/biennale")', v-if="lang == 'en' && !anyFiltersAreSet")
             .image(style='background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1600&w=1200&auto=compress,format=auto)')
             h2
               em About the Biennale
               div foodculture days
-          .link.about(@click='$router.push("/fr/biennale")', v-else-if="lang == 'fr' && !anyFiltersAreSet")
+          //- .link.about(@click='$router.push("/fr/biennale")', v-else-if="lang == 'fr' && !anyFiltersAreSet")
             .image(style='background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1600&w=1200&auto=compress,format=auto)')
             h2
               em À propos de la Biennale
@@ -841,6 +854,12 @@ $green: rgb(17,230,54);
         text-transform: lowercase !important;    
       }
     } */
+  }
+  .mobile {
+    .about {
+      margin-bottom: 0.5rem;
+      // text-align: right;
+    }
   }
   .filters {
     /* position: fixed; */
