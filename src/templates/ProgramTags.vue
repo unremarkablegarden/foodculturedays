@@ -15,7 +15,7 @@ layout
       .icon
         span(style="display: inline-block; padding-right: 3px;") &rarr;
         span(v-if="lang == 'en'") 
-          a(href='/en/biennale') About the Biennale
+          a(href='/en/biennale') About the biennial
         span(v-else)
           a(href='/fr/biennale') À propos de la Biennale
     
