@@ -396,7 +396,9 @@ $headingSizeMobile: 1.9rem;
  }
 }
 .menu-item.biennale a,
-.menu-item.program a {
+.menu-item.program a,
+.menu-item.programme a
+ {
   color: $green;
 }
 </style>
