@@ -120,6 +120,7 @@ layout
         br
         br
         br
+        br
 
   
     .column.is-6.right.posts-col
@@ -218,7 +219,7 @@ export default {
     },
     resetLabel () {
       if (this.lang == 'fr') return 'Réinitialiser les filtres'
-      else return "Reset filters"
+      else return "Reset the filters"
     },
     locationsTitle () {
       if (this.lang == 'en') return 'Locations'
@@ -1098,8 +1099,14 @@ em {
   background-position: center;
 }
 
-.clear-filter .tag {
-  text-transform: none !important;
+.clear-filter {
+  margin-top: -2rem;
+    .tag {
+      text-transform: none !important;
+      background: black;
+      color: white;
+      border-color: black;
+    }
 }
 
 .close-filter .tag {
