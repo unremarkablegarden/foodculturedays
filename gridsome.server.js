@@ -620,6 +620,7 @@ module.exports = function (api, options) {
                 project
                 project_body
                 date_time
+                manual_date_time
                 extra_days {
                   extra_day
                 }

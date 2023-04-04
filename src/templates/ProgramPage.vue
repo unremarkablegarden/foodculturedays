@@ -50,6 +50,8 @@ layout
         
         table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
           tr.date(v-if='page.manual_date_time') 
+            td.label
+              .inside Date
             td 
               .inside
                 prismic-rich-text(:field='page.manual_date_time')
@@ -657,7 +659,8 @@ p em {
 
 .meta {
   p {
-    
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .duration-text {
     p {
