@@ -239,7 +239,7 @@ export default {
     },
     dates () {
       let sel = []
-      this.program.forEach(x => {
+      this.filteredProgram.forEach(x => {
         if (x.node.date_time) {
           // console.log(x.node.date_time);
           // console.log(this.formatDate(x.node.date_time));
@@ -279,7 +279,7 @@ export default {
     
     locations () {
       let sel = []
-      this.program.forEach(x => {
+      this.filteredProgram.forEach(x => {
         let c = x.node
         if (c && c.location) {
           let name
@@ -321,7 +321,9 @@ export default {
       // Musee du jeu
       
       // in the array filtered, move item index 1 to be last
-      filtered.push(filtered.splice(1, 1)[0])
+      if (filtered.length === 4) {
+        filtered.push(filtered.splice(1, 1)[0])
+      }
 
       
       console.log(filtered)
