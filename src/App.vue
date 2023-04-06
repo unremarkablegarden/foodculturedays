@@ -442,11 +442,11 @@ export default {
         'foodculture days est une plateforme transdisciplinaire de partage de connaissances basée à Vevey (Suisse)'
       ]
       return [
-        {
-          key: 'og:image',
-          name: 'og:image',
-          content: 'https://images.prismic.io/foodculturedays2020/030721da-4fee-4898-a855-b80ad7daf65b_1.jpg?h=2400&auto=compress,format'
-        },
+        // {
+        //   key: 'og:image',
+        //   name: 'og:image',
+        //   content: 'https://images.prismic.io/foodculturedays2020/030721da-4fee-4898-a855-b80ad7daf65b_1.jpg?h=2400&auto=compress,format'
+        // },
         {
           key: 'description',
           name: 'description',
