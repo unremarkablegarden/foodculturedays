@@ -301,7 +301,32 @@ export default {
         }
       })
       
-      return filtered.sort()
+      // FR
+      // 0: "Pavillon Central"
+      // 1: "Musée du Jeu"
+      // 2: "Dans la ville"
+      // 3: "EPICOOP - Atelier 1 : Rue des Marron
+      
+      // EN
+      // 0: "Central Pavilion"
+      // 1: "Musée du Jeu"
+      // 2: "Around the City"
+      // 3: "EPICOOP
+      
+      // requested order
+      
+      // Pavillon central
+      // Dans la ville
+      // Epicoop
+      // Musee du jeu
+      
+      // in the array filtered, move item index 1 to be last
+      filtered.push(filtered.splice(1, 1)[0])
+
+      
+      console.log(filtered)
+      
+      return filtered
     },
     
     // artists () {
