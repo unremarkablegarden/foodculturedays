@@ -116,7 +116,7 @@ layout
               .inside Activation
             td 
               .inside {{ page.activation }}
-          tr.language(v-if='page.language')
+          //- tr.language(v-if='page.language')
             td(v-if='fr').label 
               .inside Langue
             td(v-else).label
