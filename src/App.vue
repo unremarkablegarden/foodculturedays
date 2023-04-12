@@ -132,48 +132,48 @@ export default {
       }
     },
     $route (to, from) {
-      // get last part of route
-      let uid = to.path
-      if (uid[uid.length - 1] == '/') uid = uid.slice(0, -1)
-      uid = uid.split('/')
-      uid = uid[uid.length - 1]
-      this.uid = uid
-      console.log('uid change = ' + uid)
+      // // get last part of route
+      // let uid = to.path
+      // if (uid[uid.length - 1] == '/') uid = uid.slice(0, -1)
+      // uid = uid.split('/')
+      // uid = uid[uid.length - 1]
+      // this.uid = uid
+      // console.log('uid change = ' + uid)
       
-      // if (!process.isClient) return
-      console.log('GA page > ' + to.path)
-      this.$ga.page(to.path)
+      // // if (!process.isClient) return
+      // console.log('GA page > ' + to.path)
+      // this.$ga.page(to.path)
 
 
-      this.animating = true
-      setTimeout(() => {
-        this.animating = false
-      }, 600)
+      // this.animating = true
+      // setTimeout(() => {
+      //   this.animating = false
+      // }, 600)
 
-      if (from.path == '/') {
-        this.hideMenu()
-      }
-      // this.hideMenu()
+      // if (from.path == '/') {
+      //   this.hideMenu()
+      // }
+      // // this.hideMenu()
       
-      if (to.path == '/en/' && from.path == '/fr/' || to.path == '/fr/' && from.path == '/en/') {
-        // lang switch
-      }
-      else if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
-        console.log('back home')
-        // setTimeout(() => {
-        //   this.splash = true  
-        // }, 500);
-        this.splash = true
-        this.isHome = true
-        // this.menuShown = true
-      } 
-      else {
-        console.log('route not back home');
-        if (this.isMobile) this.hideMenu(true)
-        this.splash = false
-        this.isHome = false
-        if (this.isMobile) this.menuShown = false
-      }
+      // if (to.path == '/en/' && from.path == '/fr/' || to.path == '/fr/' && from.path == '/en/') {
+      //   // lang switch
+      // }
+      // else if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
+      //   console.log('back home')
+      //   // setTimeout(() => {
+      //   //   this.splash = true  
+      //   // }, 500);
+      //   this.splash = true
+      //   this.isHome = true
+      //   // this.menuShown = true
+      // } 
+      // else {
+      //   console.log('route not back home');
+      //   if (this.isMobile) this.hideMenu(true)
+      //   this.splash = false
+      //   this.isHome = false
+      //   if (this.isMobile) this.menuShown = false
+      // }
     }
   },
   mounted () {
