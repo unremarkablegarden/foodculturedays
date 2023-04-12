@@ -114,7 +114,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   //   content: `A multidisciplinary platform for knowledge exchange`,
   // })
 
-  // Vue.prototype.$anime = anime
+  Vue.prototype.$anime = anime
 
   // Vue.prototype.$nav = (to) => {
   //   if (process.isClient) {
