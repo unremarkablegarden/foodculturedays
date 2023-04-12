@@ -93,15 +93,15 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     }
   })
 
-  router.beforeEach((to, from, next) => {
-    const toDepth = to.path.split('/').length
-    const fromDepth = from.path.split('/').length
-    let transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-    if (from.path !== '/' && to.path == '/en/' || from.path !== '/' && to.path == '/fr/') { transitionName = 'slide-right' }
+  // router.beforeEach((to, from, next) => {
+  //   const toDepth = to.path.split('/').length
+  //   const fromDepth = from.path.split('/').length
+  //   let transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  //   if (from.path !== '/' && to.path == '/en/' || from.path !== '/' && to.path == '/fr/') { transitionName = 'slide-right' }
 
-    appOptions.store.commit('setTransitionName', transitionName)
-    next()
-  })
+  //   appOptions.store.commit('setTransitionName', transitionName)
+  //   next()
+  // })
 
   head.link.push({
     rel: 'stylesheet',
