@@ -118,16 +118,16 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   Vue.prototype.$nav = (to) => {
     if (process.isClient) {
-      // let top = window.pageYOffset
-      // animatedScrollTo({
-      //     duration: top,
-      //     to: 0
-      // })
-      // setTimeout(() => {
-      //   console.log('pushing $nav from main.js...');
-      //   router.push(to)
-      // }, top);
-      router.replace(to)
+      let top = window.pageYOffset
+      animatedScrollTo({
+          duration: top,
+          to: 0
+      })
+      setTimeout(() => {
+        console.log('pushing $nav from main.js...');
+        router.push(to)
+      }, top);
+      // router.replace(to)
     }
   }
 
