@@ -36,7 +36,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   let lang = 'fr'
   if (navLang.includes('en')) lang = 'en'
   
-  console.log('MAINJS lang = ' + lang)
+  // console.log('MAINJS lang = ' + lang)
   
   Vue.use(Vuex)
   appOptions.store = new Vuex.Store({
@@ -66,7 +66,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
         state.loaded = val
       },
       setLang (state, val) {
-        console.log('store = ' + val)
+        // console.log('store = ' + val)
         state.lang = val
       },
       setTransitionName (state, val) {
@@ -132,7 +132,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   Vue.prototype.$prismic = {
     linkResolver() {
-      console.log('linkResolver()')
+      // console.log('linkResolver()')
     }
   }
 

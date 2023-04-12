@@ -138,10 +138,10 @@ export default {
       uid = uid.split('/')
       uid = uid[uid.length - 1]
       this.uid = uid
-      console.log('uid change = ' + uid)
+      // console.log('uid change = ' + uid)
       
       // if (!process.isClient) return
-      console.log('GA page > ' + to.path)
+      // console.log('GA page > ' + to.path)
       this.$ga.page(to.path)
 
 
@@ -159,7 +159,7 @@ export default {
         // lang switch
       }
       else if (to.path == '/en/' && from.path !== '/fr/' || to.path == '/fr/' && from.path !== '/en/') {
-        console.log('back home')
+        // console.log('back home')
         // setTimeout(() => {
         //   this.splash = true  
         // }, 500);
@@ -168,7 +168,7 @@ export default {
         // this.menuShown = true
       } 
       else {
-        console.log('route not back home');
+        // console.log('route not back home');
         if (this.isMobile) this.hideMenu(true)
         this.splash = false
         this.isHome = false
@@ -290,7 +290,7 @@ export default {
       let stateLang = this.$store.state.lang
       if (pathLang !== stateLang) {
         this.$store.dispatch('setLang', pathLang)
-        console.log('set lang from path', pathLang)
+        // console.log('set lang from path', pathLang)
       }  
     },  
     checkPath () {

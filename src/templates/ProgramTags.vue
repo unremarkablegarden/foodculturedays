@@ -333,7 +333,7 @@ export default {
       }
 
       
-      console.log(filtered)
+      // console.log(filtered)
       
       return filtered
     },
@@ -477,7 +477,7 @@ export default {
             let hashYear = hashSplit[1]
             if (hashYear) {
               this.year = parseInt(hashYear)
-              console.log('year from hash: ' + this.year)
+              // console.log('year from hash: ' + this.year)
             }
           }
         }

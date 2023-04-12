@@ -115,7 +115,7 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   mounted () {
-    console.log('Splash mounted')
+    // console.log('Splash mounted')
     this.setSize()
   },
   methods: {

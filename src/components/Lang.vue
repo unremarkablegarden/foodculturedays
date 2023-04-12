@@ -69,7 +69,7 @@ export default {
   watch: {
     $route (to, from) {
       let path = to.path
-      console.log(path);
+      // console.log(path);
       
       if (path.includes('/en/archive/themes/') || path.includes('/fr/archives/themes/')) {
         this.hasTranslation = false

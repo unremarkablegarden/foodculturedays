@@ -169,7 +169,7 @@ export default {
 
     let PIXI = require("pixi.js")
     let supported = PIXI.utils.isWebGLSupported()
-    console.log('webgl = ' + supported)
+    // console.log('webgl = ' + supported)
     this.webgl = supported
 
 
