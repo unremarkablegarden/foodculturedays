@@ -120,9 +120,9 @@ layout
             
         prismic-rich-text(:field='page.project', v-if='page.project').project-title
         
-        //- prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
-        h1.artist-title(v-if='page.artist && page.artist.length')
-          .artist(v-for='artist in page.artist[0].text.split("/")') 
+        prismic-rich-text(:field='page.artist', v-if='page.artist').artist-title
+        //- h1.artist-title(v-if='page.artist && page.artist.length')
+          .artist(v-for='artist in page.artist') 
             span.name {{ artist }}
             //- span.sep ,&nbsp;
         
@@ -273,11 +273,27 @@ export default {
     goBack () {
       if (!process.isClient) return
       
-      let path = window.location.pathname
-      path = path.replace(/\/$/, "")
-      path = path.split('/')
-      path.pop(); path.pop();
-      this.$router.push(path.join('/'))
+      // let path = window.location.pathname
+      // path = path.replace(/\/$/, "")
+      // path = path.split('/')
+      // path.pop(); path.pop();
+      // console.log();
+      // this.$router.push(path.join('/'))
+      
+      // if router has history go -1
+      // if (this.$router.history.current.name !== 'index') {
+      //   this.$router.go(-1)
+      // } else {
+      //   // else go to home
+      //   this.$router.push('/')
+      // }
+      // console.log(this.$router.history);
+      // console.log(this.lang);
+      if (this.lang === "fr") {
+        this.$router.push('/fr/programme/')
+      } else {
+        this.$router.push('/en/program/')
+      }
     }
   },
   computed: {
