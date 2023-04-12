@@ -159,7 +159,7 @@ layout
               div foodculture days
           
             
-          .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
+          g-link(:to='programRoute(p.node._meta.uid)').link(v-for='(p, i) in filteredProgram', :key='i')
             
             .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
             
@@ -779,7 +779,8 @@ export default {
       
       // console.log(path)
       // this.$router.push(path)
-      this.$nav(path)
+      // this.$nav(path)
+      return path
     },
     toggledLocation (loc) {
       if (this.toggledLocations.includes(loc)) return 'is-active'

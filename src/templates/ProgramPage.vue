@@ -36,7 +36,7 @@ layout
 
     .column.is-6.left
       .page-wrapper
-        .back(@click='goBack')
+        g-link(:to='goBack').back
           img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
           
         .tags(v-if='page.categories').categories
@@ -298,10 +298,12 @@ export default {
       // console.log(this.lang);
       if (this.lang === "fr") {
         // this.$router.push('/fr/programme/')
-        this.$nav('/fr/programme/')
+        // this.$nav('/fr/programme/')
+        return '/fr/programme'
       } else {
         // this.$router.push('/en/program/')
-        this.$nav('/en/program/')
+        // this.$nav('/en/program/')
+        return '/en/program'
       }
     }
   },
