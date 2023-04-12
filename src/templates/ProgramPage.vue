@@ -36,7 +36,8 @@ layout
 
     .column.is-6.left
       .page-wrapper
-        .back(@click='goBack')
+        //- .back(@click='goBack')
+        a(:href="lang === 'fr' ? '/fr/programme' : '/en/program'").back
           img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
           
         .tags(v-if='page.categories').categories
