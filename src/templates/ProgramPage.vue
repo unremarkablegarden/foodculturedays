@@ -1,7 +1,8 @@
 <template lang="pug">
 layout
   //- single program page
-  .columns.program-page
+  h1 hello
+  //- .columns.program-page
     .column.is-6.no-pad.gallery-column
       //- xmp {{ gallery }}
       .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
