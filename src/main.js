@@ -124,6 +124,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
           to: 0
       })
       setTimeout(() => {
+        console.log('pushing $nav from main.js...');
         router.push(to)
       }, top);
     }
