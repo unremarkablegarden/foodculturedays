@@ -1,7 +1,8 @@
 <template lang="pug">
 layout
   //- single program page
-  .columns.program-page
+  h1 hi
+  //- .columns.program-page
     .column.is-6.no-pad.gallery-column
       //- xmp {{ gallery }}
       .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
@@ -143,210 +144,210 @@ layout
 
 <script>
 // import Newsletter from '~/components/Newsletter.vue'
-import {format} from 'date-fns'
-import frLocale from 'date-fns/locale/fr-CH'
-import { parse } from "date-fns"
-var slug = require('slug')
+// import {format} from 'date-fns'
+// import frLocale from 'date-fns/locale/fr-CH'
+// import { parse } from "date-fns"
+// var slug = require('slug')
 
-export default {
-  components: {
-    // Newsletter
-  },
-  data () {
-    return {
-      gallery: {
-        n: 0,
-      },
-      back: {
-        en: '←',
-        fr: '←'
-      },
-      // showit: false
-    }
-  },
-  metaInfo() {
-    let img = this.page.image ? this.constrainImageUrlShare(this.page.image.url) : 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=crop&h=675&w=1200&auto=compress,format=auto'
-    return {
-      title: this.browserTitle,
-      meta: [
-        {
-          property: 'og:image',
-          content: img
-        },
-        {
-          property: 'twitter:card',
-          content: 'summary_large_image'
-        }
-      ]
-    }
-  },
-  created () {
-    // this.showit = true
-  },
-  mounted () {
-    // this.showit = true
-  },
-  // watch:{
-  //   $route (to, from){
-  //     // console.log('router change')
-  //     // this.showit = false
-  //   }
-  // },
-  // beforeDestroy () {
-  //   // console.log('beforeDestroy');
-  // },
-  // destroyed () {
-  //   // console.log('destroyed');
-  //   // this.showit = false
-  // },
-  methods: {
-    constrainImageUrl (url) {
-      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
-      // console.log(newUrl)
-      return newUrl
-    },
-    constrainImageUrlShare (url) {
-      let newUrl = url.replace('?auto=compress,format', '?fit=crop&h=675&w=1200&auto=compress,format=auto')
-      // console.log(newUrl)
-      return newUrl
-    },
-    constrainImageUrlMobile (url) {
-      if (typeof url === 'string' && url.includes('?')) {
-        let urlParts = url.split('?')
-        if (urlParts.length > 1 && urlParts[1].includes('&') && urlParts[1].includes('w=') && urlParts[1].includes('h=')) {
-          const w = urlParts[1].split('&').filter(p => p.includes('w='))[0].split('=')[1]
-          const h = urlParts[1].split('&').filter(p => p.includes('h='))[0].split('=')[1]
-          const ratio = w/h
-          if (ratio <= 0.67) {
-            url = urlParts[0] + '?fit=crop&w=1200&h=1400&auto=compress,format=auto'
-          } else {
-            url = urlParts[0] + '?fit=max&w=1200&auto=compress,format=auto'
-          }
-          return url
-        } else {
-          return url
-        }
-      } else {
-        return url
-      }
-    },
-    mobileNext() {
-      this.galleryNav('+1')
-    },
-    galleryNav(dir) {
-      if (this.page.gallery) {
-        const max = this.page.gallery.length -1
-        let frame = this.gallery.n
-        if (dir == '+1') frame += 1
-        else if (dir == '-1') frame -= 1
-        if (frame < 0) frame = max
-        if (frame > max) frame = 0
-        this.gallery.n = frame
-      }
-    },
-    t (t1, t2) {
-      if (this.lang == 'fr') return t2
-      else t1
-    },
-    formatDate (date) {
-      // 2020-11-26T17:00:00+0000
-      // date = date.slice(0,10) + ' '+date.slice(11,16)
-      // let time = date.slice(11,16)
-      // let jsDate = parse(date, "yyyy-MM-dd HH:mm", new Date())
-      // let jsTime = parse(time, "HH:mm", new Date())
+// export default {
+//   components: {
+//     // Newsletter
+//   },
+//   data () {
+//     return {
+//       gallery: {
+//         n: 0,
+//       },
+//       back: {
+//         en: '←',
+//         fr: '←'
+//       },
+//       // showit: false
+//     }
+//   },
+//   metaInfo() {
+//     let img = this.page.image ? this.constrainImageUrlShare(this.page.image.url) : 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=crop&h=675&w=1200&auto=compress,format=auto'
+//     return {
+//       title: this.browserTitle,
+//       meta: [
+//         {
+//           property: 'og:image',
+//           content: img
+//         },
+//         {
+//           property: 'twitter:card',
+//           content: 'summary_large_image'
+//         }
+//       ]
+//     }
+//   },
+//   created () {
+//     // this.showit = true
+//   },
+//   mounted () {
+//     // this.showit = true
+//   },
+//   // watch:{
+//   //   $route (to, from){
+//   //     // console.log('router change')
+//   //     // this.showit = false
+//   //   }
+//   // },
+//   // beforeDestroy () {
+//   //   // console.log('beforeDestroy');
+//   // },
+//   // destroyed () {
+//   //   // console.log('destroyed');
+//   //   // this.showit = false
+//   // },
+//   methods: {
+//     constrainImageUrl (url) {
+//       let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+//       // console.log(newUrl)
+//       return newUrl
+//     },
+//     constrainImageUrlShare (url) {
+//       let newUrl = url.replace('?auto=compress,format', '?fit=crop&h=675&w=1200&auto=compress,format=auto')
+//       // console.log(newUrl)
+//       return newUrl
+//     },
+//     constrainImageUrlMobile (url) {
+//       if (typeof url === 'string' && url.includes('?')) {
+//         let urlParts = url.split('?')
+//         if (urlParts.length > 1 && urlParts[1].includes('&') && urlParts[1].includes('w=') && urlParts[1].includes('h=')) {
+//           const w = urlParts[1].split('&').filter(p => p.includes('w='))[0].split('=')[1]
+//           const h = urlParts[1].split('&').filter(p => p.includes('h='))[0].split('=')[1]
+//           const ratio = w/h
+//           if (ratio <= 0.67) {
+//             url = urlParts[0] + '?fit=crop&w=1200&h=1400&auto=compress,format=auto'
+//           } else {
+//             url = urlParts[0] + '?fit=max&w=1200&auto=compress,format=auto'
+//           }
+//           return url
+//         } else {
+//           return url
+//         }
+//       } else {
+//         return url
+//       }
+//     },
+//     mobileNext() {
+//       this.galleryNav('+1')
+//     },
+//     galleryNav(dir) {
+//       if (this.page.gallery) {
+//         const max = this.page.gallery.length -1
+//         let frame = this.gallery.n
+//         if (dir == '+1') frame += 1
+//         else if (dir == '-1') frame -= 1
+//         if (frame < 0) frame = max
+//         if (frame > max) frame = 0
+//         this.gallery.n = frame
+//       }
+//     },
+//     t (t1, t2) {
+//       if (this.lang == 'fr') return t2
+//       else t1
+//     },
+//     formatDate (date) {
+//       // 2020-11-26T17:00:00+0000
+//       // date = date.slice(0,10) + ' '+date.slice(11,16)
+//       // let time = date.slice(11,16)
+//       // let jsDate = parse(date, "yyyy-MM-dd HH:mm", new Date())
+//       // let jsTime = parse(time, "HH:mm", new Date())
       
-      if (date !== null) {
-        let time = date.split('T')[1].split('+')[0].slice(0,-3)
-        let datetime = date.replace('T', ' ')
-        let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
-        let form = 'd MMMM'
-        if (time !== '01:00' && time !== '00:00') {
-          form = 'd MMMM — HH:mm'
-        }
-        if (this.lang == 'fr') return format(d, form, { locale: frLocale })
-        else return format(d, form)
-      }
+//       if (date !== null) {
+//         let time = date.split('T')[1].split('+')[0].slice(0,-3)
+//         let datetime = date.replace('T', ' ')
+//         let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
+//         let form = 'd MMMM'
+//         if (time !== '01:00' && time !== '00:00') {
+//           form = 'd MMMM — HH:mm'
+//         }
+//         if (this.lang == 'fr') return format(d, form, { locale: frLocale })
+//         else return format(d, form)
+//       }
   
-    },
-    tagLink (tag) {
-      let ret
-      if (this.lang == 'fr') {
-        ret = '/fr/programme/themes/'
-      } else {
-        ret = '/en/program/themes/'
-      }
-      return ret + slug(tag) + '/'
-    },
-    goBack () {
-      if (!process.isClient) return
+//     },
+//     tagLink (tag) {
+//       let ret
+//       if (this.lang == 'fr') {
+//         ret = '/fr/programme/themes/'
+//       } else {
+//         ret = '/en/program/themes/'
+//       }
+//       return ret + slug(tag) + '/'
+//     },
+//     goBack () {
+//       if (!process.isClient) return
       
-      // let path = window.location.pathname
-      // path = path.replace(/\/$/, "")
-      // path = path.split('/')
-      // path.pop(); path.pop();
-      // console.log();
-      // this.$router.push(path.join('/'))
+//       // let path = window.location.pathname
+//       // path = path.replace(/\/$/, "")
+//       // path = path.split('/')
+//       // path.pop(); path.pop();
+//       // console.log();
+//       // this.$router.push(path.join('/'))
       
-      // if router has history go -1
-      // if (this.$router.history.current.name !== 'index') {
-      //   this.$router.go(-1)
-      // } else {
-      //   // else go to home
-      //   this.$router.push('/')
-      // }
-      // console.log(this.$router.history);
-      // console.log(this.lang);
-      if (this.lang === "fr") {
-        // this.$router.push('/fr/programme/')
-        this.$nav('/fr/programme/')
-      } else {
-        // this.$router.push('/en/program/')
-        this.$nav('/en/program/')
-      }
-    }
-  },
-  computed: {
-    browserTitle () {
-      let p = this.page.project
-      let a = this.page.artist
-      if (p) { p = p[0].text }
-      if (a) { a = a[0].text }
+//       // if router has history go -1
+//       // if (this.$router.history.current.name !== 'index') {
+//       //   this.$router.go(-1)
+//       // } else {
+//       //   // else go to home
+//       //   this.$router.push('/')
+//       // }
+//       // console.log(this.$router.history);
+//       // console.log(this.lang);
+//       if (this.lang === "fr") {
+//         // this.$router.push('/fr/programme/')
+//         this.$nav('/fr/programme/')
+//       } else {
+//         // this.$router.push('/en/program/')
+//         this.$nav('/en/program/')
+//       }
+//     }
+//   },
+//   computed: {
+//     browserTitle () {
+//       let p = this.page.project
+//       let a = this.page.artist
+//       if (p) { p = p[0].text }
+//       if (a) { a = a[0].text }
       
-      let t
-      if (p) t = p
+//       let t
+//       if (p) t = p
       
-      // console.log(p);
-      if (a) {  t = t + ' / ' + a }
-      return t
-    },
+//       // console.log(p);
+//       if (a) {  t = t + ' / ' + a }
+//       return t
+//     },
     
-    page () {
-      let page = this.$context.node
-      page.gallery = page.gallery.filter(p => {
-        return p.gallery_image  !== null
-      })
-      return page
-    },
-    fr () {
-      if (this.lang == 'fr') return true
-    },
-    en () {
-      if (this.lang == 'en') return true
-    },
-    lang () {
-      let lang = this.page._meta.lang
-      if (lang.includes('fr')) { lang = 'fr' }
-      else { lang = 'en' }
-      return lang
-    },
-    // newsletterText () {
-    //   const en = 'Join our newsletter'
-    //   const fr = 'Abonnez-vous à notre newsletter'
-    //   if (this.lang == 'fr') { return fr }
-    //   else { return en }
-    // }
-  }
-}
+//     page () {
+//       let page = this.$context.node
+//       page.gallery = page.gallery.filter(p => {
+//         return p.gallery_image  !== null
+//       })
+//       return page
+//     },
+//     fr () {
+//       if (this.lang == 'fr') return true
+//     },
+//     en () {
+//       if (this.lang == 'en') return true
+//     },
+//     lang () {
+//       let lang = this.page._meta.lang
+//       if (lang.includes('fr')) { lang = 'fr' }
+//       else { lang = 'en' }
+//       return lang
+//     },
+//     // newsletterText () {
+//     //   const en = 'Join our newsletter'
+//     //   const fr = 'Abonnez-vous à notre newsletter'
+//     //   if (this.lang == 'fr') { return fr }
+//     //   else { return en }
+//     // }
+//   }
+// }
 </script>
 
 

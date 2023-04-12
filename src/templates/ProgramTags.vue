@@ -159,7 +159,7 @@ layout
               div foodculture days
           
             
-          .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i')
+          .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid')
             
             .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
             

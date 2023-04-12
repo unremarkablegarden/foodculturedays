@@ -15,8 +15,8 @@
       client-only
         Menu(v-bind:class="{ 'is-hidden-menu': !menuShown }", v-if='isMobile').global-menu
         Cookies
-      //- transition(:name='transitionName')
-      router-view(class='child-view')
+      transition(:name='transitionName')
+        router-view(class='child-view')
 </template>
 
 <static-query>
