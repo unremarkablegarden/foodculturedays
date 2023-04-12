@@ -114,20 +114,20 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   //   content: `A multidisciplinary platform for knowledge exchange`,
   // })
 
-  Vue.prototype.$anime = anime
+  // Vue.prototype.$anime = anime
 
-  Vue.prototype.$nav = (to) => {
-    if (process.isClient) {
-      let top = window.pageYOffset
-      animatedScrollTo({
-          duration: top,
-          to: 0
-      })
-      setTimeout(() => {
-        router.push(to)
-      }, top);
-    }
-  }
+  // Vue.prototype.$nav = (to) => {
+  //   if (process.isClient) {
+  //     let top = window.pageYOffset
+  //     animatedScrollTo({
+  //         duration: top,
+  //         to: 0
+  //     })
+  //     setTimeout(() => {
+  //       router.push(to)
+  //     }, top);
+  //   }
+  // }
 
   Vue.prototype.$prismic = {
     linkResolver() {
