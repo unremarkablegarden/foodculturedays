@@ -778,7 +778,8 @@ export default {
       else path = '/en/program/'+this.year+'/' + slug + '/'
       
       // console.log(path)
-      this.$router.push(path)
+      // this.$router.push(path)
+      this.$nav(path)
     },
     toggledLocation (loc) {
       if (this.toggledLocations.includes(loc)) return 'is-active'

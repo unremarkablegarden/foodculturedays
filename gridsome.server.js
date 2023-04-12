@@ -422,7 +422,7 @@ module.exports = function (api, options) {
               node: node,
               uid: node._meta.uid,
               lang: node._meta.lang,
-              plainTitle: node.title[0].text,
+              plainTitle: node.title && node.title.length && node.title[0].text ? node.title[0].text : 'no_plain_title',
               altPath: altPath,
               gallery: node.gallery,
               newsletters: newsletters[lang]

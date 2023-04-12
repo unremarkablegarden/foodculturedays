@@ -1,8 +1,7 @@
 <template lang="pug">
 layout
   //- single program page
-  h1 hello
-  //- .columns.program-page
+  .columns.program-page
     .column.is-6.no-pad.gallery-column
       //- xmp {{ gallery }}
       .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
@@ -298,9 +297,11 @@ export default {
       // console.log(this.$router.history);
       // console.log(this.lang);
       if (this.lang === "fr") {
-        this.$router.push('/fr/programme/')
+        // this.$router.push('/fr/programme/')
+        this.$nav('/fr/programme/')
       } else {
-        this.$router.push('/en/program/')
+        // this.$router.push('/en/program/')
+        this.$nav('/en/program/')
       }
     }
   },
