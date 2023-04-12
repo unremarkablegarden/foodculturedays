@@ -116,6 +116,13 @@ layout
               .inside Activation
             td 
               .inside {{ page.activation }}
+          tr.language(v-if='page.language')
+            td(v-if='fr').label 
+              .inside Langue
+            td(v-else).label
+              .inside Language
+            td 
+              .inside {{ page.language }}
             
             
         prismic-rich-text(:field='page.project', v-if='page.project').project-title
@@ -179,19 +186,19 @@ export default {
   mounted () {
     // this.showit = true
   },
-  watch:{
-    $route (to, from){
-      // console.log('router change')
-      // this.showit = false
-    }
-  },
-  beforeDestroy () {
-    // console.log('beforeDestroy');
-  },
-  destroyed () {
-    // console.log('destroyed');
-    // this.showit = false
-  },
+  // watch:{
+  //   $route (to, from){
+  //     // console.log('router change')
+  //     // this.showit = false
+  //   }
+  // },
+  // beforeDestroy () {
+  //   // console.log('beforeDestroy');
+  // },
+  // destroyed () {
+  //   // console.log('destroyed');
+  //   // this.showit = false
+  // },
   methods: {
     constrainImageUrl (url) {
       let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')

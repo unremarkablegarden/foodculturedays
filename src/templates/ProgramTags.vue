@@ -40,7 +40,14 @@ layout
               a(href='/en/biennale') About the Biennale
             span(v-else)
               a(href='/fr/biennale') À propos de la Biennale
-            //- span.small (PDF)    
+            
+          .icon
+            span(style="display: inline-block; padding-right: 3px;") &rarr;
+            span(v-if="lang == 'en'") 
+              a(href='/en/ticketing-info') Ticketing info
+            span(v-else)
+              a(href='/fr/info-et-billeterie') Info et Billeterie
+            
             
         
         .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
