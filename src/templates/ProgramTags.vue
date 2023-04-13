@@ -66,7 +66,7 @@ layout
         .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
           h2.tagtitle Dates
           .dates2.tags
-            //- .date2.tag(v-for='date in dates', @click='dateToggle(date)', :class='toggledDate(date)')  {{ date }}
+            .date2.tag(v-for='date in dates', @click='dateToggle(date)', :class='toggledDate(date)')  {{ date }}
             
           .close-filter.tags
             .tag(@click='toggleFilter("close")')
