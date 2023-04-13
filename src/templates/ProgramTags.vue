@@ -54,15 +54,15 @@ layout
             
             
         
-      //-   .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
-      //-     h2.tagtitle {{ locationsTitle }}
-      //-     .locations
-      //-       .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+        .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
+          h2.tagtitle {{ locationsTitle }}
+          .locations
+            .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', :class='toggledLocation(loc)') {{ loc }}
           
-      //-     .close-filter.tags
-      //-       .tag(@click='toggleFilter("close")')
-      //-         span(v-if="lang == 'en'") close
-      //-         span(v-else) fermer
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
 
       //-   .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
               
