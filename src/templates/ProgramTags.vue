@@ -153,7 +153,7 @@ layout
               em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
               
-            xmp {{ p.node.date_time }}
+            //- xmp {{ p.node.date_time }}
               
             //- .tags {{ p.node._meta.tags }}
             //- .tags.small
