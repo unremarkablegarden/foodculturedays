@@ -1,6 +1,6 @@
 <template lang="pug">
 layout
-  .links
+  //- .links
     .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid') {{ p.node._meta.uid }}
   //- xmp.debug {{ program }}
   
@@ -25,7 +25,7 @@ layout
     
   .columns.tags-page.scroll
 
-    //- .column.is-6.left.my-filters
+    .column.is-6.left.my-filters
       .inner
         //- .flex-wrapper
         
@@ -54,91 +54,76 @@ layout
             
             
         
-        .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
-          h2.tagtitle {{ locationsTitle }}
-          .locations
-            //- .location.is-active RADIO-40
-            //- .location.disabled(v-for='loc in locations', :key='loc') {{ loc }}
-            .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
+      //-   .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
+      //-     h2.tagtitle {{ locationsTitle }}
+      //-     .locations
+      //-       .location(v-for='loc in locations', :key='loc', @click='locationToggle(loc)', v-bind:class='toggledLocation(loc)') {{ loc }}
           
-          .close-filter.tags
-            .tag(@click='toggleFilter("close")')
-              span(v-if="lang == 'en'") close
-              span(v-else) fermer
+      //-     .close-filter.tags
+      //-       .tag(@click='toggleFilter("close")')
+      //-         span(v-if="lang == 'en'") close
+      //-         span(v-else) fermer
 
-        .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
+      //-   .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
               
-          h2.tagtitle Dates
-          .dates2.tags
-            .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
-            //- .date.disabled(v-for='date in dates')  {{ date }}
-          //- .icon
-            img(src='/doc.png')
-            a(href='/menu.pdf', target='_blank') Menus à emporter 
-            span.small (PDF)
-          //- .icon
-          //-   img(src='/doc.png', target='_blank')
-          //-   a(href='/programme.pdf')
-          //-     span(v-if="lang == 'en'") Program
-          //-     span(v-else) Programme 
-          //-   span.small (PDF)
+      //-     h2.tagtitle Dates
+      //-     .dates2.tags
+      //-       .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
             
           
-          .close-filter.tags
-            .tag(@click='toggleFilter("close")')
-              span(v-if="lang == 'en'") close
-              span(v-else) fermer
+      //-     .close-filter.tags
+      //-       .tag(@click='toggleFilter("close")')
+      //-         span(v-if="lang == 'en'") close
+      //-         span(v-else) fermer
 
 
-        .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
-          h2.tagtitle {{ activitiesTitle }}
-          .categories.tags
-            .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
-              span {{ cat }}
-          .close-filter.tags
-            .tag(@click='toggleFilter("close")')
-              span(v-if="lang == 'en'") close
-              span(v-else) fermer
+      //-   .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
+      //-     h2.tagtitle {{ activitiesTitle }}
+      //-     .categories.tags
+      //-       .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
+      //-         span {{ cat }}
+      //-     .close-filter.tags
+      //-       .tag(@click='toggleFilter("close")')
+      //-         span(v-if="lang == 'en'") close
+      //-         span(v-else) fermer
         
-        .filter-section(data-filter='artists', :class='{ "is-active": (mobileCurrentFilter == "artists") }')
-          h2.tagtitle {{ artistsTitle }}
-          .artists.tags
-            .artist(v-for='artist in artists', :key='artist', v-bind:class='toggledArtist(artist)', @click='artistToggle(artist)').tag
-              span {{ artist }}
-              //- span {{ stripCountry(artist) }}
-          .close-filter.tags
-            .tag(@click='toggleFilter("close")')
-              span(v-if="lang == 'en'") close
-              span(v-else) fermer
+      //-   .filter-section(data-filter='artists', :class='{ "is-active": (mobileCurrentFilter == "artists") }')
+      //-     h2.tagtitle {{ artistsTitle }}
+      //-     .artists.tags
+      //-       .artist(v-for='artist in artists', :key='artist', v-bind:class='toggledArtist(artist)', @click='artistToggle(artist)').tag
+      //-         span {{ artist }}
+      //-         //- span {{ stripCountry(artist) }}
+      //-     .close-filter.tags
+      //-       .tag(@click='toggleFilter("close")')
+      //-         span(v-if="lang == 'en'") close
+      //-         span(v-else) fermer
         
-        .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
-          h2.tagtitle {{ themesTitle }}
-          .tags
-            .tag(
-                v-for='(tag, i) in tags', 
-                @click='tagToggle(tag)'
-                v-bind:class='toggledTag(tag)'
-              )
-              .name {{ tag }}
-          .close-filter.tags
-            .tag(@click='toggleFilter("close")')
-              span(v-if="lang == 'en'") close
-              span(v-else) fermer
+      //-   .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
+      //-     h2.tagtitle {{ themesTitle }}
+      //-     .tags
+      //-       .tag(
+      //-           v-for='(tag, i) in tags', 
+      //-           @click='tagToggle(tag)'
+      //-           v-bind:class='toggledTag(tag)'
+      //-         )
+      //-         .name {{ tag }}
+      //-     .close-filter.tags
+      //-       .tag(@click='toggleFilter("close")')
+      //-         span(v-if="lang == 'en'") close
+      //-         span(v-else) fermer
               
       
-      .clear-filter.tags(v-if='anyFiltersAreSet')
-        .tag(@click='clearFilters') {{ resetLabel }}
-        br
-        br
-        br
-        br
+      //- .clear-filter.tags(v-if='anyFiltersAreSet')
+      //-   .tag(@click='clearFilters') {{ resetLabel }}
+      //-   br
+      //-   br
+      //-   br
+      //-   br
 
   
     .column.is-6.right.posts-col
-      //- .wallpaper(v-if='!anyFiltersAreSet')
-      //- .inner(v-else-if='anyFiltersAreSet && !moving')
       .inner(v-if='!moving')
-        .icons-mobile
+        //- .icons-mobile
           //- .icon
             img(src='/doc.png')
             a(href='/menu.pdf', target='_blank') Menus à emporter 
