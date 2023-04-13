@@ -248,26 +248,52 @@ export default {
       if (this.lang == 'fr') return t2
       else t1
     },
-    formatDate (date) {
-      // 2020-11-26T17:00:00+0000
-      // date = date.slice(0,10) + ' '+date.slice(11,16)
-      // let time = date.slice(11,16)
-      // let jsDate = parse(date, "yyyy-MM-dd HH:mm", new Date())
-      // let jsTime = parse(time, "HH:mm", new Date())
+    // formatDate (date) {
+    //   // 2020-11-26T17:00:00+0000
+    //   // date = date.slice(0,10) + ' '+date.slice(11,16)
+    //   // let time = date.slice(11,16)
+    //   // let jsDate = parse(date, "yyyy-MM-dd HH:mm", new Date())
+    //   // let jsTime = parse(time, "HH:mm", new Date())
       
-      if (date !== null) {
-        let time = date.split('T')[1].split('+')[0].slice(0,-3)
-        let datetime = date.replace('T', ' ')
-        let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
-        let form = 'd MMMM'
-        if (time !== '01:00' && time !== '00:00') {
-          form = 'd MMMM — HH:mm'
-        }
-        if (this.lang == 'fr') return format(d, form, { locale: frLocale })
-        else return format(d, form)
-      }
+    //   if (date !== null) {
+    //     let time = date.split('T')[1].split('+')[0].slice(0,-3)
+    //     let datetime = date.replace('T', ' ')
+    //     let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
+    //     let form = 'd MMMM'
+    //     if (time !== '01:00' && time !== '00:00') {
+    //       form = 'd MMMM — HH:mm'
+    //     }
+    //     if (this.lang == 'fr') return format(d, form, { locale: frLocale })
+    //     else return format(d, form)
+    //   }
   
+    // },
+    
+    formatDate(date) {
+      if (typeof date !== 'string' || date.trim() === '') {
+        // console.log('date error 1', date)
+        return ''
+      }
+      
+      const [dateStr, timeStr] = date.split('T')
+      const offsetIdx = timeStr.indexOf('+')
+      const time = offsetIdx >= 0 ? timeStr.substring(0, offsetIdx) : timeStr
+      const datetime = `${dateStr} ${time}`
+      
+      const d = parseISO(datetime)
+      if (!isValid(d)) {
+        // console.log('date error 2', date)
+        return ''
+      }
+      
+      const form = 'd MMMM'
+      if (this.lang === 'fr') {
+        return format(d, form, { locale: frLocale })
+      }
+      
+      return format(d, form)
     },
+    
     tagLink (tag) {
       let ret
       if (this.lang == 'fr') {
