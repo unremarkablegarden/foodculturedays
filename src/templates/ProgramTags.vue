@@ -633,6 +633,8 @@ export default {
       this.toggledArtists = []
       this.mobileCurrentFilter = null
     },
+    
+    // for some reason breaks the built code
     // formatDate (date) {
     //   if (date !== null) {
     //     let time = date.split('T')[1].split('+')[0].slice(0,-3)
@@ -643,6 +645,7 @@ export default {
     //     else return format(d, form)
     //   }
     // },
+    
     formatDate(date) {
       if (typeof date !== 'string' || date.trim() === '') {
         console.log('date error 1', date)
