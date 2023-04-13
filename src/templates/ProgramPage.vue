@@ -143,9 +143,9 @@ layout
 
 <script>
 // import Newsletter from '~/components/Newsletter.vue'
-import {format} from 'date-fns'
+import {format, isValid, parseISO} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
-import { parse } from "date-fns"
+// import { parse } from "date-fns"
 var slug = require('slug')
 
 export default {
