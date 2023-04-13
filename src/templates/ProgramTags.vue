@@ -51,9 +51,7 @@ layout
               a(href='/en/ticketing-info') Ticketing info
             span(v-else)
               a(href='/fr/info-et-billeterie') Info et Billeterie
-            
-            
-        xmp {{ locations }}
+
         
         .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
           h2.tagtitle {{ locationsTitle }}
@@ -65,13 +63,11 @@ layout
               span(v-if="lang == 'en'") close
               span(v-else) fermer
 
-        //- .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
-              
+        .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
           h2.tagtitle Dates
           .dates2.tags
-            .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
+            //- .date2.tag(v-for='date in dates', @click='dateToggle(date)', :class='toggledDate(date)')  {{ date }}
             
-          
           .close-filter.tags
             .tag(@click='toggleFilter("close")')
               span(v-if="lang == 'en'") close
