@@ -1,7 +1,10 @@
 <template lang="pug">
 layout
+  .links
+    .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid') {{ p.node._meta.uid }}
+  //- xmp.debug {{ program }}
   //- program overview page
-  .mobile
+  //- .mobile
     .filters
       .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
       .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length') {{ locationsTitle }}
@@ -19,7 +22,7 @@ layout
         span(v-else)
           a(href='/fr/biennale') À propos de la Biennale
     
-  .columns.tags-page.scroll
+  //- .columns.tags-page.scroll
 
     .column.is-6.left.my-filters
       .inner
@@ -181,7 +184,7 @@ layout
                   .name {{ ucfirst(tag) }}
 
   
-  .preload.is-hidden
+  //- .preload.is-hidden
     img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg')
     img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/2b2b5e66-db76-474a-80f8-1369f060d844_Asset+3.svg')
 </template>
@@ -482,7 +485,6 @@ export default {
     
     filteredProgram () {
       let program = this.program
-      
       // locations
       if (this.toggledLocations.length) {
         program = program.filter(p => {
@@ -614,65 +616,6 @@ export default {
     },
     
     
-    
-  //   posts () {
-  //     let posts = []
-      
-  //     if (this.toggledTags.length) {
-  //       // combine arrays
-  //       this.toggledTags.forEach(tag => {
-  //         if (this.dataTags[tag]) {
-  //           posts = [...posts, ...this.dataTags[tag]]  
-  //         }
-  //       })
-  //     }
-  //     else {
-  //       Object.entries(this.dataTags).forEach(([key,value])=>{
-  //         posts = [...posts, ...value]
-  //       })
-  //     }
-        
-  //     // remove duplicates
-  //     let added = []
-  //     let postsFiltered = []
-  //     posts.forEach(post => {
-  //       let title
-  //       if (post.project) {
-  //         title = post.project[0].text
-  //       } else if (post.artist) {
-  //         title = post.artist[0].text
-  //       }
-          
-  //       if (! added.includes(title) ) {
-  //         added.push(title)
-  //         postsFiltered.push(post)
-  //       }
-  //     })
-      
-  //     function compare(a, b) {
-  //       let titleA, titleB
-  //       if (a.project) {
-  //         titleA = a.project[0].text
-  //       } else if (a.artist) {
-  //         titleA = a.artist[0].text
-  //       }
-  //       if (b.project) {
-  //         titleB = b.project[0].text
-  //       } else if (b.artist) {
-  //         titleB = b.artist[0].text
-  //       }
-        
-  //       const atitle = titleA,
-  //             btitle = titleB
-  //       if (atitle > btitle) return 1
-  //       else if (atitle < btitle) return -1
-  //       else return 0
-  //     }
-  //     postsFiltered.sort(compare)
-      
-  //     return postsFiltered
-      
-  //   }
   },
   methods: {
     stripCountry(artist) {
@@ -1140,6 +1083,13 @@ em {
   .image {
     height: 31vw;
   }
+}
+
+xmp.debug {
+  // allow line breaks
+  white-space: pre-wrap;
+  max-width: 50vw;
+  position: absolute;
 }
 
 </style>

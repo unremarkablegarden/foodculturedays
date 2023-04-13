@@ -642,6 +642,7 @@ module.exports = function (api, options) {
                 duration
                 duration_richtext
                 activation
+                language
                 _meta {
                   tags
                   uid
