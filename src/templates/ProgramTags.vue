@@ -3,8 +3,9 @@ layout
   .links
     .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid') {{ p.node._meta.uid }}
   //- xmp.debug {{ program }}
+  
   //- program overview page
-  //- .mobile
+  .mobile
     .filters
       .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
       .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length') {{ locationsTitle }}
@@ -184,7 +185,7 @@ layout
                   .name {{ ucfirst(tag) }}
 
   
-  //- .preload.is-hidden
+  .preload.is-hidden
     img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg')
     img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/2b2b5e66-db76-474a-80f8-1369f060d844_Asset+3.svg')
 </template>
