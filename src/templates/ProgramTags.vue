@@ -66,7 +66,7 @@ layout
         .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
           h2.tagtitle Dates
           .dates2.tags
-            .date2.tag(v-for='date in dates', @click='dateToggle(date)', :class='toggledDate(date)')  {{ date }}
+            .date2.tag(v-for='(date, i) in dates', @click='dateToggle(date)', :class='toggledDate(date)', :key='i')  {{ date }}
             
           .close-filter.tags
             .tag(@click='toggleFilter("close")')
@@ -259,15 +259,17 @@ export default {
       
       filtered = filtered.sort()
       
-      let formatted = []
-      filtered.forEach(x => {
-        let f = this.formatDate(x)
-        if (! formatted.includes(f) ) {
-          formatted.push(f)
-        }
-      })
+      return filtered
       
-      return formatted
+      // let formatted = []
+      // filtered.forEach(x => {
+      //   let f = this.formatDate(x)
+      //   if (! formatted.includes(f) ) {
+      //     formatted.push(f)
+      //   }
+      // })
+      
+      // return formatted
     },
     
     locations () {
