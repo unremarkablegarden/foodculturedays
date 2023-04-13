@@ -25,7 +25,7 @@ layout
     
   .columns.tags-page.scroll
 
-    .column.is-6.left.my-filters
+    //- .column.is-6.left.my-filters
       .inner
         //- .flex-wrapper
         
@@ -134,7 +134,7 @@ layout
         br
 
   
-    //- .column.is-6.right.posts-col
+    .column.is-6.right.posts-col
       //- .wallpaper(v-if='!anyFiltersAreSet')
       //- .inner(v-else-if='anyFiltersAreSet && !moving')
       .inner(v-if='!moving')
