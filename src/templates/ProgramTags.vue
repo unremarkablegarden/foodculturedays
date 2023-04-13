@@ -309,59 +309,41 @@ export default {
       })
       
       // FR
-      // 0: "Pavillon Central"
-      // 1: "Musée du Jeu"
-      // 2: "Dans la ville"
-      // 3: "EPICOOP - Atelier 1 : Rue des Marron
+      // 0: "Dans la ville"
+      // 1: "Pavillon Central"
+      // 2: "Musée du Jeu"
+      // 3: "EPICOOP - épicerie coopérative"
       
       // EN
       // 0: "Central Pavilion"
-      // 1: "Musée du Jeu"
-      // 2: "Around the City"
-      // 3: "EPICOOP
-      
-      // requested order
-      
-      // Pavillon central
-      // Dans la ville
-      // Epicoop
-      // Musee du jeu
-      
-      // in the array filtered, move item index 1 to be last
-      if (filtered.length === 4) {
-        filtered.push(filtered.splice(1, 1)[0])
-      }
+      // 1: "Around the City"
+      // 2: "EPICOOP - cooperative grocery store"
+      // 3: "Musée du Jeu"
 
+      // requested order: en/fr
       
-      // console.log(filtered)
+      // 0: central pavillon / pavillon central
+      // 1: Around the city / Dans la ville
+      // 2: Musée du Jeu / Musée du Jeu
+      // 3: EPICOOP - cooperative grocery store / EPICOOP - épicerie coopérative
+      
+      // if french, swap 0 and 1
+      if (this.lang == 'fr') {
+        let temp = filtered[0]
+        filtered[0] = filtered[1]
+        filtered[1] = temp
+      }
+      // if english, swap 2 and 3
+      if (this.lang == 'en') {
+        let temp = filtered[2]
+        filtered[2] = filtered[3]
+        filtered[3] = temp
+      }
+      
       
       return filtered
     },
     
-    // artists () {
-    //   let sel = []
-    //   this.program.forEach(x => {
-    //     let c = x.node
-    //     if (c && c.artist && c.artist.length) {
-    //       let name
-    //       if (c.artist[0] && c.artist[0].text) {
-    //         name = c.artist[0].text
-    //         sel.push(name)  
-    //       }
-    //     }
-    //   })
-      
-    //   let added = []
-    //   let filtered = []
-    //   sel.forEach(cat => {
-    //     if (! added.includes(cat) ) {
-    //       added.push(cat)
-    //       filtered.push(cat)
-    //     }
-    //   })
-      
-    //   return filtered.sort()
-    // },
     
     artists () {
       let artists = []
