@@ -53,6 +53,7 @@ layout
               a(href='/fr/info-et-billeterie') Info et Billeterie
             
             
+        xmp {{ locations }}
         
         .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
           h2.tagtitle {{ locationsTitle }}
@@ -64,7 +65,7 @@ layout
               span(v-if="lang == 'en'") close
               span(v-else) fermer
 
-        .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
+        //- .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
               
           h2.tagtitle Dates
           .dates2.tags
@@ -77,48 +78,48 @@ layout
               span(v-else) fermer
 
 
-      //-   .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
-      //-     h2.tagtitle {{ activitiesTitle }}
-      //-     .categories.tags
-      //-       .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
-      //-         span {{ cat }}
-      //-     .close-filter.tags
-      //-       .tag(@click='toggleFilter("close")')
-      //-         span(v-if="lang == 'en'") close
-      //-         span(v-else) fermer
+        .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
+          h2.tagtitle {{ activitiesTitle }}
+          .categories.tags
+            .category(v-for='cat in categories', :key='cat', v-bind:class='toggledCat(cat)', @click='catToggle(cat)').tag
+              span {{ cat }}
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
         
-      //-   .filter-section(data-filter='artists', :class='{ "is-active": (mobileCurrentFilter == "artists") }')
-      //-     h2.tagtitle {{ artistsTitle }}
-      //-     .artists.tags
-      //-       .artist(v-for='artist in artists', :key='artist', v-bind:class='toggledArtist(artist)', @click='artistToggle(artist)').tag
-      //-         span {{ artist }}
-      //-         //- span {{ stripCountry(artist) }}
-      //-     .close-filter.tags
-      //-       .tag(@click='toggleFilter("close")')
-      //-         span(v-if="lang == 'en'") close
-      //-         span(v-else) fermer
+        .filter-section(data-filter='artists', :class='{ "is-active": (mobileCurrentFilter == "artists") }')
+          h2.tagtitle {{ artistsTitle }}
+          .artists.tags
+            .artist(v-for='artist in artists', :key='artist', v-bind:class='toggledArtist(artist)', @click='artistToggle(artist)').tag
+              span {{ artist }}
+              //- span {{ stripCountry(artist) }}
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
         
-      //-   .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
-      //-     h2.tagtitle {{ themesTitle }}
-      //-     .tags
-      //-       .tag(
-      //-           v-for='(tag, i) in tags', 
-      //-           @click='tagToggle(tag)'
-      //-           v-bind:class='toggledTag(tag)'
-      //-         )
-      //-         .name {{ tag }}
-      //-     .close-filter.tags
-      //-       .tag(@click='toggleFilter("close")')
-      //-         span(v-if="lang == 'en'") close
-      //-         span(v-else) fermer
+        .filter-section(data-filter='tags', :class='{ "is-active": (mobileCurrentFilter == "tags") }')
+          h2.tagtitle {{ themesTitle }}
+          .tags
+            .tag(
+                v-for='(tag, i) in tags', 
+                @click='tagToggle(tag)'
+                v-bind:class='toggledTag(tag)'
+              )
+              .name {{ tag }}
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
               
       
-      //- .clear-filter.tags(v-if='anyFiltersAreSet')
-      //-   .tag(@click='clearFilters') {{ resetLabel }}
-      //-   br
-      //-   br
-      //-   br
-      //-   br
+      .clear-filter.tags(v-if='anyFiltersAreSet')
+        .tag(@click='clearFilters') {{ resetLabel }}
+        br
+        br
+        br
+        br
 
   
     .column.is-6.right.posts-col
@@ -329,6 +330,10 @@ export default {
         filtered[3] = temp
       }
       
+      // remove all null elements
+      filtered = filtered.filter(function (el) {
+        return el != null;
+      })
       
       return filtered
     },
