@@ -173,9 +173,10 @@ layout
 </template>
 
 <script>
-import {format} from 'date-fns'
+import {format, isValid, parseISO} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
-import { parse } from "date-fns"
+// import {parse} from "date-fns"
+// import {parseISO} from 'date-fns'
 
 export default {
   metaInfo() {
@@ -259,17 +260,18 @@ export default {
       
       filtered = filtered.sort()
       
-      return filtered
+      // return filtered
       
-      // let formatted = []
-      // filtered.forEach(x => {
-      //   let f = this.formatDate(x)
-      //   if (! formatted.includes(f) ) {
-      //     formatted.push(f)
-      //   }
-      // })
+      let formatted = []
+      filtered.forEach(x => {
+        let f = this.formatDate(x)
+        // let f = x
+        if (! formatted.includes(f) ) {
+          formatted.push(f)
+        }
+      })
       
-      // return formatted
+      return formatted
     },
     
     locations () {
@@ -631,16 +633,41 @@ export default {
       this.toggledArtists = []
       this.mobileCurrentFilter = null
     },
-    formatDate (date) {
-      if (date !== null) {
-        let time = date.split('T')[1].split('+')[0].slice(0,-3)
-        let datetime = date.replace('T', ' ')
-        let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
-        let form = 'd MMMM'
-        if (this.lang == 'fr') return format(d, form, { locale: frLocale })
-        else return format(d, form)
+    // formatDate (date) {
+    //   if (date !== null) {
+    //     let time = date.split('T')[1].split('+')[0].slice(0,-3)
+    //     let datetime = date.replace('T', ' ')
+    //     let d = parse(datetime, "yyyy-MM-dd HH:mm:ssxx", new Date())
+    //     let form = 'd MMMM'
+    //     if (this.lang == 'fr') return format(d, form, { locale: frLocale })
+    //     else return format(d, form)
+    //   }
+    // },
+    formatDate(date) {
+      if (typeof date !== 'string' || date.trim() === '') {
+        console.log('date error 1', date)
+        return ''
       }
+      
+      const [dateStr, timeStr] = date.split('T')
+      const offsetIdx = timeStr.indexOf('+')
+      const time = offsetIdx >= 0 ? timeStr.substring(0, offsetIdx) : timeStr
+      const datetime = `${dateStr} ${time}`
+      
+      const d = parseISO(datetime)
+      if (!isValid(d)) {
+        console.log('date error 2', date)
+        return ''
+      }
+      
+      const form = 'd MMMM'
+      if (this.lang === 'fr') {
+        return format(d, form, { locale: frLocale })
+      }
+      
+      return format(d, form)
     },
+    
     moreData(project) {
       let slug = project.path.split('/').slice(-1)[0]
       let data = this.program.find(x => x.node._meta.uid === slug)
