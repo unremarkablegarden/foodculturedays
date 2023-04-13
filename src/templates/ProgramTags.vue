@@ -64,17 +64,17 @@ layout
               span(v-if="lang == 'en'") close
               span(v-else) fermer
 
-      //-   .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
+        .filter-section(data-filter='dates', :class='{ "is-active": (mobileCurrentFilter == "dates") }')
               
-      //-     h2.tagtitle Dates
-      //-     .dates2.tags
-      //-       .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
+          h2.tagtitle Dates
+          .dates2.tags
+            .date2.tag(v-for='date in dates', @click='dateToggle(date)', v-bind:class='toggledDate(date)')  {{ date }}
             
           
-      //-     .close-filter.tags
-      //-       .tag(@click='toggleFilter("close")')
-      //-         span(v-if="lang == 'en'") close
-      //-         span(v-else) fermer
+          .close-filter.tags
+            .tag(@click='toggleFilter("close")')
+              span(v-if="lang == 'en'") close
+              span(v-else) fermer
 
 
       //-   .filter-section(data-filter='categories', :class='{ "is-active": (mobileCurrentFilter == "categories") }')
