@@ -153,6 +153,8 @@ layout
               em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
               
+            xmp {{ p.node.date_time }}
+              
             //- .tags {{ p.node._meta.tags }}
             //- .tags.small
               div(v-if='p.node.location')
@@ -264,10 +266,11 @@ export default {
       
       let formatted = []
       filtered.forEach(x => {
-        let f = this.formatDate(x)
-        // let f = x
-        if (! formatted.includes(f) ) {
-          formatted.push(f)
+        if (x) {
+          let f = this.formatDate(x)
+          if (! formatted.includes(f) ) {
+            formatted.push(f)
+          }
         }
       })
       
@@ -648,7 +651,7 @@ export default {
     
     formatDate(date) {
       if (typeof date !== 'string' || date.trim() === '') {
-        console.log('date error 1', date)
+        // console.log('date error 1', date)
         return ''
       }
       
@@ -659,7 +662,7 @@ export default {
       
       const d = parseISO(datetime)
       if (!isValid(d)) {
-        console.log('date error 2', date)
+        // console.log('date error 2', date)
         return ''
       }
       
