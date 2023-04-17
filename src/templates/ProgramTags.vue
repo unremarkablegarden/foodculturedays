@@ -13,15 +13,21 @@ layout
       .toggle(@click='toggleFilter("categories")', :class='{ "is-active": (mobileCurrentFilter == "categories") }') {{ activitiesTitle }}
       .toggle(@click='toggleFilter("tags")', :class='{ "is-active": (mobileCurrentFilter == "tags") }') {{ themesTitle }}
       .togglex(@click='clearFilters') 
-        span(v-if='anyFiltersAreSet') X
+        span(v-if='anyFiltersAreSet') ×
         span(v-else).white X
-    .about
+    .about(style='display: flex')
       .icon
         span(style="display: inline-block; padding-right: 3px;") &rarr;
         span(v-if="lang == 'en'") 
           a(href='/en/biennale') About the biennial
         span(v-else)
           a(href='/fr/biennale') À propos de la Biennale
+      .icon
+        span(style="display: inline-block; padding-right: 3px; margin-left: 1rem;") &rarr;
+        span(v-if="lang == 'en'") 
+          a(href='/en/ticketing-info') Ticketing info
+        span(v-else)
+          a(href='/fr/info-et-billeterie') Info et Billeterie
     
   .columns.tags-page.scroll
 
@@ -840,7 +846,7 @@ $green: rgb(17,230,54);
   }
   .mobile {
     .about {
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
       // text-align: right;
     }
   }
@@ -861,9 +867,9 @@ $green: rgb(17,230,54);
       // font-family: 'CE', Times, serif;
       font-family: 'Maxi', sans-serif;
       // font-style: italic;
-      padding: 0.2rem 0.3rem 0.2rem 0.2rem;
+      padding: 0.3rem 0.3rem 0rem 0.2rem;
       border: 1px black solid;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       line-height: 1em;
       // text-transform: lowercase;
       text-transform: uppercase;
@@ -876,7 +882,7 @@ $green: rgb(17,230,54);
     .togglex {
       font-size: 1.2rem;
       /* padding: 0.2rem 0.2rem 0 0; */
-      transform: translate(-.25rem, .25rem);
+      transform: translate(0, 0.15rem);
       .white {
         color: transparent;
       }

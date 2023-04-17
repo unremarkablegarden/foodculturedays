@@ -11,6 +11,9 @@ export default
     // PROGRAM
     { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
     
+    { title: ['Volunteers', 'Bénévoles'], to: ['/en/volunteers', '/fr/benevoles'] },
+    
+    
     // OPEN CALL
     // { title: ['Open Call 2023', 'Appel à Projets 2023'], to: ['/OpenCall_2023_EN.pdf', '/OpenCall_2023_FR.pdf'], blank: true },
     
