@@ -233,7 +233,7 @@ export default {
     },
     themesTitle () {
       if (this.lang == 'en') return 'Themes'
-      else return 'Themes'
+      else return 'Thèmes'
     },
     artistsTitle () {
       if (this.lang == 'en') return 'Artists'
