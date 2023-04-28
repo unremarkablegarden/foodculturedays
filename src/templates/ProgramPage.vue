@@ -89,6 +89,14 @@ layout
               .inside Price
             td 
               .inside {{ page.price }} 
+          tr.price(v-if='page.ticket_link')
+            td.label(v-if='fr') 
+              .inside Billets
+            td.label(v-else) 
+              .inside Tickets
+            td 
+              .inside
+                prismic-rich-text(:field='page.ticket_link')
           tr.duration(v-if='page.duration || page.duration_richtext')
             td.label(v-if='fr') 
               .inside Durée
