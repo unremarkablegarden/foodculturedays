@@ -236,8 +236,10 @@ export default {
       else return 'Thèmes'
     },
     artistsTitle () {
-      if (this.lang == 'en') return 'Artists'
-      else return 'Artistes'
+      if (this.lang == 'en') return 'Participants'
+      else return 'Participant·e·s'
+      // if (this.lang == 'en') return 'Artists'
+      // else return 'Artistes'
     },
     dates () {
       let sel = []
