@@ -880,6 +880,37 @@ module.exports = function (api, options) {
     
     
     
+    createPage({
+      path: `/sobremesa`,
+      component: './src/templates/Redirect.vue',
+      context: {
+        node: {
+          title: 'Sombresa',
+          link: 'https://foodculturedays.com/fr/programme/2023/sobremesa-exhibition'
+        },
+        uid: 'sombresa',
+        lang: 'fr',
+        plainTitle: 'Sombresa',
+        altPath: '/en/sobremesa',
+      }
+    })
+    createPage({
+      path: `/en/sobremesa`,
+      component: './src/templates/Redirect.vue',
+      context: {
+        node: {
+          title: 'Sombresa',
+          link: 'https://foodculturedays.com/en/program/2023/sobremesa-exhibition/'
+        },
+        uid: 'en-sombresa',
+        lang: 'en',
+        plainTitle: 'Sombresa',
+        altPath: '/sobremesa',
+      }
+    })
+    
+    
+    
     
     
     

@@ -1,6 +1,6 @@
 <template lang="pug">
-  layout
-    .columns
+layout
+  .columns
 </template>
 
 
