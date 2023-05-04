@@ -879,6 +879,15 @@ module.exports = function (api, options) {
     })
     
     
+    // const redirects = [
+    //   {
+    //     path: '/en/programme',
+    //     slug: 'programme',
+    //     title: 'Programme',
+    //     redirect: 'https://foodculturedays.com/en/program/2023/'
+    //   } 
+    // ]
+    
     
     createPage({
       path: `/sobremesa`,

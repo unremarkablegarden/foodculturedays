@@ -131,7 +131,14 @@ layout
               .inside Language
             td 
               .inside {{ page.language }}
-            
+          tr.price(v-if='page.program_pdf')
+            td.label(v-if='fr') 
+              .inside PDF
+            td.label(v-else) 
+              .inside PDF
+            td 
+              .inside
+                prismic-rich-text(:field='page.program_pdf')
             
         prismic-rich-text(:field='page.project', v-if='page.project').project-title
         
