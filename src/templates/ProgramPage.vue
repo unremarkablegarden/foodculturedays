@@ -89,15 +89,17 @@ layout
               .inside Price
             td 
               .inside {{ page.price }} 
-          tr.ticket(v-if='page.ticket_link && page.ticket_link.spans && page.ticket_link.spans.length')
+
+          //- xmp {{ page.ticket_link[0] }}
+          tr.ticket(v-if='page.ticket_link && page.ticket_link[0] && page.ticket_link[0].spans &&  page.ticket_link[0].spans.length')
             td.label(v-if='fr') 
               .inside Billets
             td.label(v-else) 
               .inside Tickets
             td 
               .inside
-                //- prismic-rich-text(:field='page.ticket_link')
-                xmp {{ page.ticket_link && page.ticket_link.spans && page.ticket_link.spans.length ? page.ticket_link : false }}
+                prismic-rich-text(:field='page.ticket_link')
+                //- xmp {{ page.ticket_link && page.ticket_link.spans && page.ticket_link.spans.length ? page.ticket_link : false }}
           tr.pdf(v-if='page.program_pdf')
             td.label(v-if='fr') 
               .inside PDF
@@ -106,14 +108,15 @@ layout
             td 
               .inside
                 prismic-rich-text(:field='page.program_pdf')
-          tr.duration(v-if='page.duration || page.duration_richtext')
+          tr.duration(v-if='page.duration || page.duration_richtext && page.duration_richtext.spans && page.duration_richtext.spans.length')
             td.label(v-if='fr') 
               .inside Durée
             td.label(v-else) 
               .inside Duration
-            td(v-if='page.duration_richtext').duration-text
+            td(v-if='page.duration_richtext && page.duration_richtext[0] && page.duration_richtext[0].spans && page.duration_richtext[0].spans.length').duration-text
               .inside 
                 prismic-rich-text(:field='page.duration_richtext')
+                //- xmp {{ page.duration_richtext }}
             td(v-else)
               .inside 
                 | {{ page.duration }} 
