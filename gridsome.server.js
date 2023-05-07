@@ -703,8 +703,6 @@ module.exports = function (api, options) {
               image: node.image,
               // plainTitle: node.artist[0].text,
               tags: node._meta.tags,
-              ticket_link: node.ticket_link,
-              program_pdf: node.program_pdf
             }
             
             // if (!tags[tag]) {

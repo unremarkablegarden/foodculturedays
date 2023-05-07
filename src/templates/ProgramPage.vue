@@ -89,15 +89,16 @@ layout
               .inside Price
             td 
               .inside {{ page.price }} 
-          tr.price(v-if='page.ticket_link')
+          tr.ticket(v-if='page.ticket_link && page.ticket_link.spans && page.ticket_link.spans.length')
             td.label(v-if='fr') 
               .inside Billets
             td.label(v-else) 
               .inside Tickets
             td 
               .inside
-                prismic-rich-text(:field='page.ticket_link')
-          tr.price(v-if='page.program_pdf')
+                //- prismic-rich-text(:field='page.ticket_link')
+                xmp {{ page.ticket_link && page.ticket_link.spans && page.ticket_link.spans.length ? page.ticket_link : false }}
+          tr.pdf(v-if='page.program_pdf')
             td.label(v-if='fr') 
               .inside PDF
             td.label(v-else) 
