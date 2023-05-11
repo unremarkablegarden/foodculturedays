@@ -607,8 +607,8 @@ export default {
       
       // sort program by: el.node.project[0].text
       program = program.sort((a,b) => {
-        let aTitle = a.node.project[0].text
-        let bTitle = b.node.project[0].text
+        let aTitle = a.node.project && a.node.project.length && a.node.project[0].text ? a.node.project[0].text : 'Missing title'
+        let bTitle = b.node.project && b.node.project.length && b.node.project[0].text ? b.node.project[0].text : 'Missing title'
         if (aTitle < bTitle) return -1
         if (aTitle > bTitle) return 1
         return 0
