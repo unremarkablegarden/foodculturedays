@@ -382,6 +382,7 @@ module.exports = function (api, options) {
                   item
                 }
                 excerpt
+                disable_newsletter
                 _meta {
                   uid
                   lang

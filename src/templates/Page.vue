@@ -40,10 +40,9 @@
               prismic-rich-text(:field='page.title')
           prismic-rich-text(:field='page.subtitle', v-if='page.subtitle').subtitle
           .content
-            //- xmp {{ page.body }}
             prismic-rich-text(v-if='page.body', :field='page.body')
-
-          Newsletter(:newsletters='$context.newsletters')
+          
+          Newsletter(:newsletters='$context.newsletters', v-if='! page.disable_newsletter')
 
 </template>
 
@@ -73,6 +72,14 @@ export default {
     }
   },
   computed: {
+    noImage () {
+      var data = this.$context.node
+      if (data.image || data.gallery && data.gallery[0] && data.gallery[0].item) {
+        return true
+      } else {
+        return false
+      }
+    },
     page () {
       // {
       //   "type": "paragraph",
