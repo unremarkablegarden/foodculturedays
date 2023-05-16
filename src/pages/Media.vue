@@ -126,8 +126,8 @@ export default {
 
       let p = this.$context.data
       p.sort((a, b) => {
-        const sortA = a.node.year
-        const sortB = b.node.year
+        const sortA = a.node.year ? a.node.year : 0
+        const sortB = b.node.year ? b.node.year : 0
         if(sortA > sortB) { return -1 }
         if(sortA < sortB) { return 1 }
         return 0
@@ -143,7 +143,7 @@ export default {
       let p = this.pages
       let images = []
       p.forEach(e => {
-        if (e.node.image) {
+        if (e.node.image && e.node.image.url) {
           images.push(e.node.image.url)
         }
       })
@@ -151,7 +151,7 @@ export default {
     },
     image () {
       if (!process.isClient) return
-      return this.images[0]
+      return this.images && this.images.length ? this.images[0] : false
       // if (this.pages[0].node.image && this.pages[0].node.image.url) {
       //   return this.pages[0].node.image.url || false
       // }
