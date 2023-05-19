@@ -544,7 +544,6 @@ export default {
             })
             return found
           }
-          // if (p.node.extra_days)
         })
       }
       
@@ -568,30 +567,12 @@ export default {
             })
             return found
           }
-          // if (p.node.artist && p.node.artist.length) {
-            
-          //   // p.node.artist.forEach(a => {
-          //   //   if (this.toggledArtists.includes(a.text)) {
-          //   //     return true
-          //   //   }
-          //   // })
-          // }
         })
       }
       
       // categories
       if (this.toggledCats.length) {
         program = program.filter(p => {
-          // let found = false
-          // if (p.node.categories.length) {
-          //   p.node.categories.forEach(c => {
-          //     if (this.toggledCats.includes(c.category.name)) {
-          //       found = true
-          //     }
-          //   })
-          // }
-          // return found
-          
           
           let pCats = []
           p.node.categories.forEach(c => {
@@ -602,44 +583,36 @@ export default {
           
           return this.toggledCats.every(x => pCats.includes(x))
           
-          // const a = JSON.stringify(this.toggledCats.sort()).slice(1,-1)
-          // const b = JSON.stringify(pCats.sort()).slice(1,-1)
-          // if (b.includes(a)) console.log(a + ' = ' +b);
-          // return b.includes(a)
         })
       }
       
       // tags
       if (this.toggledTags.length) {
         program = program.filter(p => {
-          // let found = false
-          // if (p.node._meta.tags.length) {
-          //   p.node._meta.tags.forEach(t => {
-          //     if (this.toggledTags.includes(t)) {
-          //       found = true
-          //     }
-          //   })
-          // }
-          // return found
           
           let pTags = []
           p.node._meta.tags.forEach(t => pTags.push(t))
           
           return this.toggledTags.every(x => pTags.includes(x))
-          // console.log(pTags);
-          // const a = JSON.stringify(this.toggledTags.sort()).slice(1,-1)
-          // const b = JSON.stringify(pTags.sort()).slice(1,-1)
-          // if (b.includes(a)) console.log(a + ' = ' +b);
-          // return b.includes(a)
         })
       }
       
       // sort program by: el.node.project[0].text
+      // program = program.sort((a,b) => {
+      //   let aTitle = a.node.project && a.node.project.length && a.node.project[0].text ? a.node.project[0].text : 'Missing title'
+      //   let bTitle = b.node.project && b.node.project.length && b.node.project[0].text ? b.node.project[0].text : 'Missing title'
+      //   if (aTitle < bTitle) return -1
+      //   if (aTitle > bTitle) return 1
+      //   return 0
+      // })
+      
+      // sort program by: el.node.date_time (converted with date-fns)
       program = program.sort((a,b) => {
-        let aTitle = a.node.project && a.node.project.length && a.node.project[0].text ? a.node.project[0].text : 'Missing title'
-        let bTitle = b.node.project && b.node.project.length && b.node.project[0].text ? b.node.project[0].text : 'Missing title'
-        if (aTitle < bTitle) return -1
-        if (aTitle > bTitle) return 1
+        let aDate = a.node.date_time ? this.getUnixtime(a.node.date_time) : 'Missing date'
+        let bDate = b.node.date_time ? this.getUnixtime(b.node.date_time) : 'Missing date'
+        // console.log(this.getUnixtime(a.node.date_time))
+        if (aDate < bDate) return -1
+        if (aDate > bDate) return 1
         return 0
       })
       
@@ -686,12 +659,16 @@ export default {
     //   }
     // },
     
+    getUnixtime (date_time) {
+      if (typeof date_time !== 'string' || date_time.trim() === '') return ''
+      const date = parseISO(date_time)
+      const unix = new Date(date).getTime()
+      return unix
+    },
+    
     formatDateTime (dateStr) {
       // Parse the date string to a JavaScript Date object
-      if (typeof dateStr !== 'string' || dateStr.trim() === '') {
-        // console.log('date error 1', date)
-        return ''
-      }
+      if (typeof dateStr !== 'string' || dateStr.trim() === '') return ''
       const date = parseISO(dateStr)
 
       // Format the date string in French with the +02:00 time zone
