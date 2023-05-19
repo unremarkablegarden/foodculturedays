@@ -159,6 +159,35 @@ layout
               em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
               
+            .program-overview-time
+              //- xmp date_time
+              //- xmp {{ p.node.date_time }}
+              //- xmp formatted
+              
+              //- xmp {{ formatDateTime(p.node.date_time) }}
+              //- xmp extra_days
+              //- xmp {{ p.node.extra_days }}
+              //- xmp manual_date_time
+              //- xmp {{ p.node.manual_date_time }}
+              
+              table.meta(v-if='p.node.date_time || p.node.extra_days || p.node.manual_date_time')
+                tr.date(v-if='p.node.manual_date_time') 
+                  td 
+                    .inside
+                      prismic-rich-text(:field='p.node.manual_date_time')
+                tr.date(v-else-if='p.node.date_time && !p.node.extra_days') 
+                  td 
+                    //- .inside {{ formatDate(p.node.date_time) }}
+                    .inside {{ formatDateTime(p.node.date_time) }}
+                tr.date(v-else-if='p.node.date_time && p.node.extra_days') 
+                  td 
+                    .inside 
+                      | {{ formatDateTime(p.node.date_time) }}
+                      div(v-for='extra in p.node.extra_days', v-if='"extra_day" in extra')
+                        //- | {{ formatDate(extra.extra_day) }}
+                        | {{ formatDateTime(extra.extra_day) }}
+                        
+            //- xmp {{ p.node }}
             //- xmp {{ p.node.date_time }}
               
             //- .tags {{ p.node._meta.tags }}
@@ -657,6 +686,26 @@ export default {
     //   }
     // },
     
+    formatDateTime (dateStr) {
+      // Parse the date string to a JavaScript Date object
+      if (typeof dateStr !== 'string' || dateStr.trim() === '') {
+        // console.log('date error 1', date)
+        return ''
+      }
+      const date = parseISO(dateStr)
+
+      // Format the date string in French with the +02:00 time zone
+      let formattedDateFrench = format(date, 'd MMMM / HH:mm', { locale: frLocale, timeZone: '+02:00' })
+      formattedDateFrench = formattedDateFrench.replace('/', 'à')
+
+      // Format the date string in English with the +02:00 time zone
+      let formattedDateEnglish = format(date, 'MMMM d / h a', { timeZone: '+02:00' })
+      formattedDateEnglish = formattedDateEnglish.replace('/', 'at')
+
+      if (this.lang == 'fr') return formattedDateFrench
+      else return formattedDateEnglish
+    },
+    
     formatDate(date) {
       if (typeof date !== 'string' || date.trim() === '') {
         // console.log('date error 1', date)
@@ -1122,4 +1171,21 @@ xmp.debug {
   position: absolute;
 }
 
+
+</style>
+
+<style lang="scss">
+.program-overview-time {
+  margin-top: 0.3rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.1rem;
+  border-top: 1px #00000020 solid;
+  font-size: 0.8rem;
+  line-height: 1.5em;
+  table, tr, td, p {
+    padding: 0 !important;
+    margin: 0 !important;
+    
+  }
+}
 </style>
