@@ -126,6 +126,9 @@ layout
   
     .column.is-6.right.posts-col
       .inner(v-if='!moving')
+        .n-events(v-if='filteredProgram.length')
+          span(v-if='lang == "en"') Showing {{ filteredProgram.length }} events
+          span(v-else) Affichage de {{ filteredProgram.length }} événements
         //- .icons-mobile
           //- .icon
             img(src='/doc.png')
@@ -703,7 +706,7 @@ export default {
       const date = parse(dayOfYear, 'DDD', new Date());
       let monthAndDay
       if (this.lang == 'fr') {
-        monthAndDay = format(date, 'MMMM d', { locale: frLocale })
+        monthAndDay = format(date, 'd MMMM', { locale: frLocale })
       } else {
         monthAndDay = format(date, 'MMMM d')
       }
@@ -1246,14 +1249,26 @@ xmp.debug {
   //   }
   // }
 }
+.n-events {
+  background: black;
+  color: white;
+  // background: white;
+  font-size: 0.8rem;
+  // font-weight: 600;
+  line-height: 1em;
+  border: 1px black solid;
+  padding: 4px 6px 1px;
+  border-radius: 10px;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+}
 </style>
 
 <style lang="scss">
 .program-overview-time {
   margin-top: 0.3rem;
-  // padding-top: 0.3rem;
   padding-bottom: 0.3rem;
-  // border-top: 1px #00000020 solid;
   font-size: 0.8rem;
   line-height: 1.5em;
   table, tr, td, p {
