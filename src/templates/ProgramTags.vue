@@ -1267,8 +1267,8 @@ xmp.debug {
 
 <style lang="scss">
 .program-overview-time {
-  margin-top: 0.3rem;
-  padding-bottom: 0.3rem;
+  margin-top: 0.25rem;
+  padding-bottom: 0.25rem;
   font-size: 0.8rem;
   line-height: 1.5em;
   table, tr, td, p {
