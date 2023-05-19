@@ -170,22 +170,27 @@ layout
               //- xmp manual_date_time
               //- xmp {{ p.node.manual_date_time }}
               
-              table.meta(v-if='p.node.date_time || p.node.extra_days || p.node.manual_date_time')
-                tr.date(v-if='p.node.manual_date_time') 
+              //- xmp {{ allDates(p.node) }}
+              .dts
+                span.d(v-for='(d,i) in allDates(p.node)')
+                  span {{ d }}
+              //- table.meta(v-if='p.node.date_time || p.node.extra_days')
+                //- tr.date(v-if='p.node.manual_date_time') 
+                //-   td 
+                //-     .inside
+                //-       prismic-rich-text(:field='p.node.manual_date_time')
+                tr.date(v-if='p.node.date_time && !p.node.extra_days') 
                   td 
-                    .inside
-                      prismic-rich-text(:field='p.node.manual_date_time')
-                tr.date(v-else-if='p.node.date_time && !p.node.extra_days') 
-                  td 
-                    //- .inside {{ formatDate(p.node.date_time) }}
-                    .inside {{ formatDateTime(p.node.date_time) }}
+                    .inside {{ formatDate(p.node.date_time) }}
+                    //- .inside {{ formatDateTime(p.node.date_time) }}
                 tr.date(v-else-if='p.node.date_time && p.node.extra_days') 
                   td 
                     .inside 
-                      | {{ formatDateTime(p.node.date_time) }}
+                      | {{ formatDate(p.node.date_time) }}
+                      //- | {{ formatDateTime(p.node.date_time) }}
                       div(v-for='extra in p.node.extra_days', v-if='"extra_day" in extra')
-                        //- | {{ formatDate(extra.extra_day) }}
-                        | {{ formatDateTime(extra.extra_day) }}
+                        | {{ formatDate(extra.extra_day) }}
+                        //- | {{ formatDateTime(extra.extra_day) }}
                         
             //- xmp {{ p.node }}
             //- xmp {{ p.node.date_time }}
@@ -210,7 +215,7 @@ layout
 </template>
 
 <script>
-import {format, isValid, parseISO} from 'date-fns'
+import {format, isValid, parseISO, parse} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
 // import {parse} from "date-fns"
 // import {parseISO} from 'date-fns'
@@ -664,6 +669,80 @@ export default {
       const date = parseISO(date_time)
       const unix = new Date(date).getTime()
       return unix
+    },
+    
+    convertToRanges(numbers) {
+      const ranges = [];
+      let start = numbers[0];
+      let end = numbers[0];
+      let startDate = null
+      let endDate = null
+
+      for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] === end + 1) {
+          end = numbers[i];
+        } else {
+          // ranges.push(start === end ? `${start}` : `${start}-${end}`);
+          startDate = this.convertNumberToDate(start)
+          endDate = this.convertNumberToDate(end)
+          ranges.push(start === end ? `${startDate}` : `${startDate}-${endDate}`);
+          start = numbers[i];
+          end = numbers[i];
+        }
+      }
+
+      // ranges.push(start === end ? `${start}` : `${start}-${end}`);
+      startDate = this.convertNumberToDate(start)
+      endDate = this.convertNumberToDate(end)
+      ranges.push(start === end ? `${startDate}` : `${startDate}-${endDate}`);
+
+      return ranges;
+    },
+    
+    convertNumberToDate (dayOfYear) {
+      const date = parse(dayOfYear, 'DDD', new Date());
+      let monthAndDay
+      if (this.lang == 'fr') {
+        monthAndDay = format(date, 'MMMM d', { locale: frLocale })
+      } else {
+        monthAndDay = format(date, 'MMMM d')
+      }
+      return monthAndDay
+    },
+    
+    allDates (node) {
+      let dates = []
+      if (node.date_time) {
+        let date = node.date_time
+        date = date.includes('T') ? date.split('T')[0] : date
+        if (date && ! dates.includes(date)) dates.push(date)
+      }
+      if (node.extra_days) {
+        node.extra_days.forEach(d => {
+          let date = d.extra_day
+          if (date) {
+            date = date.includes('T') ? date.split('T')[0] : date
+            if (date && ! dates.includes(date)) dates.push(date)
+          }
+        })
+      }
+      
+      // loop through the dates and replace continuous dates with ranges, possible several ranges
+      let datesAsInts = []
+      let ranges = []
+      
+      if (dates.length > 1) {
+        dates.forEach(d => {
+          let day = format(parseISO(d), 'DDD')
+          datesAsInts.push(parseInt(day))
+        })
+        ranges = this.convertToRanges(datesAsInts)
+      } else {
+        let day = format(parseISO(dates[0]), 'DDD')
+        ranges = this.convertToRanges([day])
+      }
+      
+      return ranges.length ? ranges : dates
     },
     
     formatDateTime (dateStr) {
@@ -1148,15 +1227,33 @@ xmp.debug {
   position: absolute;
 }
 
-
+.dts .d {
+  display: inline-block;
+  margin-right: 0.3rem;
+  font-size: 0.7rem;
+  line-height: 1em;
+  border: 1px black solid;
+  padding: 4px 6px 1px;
+  border-radius: 10px;
+  // ::after {
+  //   content: ',';
+  //   display: inline-block;
+  //   margin-right: 0.2rem;
+  // }
+  // &:last-child {
+  //   ::after {
+  //     content: '';
+  //   }
+  // }
+}
 </style>
 
 <style lang="scss">
 .program-overview-time {
   margin-top: 0.3rem;
-  padding-top: 0.3rem;
-  padding-bottom: 0.1rem;
-  border-top: 1px #00000020 solid;
+  // padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  // border-top: 1px #00000020 solid;
   font-size: 0.8rem;
   line-height: 1.5em;
   table, tr, td, p {
