@@ -162,7 +162,7 @@ layout
 
 <script>
 // import Newsletter from '~/components/Newsletter.vue'
-import {format, isValid, parseISO} from 'date-fns'
+import {format, isValid, parseISO, addHours} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
 // import { parse } from "date-fns"
 var slug = require('slug')
@@ -294,23 +294,39 @@ export default {
         return ''
       }
       
-      const [dateStr, timeStr] = date.split('T')
-      const offsetIdx = timeStr.indexOf('+')
-      const time = offsetIdx >= 0 ? timeStr.substring(0, offsetIdx) : timeStr
-      const datetime = `${dateStr} ${time}`
+      // const [dateStr, timeStr] = date.split('T')
+      // const offsetIdx = timeStr.indexOf('+')
+      // let time = offsetIdx >= 0 ? timeStr.substring(0, offsetIdx) : timeStr
+      // // change time to timezone +02:00 by adding two hours
+      // let [hours, minutes] = time.split(':')
+      // time = `${parseInt(hours) + 2}:${minutes}`
       
-      const d = parseISO(datetime)
+      // const datetime = `${dateStr} ${time}`
+      
+      // const d = parseISO(datetime)
+      let d = parseISO(date)
+      // add two hours to the date with date-fns
+      // console.log('date', date);
+      // let d = addHours(parseISO(date), 0)
+      // console.log('d', d);
+      // console.log(d)
       if (!isValid(d)) {
         // console.log('date error 2', date)
         return ''
       }
       
+      // const form = 'd MMMM HH:mm'
       const form = 'd MMMM'
       if (this.lang === 'fr') {
-        return format(d, form, { locale: frLocale })
+        const ret = format(d, form, { locale: frLocale })
+        console.log(ret);
+        return ret
       }
-      
-      return format(d, form)
+      else {
+        const ret = format(d, form)
+        console.log(ret);
+        return ret
+      }
     },
     
     tagLink (tag) {

@@ -680,6 +680,13 @@ export default {
       let end = numbers[0];
       let startDate = null
       let endDate = null
+      
+      // sort numbers
+      numbers = numbers.sort((a,b) => {
+        if (a < b) return -1
+        if (a > b) return 1
+        return 0
+      })
 
       for (let i = 1; i < numbers.length; i++) {
         if (numbers[i] === end + 1) {
@@ -717,16 +724,18 @@ export default {
       let dates = []
       if (node.date_time) {
         let date = node.date_time
-        date = date.includes('T') ? date.split('T')[0] : date
+        // let date = this.formatDate(node.date_time
+        // date = date.includes('T') ? date.split('T')[0] : date
         if (date && ! dates.includes(date)) dates.push(date)
+        // dates.push(this.formatDate(node.date_time))
       }
       if (node.extra_days) {
         node.extra_days.forEach(d => {
           let date = d.extra_day
-          if (date) {
-            date = date.includes('T') ? date.split('T')[0] : date
-            if (date && ! dates.includes(date)) dates.push(date)
-          }
+          // if (date) {
+            // date = date.includes('T') ? date.split('T')[0] : date
+          if (date && ! dates.includes(date)) dates.push(date)
+          // }
         })
       }
       
@@ -736,8 +745,8 @@ export default {
       
       if (dates.length > 1) {
         dates.forEach(d => {
-          let day = format(parseISO(d), 'DDD')
-          datesAsInts.push(parseInt(day))
+          let day = parseInt(format(parseISO(d), 'DDD'))
+          if (! datesAsInts.includes(day)) datesAsInts.push(parseInt(day))
         })
         ranges = this.convertToRanges(datesAsInts)
       } else {
@@ -745,7 +754,9 @@ export default {
         ranges = this.convertToRanges([day])
       }
       
-      return ranges.length ? ranges : dates
+      let ret = ranges.length ? ranges : dates
+      
+      return ret
     },
     
     formatDateTime (dateStr) {
@@ -771,12 +782,12 @@ export default {
         return ''
       }
       
-      const [dateStr, timeStr] = date.split('T')
-      const offsetIdx = timeStr.indexOf('+')
-      const time = offsetIdx >= 0 ? timeStr.substring(0, offsetIdx) : timeStr
-      const datetime = `${dateStr} ${time}`
+      // const [dateStr, timeStr] = date.split('T')
+      // const offsetIdx = timeStr.indexOf('+')
+      // const time = offsetIdx >= 0 ? timeStr.substring(0, offsetIdx) : timeStr
+      // const datetime = `${dateStr} ${time}`
       
-      const d = parseISO(datetime)
+      const d = parseISO(date)
       if (!isValid(d)) {
         // console.log('date error 2', date)
         return ''
@@ -1263,6 +1274,12 @@ xmp.debug {
   top: 1.5rem;
   left: 1.5rem;
 }
+@media (max-width: 737px) {
+  .n-events {
+    display: none;
+  }
+}
+
 </style>
 
 <style lang="scss">
