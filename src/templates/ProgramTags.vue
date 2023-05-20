@@ -163,41 +163,10 @@ layout
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
               
             .program-overview-time
-              //- xmp date_time
-              //- xmp {{ p.node.date_time }}
-              //- xmp formatted
-              
-              //- xmp {{ formatDateTime(p.node.date_time) }}
-              //- xmp extra_days
-              //- xmp {{ p.node.extra_days }}
-              //- xmp manual_date_time
-              //- xmp {{ p.node.manual_date_time }}
-              
-              //- xmp {{ allDates(p.node) }}
               .dts
                 span.d(v-for='(d,i) in allDates(p.node)')
                   span {{ d }}
-              //- table.meta(v-if='p.node.date_time || p.node.extra_days')
-                //- tr.date(v-if='p.node.manual_date_time') 
-                //-   td 
-                //-     .inside
-                //-       prismic-rich-text(:field='p.node.manual_date_time')
-                tr.date(v-if='p.node.date_time && !p.node.extra_days') 
-                  td 
-                    .inside {{ formatDate(p.node.date_time) }}
-                    //- .inside {{ formatDateTime(p.node.date_time) }}
-                tr.date(v-else-if='p.node.date_time && p.node.extra_days') 
-                  td 
-                    .inside 
-                      | {{ formatDate(p.node.date_time) }}
-                      //- | {{ formatDateTime(p.node.date_time) }}
-                      div(v-for='extra in p.node.extra_days', v-if='"extra_day" in extra')
-                        | {{ formatDate(extra.extra_day) }}
-                        //- | {{ formatDateTime(extra.extra_day) }}
-                        
-            //- xmp {{ p.node }}
-            //- xmp {{ p.node.date_time }}
-              
+                  
             //- .tags {{ p.node._meta.tags }}
             //- .tags.small
               div(v-if='p.node.location')

@@ -118,7 +118,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   Vue.prototype.$nav = (to) => {
     if (process.isClient) {
-      let top = window.pageYOffset
+      // let top = window.pageYOffset
+      let top = 500
       animatedScrollTo({
           duration: top,
           to: 0
