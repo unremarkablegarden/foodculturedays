@@ -32,9 +32,6 @@ layout
           g-link(to='/fr/info-et-billeterie') Info et Billeterie
     
   .columns.tags-page.scroll
-    .column.is-6.left.my-filters
-      .inner
-        a(href='/en/biennale') About the biennial
 
     //- .column.is-6.left.my-filters
       .inner
@@ -133,7 +130,7 @@ layout
         br
 
   
-    //- .column.is-6.right.posts-col
+    .column.is-6.right.posts-col
       .inner(v-if='!moving')
         .n-events(v-if='filteredProgram.length')
           span(v-if='lang == "en"') Showing {{ filteredProgram.length }} events
