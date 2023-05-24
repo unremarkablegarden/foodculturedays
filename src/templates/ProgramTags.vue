@@ -143,9 +143,9 @@ layout
             span.small (PDF)
             
         .links(v-if='program.length')
-          .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid')
-            h2 {{ p.node.project[0].text }}
           //- .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid')
+            h2 {{ p.node.project[0].text }}
+          .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid')
             .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
             h2
               em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
