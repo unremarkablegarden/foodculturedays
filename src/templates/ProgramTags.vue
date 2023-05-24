@@ -5,7 +5,7 @@ layout
   //- xmp.debug {{ program }}
   
   //- program overview page
-  .mobile
+  //- .mobile
     .filters
       .toggle(@click='toggleFilter("dates")', :class='{ "is-active": (mobileCurrentFilter == "dates") }') Dates
       .toggle(@click='toggleFilter("locations")', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length') {{ locationsTitle }}
@@ -32,8 +32,11 @@ layout
           g-link(to='/fr/info-et-billeterie') Info et Billeterie
     
   .columns.tags-page.scroll
-
     .column.is-6.left.my-filters
+      .inner
+        a(href='/en/biennale') About the biennial
+
+    //- .column.is-6.left.my-filters
       .inner
         //- .flex-wrapper
         
@@ -130,7 +133,7 @@ layout
         br
 
   
-    .column.is-6.right.posts-col
+    //- .column.is-6.right.posts-col
       .inner(v-if='!moving')
         .n-events(v-if='filteredProgram.length')
           span(v-if='lang == "en"') Showing {{ filteredProgram.length }} events
