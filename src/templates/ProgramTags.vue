@@ -150,7 +150,7 @@ layout
             h2
               em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
-            .program-overview-time
+            //- .program-overview-time
               .dts
                 span.d(v-for='(d,i) in allDates(p.node)')
                   span {{ d }}
