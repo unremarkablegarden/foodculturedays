@@ -150,7 +150,7 @@ layout
             h2
               em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
-            //- .program-overview-time
+            .program-overview-time
               .dts
                 span.d(v-for='(d,i) in allDates(p.node)')
                   span {{ d }}
@@ -667,18 +667,28 @@ export default {
       let dates = []
       if (node.date_time) {
         let date = node.date_time
-        // let date = this.formatDate(node.date_time
-        // date = date.includes('T') ? date.split('T')[0] : date
         if (date && ! dates.includes(date)) dates.push(date)
-        // dates.push(this.formatDate(node.date_time))
       }
       if (node.extra_days) {
         node.extra_days.forEach(d => {
           let date = d.extra_day
-          // if (date) {
-            // date = date.includes('T') ? date.split('T')[0] : date
           if (date && ! dates.includes(date)) dates.push(date)
-          // }
+        })
+      }
+      return dates
+    },
+    
+    allDates2 (node) {
+      let dates = []
+      
+      if (node.date_time) {
+        let date = node.date_time
+        if (date && ! dates.includes(date)) dates.push(date)
+      }
+      if (node.extra_days) {
+        node.extra_days.forEach(d => {
+          let date = d.extra_day
+          if (date && ! dates.includes(date)) dates.push(date)
         })
       }
       
@@ -725,11 +735,6 @@ export default {
         // console.log('date error 1', date)
         return ''
       }
-      
-      // const [dateStr, timeStr] = date.split('T')
-      // const offsetIdx = timeStr.indexOf('+')
-      // const time = offsetIdx >= 0 ? timeStr.substring(0, offsetIdx) : timeStr
-      // const datetime = `${dateStr} ${time}`
       
       const d = parseISO(date)
       if (!isValid(d)) {
