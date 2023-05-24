@@ -719,12 +719,13 @@ export default {
         })
         ranges = this.convertToRanges(datesAsInts)
       } else {
-        let day = format(parseISO(dates[0]), 'DDD')
-        ranges = this.convertToRanges([day])
+        if (dates[0]) {
+          let day = format(parseISO(dates[0]), 'DDD')
+          ranges = this.convertToRanges([day])
+        }
       }
       
       let ret = ranges.length ? ranges : dates
-      
       return ret
     },
     
