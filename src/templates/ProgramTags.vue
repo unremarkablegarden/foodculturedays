@@ -125,10 +125,11 @@ layout
 
   
     .column.is-6.right.posts-col
-      //- .inner(v-if='!moving')
+      .inner(v-if='!moving')
         .n-events(v-if='filteredProgram.length')
           span(v-if='lang == "en"') Showing {{ filteredProgram.length }} events
           span(v-else) Affichage de {{ filteredProgram.length }} événements
+        
         //- .icons-mobile
           //- .icon
             img(src='/doc.png')
@@ -142,44 +143,17 @@ layout
             span.small (PDF)
             
         .links(v-if='program.length')
-          //- .link.about(@click='$router.push("/en/biennale")', v-if="lang == 'en' && !anyFiltersAreSet")
-            .image(style='background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1600&w=1200&auto=compress,format=auto)')
-            h2
-              em About the Biennale
-              div foodculture days
-          //- .link.about(@click='$router.push("/fr/biennale")', v-else-if="lang == 'fr' && !anyFiltersAreSet")
-            .image(style='background-image: url(https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=max&h=1600&w=1200&auto=compress,format=auto)')
-            h2
-              em À propos de la Biennale
-              div foodculture days
-          
-            
           .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid')
-            
+            h2 {{ p.node.project[0].text }}
+          //- .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid')
             .image(v-if='p.node.image', :style='"background-image: url("+resizeImage(p.node.image.url)+")"')
-            
             h2
               em(v-if='p.node.project') {{ ucfirst(p.node.project[0].text) }}
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
-              
             .program-overview-time
               .dts
                 span.d(v-for='(d,i) in allDates(p.node)')
                   span {{ d }}
-                  
-            //- .tags {{ p.node._meta.tags }}
-            //- .tags.small
-              div(v-if='p.node.location')
-                .small {{ p.node.location.short_name }}
-              div
-                //- .small Activities
-                .tag(v-for='(cat) in p.node.categories', v-bind:class='toggledCat(cat.category.name)')
-                  .name {{ cat.category.name }}
-              div
-                //- .small Themes
-                .tag(v-for='(tag) in p.node._meta.tags', v-bind:class='toggledTag(tag)')
-                  .name {{ ucfirst(tag) }}
-
   
   .preload.is-hidden
     img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg')
