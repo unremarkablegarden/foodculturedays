@@ -25,9 +25,11 @@ layout
       .icon
         span(style="display: inline-block; padding-right: 3px; margin-left: 1rem;") &rarr;
         span(v-if="lang == 'en'") 
-          a(href='/en/ticketing-info') Ticketing info
+          //- a(href='/en/ticketing-info') Ticketing info
+          g-link(to='/en/ticketing-info') Ticketing info
         span(v-else)
-          a(href='/fr/info-et-billeterie') Info et Billeterie
+          //- a(href='/fr/info-et-billeterie') Info et Billeterie
+          g-link(to='/fr/info-et-billeterie') Info et Billeterie
     
   .columns.tags-page.scroll
 
@@ -47,16 +49,20 @@ layout
           .icon
             span(style="display: inline-block; padding-right: 3px;") &rarr;
             span(v-if="lang == 'en'") 
-              a(href='/en/biennale') About the Biennale
+              //- a(href='/en/biennale') About the Biennale
+              g-link(to='/en/biennale') About the Biennale
             span(v-else)
-              a(href='/fr/biennale') À propos de la Biennale
+              //- a(href='/fr/biennale') À propos de la Biennale
+              g-link(to='/fr/biennale') À propos de la Biennale
             
           .icon
             span(style="display: inline-block; padding-right: 3px;") &rarr;
             span(v-if="lang == 'en'") 
-              a(href='/en/ticketing-info') Ticketing info
+              //- a(href='/en/ticketing-info') Ticketing info
+              g-link(to='/en/ticketing-info') Ticketing info
             span(v-else)
-              a(href='/fr/info-et-billeterie') Info et Billeterie
+              //- a(href='/fr/info-et-billeterie') Info et Billeterie
+              g-link(to='/fr/info-et-billeterie') Info et Billeterie
 
         
         .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
