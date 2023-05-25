@@ -699,10 +699,10 @@ export default {
       dates = dates.map(d => parseInt(d))
       
       // remove dupes
-      dates = dates.filter((item, index) => dates.indexOf(item) === index)
+      // dates = dates.filter((item, index) => dates.indexOf(item) === index)
       
       // sort
-      dates = dates.sort()
+      // dates = dates.sort()
       
       // THIS BROKE THE CODE???
       // turn into ranges
