@@ -690,24 +690,23 @@ export default {
       // convert string to object
       dates = dates.map(d => new Date(d))
 
+      // THIS BROKE THE CODE???
       // parse them
       // dates = dates.map(d => parseISO(d))
       
-      
       // turn into numbers
       dates = dates.map(d => format(d, 'DDD'))
-      console.log(dates);
       // parse as ints
-      // dates = dates.map(d => parseInt(d))
+      dates = dates.map(d => parseInt(d))
+      
+      // remove dupes
+      dates = dates.filter((item, index) => dates.indexOf(item) === index)
       
       // sort
-      // dates = dates.sort()
-      // // remove dupes
-      // dates = dates.filter((item, index) => dates.indexOf(item) === index)
+      dates = dates.sort()
       
-      
-      // // turn into ranges
-      // dates = this.convertToRanges(dates)
+      // turn into ranges
+      dates = this.convertToRanges(dates)
       // // convert ranges to dates
       // dates = this.convertRangeToDates(dates)
       // debug
