@@ -690,7 +690,6 @@ export default {
       // convert string to object
       dates = dates.map(d => new Date(d))
 
-      // THIS BROKE THE CODE???
       // parse them
       // dates = dates.map(d => parseISO(d))
       
@@ -705,8 +704,9 @@ export default {
       // sort
       dates = dates.sort()
       
+      // THIS BROKE THE CODE???
       // turn into ranges
-      dates = this.convertToRanges(dates)
+      // dates = this.convertToRanges(dates)
       // // convert ranges to dates
       // dates = this.convertRangeToDates(dates)
       // debug
