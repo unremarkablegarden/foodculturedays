@@ -701,16 +701,16 @@ export default {
       // remove dupes
       // dates = dates.filter((item, index) => dates.indexOf(item) === index)
       // doesn't work so give me a vanilla version
-      let added = []
-      let filtered = []
-      dates.forEach(d => {
-        if (! added.includes(d) ) {
-          added.push(d)
-          filtered.push(d)
-        }
-      })
-      dates = filtered
-      console.log('dates', dates);
+      // let added = []
+      // let filtered = []
+      // dates.forEach(d => {
+      //   if (! added.includes(d) ) {
+      //     added.push(d)
+      //     filtered.push(d)
+      //   }
+      // })
+      // dates = filtered
+      // console.log('dates', dates);
       
       // sort
       // dates = dates.sort()
