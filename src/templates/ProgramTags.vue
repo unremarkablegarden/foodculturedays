@@ -686,14 +686,25 @@ export default {
       
       // filter out empty
       if (dates.length == 0) return []
+
+      // convert string to object
+      dates = dates.map(d => new Date(d))
+
       // parse them
-      dates = dates.map(d => parseISO(d))
-      // turn into numbers and sort
-      dates = dates.map(d => format(d, 'DDD')).sort()
+      // dates = dates.map(d => parseISO(d))
+      
+      
+      // turn into numbers
+      dates = dates.map(d => format(d, 'DDD'))
+      console.log(dates);
+      // parse as ints
+      // dates = dates.map(d => parseInt(d))
+      
+      // sort
+      // dates = dates.sort()
       // // remove dupes
-      dates = dates.filter((item, index) => dates.indexOf(item) === index)
-      // // parse as ints
-      dates = dates.map(d => parseInt(d))
+      // dates = dates.filter((item, index) => dates.indexOf(item) === index)
+      
       
       // // turn into ranges
       // dates = this.convertToRanges(dates)
