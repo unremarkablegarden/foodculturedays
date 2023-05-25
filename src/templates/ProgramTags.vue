@@ -691,9 +691,9 @@ export default {
       // turn into numbers and sort
       dates = dates.map(d => format(d, 'DDD')).sort()
       // // remove dupes
-      // dates = dates.filter((item, index) => dates.indexOf(item) === index)
+      dates = dates.filter((item, index) => dates.indexOf(item) === index)
       // // parse as ints
-      // dates = dates.map(d => parseInt(d))
+      dates = dates.map(d => parseInt(d))
       
       // // turn into ranges
       // dates = this.convertToRanges(dates)
