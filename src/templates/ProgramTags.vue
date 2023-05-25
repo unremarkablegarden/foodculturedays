@@ -717,7 +717,8 @@ export default {
       
       // THIS BROKE THE CODE???
       // turn into ranges
-      dates = this.convertToRanges(dates)
+      // dates = this.convertToRanges(dates)
+      
       // // convert ranges to dates
       // dates = this.convertRangeToDates(dates)
       // debug
