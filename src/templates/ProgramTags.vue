@@ -689,7 +689,7 @@ export default {
       // parse them
       dates = dates.map(d => parseISO(d))
       // turn into numbers and sort
-      // dates = dates.map(d => format(d, 'DDD')).sort()
+      dates = dates.map(d => format(d, 'DDD')).sort()
       // // remove dupes
       // dates = dates.filter((item, index) => dates.indexOf(item) === index)
       // // parse as ints
