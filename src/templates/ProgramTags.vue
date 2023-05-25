@@ -713,7 +713,7 @@ export default {
       // console.log('dates', dates);
       
       // sort
-      // dates = dates.sort()
+      dates = dates.sort()
       
       // THIS BROKE THE CODE???
       // turn into ranges
