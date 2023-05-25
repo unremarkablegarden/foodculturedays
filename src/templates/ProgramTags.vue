@@ -161,7 +161,7 @@ layout
 </template>
 
 <script>
-import {format, isValid, parseISO, parse} from 'date-fns'
+import {format, isValid, parseISO, parse, setDayOfYear} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
 // import {parse} from "date-fns"
 // import {parseISO} from 'date-fns'
@@ -617,53 +617,61 @@ export default {
       return unix
     },
     
-    convertToRanges(numbers) {
-      const ranges = [];
-      let start = numbers[0];
-      let end = numbers[0];
-      let startDate = null
-      let endDate = null
-      
-      // sort numbers
-      numbers = numbers.sort((a,b) => {
-        if (a < b) return -1
-        if (a > b) return 1
-        return 0
-      })
-
-      for (let i = 1; i < numbers.length; i++) {
-        if (numbers[i] === end + 1) {
-          end = numbers[i];
-        } else {
-          // ranges.push(start === end ? `${start}` : `${start}-${end}`);
-          startDate = this.convertNumberToDate(start)
-          endDate = this.convertNumberToDate(end)
-          ranges.push(start === end ? `${startDate}` : `${startDate}-${endDate}`);
-          start = numbers[i];
-          end = numbers[i];
-        }
-      }
-
-      // ranges.push(start === end ? `${start}` : `${start}-${end}`);
-      startDate = this.convertNumberToDate(start)
-      endDate = this.convertNumberToDate(end)
-      ranges.push(start === end ? `${startDate}` : `${startDate}-${endDate}`);
-
-      return ranges;
-    },
     
-    convertNumberToDate (dayOfYear) {
-      const date = parse(dayOfYear, 'DDD', new Date());
-      let monthAndDay
-      if (this.lang == 'fr') {
-        monthAndDay = format(date, 'd MMMM', { locale: frLocale })
-      } else {
-        monthAndDay = format(date, 'MMMM d')
-      }
-      return monthAndDay
-    },
+    
+    // convertToRanges2(numbers) {
+    //   const ranges = [];
+    //   let start = numbers[0];
+    //   let end = numbers[0];
+    //   let startDate = null
+    //   let endDate = null
+      
+    //   // sort numbers
+    //   numbers = numbers.sort((a,b) => {
+    //     if (a < b) return -1
+    //     if (a > b) return 1
+    //     return 0
+    //   })
+      
+    //   console.log('numbers', numbers);
+
+    //   for (let i = 1; i < numbers.length; i++) {
+    //     if (numbers[i] === end + 1) {
+    //       end = numbers[i];
+    //     } else {
+    //       // ranges.push(start === end ? `${start}` : `${start}-${end}`);
+    //       startDate = this.convertNumberToDate(start)
+    //       endDate = this.convertNumberToDate(end)
+    //       ranges.push(start === end ? `${startDate}` : `${startDate}-${endDate}`);
+    //       start = numbers[i];
+    //       end = numbers[i];
+    //     }
+    //   }
+
+    //   // ranges.push(start === end ? `${start}` : `${start}-${end}`);
+    //   startDate = this.convertNumberToDate(start)
+    //   endDate = this.convertNumberToDate(end)
+    //   ranges.push(start === end ? `${startDate}` : `${startDate}-${endDate}`);
+
+    //   return ranges;
+    // },
+    
+    
+    
+    // convertNumberToDate2 (dayOfYear) {
+    //   const date = parse(dayOfYear, 'DDD', new Date());
+    //   let monthAndDay
+    //   if (this.lang == 'fr') {
+    //     monthAndDay = format(date, 'd MMMM', { locale: frLocale })
+    //   } else {
+    //     monthAndDay = format(date, 'MMMM d')
+    //   }
+    //   return monthAndDay
+    //   // return dayOfYear
+    // },
     
     allDates (node) {
+      // add all the dates to an array
       let dates = []
       if (node.date_time) {
         let date = node.date_time
@@ -675,43 +683,119 @@ export default {
           if (date && ! dates.includes(date)) dates.push(date)
         })
       }
+      
+      // filter out empty
+      if (dates.length == 0) return []
+      // parse them
+      dates = dates.map(d => parseISO(d))
+      // turn into numbers and sort
+      dates = dates.map(d => format(d, 'DDD')).sort()
+      // remove dupes
+      dates = dates.filter((item, index) => dates.indexOf(item) === index)
+      // parse as ints
+      dates = dates.map(d => parseInt(d))
+      
+      // turn into ranges
+      dates = this.convertToRanges(dates)
+      // convert ranges to dates
+      dates = this.convertRangeToDates(dates)
+      // debug
+      // console.log('dates', dates)
+      
       return dates
     },
     
-    allDates2 (node) {
-      let dates = []
+    convertToRanges(numbers) {
+      // numbers is a sorted array of ints
+      // some have only one element
+      // if they are sequential, put them as a "range" string in ranges
+      // e.g. 143, 144, 145 becomes 143-145
+      // then the next number is not sequential, so it becomes a new range
+      // some have no ranges but several discontinious numbers
       
-      if (node.date_time) {
-        let date = node.date_time
-        if (date && ! dates.includes(date)) dates.push(date)
-      }
-      if (node.extra_days) {
-        node.extra_days.forEach(d => {
-          let date = d.extra_day
-          if (date && ! dates.includes(date)) dates.push(date)
-        })
-      }
-      
-      // loop through the dates and replace continuous dates with ranges, possible several ranges
-      let datesAsInts = []
-      let ranges = []
-      
-      if (dates.length > 1) {
-        dates.forEach(d => {
-          let day = parseInt(format(parseISO(d), 'DDD'))
-          if (! datesAsInts.includes(day)) datesAsInts.push(parseInt(day))
-        })
-        ranges = this.convertToRanges(datesAsInts)
-      } else {
-        if (dates[0]) {
-          let day = format(parseISO(dates[0]), 'DDD')
-          ranges = this.convertToRanges([day])
+      // GPT-4:
+      const ranges = [];
+      let startRange = numbers[0];
+      let endRange = numbers[0];
+
+      for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] === endRange + 1) {
+          endRange = numbers[i];
+        } else {
+          if (startRange === endRange) {
+            ranges.push(startRange.toString());
+          } else {
+            ranges.push(`${startRange}-${endRange}`);
+          }
+          startRange = endRange = numbers[i];
         }
       }
-      
-      let ret = ranges.length ? ranges : dates
-      return ret
+
+      if (startRange === endRange) {
+        ranges.push(startRange.toString());
+      } else {
+        ranges.push(`${startRange}-${endRange}`);
+      }
+
+      return ranges;      
     },
+    
+    convertRangeToDates (ranges) {
+      // GPT-4
+      const formatDate = (dayOfYear) => {
+        const date = setDayOfYear(new Date(), dayOfYear);
+        const formatTemplate = this.lang === 'fr' ? 'd MMMM' : 'MMMM d';
+        const locale = this.lang === 'fr' ? frLocale : undefined;
+
+        return format(date, formatTemplate, { locale });
+      };
+
+      const formatRange = (range) => {
+        const [start, end] = range.split('-');
+        return `${formatDate(start)}-${formatDate(end)}`;
+      };
+
+      return ranges.map((item) => {
+        return item.includes('-') ? formatRange(item) : formatDate(parseInt(item));
+      });
+    },
+    
+    
+    
+    // allDates2 (node) {
+    //   let dates = []
+      
+    //   if (node.date_time) {
+    //     let date = node.date_time
+    //     if (date && ! dates.includes(date)) dates.push(date)
+    //   }
+    //   if (node.extra_days) {
+    //     node.extra_days.forEach(d => {
+    //       let date = d.extra_day
+    //       if (date && ! dates.includes(date)) dates.push(date)
+    //     })
+    //   }
+      
+    //   // loop through the dates and replace continuous dates with ranges, possible several ranges
+    //   let datesAsInts = []
+    //   let ranges = []
+      
+    //   if (dates.length > 1) {
+    //     dates.forEach(d => {
+    //       let day = parseInt(format(parseISO(d), 'DDD'))
+    //       if (! datesAsInts.includes(day)) datesAsInts.push(parseInt(day))
+    //     })
+    //     ranges = this.convertToRanges(datesAsInts)
+    //   } else {
+    //     if (dates[0]) {
+    //       let day = format(parseISO(dates[0]), 'DDD')
+    //       ranges = this.convertToRanges([day])
+    //     }
+    //   }
+      
+    //   let ret = ranges.length ? ranges : dates
+    //   return ret
+    // },
     
     formatDateTime (dateStr) {
       // Parse the date string to a JavaScript Date object
