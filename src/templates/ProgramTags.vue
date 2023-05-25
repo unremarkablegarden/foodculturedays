@@ -163,7 +163,7 @@ layout
 
 <script>
 import Dates from '~/components/Dates.vue'
-import {format, isValid, parseISO, parse, setDayOfYear} from 'date-fns'
+import {format, isValid, parseISO } from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
 // import {parse} from "date-fns"
 // import {parseISO} from 'date-fns'
@@ -675,87 +675,87 @@ export default {
     //   // return dayOfYear
     // },
     
-    allDates (node) {
-      // add all the dates to an array
-      let dates = []
-      if (node.date_time) {
-        let date = node.date_time
-        if (date && ! dates.includes(date)) dates.push(date)
-      }
-      if (node.extra_days) {
-        node.extra_days.forEach(d => {
-          let date = d.extra_day
-          if (date && ! dates.includes(date)) dates.push(date)
-        })
-      }
+    // allDates (node) {
+    //   // add all the dates to an array
+    //   let dates = []
+    //   if (node.date_time) {
+    //     let date = node.date_time
+    //     if (date && ! dates.includes(date)) dates.push(date)
+    //   }
+    //   if (node.extra_days) {
+    //     node.extra_days.forEach(d => {
+    //       let date = d.extra_day
+    //       if (date && ! dates.includes(date)) dates.push(date)
+    //     })
+    //   }
       
-      // filter out empty
-      if (dates.length == 0) return []
+    //   // filter out empty
+    //   if (dates.length == 0) return []
 
-      // convert string to object
-      dates = dates.map(d => new Date(d))
+    //   // convert string to object
+    //   dates = dates.map(d => new Date(d))
 
-      // parse them
-      // dates = dates.map(d => parseISO(d))
+    //   // parse them
+    //   // dates = dates.map(d => parseISO(d))
       
-      // turn into numbers
-      dates = dates.map(d => format(d, 'DDD'))
-      // parse as ints
-      dates = dates.map(d => parseInt(d))
+    //   // turn into numbers
+    //   dates = dates.map(d => format(d, 'DDD'))
+    //   // parse as ints
+    //   dates = dates.map(d => parseInt(d))
       
-      // remove dupes
-      // dates = dates.filter((item, index) => dates.indexOf(item) === index)
-      // doesn't work so give me a vanilla version
-      // let added = []
-      // let filtered = []
-      // dates.forEach(d => {
-      //   if (! added.includes(d) ) {
-      //     added.push(d)
-      //     filtered.push(d)
-      //   }
-      // })
-      // dates = filtered
-      // console.log('dates', dates);
+    //   // remove dupes
+    //   // dates = dates.filter((item, index) => dates.indexOf(item) === index)
+    //   // doesn't work so give me a vanilla version
+    //   // let added = []
+    //   // let filtered = []
+    //   // dates.forEach(d => {
+    //   //   if (! added.includes(d) ) {
+    //   //     added.push(d)
+    //   //     filtered.push(d)
+    //   //   }
+    //   // })
+    //   // dates = filtered
+    //   // console.log('dates', dates);
       
-      // sort
-      dates = dates.sort()
+    //   // sort
+    //   dates = dates.sort()
       
-      // THIS BROKE THE CODE???
-      // turn into ranges
-      // dates = this.convertToRanges(dates)
+    //   // THIS BROKE THE CODE???
+    //   // turn into ranges
+    //   // dates = this.convertToRanges(dates)
       
-      // // convert ranges to dates
-      // dates = this.convertRangeToDates(dates)
-      // debug
-      // console.log('dates', dates)
+    //   // // convert ranges to dates
+    //   // dates = this.convertRangeToDates(dates)
+    //   // debug
+    //   // console.log('dates', dates)
       
-      return dates
-    },
+    //   return dates
+    // },
     
-    convertToRanges(numbers) {
-      if (!Array.isArray(numbers) || numbers.length === 0) {
-        return [];
-      }
+    // convertToRanges(numbers) {
+    //   if (!Array.isArray(numbers) || numbers.length === 0) {
+    //     return [];
+    //   }
 
-      const ranges = [];
-      let startRange = numbers[0];
-      let endRange = numbers[0];
+    //   const ranges = [];
+    //   let startRange = numbers[0];
+    //   let endRange = numbers[0];
 
-      numbers.forEach((num, i) => {
-        if (i === 0) return; // Skip the first element since we've already set startRange and endRange.
+    //   numbers.forEach((num, i) => {
+    //     if (i === 0) return; // Skip the first element since we've already set startRange and endRange.
 
-        if (num === endRange + 1) {
-          endRange = num;
-        } else {
-          ranges.push(startRange === endRange ? startRange.toString() : `${startRange}-${endRange}`);
-          startRange = endRange = num;
-        }
-      });
+    //     if (num === endRange + 1) {
+    //       endRange = num;
+    //     } else {
+    //       ranges.push(startRange === endRange ? startRange.toString() : `${startRange}-${endRange}`);
+    //       startRange = endRange = num;
+    //     }
+    //   });
 
-      ranges.push(startRange === endRange ? startRange.toString() : `${startRange}-${endRange}`);
+    //   ranges.push(startRange === endRange ? startRange.toString() : `${startRange}-${endRange}`);
 
-      return ranges;
-    },
+    //   return ranges;
+    // },
     
     // convertToRanges(numbers) {
     //   // numbers is a sorted array of ints
@@ -792,25 +792,25 @@ export default {
     //   return ranges;      
     // },
     
-    convertRangeToDates (ranges) {
-      // GPT-4
-      const formatDate = (dayOfYear) => {
-        const date = setDayOfYear(new Date(), dayOfYear);
-        const formatTemplate = this.lang === 'fr' ? 'd MMMM' : 'MMMM d';
-        const locale = this.lang === 'fr' ? frLocale : undefined;
+    // convertRangeToDates (ranges) {
+    //   // GPT-4
+    //   const formatDate = (dayOfYear) => {
+    //     const date = setDayOfYear(new Date(), dayOfYear);
+    //     const formatTemplate = this.lang === 'fr' ? 'd MMMM' : 'MMMM d';
+    //     const locale = this.lang === 'fr' ? frLocale : undefined;
 
-        return format(date, formatTemplate, { locale });
-      };
+    //     return format(date, formatTemplate, { locale });
+    //   };
 
-      const formatRange = (range) => {
-        const [start, end] = range.split('-');
-        return `${formatDate(start)}-${formatDate(end)}`;
-      };
+    //   const formatRange = (range) => {
+    //     const [start, end] = range.split('-');
+    //     return `${formatDate(start)}-${formatDate(end)}`;
+    //   };
 
-      return ranges.map((item) => {
-        return item.includes('-') ? formatRange(item) : formatDate(parseInt(item));
-      });
-    },
+    //   return ranges.map((item) => {
+    //     return item.includes('-') ? formatRange(item) : formatDate(parseInt(item));
+    //   });
+    // },
     
     
     

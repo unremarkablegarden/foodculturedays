@@ -1,7 +1,7 @@
 <template lang="pug">
 .dates-tags
   span.d(v-for='(d,i) in allDates(node)')
-    span {{ d }}
+    span {{ d.replace('-', '–') }}
 </template>
 
 <script>
@@ -66,7 +66,7 @@ export default {
       dates = this.convertToRanges(dates)
       
       // // convert ranges to dates
-      // dates = this.convertRangeToDates(dates)
+      dates = this.convertRangeToDates(dates)
       // debug
       // console.log('dates', dates)
       
@@ -96,6 +96,26 @@ export default {
       ranges.push(startRange === endRange ? startRange.toString() : `${startRange}-${endRange}`);
 
       return ranges;
+    },
+    
+    convertRangeToDates (ranges) {
+      // GPT-4
+      const formatDate = (dayOfYear) => {
+        const date = setDayOfYear(new Date(), dayOfYear);
+        const formatTemplate = this.lang === 'fr' ? 'd MMMM' : 'MMMM d';
+        const locale = this.lang === 'fr' ? frLocale : undefined;
+
+        return format(date, formatTemplate, { locale });
+      };
+
+      const formatRange = (range) => {
+        const [start, end] = range.split('-');
+        return `${formatDate(start)}-${formatDate(end)}`;
+      };
+
+      return ranges.map((item) => {
+        return item.includes('-') ? formatRange(item) : formatDate(parseInt(item));
+      });
     },
   }
 }
