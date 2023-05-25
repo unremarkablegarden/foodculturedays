@@ -152,8 +152,9 @@ layout
               div(v-if='p.node.artist') {{ ucfirst(p.node.artist[0].text) }}
             .program-overview-time
               .dts
-                span.d(v-for='(d,i) in allDates(p.node)')
-                  span {{ d }}
+                Dates(:node='p.node', :lang='lang')
+                //- span.d(v-for='(d,i) in allDates(p.node)')
+                //-   span {{ d }}
   
   .preload.is-hidden
     img(src='https://prismic-io.s3.amazonaws.com/foodculturedays2020/f5ad4715-275e-4423-a617-7036a66d82c1_Asset+4.svg')
@@ -161,12 +162,16 @@ layout
 </template>
 
 <script>
+import Dates from '~/components/Dates.vue'
 import {format, isValid, parseISO, parse, setDayOfYear} from 'date-fns'
 import frLocale from 'date-fns/locale/fr-CH'
 // import {parse} from "date-fns"
 // import {parseISO} from 'date-fns'
 
 export default {
+  components: {
+    Dates
+  },
   metaInfo() {
     const img = 'https://images.prismic.io/foodculturedays2020/dbd163b0-c536-4394-ac85-003f4dd36652_background.jpg?fit=crop&h=675&w=1200&auto=compress,format=auto'
     return {
@@ -717,7 +722,7 @@ export default {
       
       // THIS BROKE THE CODE???
       // turn into ranges
-      dates = this.convertToRanges(dates)
+      // dates = this.convertToRanges(dates)
       
       // // convert ranges to dates
       // dates = this.convertRangeToDates(dates)
