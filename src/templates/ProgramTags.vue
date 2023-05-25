@@ -717,7 +717,7 @@ export default {
       
       // THIS BROKE THE CODE???
       // turn into ranges
-      // dates = this.convertToRanges(dates)
+      dates = this.convertToRanges(dates)
       
       // // convert ranges to dates
       // dates = this.convertRangeToDates(dates)
@@ -728,39 +728,64 @@ export default {
     },
     
     convertToRanges(numbers) {
-      // numbers is a sorted array of ints
-      // some have only one element
-      // if they are sequential, put them as a "range" string in ranges
-      // e.g. 143, 144, 145 becomes 143-145
-      // then the next number is not sequential, so it becomes a new range
-      // some have no ranges but several discontinious numbers
-      
-      // GPT-4:
+      if (!Array.isArray(numbers) || numbers.length === 0) {
+        return [];
+      }
+
       const ranges = [];
       let startRange = numbers[0];
       let endRange = numbers[0];
 
-      for (let i = 1; i < numbers.length; i++) {
-        if (numbers[i] === endRange + 1) {
-          endRange = numbers[i];
+      numbers.forEach((num, i) => {
+        if (i === 0) return; // Skip the first element since we've already set startRange and endRange.
+
+        if (num === endRange + 1) {
+          endRange = num;
         } else {
-          if (startRange === endRange) {
-            ranges.push(startRange.toString());
-          } else {
-            ranges.push(`${startRange}-${endRange}`);
-          }
-          startRange = endRange = numbers[i];
+          ranges.push(startRange === endRange ? startRange.toString() : `${startRange}-${endRange}`);
+          startRange = endRange = num;
         }
-      }
+      });
 
-      if (startRange === endRange) {
-        ranges.push(startRange.toString());
-      } else {
-        ranges.push(`${startRange}-${endRange}`);
-      }
+      ranges.push(startRange === endRange ? startRange.toString() : `${startRange}-${endRange}`);
 
-      return ranges;      
+      return ranges;
     },
+    
+    // convertToRanges(numbers) {
+    //   // numbers is a sorted array of ints
+    //   // some have only one element
+    //   // if they are sequential, put them as a "range" string in ranges
+    //   // e.g. 143, 144, 145 becomes 143-145
+    //   // then the next number is not sequential, so it becomes a new range
+    //   // some have no ranges but several discontinious numbers
+      
+    //   // GPT-4:
+    //   const ranges = [];
+    //   let startRange = numbers[0];
+    //   let endRange = numbers[0];
+
+    //   for (let i = 1; i < numbers.length; i++) {
+    //     if (numbers[i] === endRange + 1) {
+    //       endRange = numbers[i];
+    //     } else {
+    //       if (startRange === endRange) {
+    //         ranges.push(startRange.toString());
+    //       } else {
+    //         ranges.push(`${startRange}-${endRange}`);
+    //       }
+    //       startRange = endRange = numbers[i];
+    //     }
+    //   }
+
+    //   if (startRange === endRange) {
+    //     ranges.push(startRange.toString());
+    //   } else {
+    //     ranges.push(`${startRange}-${endRange}`);
+    //   }
+
+    //   return ranges;      
+    // },
     
     convertRangeToDates (ranges) {
       // GPT-4
