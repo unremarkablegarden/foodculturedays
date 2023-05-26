@@ -15,27 +15,27 @@ layout
       .togglex(@click='clearFilters') 
         span(v-if='anyFiltersAreSet') ×
         span(v-else).white X
-    .about(style='display: flex')
+    .about
       .icon
-        span(style="display: inline-block; padding-right: 3px;") &rarr;
+        .arrow &rarr;
         span(v-if="lang == 'en'") 
           a(href='/en/biennale') About the biennial
         span(v-else)
           a(href='/fr/biennale') À propos de la Biennale
       .icon
-        span(style="display: inline-block; padding-right: 3px; margin-left: 1rem;") &rarr;
+        .arrow &rarr;
         span(v-if="lang == 'en'") 
           a(href='/en/ticketing-info') Ticketing info
         span(v-else)
           a(href='/fr/info-et-billeterie') Info et Billeterie
       .icon
-        span(style="display: inline-block; padding-right: 3px; margin-left: 1rem;") &rarr;
+        .arrow &rarr;
         span(v-if="lang == 'en'") 
           a(href='https://foodculturedays2020.cdn.prismic.io/foodculturedays2020/5ac4b9ee-757a-4192-90dc-73774367653e_2023_fcd_catalog_digital.pdf' target="_blank") Download the program
         span(v-else)
           a(href='https://foodculturedays2020.cdn.prismic.io/foodculturedays2020/5ac4b9ee-757a-4192-90dc-73774367653e_2023_fcd_catalog_digital.pdf' target="_blank") Téléchargez le programme
       .icon
-        span(style="display: inline-block; padding-right: 3px; margin-left: 1rem;") &rarr;
+        .arrow &rarr;
         span(v-if="lang == 'en'") 
           a(href='https://foodculturedays2020.cdn.prismic.io/foodculturedays2020/fc03ddf6-4d71-4601-af05-ef841fb9db8d_2023_program_digital.pdf' target="_blank") Download the schedule
         span(v-else)
@@ -1079,7 +1079,20 @@ $green: rgb(17,230,54);
   .mobile {
     .about {
       margin-bottom: 1.5rem;
-      // text-align: right;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      a {
+        font-size: 0.9rem;
+      }
+      .arrow {
+        display: inline-block;  
+        padding-right: 4px;
+      }
+      .icon {
+        // box-shadow: 0 0 0 1px black;
+        width: 50%;
+      }
     }
   }
   .filters {
