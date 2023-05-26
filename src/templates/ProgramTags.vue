@@ -40,6 +40,12 @@ layout
           a(href='https://foodculturedays2020.cdn.prismic.io/foodculturedays2020/fc03ddf6-4d71-4601-af05-ef841fb9db8d_2023_program_digital.pdf' target="_blank") Download the schedule
         span(v-else)
           a(href='https://foodculturedays2020.cdn.prismic.io/foodculturedays2020/fc03ddf6-4d71-4601-af05-ef841fb9db8d_2023_program_digital.pdf' target="_blank") Téléchargez l'horaire
+      .icon
+        .arrow &rarr;
+        span(v-if="lang == 'en'") 
+          a(href='/en/menu-of-the-day-2023') Menu of the day
+        span(v-else)
+          a(href='/fr/menu-du-jour-2023/') Menu du jour
     
   .columns.tags-page.scroll
 
@@ -83,6 +89,13 @@ layout
               a(href='https://foodculturedays2020.cdn.prismic.io/foodculturedays2020/fc03ddf6-4d71-4601-af05-ef841fb9db8d_2023_program_digital.pdf' target="_blank") Download the schedule
             span(v-else)
               a(href='https://foodculturedays2020.cdn.prismic.io/foodculturedays2020/fc03ddf6-4d71-4601-af05-ef841fb9db8d_2023_program_digital.pdf' target="_blank") Téléchargez l'horaire
+              
+          .icon
+            span(style="display: inline-block; padding-right: 3px;") &rarr;
+            span(v-if="lang == 'en'") 
+              a(href='/en/menu-of-the-day-2023') Menu of the day
+            span(v-else)
+              a(href='/fr/menu-du-jour-2023/') Menu du jour
 
         
         .flex.filter-section(data-filter='locations', :class='{ "is-active": (mobileCurrentFilter == "locations") }', v-if='locations.length')
