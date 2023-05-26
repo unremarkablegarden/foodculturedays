@@ -1114,6 +1114,7 @@ $green: rgb(17,230,54);
       // font-style: italic;
       padding: 0.3rem 0.3rem 0rem 0.2rem;
       border: 1px black solid;
+      border-radius: 5px;
       font-size: 0.8rem;
       line-height: 1em;
       // text-transform: lowercase;
@@ -1201,6 +1202,7 @@ $green: rgb(17,230,54);
     display: inline-block;
     margin: 0 0.5rem 0.5rem 0;
     padding: 0.3rem 0.2rem 0.1rem;
+    border-radius: 5px;
     // transition: all 200ms;
     /* @media (min-width: 960px) { */
     @media (min-width: 737px) {

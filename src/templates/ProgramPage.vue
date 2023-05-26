@@ -484,6 +484,7 @@ p em {
     display: inline-block;
     margin: 0 0.5rem 0.5rem 0;
     padding: 0.3rem 0.2rem 0.1rem;
+    border-radius: 5px;
     // transition: all 200ms;
     &:hover {
       background: #000;
@@ -787,6 +788,7 @@ p em {
   line-height: 1.2em;
   margin: 0 0 1.8rem;
   border: 1px black solid;
+  border-radius: 5px;
   // padding: 0.35rem 0.5rem 0.4rem;
   padding: 0.35rem 0.5rem 0.2rem;
   width: 100%;
