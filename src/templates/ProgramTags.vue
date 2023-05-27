@@ -1037,6 +1037,9 @@ $green: rgb(17,230,54);
   }
 }
 .icon {
+
+  white-space: nowrap;
+  
   img {
     height: 1rem;
     width: auto;
