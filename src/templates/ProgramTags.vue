@@ -1099,11 +1099,13 @@ $green: rgb(17,230,54);
       justify-content: space-between;
       flex-wrap: wrap;
       a {
-        font-size: 0.9rem;
+        // font-size: 0.9rem;
+        font-size: 0.8rem;
       }
       .arrow {
         display: inline-block;  
-        padding-right: 4px;
+        // padding-right: 4px;
+        padding-right: 3px;
       }
       .icon {
         // box-shadow: 0 0 0 1px black;
