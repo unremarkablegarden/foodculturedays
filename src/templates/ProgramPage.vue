@@ -4,7 +4,14 @@ layout
   .columns.program-page
     .column.is-6.no-pad.gallery-column
       //- xmp {{ gallery }}
-      .gallery(v-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
+      .gallery.video(v-if='video.code && video.enabled || video.code && isPreview')
+        .item
+          .embed-container
+            //- pre {{ video.code }}
+            .embed-container
+              .html(v-html='video.code')
+              
+      .gallery(v-else-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
         .items
           .item(
             v-for='(item, i) in page.gallery', 
@@ -26,7 +33,7 @@ layout
             .left(@click='galleryNav("-1")')
             .right(@click='galleryNav("+1")')
       
-      .gallery(v-if='page.image && !page.gallery.length')
+      .gallery(v-else-if='page.image && !page.gallery.length')
         
         .item(:style="'background-image: url('+constrainImageUrl(page.image.url)+')'", v-if='page.image').is-desktop
         
@@ -367,6 +374,22 @@ export default {
     }
   },
   computed: {
+    video () {
+      return {
+        code: this.page.video_embed_code,
+        enabled: this.page.embed_enabled ? true : false
+      }
+    },
+    isPreview () {
+      // xmp {{ page.video_embed_code }}
+      // xmp {{ page.embed_enabled }}
+      // xmp {{ $route.query }}
+      // const q = 
+      // if q has the property preview even if its not set
+      if (this.$route.query.hasOwnProperty('preview')) {
+        return true
+      }
+    },
     browserTitle () {
       let p = this.page.project
       let a = this.page.artist
@@ -815,5 +838,28 @@ p em {
   width: 100%;
 }
 
+
+</style>
+
+<style>
+
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  /* max-width: 100%; */
+  width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 </style>

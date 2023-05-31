@@ -635,6 +635,8 @@ module.exports = function (api, options) {
                   }
                 }
                 image
+                video_embed_code
+                embed_enabled
                 gallery {
                   gallery_image
                 }
