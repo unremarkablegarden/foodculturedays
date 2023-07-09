@@ -8,8 +8,8 @@ layout
         .item
           .embed-container
             //- pre {{ video.code }}
-            .embed-container
-              .html(v-html='video.code')
+            //- .embed-container
+            .html(v-html='video.code')
               
       .gallery(v-else-if='page.gallery.length && page.gallery[0].gallery_image !== null').slider
         .items
