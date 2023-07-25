@@ -11,7 +11,7 @@ export default
     // PROGRAM
     { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
     
-    { title: ['Volunteers', 'Bénévoles'], to: ['/en/volunteers', '/fr/benevoles'] },
+    // { title: ['Volunteers', 'Bénévoles'], to: ['/en/volunteers', '/fr/benevoles'] },
     
     
     // OPEN CALL
