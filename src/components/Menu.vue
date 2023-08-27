@@ -395,7 +395,7 @@ $headingSizeMobile: 1.9rem;
  transform: translateX(-100%); 
  }
 }
-.menu-item.biennale a,
+// .menu-item.biennale a,
 .menu-item.program a,
 .menu-item.programme a,
 .menu-item.benevoles a,

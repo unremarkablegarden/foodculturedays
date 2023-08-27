@@ -5,7 +5,7 @@ export default
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
     // BIENALE
-    { title: ['Art Biennial', "Biennale D'Art"], to: ['/en/biennale', '/fr/biennale'] },
+    { title: ['Biennale', "Biennale"], to: ['/en/biennale', '/fr/biennale'] },
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.fromtheforestsashes.com/'], blank: true },
     
     // PROGRAM
