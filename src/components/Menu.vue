@@ -396,11 +396,12 @@ $headingSizeMobile: 1.9rem;
  }
 }
 // .menu-item.biennale a,
-.menu-item.program a,
+/* .menu-item.program a,
 .menu-item.programme a,
 .menu-item.benevoles a,
 .menu-item.volunteers a
  {
   color: $green;
-}
+} 
+*/
 </style>
