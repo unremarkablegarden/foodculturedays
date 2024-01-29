@@ -104,7 +104,14 @@ export default {
       this.$router.go(-1)
     },
     constrainImageUrl (url) {
-      let newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      // if url contains auto=format,compress
+      let newUrl
+      if (url.indexOf('auto=format,compress') == -1) {
+        newUrl = url.replace('?auto=format,compress', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      }
+      else {
+        newUrl = url.replace('?auto=compress,format', '?fit=max&h=1600&w=1200&auto=compress,format=auto')
+      }
       console.log(newUrl)
       return newUrl
     },
