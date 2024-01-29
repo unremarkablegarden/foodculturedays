@@ -5,11 +5,11 @@ export default
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
     // BIENALE
-    { title: ['Biennale', "Biennale"], to: ['/en/biennale', '/fr/biennale'] },
+    // { title: ['Biennale', "Biennale"], to: ['/en/biennale', '/fr/biennale'] },
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.fromtheforestsashes.com/'], blank: true },
     
     // PROGRAM
-    { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
+    // { title: ['Program', 'Programme'], to: ['/en/program', '/fr/programme'] },
     
     // { title: ['Volunteers', 'Bénévoles'], to: ['/en/volunteers', '/fr/benevoles'] },
     
