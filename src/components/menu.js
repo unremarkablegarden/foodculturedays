@@ -24,7 +24,7 @@ export default
     { title: ['Perennial actions on the territory', 'Actions pérennes sur le territoire'], to: ['/en/perennial-projects-on-the-territory', '/fr/projets-perennes-sur-le-territoire'] },
     
     // EVENTS 2022
-    // { title: ['Events 2022', 'Évènements 2022'], to: ['/en/events-2022', '/fr/evenements-2022'] },
+    { title: ['Events', 'Évènements'], to: ['/en/events', '/fr/evenements'] },
     
     // FIELD RESEARCH
     { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
