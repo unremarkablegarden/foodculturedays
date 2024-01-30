@@ -87,7 +87,8 @@ export default {
       //   "spans": []
       // },
       var data = this.$context.node
-      if (data) {
+      // console.log('xxx', data)
+      if (Array.isArray(data)) {
         data.body.forEach(el => {
           if (el && el.type == 'paragraph') {
             if (el.text == '*\n*\n*') {
