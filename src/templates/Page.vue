@@ -87,14 +87,16 @@ export default {
       //   "spans": []
       // },
       var data = this.$context.node
-      data.body.forEach(el => {
-        if (el && el.type == 'paragraph') {
-          if (el.text == '*\n*\n*') {
-            el.text = '*'
-            el.type = 'heading2'
+      if (data) {
+        data.body.forEach(el => {
+          if (el && el.type == 'paragraph') {
+            if (el.text == '*\n*\n*') {
+              el.text = '*'
+              el.type = 'heading2'
+            }
           }
-        }
-      })
+        })  
+      }
       return data
     }
   },
