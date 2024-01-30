@@ -4,6 +4,10 @@ export default
     // ABOUT
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
+    // EVENTS 
+    { title: ['Events', 'Évènements'], to: ['/en/events', '/fr/evenements'] },
+    
+    
     // BIENALE
     // { title: ['Biennale', "Biennale"], to: ['/en/biennale', '/fr/biennale'] },
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.fromtheforestsashes.com/'], blank: true },
@@ -23,8 +27,6 @@ export default
     // Perennial actions
     { title: ['Perennial actions on the territory', 'Actions pérennes sur le territoire'], to: ['/en/perennial-projects-on-the-territory', '/fr/projets-perennes-sur-le-territoire'] },
     
-    // EVENTS 2022
-    { title: ['Events', 'Évènements'], to: ['/en/events', '/fr/evenements'] },
     
     // FIELD RESEARCH
     { title: ['Field research', 'Recherche sur le terrain'], to: ['/en/field-research', '/fr/recherche-sur-le-terrain'] },
