@@ -20,6 +20,21 @@
         client-only
           .column.is-6.left
             h1.title {{ title }}
+            
+            //- 2023 pdf
+            .year
+              h2.serif 
+                span 2023
+              .pages-wrapper.page
+                  .archive-item
+                    a(href='https://prismic-io.s3.amazonaws.com/foodculturedays2020/a80190aa-f2e5-404d-8e09-f5f3aac82945_2023_fcd_catalog_digital.pdf', target='_blank', style='color: black; display: block;')
+                      h2(v-if='lang === "en"')
+                        em Art Biennale 2023
+                        div Devouring the Soil’s Words
+                      h2(v-else)
+                        em Biennale d'art 2023
+                        div Dévorer les paroles de la terre
+            
             .year(v-for='(year, index) in years', :key='index')
               h2.serif 
                 span {{ year.year }}
@@ -40,48 +55,6 @@
                       em(v-if='page.node.project') {{ tc(page.node.project[0].text) }}
                       div(v-if='page.node.artist') {{ tc(page.node.artist[0].text) }}
 </template>
-
-<style lang="scss" scoped>
-
-h1 {
-  // margin-top: 0.3rem;
-  margin-bottom: 1rem;
-}
-h2 {
-  font-size: 0.98rem;
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-  text-transform: uppercase;
-}
-em {
-  // font-size: 1.05rem;
-  font-size: 1.07rem;
-}
-.pages-wrapper {
-  border-top: 1px black solid;
-  // margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-// replaces pages-wrapper (not year titles)
-// h1.title {
-//   border-bottom: 1px black solid;
-//   margin-bottom: 0;
-//   padding-bottom: 1rem;
-// }
-
-.column.is-6.left {
-  padding-bottom: 5rem;
-}
-.page {
-  padding: 0.5rem 0 0.2rem;
-  border-bottom: 1px black solid;
-}
-.link {
-  color: black;
-}
-</style>
 
 <script>
 // var titleCaseFrench = require('titlecase-french')
@@ -199,3 +172,47 @@ export default {
   }
 }
 </script>
+
+
+
+<style lang="scss" scoped>
+
+h1 {
+  // margin-top: 0.3rem;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 0.98rem;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+em {
+  // font-size: 1.05rem;
+  font-size: 1.07rem;
+}
+.pages-wrapper {
+  border-top: 1px black solid;
+  // margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+// replaces pages-wrapper (not year titles)
+// h1.title {
+//   border-bottom: 1px black solid;
+//   margin-bottom: 0;
+//   padding-bottom: 1rem;
+// }
+
+.column.is-6.left {
+  padding-bottom: 5rem;
+}
+.page {
+  padding: 0.5rem 0 0.2rem;
+  border-bottom: 1px black solid;
+}
+.link {
+  color: black;
+}
+</style>
