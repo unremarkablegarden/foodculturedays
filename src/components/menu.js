@@ -9,7 +9,7 @@ export default
     
     
     // BIENALE
-    // { title: ['Biennale', "Biennale"], to: ['/en/biennale', '/fr/biennale'] },
+    { title: ['Biennale', "Biennale"], to: ['/en/biennale', '/fr/biennale'] },
     // { title: ['Biennale', 'Biennale'], to: ['https://www.fromtheforestsashes.com/', 'https://www.fromtheforestsashes.com/'], blank: true },
     
     // PROGRAM
