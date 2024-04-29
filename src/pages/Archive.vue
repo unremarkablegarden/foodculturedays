@@ -22,18 +22,18 @@
             h1.title {{ title }}
             
             //- 2023 pdf
-            .year
-              h2.serif 
-                span 2023
-              .pages-wrapper.page
-                  .archive-item
-                    a(href='https://prismic-io.s3.amazonaws.com/foodculturedays2020/a80190aa-f2e5-404d-8e09-f5f3aac82945_2023_fcd_catalog_digital.pdf', target='_blank', style='color: black; display: block;')
-                      h2(v-if='lang === "en"')
-                        em Art Biennale 2023
-                        div Devouring the Soil’s Words
-                      h2(v-else)
-                        em Biennale d'art 2023
-                        div Dévorer les paroles de la terre
+            //- .year
+            //-   h2.serif 
+            //-     span 2023
+            //-   .pages-wrapper.page
+            //-       .archive-item
+            //-         a(href='https://prismic-io.s3.amazonaws.com/foodculturedays2020/a80190aa-f2e5-404d-8e09-f5f3aac82945_2023_fcd_catalog_digital.pdf', target='_blank', style='color: black; display: block;')
+            //-           h2(v-if='lang === "en"')
+            //-             em Art Biennale 2023
+            //-             div Devouring the Soil’s Words
+            //-           h2(v-else)
+            //-             em Biennale d'art 2023
+            //-             div Dévorer les paroles de la terre
             
             .year(v-for='(year, index) in years', :key='index')
               h2.serif 
@@ -46,14 +46,26 @@
               .pages-wrapper
                 .archive-item(v-for='(page, index) in year.pages', :key='index')
                   //- g-link(:to='page.node.context.path', v-for='(page, index) in year.pages', :key='index').link
-                  .page.link(@click='archiveRoute(page.node.context.path)')
-                    h2
-                      
-                      div(v-if='!page.node.artist && !page.node.project') 
-                        strong ERROR with this page. Fix in Prismic:
-                        xmp(style='text-transform: none;') {{ page.node }}
-                      em(v-if='page.node.project') {{ tc(page.node.project[0].text) }}
-                      div(v-if='page.node.artist') {{ tc(page.node.artist[0].text) }}
+                  template(v-if='page && page.node && page.node.context.path')
+                    .page.link(@click='archiveRoute(page.node.context.path)')
+                      h2
+                        
+                        div(v-if='!page.node.artist && !page.node.project') 
+                          strong ERROR with this page. Fix in Prismic:
+                          xmp(style='text-transform: none;') {{ page.node }}
+                        em(v-if='page.node.project') {{ tc(page.node.project[0].text) }}
+                        div(v-if='page.node.artist') {{ tc(page.node.artist[0].text) }}
+                  
+                  template(v-else-if='page.biennale == true')
+                    //- .archive-item
+                    a.page.link(href='https://prismic-io.s3.amazonaws.com/foodculturedays2020/a80190aa-f2e5-404d-8e09-f5f3aac82945_2023_fcd_catalog_digital.pdf', target='_blank', style='color: black; display: block;')
+                        h2(v-if='lang === "en"')
+                          em Art Biennale 2023
+                          div Devouring the Soil’s Words
+                        h2(v-else)
+                          em Biennale d'art 2023
+                          div Dévorer les paroles de la terre
+                    
 </template>
 
 <script>
@@ -158,6 +170,17 @@ export default {
         })
       })
 
+      // console.log(structure)
+      
+      structure.forEach(s => {
+        if (s.year == 2023) {
+          const pdf = {
+            biennale: true
+          }
+          s.pages.push(pdf)
+        }
+      })
+      
       return structure
     },
   },
