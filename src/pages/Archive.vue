@@ -172,14 +172,30 @@ export default {
 
       // console.log(structure)
       
+      let attached = false
       structure.forEach(s => {
         if (s.year == 2023) {
           const pdf = {
             biennale: true
           }
           s.pages.push(pdf)
+          attached = true
         }
       })
+      
+      if (!attached) {
+        structure.push({
+          year: 2023,
+          pages: [{
+            biennale: true
+          }]
+        })
+        structure.sort((a, b) => {
+          if (a.year > b.year) { return -1 }
+          if (a.year < b.year) { return 1 }
+          return 0
+        })
+      }
       
       return structure
     },
