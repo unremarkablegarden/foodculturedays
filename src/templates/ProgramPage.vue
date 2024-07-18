@@ -49,107 +49,109 @@ layout
         .tags(v-if='page.categories').categories
           .tag(v-for='cat in page.categories', v-if='cat.category !== null') {{ cat.category.name }}
         .tags(v-if='page._meta.tags').normal-tags
-          //- .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
-          g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
+          template(v-if='currentEvent')
+            g-link.tag(:to="tagLink(tag)", v-for='(tag,i) in page._meta.tags', :key='i').link
             .name {{ tag }}
-        
+          template(v-else)
+            .tag(v-for='(tag,i) in page._meta.tags', :key='i') {{ tag }}
 
-        
-        table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
-          tr.date(v-if='page.manual_date_time') 
-            td.label
-              .inside Date
-            td 
-              .inside
-                prismic-rich-text(:field='page.manual_date_time')
-          tr.date(v-else-if='page.date_time && !page.extra_days') 
-            td.label 
-              .inside Date
-            td 
-              .inside {{ formatDate(page.date_time) }}
-          tr.date(v-else-if='page.date_time && page.extra_days') 
-            td.label 
-              .inside 
-                //- span(v-if='fr') Dater
-                //- span(v-else) Dates
-                span Dates
-            td 
-              .inside 
-                //- xmp {{ page.date_time }}
-                //- xmp {{ page.extra_days }}
-                | {{ formatDate(page.date_time) }}
-                div(v-for='extra in page.extra_days', v-if='"extra_day" in extra')
-                  //- xmp {{ extra.extra_day }}
-                  //- | , {{ formatDate(extra.extra_day) }}
-                  | {{ formatDate(extra.extra_day) }}
-          tr.location(v-if='page.location')
-            td.label(v-if='fr') 
-              .inside Lieu
-            td.label(v-else) 
-              .inside Venue
-            td 
-              .inside {{ page.location.location[0].text }}
-          tr.price(v-if='page.price')
-            td.label(v-if='fr') 
-              .inside Prix
-            td.label(v-else) 
-              .inside Price
-            td 
-              .inside {{ page.price }} 
+        //- only show the meta box if 
+        template(v-if='currentEvent')
+          table.meta(v-if='page.date_time || page.location || page.price || page.duration || page.duration_richtext || page.participants || page.participants || page.activation')
+            tr.date(v-if='page.manual_date_time') 
+              td.label
+                .inside Date
+              td 
+                .inside
+                  prismic-rich-text(:field='page.manual_date_time')
+            tr.date(v-else-if='page.date_time && !page.extra_days') 
+              td.label 
+                .inside Date
+              td 
+                .inside {{ formatDate(page.date_time) }}
+            tr.date(v-else-if='page.date_time && page.extra_days') 
+              td.label 
+                .inside 
+                  //- span(v-if='fr') Dater
+                  //- span(v-else) Dates
+                  span Dates
+              td 
+                .inside 
+                  //- xmp {{ page.date_time }}
+                  //- xmp {{ page.extra_days }}
+                  | {{ formatDate(page.date_time) }}
+                  div(v-for='extra in page.extra_days', v-if='"extra_day" in extra')
+                    //- xmp {{ extra.extra_day }}
+                    //- | , {{ formatDate(extra.extra_day) }}
+                    | {{ formatDate(extra.extra_day) }}
+            tr.location(v-if='page.location')
+              td.label(v-if='fr') 
+                .inside Lieu
+              td.label(v-else) 
+                .inside Venue
+              td 
+                .inside {{ page.location.location[0].text }}
+            tr.price(v-if='page.price')
+              td.label(v-if='fr') 
+                .inside Prix
+              td.label(v-else) 
+                .inside Price
+              td 
+                .inside {{ page.price }} 
 
-          //- xmp {{ page.ticket_link[0] }}
-          tr.ticket(v-if='page.ticket_link && page.ticket_link[0] && page.ticket_link[0].spans &&  page.ticket_link[0].spans.length')
-            td.label(v-if='fr') 
-              .inside Billets
-            td.label(v-else) 
-              .inside Tickets
-            td 
-              .inside
-                prismic-rich-text(:field='page.ticket_link')
-                //- xmp {{ page.ticket_link && page.ticket_link.spans && page.ticket_link.spans.length ? page.ticket_link : false }}
-          tr.pdf(v-if='page.program_pdf')
-            td.label(v-if='fr') 
-              .inside PDF
-            td.label(v-else) 
-              .inside PDF
-            td 
-              .inside
-                prismic-rich-text(:field='page.program_pdf')
-          tr.duration(v-if='page.duration || page.duration_richtext && page.duration_richtext.spans && page.duration_richtext.spans.length')
-            td.label(v-if='fr') 
-              .inside Durée
-            td.label(v-else) 
-              .inside Duration
-            td(v-if='page.duration_richtext && page.duration_richtext[0] && page.duration_richtext[0].spans && page.duration_richtext[0].spans.length').duration-text
-              .inside 
-                prismic-rich-text(:field='page.duration_richtext')
-                //- xmp {{ page.duration_richtext }}
-            td(v-else)
-              .inside 
-                | {{ page.duration }} 
-          tr.participants(v-if='page.participants')
-            td(v-if='fr').label 
-              .inside Notes
-            td(v-if='fr')
-              .inside 
-                | Capacité maximale de {{ page.participants }}
-            td(v-if='en').label 
-              .inside Note
-            td(v-if='en')
-              .inside 
-                | Maximum capacity of {{ page.participants }}
-          tr.activation(v-if='page.activation')
-            td.label 
-              .inside Activation
-            td 
-              .inside {{ page.activation }}
-          tr.language(v-if='page.language')
-            td(v-if='fr').label 
-              .inside Langue
-            td(v-else).label
-              .inside Language
-            td 
-              .inside {{ page.language }}
+            //- xmp {{ page.ticket_link[0] }}
+            tr.ticket(v-if='page.ticket_link && page.ticket_link[0] && page.ticket_link[0].spans &&  page.ticket_link[0].spans.length')
+              td.label(v-if='fr') 
+                .inside Billets
+              td.label(v-else) 
+                .inside Tickets
+              td 
+                .inside
+                  prismic-rich-text(:field='page.ticket_link')
+                  //- xmp {{ page.ticket_link && page.ticket_link.spans && page.ticket_link.spans.length ? page.ticket_link : false }}
+            tr.pdf(v-if='page.program_pdf')
+              td.label(v-if='fr') 
+                .inside PDF
+              td.label(v-else) 
+                .inside PDF
+              td 
+                .inside
+                  prismic-rich-text(:field='page.program_pdf')
+            tr.duration(v-if='page.duration || page.duration_richtext && page.duration_richtext.spans && page.duration_richtext.spans.length')
+              td.label(v-if='fr') 
+                .inside Durée
+              td.label(v-else) 
+                .inside Duration
+              td(v-if='page.duration_richtext && page.duration_richtext[0] && page.duration_richtext[0].spans && page.duration_richtext[0].spans.length').duration-text
+                .inside 
+                  prismic-rich-text(:field='page.duration_richtext')
+                  //- xmp {{ page.duration_richtext }}
+              td(v-else)
+                .inside 
+                  | {{ page.duration }} 
+            tr.participants(v-if='page.participants')
+              td(v-if='fr').label 
+                .inside Notes
+              td(v-if='fr')
+                .inside 
+                  | Capacité maximale de {{ page.participants }}
+              td(v-if='en').label 
+                .inside Note
+              td(v-if='en')
+                .inside 
+                  | Maximum capacity of {{ page.participants }}
+            tr.activation(v-if='page.activation')
+              td.label 
+                .inside Activation
+              td 
+                .inside {{ page.activation }}
+            tr.language(v-if='page.language')
+              td(v-if='fr').label 
+                .inside Langue
+              td(v-else).label
+                .inside Language
+              td 
+                .inside {{ page.language }}
             
         prismic-rich-text(:field='page.project', v-if='page.project').project-title
         
@@ -366,14 +368,29 @@ export default {
       // console.log(this.lang);
       if (this.lang === "fr") {
         // this.$router.push('/fr/programme/')
-        this.$nav('/fr/programme/')
+        if (this.currentEvent) {
+          this.$nav('/fr/programme/')
+        } else {
+          this.$nav('/fr/archives')
+        }
       } else {
         // this.$router.push('/en/program/')
-        this.$nav('/en/program/')
+        if (this.currentEvent) {
+          this.$nav('/en/program/')
+        } else {
+          this.$nav('/en/archive')
+        }
       }
     }
   },
   computed: {
+    // currentYear () {
+    //   return new Date().getFullYear()
+    // },
+    currentEvent () {
+      // return true
+      return new Date(this.page.date_time).getFullYear() == new Date().getFullYear()
+    },
     video () {
       return {
         code: this.page.video_embed_code,
