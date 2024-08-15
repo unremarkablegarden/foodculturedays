@@ -131,6 +131,8 @@ export default {
           if(sortA < sortB) { return 1 }
           return 0
         })
+        
+        p = p.reverse()
 
         structure.push({
           year: year,
