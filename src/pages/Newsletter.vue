@@ -37,11 +37,11 @@
                         label(for='mce-BIRTHDAY-month') {{ t[lang].form[3] }}
                         .datefield
                           span.subfield.monthfield
-                            input.birthday#mce-BIRTHDAY-month(type='text', pattern='[0-9]*', placeholder='MM', size='2', maxlength='2', name='BIRTHDAY[month]')
+                            input.birthday#mce-BIRTHDAY-month(type='text', pattern='[0-9]*', placeholder='MM', size='2', maxlength='2', name='BIRTHDAY[month]', style='width: 2.8rem;')
                           | /
 
                           span.subfield.dayfield
-                            input.birthday#mce-BIRTHDAY-day(type='text', pattern='[0-9]*', placeholder='DD', size='2', maxlength='2', name='BIRTHDAY[day]')
+                            input.birthday#mce-BIRTHDAY-day(type='text', pattern='[0-9]*', placeholder='DD', size='2', maxlength='2', name='BIRTHDAY[day]', style='width: 2.8rem;')
                           span.small-meta.nowrap ( mm / dd )
                       //- #mce-responses.clear
                         .response#mce-error-response(style='display:none')
