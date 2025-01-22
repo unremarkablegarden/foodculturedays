@@ -164,14 +164,14 @@ export default {
       border-left: 0;
     }
   }
-  .biennale #lang button {
-    transition: all 500ms ease-in-out;
-    // black
-    color: #000;
-    border: 1px #000 solid;
-    &.is-active {
-      color: white;
-      background: #000;
-    }
-  }
+  // .biennale #lang button {
+  //   transition: all 500ms ease-in-out;
+  //   // black
+  //   color: #000;
+  //   border: 1px #000 solid;
+  //   &.is-active {
+  //     color: white;
+  //     background: #000;
+  //   }
+  // }
 </style>

@@ -349,6 +349,7 @@ $headingSize: 2.2rem;
   
 }
 
+/* 
 .page-wrapper.biennale .title h1,
 .page-wrapper.biennale h1
 {
@@ -357,6 +358,7 @@ $headingSize: 2.2rem;
   color: black;
   font-weight: normal !important;
 }
+
 .biennale h1 strong, .biennale h2 strong {
   font-weight: normal !important;
 }
@@ -368,4 +370,5 @@ $headingSize: 2.2rem;
   margin-top: 1.0em;
   font-weight: normal !important;
 }
+*/
 </style>

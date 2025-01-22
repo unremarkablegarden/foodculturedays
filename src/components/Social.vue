@@ -53,10 +53,10 @@
     }
   }
 }
-.biennale #social {
-  * {
-    // filter: grayscale(100) 
-    filter: brightness(0)
-  }
-}
+// .biennale #social {
+//   * {
+//     // filter: grayscale(100) 
+//     filter: brightness(0)
+//   }
+// }
 </style>

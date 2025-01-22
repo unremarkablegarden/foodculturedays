@@ -176,23 +176,23 @@ export default {
   }
 
 }
-.biennale #newsletter {
-  .arrow.green {
-    color: black;
-  }
-  a {
-    color: black;
-  }
-}
-// .biennale 
-.biennale #newsletter {
-  opacity: 0.6;
-}
-.biennale #newsletter .subtitle {
-  border-top: 1px black solid;
-  padding-top: 1.4rem;
-  margin-top: 6rem;
-}
+// .biennale #newsletter {
+//   .arrow.green {
+//     color: black;
+//   }
+//   a {
+//     color: black;
+//   }
+// }
+// // .biennale 
+// .biennale #newsletter {
+//   opacity: 0.6;
+// }
+// .biennale #newsletter .subtitle {
+//   border-top: 1px black solid;
+//   padding-top: 1.4rem;
+//   margin-top: 6rem;
+// }
 
 #legal {
   margin-top: 2rem;
