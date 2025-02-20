@@ -204,5 +204,8 @@ export default {
     border: 1px solid #666;
     color: #666;
   }
+  input {
+    color: black !important;
+  }
 }
 </style>

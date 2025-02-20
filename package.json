@@ -2,9 +2,9 @@
   "name": "fcd-gridsome",
   "private": true,
   "scripts": {
-    "build": "gridsome build",
-    "develop": "export NODE_OPTIONS=--openssl-legacy-provider && gridsome develop",
-    "explore": "gridsome explore"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider gridsome build",
+    "develop": "NODE_OPTIONS=--openssl-legacy-provider gridsome develop",
+    "explore": "NODE_OPTIONS=--openssl-legacy-provider gridsome explore"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
