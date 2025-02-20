@@ -10,7 +10,7 @@
           div Ce site Web utilise des cookies pour vous garantir la meilleure expérience possible sur notre site.
           div.mt-2 En continuant à utiliser ce site Web, vous acceptez que nous utilisions des cookies.
       .col-4(style="margin-top: 1rem")
-        button.btn(@click='accept')
+        button.btn(@click='accept', style='font-weight: normal !important;')
           span(v-if='lang === "en"') I understand
           span(v-else) J'ai compris
         
