@@ -2,29 +2,18 @@
   #newsletter
     .subtitle {{ t[lang].subtitle }}
 
-    //- #mc_embed_signup
-    //-   form#mc-embedded-subscribe-form.validate(action='https://foodculturedays.us16.list-manage.com/subscribe/post?u=07a3eaaaad1fdf2ab12286e6a&id=a741f19be3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate)
-    //-     #mc_embed_signup_scroll
-    //-       div(style='position: absolute; left: -5000px;', aria-hidden='true')
-    //-         input(type='text', name='b_07a3eaaaad1fdf2ab12286e6a_a741f19be3', tabindex='-1')
-    //-       label(for='mce-EMAIL') {{ t[lang].form[0] }}
-    //-       .mc-field-group#email.email-fields
-    //-         .email-left
-    //-           input.required.email#mce-EMAIL(type='email', name='EMAIL')
-    //-         .email-right
-    //-           //- input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
-    //-           input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe' style='color: black !important; font-weight: normal !important;').submit
-    
-    form.seva-form.formkit-form(action='https://app.kit.com/forms/7707558/subscriptions' method='post' data-sv-form='7707558' data-uid='0eb9257cf4' data-format='inline' data-version='5' :data-options='ckOptions' min-width='400 500 600 700 800')
-      div(data-style='clean')
-        .formkit-alert.formkit-alert-error(data-element='errors' data-group='alert')
-          .seva-fields.formkit-fields(data-element='fields' data-stacked='false')
-            .formkit-field
-              label(for='email_address') {{ t[lang].form[0] }}
-              div(style='display: flex;')
-                input.formkit-input(name='email_address' aria-label required type='email' style='margin-right: 0.5rem; width: 66%;')
-                button.formkit-submit.formkit-submit(data-element='submit' style='text-transform: uppercase; border-radius: 0.4rem; width: auto; padding: 0.25rem 1rem 0;') 
-                  | {{ t[lang].form[4] }}
+    #mc_embed_signup
+      form#mc-embedded-subscribe-form.validate(action='https://foodculturedays.us16.list-manage.com/subscribe/post?u=07a3eaaaad1fdf2ab12286e6a&id=a741f19be3', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate)
+        #mc_embed_signup_scroll
+          div(style='position: absolute; left: -5000px;', aria-hidden='true')
+            input(type='text', name='b_07a3eaaaad1fdf2ab12286e6a_a741f19be3', tabindex='-1')
+          label(for='mce-EMAIL') {{ t[lang].form[0] }}
+          .mc-field-group#email.email-fields
+            .email-left
+              input.required.email#mce-EMAIL(type='email', name='EMAIL')
+            .email-right
+              //- input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
+              input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe' style='color: black !important; font-weight: normal !important;').submit
     
     .downloads
       //- xmp {{ nletters }}
@@ -45,23 +34,12 @@
 
 <script>
 export default {
-  head() {
-    return {
-      script: [
-        {
-          src: 'https://f.convertkit.com/ckjs/ck.5.js',
-          async: true,
-          defer: true
-        }
-      ]
-    }
-  },
   data () {
     return {
       lang: 'en',
       t: {
         en: {
-          title: 'BIENNALE 05 - 09.06.2025, VEVEY',
+          title: 'NEXT EDITION (III) 26 – 29.11.2020, VEVEY',
           // subtitle: 'Join our newsletter',
           subtitle: 'Subscribe to our newsletter',
           form: [
@@ -73,7 +51,7 @@ export default {
           ]
         },
         fr: {
-          title: 'BIENNALE 05 - 09.06.2025, VEVEY',
+          title: 'PROCHAINE EDITION (III) 26 – 29.11.2020, VEVEY',
           subtitle: 'Abonnez-vous à notre newsletter',
           form: [
             'Adresse E-mail',
@@ -83,59 +61,6 @@ export default {
             'Souscrire'
           ]
         }
-      },
-      ckOptions: {
-        settings: {
-          after_subscribe: {
-            action: 'message',
-            success_message: 'Success! Now check your email to confirm your subscription.',
-            redirect_url: ''
-          },
-          analytics: {
-            google: null,
-            fathom: null,
-            facebook: null,
-            segment: null,
-            pinterest: null,
-            sparkloop: null,
-            googletagmanager: null
-          },
-          modal: {
-            trigger: 'timer',
-            scroll_percentage: null,
-            timer: 5,
-            devices: 'all',
-            show_once_every: 15
-          },
-          powered_by: {
-            show: false,
-            url: 'https://kit.com/features/forms?utm_campaign=poweredby&utm_content=form&utm_medium=referral&utm_source=dynamic'
-          },
-          recaptcha: {
-            enabled: false
-          },
-          return_visitor: {
-            action: 'show',
-            custom_content: ''
-          },
-          slide_in: {
-            display_in: 'bottom_right',
-            trigger: 'timer',
-            scroll_percentage: null,
-            timer: 5,
-            devices: 'all',
-            show_once_every: 15
-          },
-          sticky_bar: {
-            display_in: 'top',
-            trigger: 'timer',
-            scroll_percentage: null,
-            timer: 5,
-            devices: 'all',
-            show_once_every: 15
-          }
-        },
-        version: '5'
       }
     }
   },
@@ -210,7 +135,7 @@ export default {
     padding: 0;
     width: 100%;
   }
-  input, button {
+  input {
     border: 1px black solid;
     width: 100%;
     background: white;
