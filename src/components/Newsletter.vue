@@ -12,12 +12,13 @@
             .email-left
               input.required.email#mce-EMAIL(type='email', name='EMAIL')
             .email-right
-              input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
+              //- input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe').submit
+              input#mc-embedded-subscribe.button(type='submit', :value='t[lang].form[4]', name='subscribe' style='color: black !important; font-weight: normal !important;').submit
     
     .downloads
       //- xmp {{ nletters }}
       .newsletter-link(v-for='(item, i) in nletters', :key="i")
-        a(:href='item.link', target="_blank") 
+        a(:href='item.link', target="_blank", style='margin-bottom: 0.5em; display: block;')
           | {{ item.title }}
           span.arrow.green &nbsp;&rarr;&nbsp;
     
