@@ -4,8 +4,6 @@ export default
     // ABOUT
     { title: ['About', 'À Propos'], to: ['/en/about', '/fr/a-propos'] },
     
-    // EVENTS 
-    { title: ['Events', 'Évènements'], to: ['/en/events', '/fr/evenements'] },
     
     
     // BIENALE
@@ -17,6 +15,9 @@ export default
     
     { title: ['Volunteers', 'Bénévoles'], to: ['/en/volunteers', '/fr/benevoles'] },
     
+    
+    // EVENTS 
+    { title: ['Events', 'Évènements'], to: ['/en/events', '/fr/evenements'] },
     
     // OPEN CALL
     // { title: ['Open Call 2023', 'Appel à Projets 2023'], to: ['/OpenCall_2023_EN.pdf', '/OpenCall_2023_FR.pdf'], blank: true },
