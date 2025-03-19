@@ -17,8 +17,8 @@ export default
     
     
     // EVENTS 
-    { title: ['Events', 'Évènements'], to: ['/en/events', '/fr/evenements'] },
-    
+    // { title: ['Events', 'Évènements'], to: ['/en/events', '/fr/evenements'] },
+    { title: ['Satellite Events', 'Événements Satellites'], to: ['/en/events', '/fr/evenements'] },
     // OPEN CALL
     // { title: ['Open Call 2023', 'Appel à Projets 2023'], to: ['/OpenCall_2023_EN.pdf', '/OpenCall_2023_FR.pdf'], blank: true },
     
