@@ -74,6 +74,6 @@ export default
     // VIDEO
     // { title: ['Video', 'Vidéo'], to: ['https://vimeo.com/user72160049', 'https://vimeo.com/user72160049'] },
     // CONTACT
-    { title: ['Contact', 'Contact'], to: ['/en/contact', '/fr/contact'] },
+    { title: ['Team', 'Équipe'], to: ['/en/contact', '/fr/contact'] },
 
   ]
