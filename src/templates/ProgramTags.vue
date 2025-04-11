@@ -1,5 +1,22 @@
 <template lang="pug">
 layout
+  .program
+    .columns
+      .column.is-6.no-pad.gallery-column
+        .gallery
+          //- .item(style="background-image: url(https://images.prismic.io/foodculturedays2020/f23c2ded-df54-4f93-8013-d436bcc2e68d_2020_09_25_RAW_academie_Anna_Tje%CC%81-5-2+c.+Mathilde+Assier+copie.jpg??fit=max&h=1600&w=1200auto=compress,format); background-position: center center; background-size: cover;")
+          .item(style="background-image: url(https://images.prismic.io/foodculturedays2020/Z_WPb3dAxsiBwdYk__MG_9472.jpg?auto=format,compress&fit=max&h=1600&w=1200auto=compress,format); background-position: center center; background-size: cover;")
+      .column.is-6.left
+        .page-wrapper
+          //- .back(@click='goBack')
+            img(src='https://images.prismic.io/foodculturedays2020/dc97c761-a203-480b-be86-918aa8fc8add_close.png?auto=compress,format').close
+            
+          h1.title 
+            template(v-if='lang === "en"') Program
+            template(v-else) Programme
+          p(v-if='lang === "en"') The program for 2025 is not available yet.
+          p(v-else) Le programme pour 2025 n'est pas encore disponible.
+//- layout
   //- .links
     .link(v-for='(p, i) in filteredProgram', @click='programRoute(p.node._meta.uid)', :key='i', v-if='p && p.node._meta.uid') {{ p.node._meta.uid }}
   //- xmp.debug {{ program }}
